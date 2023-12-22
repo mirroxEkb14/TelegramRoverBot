@@ -1,0 +1,8 @@
+# IntelliJ IDEA project configuration files
+.idea/
+
+# Output directories for compiled code or generated artifacts
+out/
+
+# Maven target directory containing compiled classes, JARs, and other build-related files
+target/

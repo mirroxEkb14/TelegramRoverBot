@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cz.vance.movieapp</groupId>
+    <artifactId>TelegramRoverBot</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <telegrambots.version>6.5.0</telegrambots.version>
+        <shakeyaml.version>2.0</shakeyaml.version>
+        <junit.version>4.13.2</junit.version>
+        <annotations.version>24.0.1</annotations.version>
+    </properties>
+
+    <dependencies>
+        <!-- «TelegramBots» or «TelegramBotsApi» library to create Telegram bots
+        Reference: https://github.com/rubenlagus/TelegramBots#telegram-bot-java-library -->
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>${telegrambots.version}</version>
+        </dependency>
+
+        <!-- «SnakeYAML» library to read the configuration file
+        Reference: https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${shakeyaml.version}</version>
+        </dependency>
+
+        <!-- «JUnit» framework to test individual units of the application to ensure they behave as expected
+        Reference: https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- «Annotations» library provides additional information to the IntelliJ IDEA IDE improving code analysis,
+        inspections, and code completion within the development environment
+        Reference: https://mvnrepository.com/artifact/org.jetbrains/annotations -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${annotations.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>
