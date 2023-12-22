@@ -1,14 +1,16 @@
 package cz.vance.movieapp.managers;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.keyboards.InlineKeyboardBuilder;
+import cz.vance.movieapp.keyboards.ReplyKeyboardBuilder;
+import cz.vance.movieapp.utils.BotMessage;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import cz.vance.movieapp.bot.TelegramRoverBot;
-
-import java.util.function.Predicate;
 //</editor-fold>
 
 /**
@@ -18,21 +20,18 @@ import java.util.function.Predicate;
  */
 public final class MessageManager implements IMessageManager {
 
-    /**
-     * This <b>constant</b> represents a validator implemented by default Java functional interface {@link Predicate}
-     * for incoming updates that checks:
-     * <ol>
-     * <li> if the update has a message;
-     * <li> if the message has text;
-     * </ol>
-     */
-    private static final Predicate<Update> updateValidator = t ->
-            t.hasMessage() && t.getMessage().hasText();
+    private static final String PARSE_MODE = "HTML";
     /**
      * This <b>constant</b> is an instance of the {@link TelegramRoverBot} class that is needed to send
      * messages
      */
     private final TelegramLongPollingBot bot;
+    /**
+     * These <b>constants</b> are instances of the custom keyboard builders that provide with different custom
+     * keyboards
+     */
+    private final ReplyKeyboardBuilder replyKeyboardBuilder = new ReplyKeyboardBuilder();
+    private final InlineKeyboardBuilder inlineKeyboardBuilder = new InlineKeyboardBuilder();
 
     public MessageManager(TelegramLongPollingBot bot) {
         this.bot = bot;
@@ -40,27 +39,67 @@ public final class MessageManager implements IMessageManager {
 
     @Override
     public void sendEcho(Update botUpdate) {
-        if (updateValidator.test(botUpdate)) {
-            final long chatId = getChatId(botUpdate);
-            final String messageText = getMessageText(botUpdate);
-            echo(chatId, messageText);
+        final long chatId = getChatId(botUpdate);
+        final String messageText = getMessageText(botUpdate);
+        sendEcho(chatId, messageText);
+    }
+
+    @Override
+    public void sendWelcome(Update botUpdate) {
+        final long chatId = getChatId(botUpdate);
+        final String messageText = getFormattedWelcomeText(botUpdate);
+        sendWelcome(chatId, messageText);
+    }
+
+//<editor-fold default-state="collapsed" desc="Welcome Message">
+    /**
+     * Sends a welcome message to the specified <b>chat ID</b> with the given <b>message text</b>
+     *
+     * @param chatId A whole number representing a chat ID
+     * @param messageText A string containing the text
+     */
+    private void sendWelcome(long chatId, String messageText) {
+        try {
+            bot.execute(buildTelegramMessage(chatId,
+                    messageText,
+                    replyKeyboardBuilder.buildMainMenuKeyboard()));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
     }
 
+    /**
+     * Formats and returns the welcome text by adding <b>user's username</b> and <b>the username of the bot</b>
+     *
+     * @param botUpdate The bot update to extract <b>user's surname</b>
+     *
+     * @return The formatted text for a welcome message
+     */
+    private String getFormattedWelcomeText(@NotNull Update botUpdate) {
+        return String.format(
+                BotMessage.WELCOME_MESSAGE.content(),
+                botUpdate.getMessage().getFrom().getFirstName(),
+                bot.getBotUsername());
+    }
+//</editor-fold>
+
+//<editor-fold default-state="collapsed" desc="Echo Message">
     /**
      * Sends an echo message to the specified <b>chat ID</b> with the given <b>message text</b>
      *
      * @param chatId A whole number representing a chat ID
      * @param messageText A string containing the text
      */
-    private void echo(long chatId, String messageText) {
+    private void sendEcho(long chatId, String messageText) {
         try {
             bot.execute(buildTelegramMessage(chatId, messageText));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
     }
+//</editor-fold>
 
+//<editor-fold default-state="collapsed" desc="Message Builders">
     /**
      * Builds a Telegram message with the specified <b>chat ID</b> and <b>message text</b>
      *
@@ -75,11 +114,36 @@ public final class MessageManager implements IMessageManager {
         final SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(messageText);
+        message.setParseMode(PARSE_MODE);
         return message;
     }
 
     /**
-     * Extracts the chat ID from the provided Telegram update
+     * Builds a Telegram message with the specified <b>chat ID</b>, <b>message text</b> and <b>reply keyboard</b>
+     *
+     * @param chatId A whole number representing a chat ID
+     * @param messageText A string containing the text
+     * @param keyboardMarkup A reply keyboard instance
+     *
+     * @return A configured <b>SendMessage</b> instance with custom buttons representing the Telegram message
+     *
+     * @see SendMessage
+     */
+    private @NotNull SendMessage buildTelegramMessage(long chatId,
+                                                      String messageText,
+                                                      ReplyKeyboardMarkup keyboardMarkup) {
+        final SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(messageText);
+        message.setReplyMarkup(keyboardMarkup);
+        message.setParseMode(PARSE_MODE);
+        return message;
+    }
+//</editor-fold>
+
+//<editor-fold default-state="collapsed" desc="Update Parameters Getters">
+    /**
+     * Extracts the <b>chat ID</b> from the provided Telegram update
      *
      * @param update The Telegram update containing a message
      *
@@ -90,7 +154,7 @@ public final class MessageManager implements IMessageManager {
     }
 
     /**
-     * Retrieves the text from the message in the provided Telegram update
+     * Retrieves <b>the text</b> from the message in the provided Telegram update
      *
      * @param update The Telegram update containing a message
      *
@@ -99,4 +163,5 @@ public final class MessageManager implements IMessageManager {
     private String getMessageText(@NotNull Update update) {
         return update.getMessage().getText();
     }
+//</editor-fold>
 }

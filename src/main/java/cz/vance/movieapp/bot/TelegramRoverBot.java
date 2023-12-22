@@ -58,7 +58,13 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        messageManager.sendEcho(update);
+        if (messageManager.isMessage(update)) {
+            if (messageManager.isStartCommand(update)) {
+                messageManager.sendWelcome(update);
+            } else {
+                messageManager.sendEcho(update);
+            }
+        }
     }
 }
 
