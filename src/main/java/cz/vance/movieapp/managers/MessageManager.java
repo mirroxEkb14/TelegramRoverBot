@@ -3,11 +3,13 @@ package cz.vance.movieapp.managers;
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.keyboards.InlineKeyboardBuilder;
 import cz.vance.movieapp.keyboards.ReplyKeyboardBuilder;
+import cz.vance.movieapp.randomizers.SmartSearchRandomizer;
 import cz.vance.movieapp.utils.BotMessage;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import cz.vance.movieapp.bot.TelegramRoverBot;
@@ -57,6 +59,13 @@ public final class MessageManager implements IMessageManager {
         sendHelp(chatId, messageText);
     }
 
+    @Override
+    public void sendMood(Update botUpdate) {
+        final long chatId = getChatId(botUpdate);
+        final String messageText = SmartSearchRandomizer.getMoodMessage();
+        sendMood(chatId, messageText);
+    }
+
 //<editor-fold default-state="collapsed" desc="Echo Message">
     /**
      * Sends an echo message to the specified <b>chat ID</b> with the given <b>message text</b>
@@ -84,7 +93,8 @@ public final class MessageManager implements IMessageManager {
      */
     private void sendWelcome(long chatId, String messageText) {
         try {
-            bot.execute(buildTelegramMessage(chatId,
+            bot.execute(buildTelegramMessage(
+                    chatId,
                     messageText,
                     replyKeyboardBuilder.buildMainMenuKeyboard()));
         } catch (TelegramApiException e) {
@@ -117,6 +127,25 @@ public final class MessageManager implements IMessageManager {
     private void sendHelp(long chatId, String messageText) {
         try {
             bot.execute(buildTelegramMessage(chatId, messageText));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+//</editor-fold>
+
+//<editor-fold default-state="collapsed" desc="Mood Message">
+    /**
+     * Sends a message with <b>the mood selection</b> to the specified <b>chat ID</b> with the given <b>message text</b>
+     *
+     * @param chatId A whole number representing a chat ID
+     * @param messageText A string containing the text
+     */
+    private void sendMood(long chatId, String messageText) {
+        try {
+            bot.execute(buildTelegramMessage(
+                    chatId,
+                    messageText,
+                    inlineKeyboardBuilder.buildMoodKeyboard()));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
@@ -158,6 +187,28 @@ public final class MessageManager implements IMessageManager {
     private @NotNull SendMessage buildTelegramMessage(long chatId,
                                                       String messageText,
                                                       ReplyKeyboardMarkup keyboardMarkup) {
+        final SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(messageText);
+        message.setReplyMarkup(keyboardMarkup);
+        message.setParseMode(PARSE_MODE);
+        return message;
+    }
+
+    /**
+     * Builds a Telegram message with the specified <b>chat ID</b>, <b>message text</b> and <b>inline keyboard</b>
+     *
+     * @param chatId A whole number representing a chat ID
+     * @param messageText A string containing the text
+     * @param keyboardMarkup An inline keyboard instance
+     *
+     * @return A configured <b>SendMessage</b> instance with custom buttons representing the Telegram message
+     *
+     * @see SendMessage
+     */
+    private @NotNull SendMessage buildTelegramMessage(long chatId,
+                                                      String messageText,
+                                                      InlineKeyboardMarkup keyboardMarkup) {
         final SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(messageText);

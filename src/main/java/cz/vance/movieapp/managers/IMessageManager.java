@@ -1,9 +1,13 @@
 package cz.vance.movieapp.managers;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.keyboards.IReplyKeyboardBuilder;
 import cz.vance.movieapp.utils.BotCommand;
+import cz.vance.movieapp.utils.MainMenuButton;
+import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 //</editor-fold>
 
@@ -36,6 +40,10 @@ public interface IMessageManager {
     Predicate<Update> helpCommandValidator = t ->
             t.getMessage().getText().equals(
                     BotCommand.HELP_COMMAND.content());
+    /**
+     * This <b>constant</b> compares two strings
+     */
+    BiPredicate<String, String> smartSearchValidator = String::equalsIgnoreCase;
 
     /**
      * Sends an echo message based on the provided bot update
@@ -50,9 +58,11 @@ public interface IMessageManager {
     void sendEcho(Update botUpdate);
 
     /**
-     * Sends a welcome message when a user <b>starts the bot for the first time</b>
+     * Sends a welcome message when a user <b>starts the bot for the first time</b> with the <b>main menu keyboard</b>
      *
      * @param botUpdate The incoming update
+     *
+     * @see IReplyKeyboardBuilder#buildMainMenuKeyboard()
      */
     void sendWelcome(Update botUpdate);
 
@@ -64,6 +74,15 @@ public interface IMessageManager {
     void sendHelp(Update botUpdate);
 
     /**
+     * Sends a message with user's mood selection
+     *
+     * @param botUpdate The received update
+     *
+     * @see IReplyKeyboardBuilder#buildMoodKeyboard()
+     */
+    void sendMood(Update botUpdate);
+
+    /**
      * Checks if the provided update contains a valid message, i.e. <b>there is a message</b> and this <b>message
      * contains some text</b>
      *
@@ -73,6 +92,20 @@ public interface IMessageManager {
      */
     default boolean isMessage(Update botUpdate) {
         return messageExistenceValidator.test(botUpdate);
+    }
+
+    /**
+     * Checks if the text in the user's message is a <b>SmartSearch</b> option
+     *
+     * @param botUpdate The incoming update
+     *
+     * @return {@code true} if the text in the message equals to the <b>SmartSearch</b> button text, {@code false}
+     * otherwise
+     */
+    default boolean isSmartSearchButton(@NotNull Update botUpdate) {
+        return smartSearchValidator.test(
+                botUpdate.getMessage().getText(),
+                MainMenuButton.SMART_SEARCH_BUTTON.content());
     }
 
     /**

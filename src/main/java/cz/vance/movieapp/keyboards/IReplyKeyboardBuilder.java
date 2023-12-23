@@ -1,7 +1,9 @@
 package cz.vance.movieapp.keyboards;
 
+//<editor-fold default-state="collapsed" desc="Imports">
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import cz.vance.movieapp.utils.ReplyButton;
+import cz.vance.movieapp.utils.MainMenuButton;
+//</editor-fold>
 
 /**
  * This <b>IReplyKeyboardBuilder</b> interface declares a set of basic operations for creating custom reply
@@ -10,7 +12,7 @@ import cz.vance.movieapp.utils.ReplyButton;
 public interface IReplyKeyboardBuilder {
 
     /**
-     * Builds and returns the main menu reply keyboard containing the following buttons:
+     * Builds and returns <b>the main menu reply keyboard</b> containing the following buttons:
      * <ol>
      * <li> 🎬 Smart search
      * <li> 🎯 Our choice
@@ -20,7 +22,7 @@ public interface IReplyKeyboardBuilder {
      *
      * @return Configured instance of <b>ReplyKeyboardMarkup</b>
      *
-     * @see ReplyButton
+     * @see MainMenuButton
      */
     ReplyKeyboardMarkup buildMainMenuKeyboard();
 }

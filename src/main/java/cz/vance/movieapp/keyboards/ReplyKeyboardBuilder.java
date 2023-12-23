@@ -1,7 +1,7 @@
 package cz.vance.movieapp.keyboards;
 
 //<editor-fold default-state="collapsed" desc="Imports">
-import cz.vance.movieapp.utils.ReplyButton;
+import cz.vance.movieapp.utils.MainMenuButton;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
@@ -29,13 +29,13 @@ public final class ReplyKeyboardBuilder implements IReplyKeyboardBuilder {
         final KeyboardRow secondRow = new KeyboardRow();
 
         firstRow.add(new KeyboardButton(
-                ReplyButton.SMART_SEARCH_BUTTON.content()));
+                MainMenuButton.SMART_SEARCH_BUTTON.content()));
         firstRow.add(new KeyboardButton(
-                ReplyButton.OUR_CHOICE_BUTTON.content()));
+                MainMenuButton.OUR_CHOICE_BUTTON.content()));
         firstRow.add(new KeyboardButton(
-                ReplyButton.NO_IDEA_BUTTON.content()));
+                MainMenuButton.NO_IDEA_BUTTON.content()));
         secondRow.add(new KeyboardButton(
-                ReplyButton.FEEDBACK_BUTTON.content()));
+                MainMenuButton.FEEDBACK_BUTTON.content()));
 
         keyboardRows.add(firstRow);
         keyboardRows.add(secondRow);
