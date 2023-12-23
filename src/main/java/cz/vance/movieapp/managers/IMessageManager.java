@@ -30,6 +30,12 @@ public interface IMessageManager {
     Predicate<Update> startCommandValidator = t ->
             t.getMessage().getText().equals(
                     BotCommand.START_COMMAND.content());
+    /**
+     * This <b>constant</b> validates an incoming update and checks for the <b>/help</b> command
+     */
+    Predicate<Update> helpCommandValidator = t ->
+            t.getMessage().getText().equals(
+                    BotCommand.HELP_COMMAND.content());
 
     /**
      * Sends an echo message based on the provided bot update
@@ -44,15 +50,22 @@ public interface IMessageManager {
     void sendEcho(Update botUpdate);
 
     /**
-     * Sends a welcome message when a user starts the bot for the first time
+     * Sends a welcome message when a user <b>starts the bot for the first time</b>
      *
      * @param botUpdate The incoming update
      */
     void sendWelcome(Update botUpdate);
 
     /**
-     * Checks if the provided update contains a valid message, i.e. there is a message and this message contains some
-     * text
+     * Sends a help message when a user enters <b>/help</b>
+     *
+     * @param botUpdate The incoming update
+     */
+    void sendHelp(Update botUpdate);
+
+    /**
+     * Checks if the provided update contains a valid message, i.e. <b>there is a message</b> and this <b>message
+     * contains some text</b>
      *
      * @param botUpdate The received update
      *
@@ -63,15 +76,28 @@ public interface IMessageManager {
     }
 
     /**
-     * Checks if the provided update contains a message that represents the start command
+     * Checks if the provided update contains a message that represents the <b>start command</b>
      *
      * @param botUpdate The received update
      *
-     * @return {@code true} if the update message is a start command, {@code false} otherwise
+     * @return {@code true} if the update message is a <b>start command</b>, {@code false} otherwise
      *
      * @see BotCommand#START_COMMAND
      */
     default boolean isStartCommand(Update botUpdate) {
         return startCommandValidator.test(botUpdate);
+    }
+
+    /**
+     * Checks the message text for the <b>/help</b> command
+     *
+     * @param botUpdate The received update
+     *
+     * @return {@code true} if the update message is a <b>help command</b>, {@code false} otherwise
+     *
+     * @see BotCommand#HELP_COMMAND
+     */
+    default boolean isHelpCommand(Update botUpdate) {
+        return helpCommandValidator.test(botUpdate);
     }
 }

@@ -61,6 +61,8 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
         if (messageManager.isMessage(update)) {
             if (messageManager.isStartCommand(update)) {
                 messageManager.sendWelcome(update);
+            } else if (messageManager.isHelpCommand(update)) {
+                messageManager.sendHelp(update);
             } else {
                 messageManager.sendEcho(update);
             }

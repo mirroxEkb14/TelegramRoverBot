@@ -20,7 +20,6 @@ import cz.vance.movieapp.bot.TelegramRoverBot;
  */
 public final class MessageManager implements IMessageManager {
 
-    private static final String PARSE_MODE = "HTML";
     /**
      * This <b>constant</b> is an instance of the {@link TelegramRoverBot} class that is needed to send
      * messages
@@ -51,7 +50,32 @@ public final class MessageManager implements IMessageManager {
         sendWelcome(chatId, messageText);
     }
 
+    @Override
+    public void sendHelp(Update botUpdate) {
+        final long chatId = getChatId(botUpdate);
+        final String messageText = BotMessage.HELP_MESSAGE.content();
+        sendHelp(chatId, messageText);
+    }
+
+//<editor-fold default-state="collapsed" desc="Echo Message">
+    /**
+     * Sends an echo message to the specified <b>chat ID</b> with the given <b>message text</b>
+     *
+     * @param chatId A whole number representing a chat ID
+     * @param messageText A string containing the text
+     */
+    private void sendEcho(long chatId, String messageText) {
+        try {
+            bot.execute(buildTelegramMessage(chatId, messageText));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+//</editor-fold>
+
 //<editor-fold default-state="collapsed" desc="Welcome Message">
+    private static final String USER_USERNAME_PATTERN = "<b>%s</b>";
+
     /**
      * Sends a welcome message to the specified <b>chat ID</b> with the given <b>message text</b>
      *
@@ -78,19 +102,19 @@ public final class MessageManager implements IMessageManager {
     private String getFormattedWelcomeText(@NotNull Update botUpdate) {
         return String.format(
                 BotMessage.WELCOME_MESSAGE.content(),
-                botUpdate.getMessage().getFrom().getFirstName(),
+                String.format(USER_USERNAME_PATTERN, botUpdate.getMessage().getFrom().getFirstName()),
                 bot.getBotUsername());
     }
 //</editor-fold>
 
-//<editor-fold default-state="collapsed" desc="Echo Message">
+//<editor-fold default-state="collapsed" desc="Help Message">
     /**
-     * Sends an echo message to the specified <b>chat ID</b> with the given <b>message text</b>
+     * Sends a help message to the specified <b>chat ID</b> with the given <b>message text</b>
      *
      * @param chatId A whole number representing a chat ID
      * @param messageText A string containing the text
      */
-    private void sendEcho(long chatId, String messageText) {
+    private void sendHelp(long chatId, String messageText) {
         try {
             bot.execute(buildTelegramMessage(chatId, messageText));
         } catch (TelegramApiException e) {
@@ -100,6 +124,8 @@ public final class MessageManager implements IMessageManager {
 //</editor-fold>
 
 //<editor-fold default-state="collapsed" desc="Message Builders">
+    private static final String PARSE_MODE = "HTML";
+
     /**
      * Builds a Telegram message with the specified <b>chat ID</b> and <b>message text</b>
      *
