@@ -3,6 +3,8 @@ package cz.vance.movieapp.bot;
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.config.TelegramRoverBotConfig;
 import cz.vance.movieapp.exceptions.ConfigException;
+import cz.vance.movieapp.keyboards.IInlineKeyboardBuilder;
+import cz.vance.movieapp.keyboards.InlineKeyboardBuilder;
 import cz.vance.movieapp.managers.IMessageManager;
 import cz.vance.movieapp.managers.MessageManager;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -25,6 +27,7 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
     private static TelegramRoverBotConfig botConfig;
 
     private final IMessageManager messageManager = new MessageManager(this);
+    private final IInlineKeyboardBuilder inlineKeyboardBuilder = new InlineKeyboardBuilder();
 
     /**
      * Constructor
@@ -68,6 +71,10 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
             } else {
                 messageManager.sendEcho(update);
             }
+            return;
+        }
+        if (inlineKeyboardBuilder.isMoodButton(update)) {
+
         }
     }
 }

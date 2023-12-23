@@ -2,6 +2,7 @@ package cz.vance.movieapp.managers;
 
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.keyboards.IReplyKeyboardBuilder;
+import cz.vance.movieapp.keyboards.IInlineKeyboardBuilder;
 import cz.vance.movieapp.utils.BotCommand;
 import cz.vance.movieapp.utils.MainMenuButton;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +18,7 @@ import java.util.function.Predicate;
  */
 public interface IMessageManager {
 
+//<editor-fold default-state="collapsed" desc="Validators">
     /**
      * This <b>constant</b> represents a validator implemented by default Java functional interface {@link Predicate}
      * for incoming updates that checks:
@@ -27,23 +29,17 @@ public interface IMessageManager {
      */
     Predicate<Update> messageExistenceValidator = t ->
             t.hasMessage() && t.getMessage().hasText();
-    /**
-     * This <b>constant</b> represents a validator checking an incoming update, if the user entered the <b>/start</b>
-     * command
-     */
-    Predicate<Update> startCommandValidator = t ->
+
+     Predicate<Update> startCommandValidator = t ->
             t.getMessage().getText().equals(
                     BotCommand.START_COMMAND.content());
-    /**
-     * This <b>constant</b> validates an incoming update and checks for the <b>/help</b> command
-     */
-    Predicate<Update> helpCommandValidator = t ->
+
+     Predicate<Update> helpCommandValidator = t ->
             t.getMessage().getText().equals(
                     BotCommand.HELP_COMMAND.content());
-    /**
-     * This <b>constant</b> compares two strings
-     */
+
     BiPredicate<String, String> smartSearchValidator = String::equalsIgnoreCase;
+//</editor-fold>
 
     /**
      * Sends an echo message based on the provided bot update
@@ -78,59 +74,27 @@ public interface IMessageManager {
      *
      * @param botUpdate The received update
      *
-     * @see IReplyKeyboardBuilder#buildMoodKeyboard()
+     * @see IInlineKeyboardBuilder#buildMoodKeyboard()
      */
     void sendMood(Update botUpdate);
 
-    /**
-     * Checks if the provided update contains a valid message, i.e. <b>there is a message</b> and this <b>message
-     * contains some text</b>
-     *
-     * @param botUpdate The received update
-     *
-     * @return {@code true} if the update contains a valid message, {@code false} otherwise
-     */
+//<editor-fold default-state="collapsed" desc="Boolean Methods">
     default boolean isMessage(Update botUpdate) {
         return messageExistenceValidator.test(botUpdate);
     }
 
-    /**
-     * Checks if the text in the user's message is a <b>SmartSearch</b> option
-     *
-     * @param botUpdate The incoming update
-     *
-     * @return {@code true} if the text in the message equals to the <b>SmartSearch</b> button text, {@code false}
-     * otherwise
-     */
     default boolean isSmartSearchButton(@NotNull Update botUpdate) {
         return smartSearchValidator.test(
                 botUpdate.getMessage().getText(),
                 MainMenuButton.SMART_SEARCH_BUTTON.content());
     }
 
-    /**
-     * Checks if the provided update contains a message that represents the <b>start command</b>
-     *
-     * @param botUpdate The received update
-     *
-     * @return {@code true} if the update message is a <b>start command</b>, {@code false} otherwise
-     *
-     * @see BotCommand#START_COMMAND
-     */
     default boolean isStartCommand(Update botUpdate) {
         return startCommandValidator.test(botUpdate);
     }
 
-    /**
-     * Checks the message text for the <b>/help</b> command
-     *
-     * @param botUpdate The received update
-     *
-     * @return {@code true} if the update message is a <b>help command</b>, {@code false} otherwise
-     *
-     * @see BotCommand#HELP_COMMAND
-     */
     default boolean isHelpCommand(Update botUpdate) {
         return helpCommandValidator.test(botUpdate);
     }
+//</editor-fold>
 }
