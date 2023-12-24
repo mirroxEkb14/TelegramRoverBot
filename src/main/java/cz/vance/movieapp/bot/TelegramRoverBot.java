@@ -68,6 +68,11 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
         }
     }
 
+    /**
+     * Sends responses to the user based on the incoming user's message
+     *
+     * @param update The instance of a Telegram update object
+     */
     private void handleMessage(Update update) {
         if (messageManager.isStartCommand(update)) {
             messageManager.sendWelcome(update);
@@ -80,13 +85,18 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
         }
     }
 
+    /**
+     * Sends responses to the user based on the incoming callbacks that are held in inline buttons
+     *
+     * @param update The instance of a Telegram update object
+     */
     private void handleCallback(Update update) {
         if (inlineKeyboardBuilder.isMoodButton(update)) {
             messageManager.sendCatalogue(update);
         } else if (inlineKeyboardBuilder.isCatalogueButton(update)) {
             messageManager.sendGenre(update);
         } else if (inlineKeyboardBuilder.isGenreButton(update)) {
-            System.out.println("HERE");
+
         }
     }
 }
