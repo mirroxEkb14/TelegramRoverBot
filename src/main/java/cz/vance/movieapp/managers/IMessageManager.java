@@ -70,13 +70,31 @@ public interface IMessageManager {
     void sendHelp(Update botUpdate);
 
     /**
-     * Sends a message with user's mood selection
+     * Sends a message with <b>user's mood selection</b>
      *
      * @param botUpdate The received update
      *
      * @see IInlineKeyboardBuilder#buildMoodKeyboard()
      */
     void sendMood(Update botUpdate);
+
+    /**
+     * Sends a message with <b>movie/series selection</b>
+     *
+     * @param botUpdate The received update
+     *
+     * @see IInlineKeyboardBuilder#buildCatalogueKeyboard()
+     */
+    void sendCatalogue(Update botUpdate);
+
+    /**
+     * Sends a message with <b>genre selection</b>
+     *
+     * @param botUpdate The received update
+     *
+     * @see IInlineKeyboardBuilder#buildGenreKeyboard()
+     */
+    void sendGenre(Update botUpdate);
 
 //<editor-fold default-state="collapsed" desc="Boolean Methods">
     default boolean isMessage(Update botUpdate) {

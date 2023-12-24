@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
  * @see Catalogue
  */
 public enum Genre {
-    MORE_BUTTON("More \u21aa"),
     COMEDY_BUTTON("\ud83d\udd7a Comedy"),
     DRAMA_BUTTON("\ud83d\udc94 Drama"),
     MELODRAMA_BUTTON("\ud83d\udc98 Melodrama"),

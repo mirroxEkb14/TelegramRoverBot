@@ -39,4 +39,27 @@ public final class SmartSearchRandomizer {
         return moodSelection.get(
                 random.nextInt(moodSelection.size()));
     }
+
+    /**
+     * Extracts a random element from the <b>catalogueSelection</b> list that contains all the possible texts when the
+     * user clicks one of the <b>SmartSearch</b> buttons and now a <b>movie/series selection keyboard</b> should appear
+     *
+     * @return A randomly chosen element from the <b>catalogueSelection</b> list
+     */
+    public static String getCatalogueMessage() {
+        return catalogueSelection.get(
+                random.nextInt(catalogueSelection.size()));
+    }
+
+    /**
+     * Extracts a random element from the <b>genreSelection</b> list that contains all the possible texts when the
+     * user clicks one of the <b>movie/series selection</b> buttons and now a <b>genre selection keyboard</b> should
+     * appear
+     *
+     * @return A randomly chosen element from the <b>genreSelection</b> list
+     */
+    public static String getGenreMessage() {
+        return genreSelection.get(
+                random.nextInt(genreSelection.size()));
+    }
 }

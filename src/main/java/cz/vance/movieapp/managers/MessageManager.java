@@ -8,6 +8,7 @@ import cz.vance.movieapp.utils.BotMessage;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -40,30 +41,46 @@ public final class MessageManager implements IMessageManager {
 
     @Override
     public void sendEcho(Update botUpdate) {
-        final long chatId = getChatId(botUpdate);
+        final long chatId = getMessageChatId(botUpdate);
         final String messageText = getMessageText(botUpdate);
         sendEcho(chatId, messageText);
     }
 
     @Override
     public void sendWelcome(Update botUpdate) {
-        final long chatId = getChatId(botUpdate);
+        final long chatId = getMessageChatId(botUpdate);
         final String messageText = getFormattedWelcomeText(botUpdate);
         sendWelcome(chatId, messageText);
     }
 
     @Override
     public void sendHelp(Update botUpdate) {
-        final long chatId = getChatId(botUpdate);
+        final long chatId = getMessageChatId(botUpdate);
         final String messageText = BotMessage.HELP_MESSAGE.content();
         sendHelp(chatId, messageText);
     }
 
     @Override
     public void sendMood(Update botUpdate) {
-        final long chatId = getChatId(botUpdate);
+        final long chatId = getMessageChatId(botUpdate);
         final String messageText = SmartSearchRandomizer.getMoodMessage();
         sendMood(chatId, messageText);
+    }
+
+    @Override
+    public void sendCatalogue(Update botUpdate) {
+        final long chatId = getCallbackChatId(botUpdate);
+        final long messageId = getCallbackMessageId(botUpdate);
+        final String messageText = SmartSearchRandomizer.getCatalogueMessage();
+        sendCatalogue(chatId, messageId, messageText);
+    }
+
+    @Override
+    public void sendGenre(Update botUpdate) {
+        final long chatId = getCallbackChatId(botUpdate);
+        final long messageId = getCallbackMessageId(botUpdate);
+        final String messageText = SmartSearchRandomizer.getGenreMessage();
+        sendGenre(chatId, messageId, messageText);
     }
 
 //<editor-fold default-state="collapsed" desc="Echo Message">
@@ -117,7 +134,7 @@ public final class MessageManager implements IMessageManager {
     }
 //</editor-fold>
 
-//<editor-fold default-state="collapsed" desc="Help Message">
+//<editor-fold default-state="collapsed" desc="sendHelp">
     /**
      * Sends a help message to the specified <b>chat ID</b> with the given <b>message text</b>
      *
@@ -133,7 +150,7 @@ public final class MessageManager implements IMessageManager {
     }
 //</editor-fold>
 
-//<editor-fold default-state="collapsed" desc="Mood Message">
+//<editor-fold default-state="collapsed" desc="sendMood">
     /**
      * Sends a message with <b>the mood selection</b> to the specified <b>chat ID</b> with the given <b>message text</b>
      *
@@ -146,6 +163,50 @@ public final class MessageManager implements IMessageManager {
                     chatId,
                     messageText,
                     inlineKeyboardBuilder.buildMoodKeyboard()));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+//</editor-fold>
+
+//<editor-fold default-state="collapsed" desc="sendCatalogue">
+    /**
+     * Sends a message with <b>the movie/series selection</b> to the specified <b>chat ID</b> with the given
+     * <b>message ID</b> and <b>message text</b>
+     *
+     * @param chatId A whole number representing a chat ID
+     * @param messageId A whole number representing a message ID
+     * @param messageText A string containing the text
+     */
+    private void sendCatalogue(long chatId, long messageId, String messageText) {
+        try {
+            bot.execute(buildTelegramMessage(
+                    chatId,
+                    messageId,
+                    messageText,
+                    inlineKeyboardBuilder.buildCatalogueKeyboard()));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+//</editor-fold>
+
+//<editor-fold default-state="collapsed" desc="sendGenre">
+    /**
+     * Sends a message with <b>the genre selection</b> to the specified <b>chat ID</b> with the given
+     * <b>message ID</b> and <b>message text</b>
+     *
+     * @param chatId A whole number representing a chat ID
+     * @param messageId A whole number representing a message ID
+     * @param messageText A string containing the text
+     */
+    private void sendGenre(long chatId, long messageId, String messageText) {
+        try {
+            bot.execute(buildTelegramMessage(
+                    chatId,
+                    messageId,
+                    messageText,
+                    inlineKeyboardBuilder.buildGenreKeyboard()));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
@@ -176,23 +237,29 @@ public final class MessageManager implements IMessageManager {
     /**
      * Builds a Telegram message with the specified <b>chat ID</b>, <b>message text</b> and <b>reply keyboard</b>
      *
-     * @param chatId A whole number representing a chat ID
+     * Builds an edited Telegram message with the specified <b>chat ID</b>, <b>message ID</b>, <b>message text</b> and
+     * <b>inline keyboard</b>
+     *
+     * @param callbackChatId A whole number representing a chat ID
+     * @param callbackMessageId A whole number representing a message ID
      * @param messageText A string containing the text
-     * @param keyboardMarkup A reply keyboard instance
+     * @param keyboardMarkup An inline keyboard instance
      *
-     * @return A configured <b>SendMessage</b> instance with custom buttons representing the Telegram message
+     * @return A configured <b>EditMessageText</b> instance with custom buttons representing the edited Telegram message
      *
-     * @see SendMessage
+     * @see EditMessageText
      */
-    private @NotNull SendMessage buildTelegramMessage(long chatId,
+    private @NotNull EditMessageText buildTelegramMessage(long callbackChatId,
+                                                      long callbackMessageId,
                                                       String messageText,
-                                                      ReplyKeyboardMarkup keyboardMarkup) {
-        final SendMessage message = new SendMessage();
-        message.setChatId(chatId);
-        message.setText(messageText);
-        message.setReplyMarkup(keyboardMarkup);
-        message.setParseMode(PARSE_MODE);
-        return message;
+                                                      InlineKeyboardMarkup keyboardMarkup) {
+        final EditMessageText editedMessage = new EditMessageText();
+        editedMessage.setChatId(callbackChatId);
+        editedMessage.setMessageId(Math.toIntExact(callbackMessageId));
+        editedMessage.setText(messageText);
+        editedMessage.setReplyMarkup(keyboardMarkup);
+        editedMessage.setParseMode(PARSE_MODE);
+        return editedMessage;
     }
 
     /**
@@ -216,18 +283,62 @@ public final class MessageManager implements IMessageManager {
         message.setParseMode(PARSE_MODE);
         return message;
     }
+
+    /**
+     * Builds a Telegram message with the specified <b>chat ID</b>, <b>message text</b> and <b>reply keyboard</b>
+     *
+     * @param chatId A whole number representing a chat ID
+     * @param messageText A string containing the text
+     * @param keyboardMarkup A reply keyboard instance
+     *
+     * @return A configured <b>SendMessage</b> instance with custom buttons representing the Telegram message
+     *
+     * @see SendMessage
+     */
+    private @NotNull SendMessage buildTelegramMessage(long chatId,
+                                                      String messageText,
+                                                      ReplyKeyboardMarkup keyboardMarkup) {
+        final SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(messageText);
+        message.setReplyMarkup(keyboardMarkup);
+        message.setParseMode(PARSE_MODE);
+        return message;
+    }
 //</editor-fold>
 
 //<editor-fold default-state="collapsed" desc="Update Parameters Getters">
     /**
-     * Extracts the <b>chat ID</b> from the provided Telegram update
+     * Extracts the <b>chat ID</b> from the provided Telegram update message
      *
      * @param update The Telegram update containing a message
      *
      * @return A whole number of the <b>long</b> primitive type
      */
-    private long getChatId(@NotNull Update update) {
+    private long getMessageChatId(@NotNull Update update) {
         return update.getMessage().getChatId();
+    }
+
+    /**
+     * Extracts the <b>chat ID</b> from the provided Telegram update callback
+     *
+     * @param update The Telegram update containing a callback
+     *
+     * @return A whole number of the <b>long</b> primitive type
+     */
+    private long getCallbackChatId(@NotNull Update update) {
+        return update.getCallbackQuery().getMessage().getChatId();
+    }
+
+    /**
+     * Extracts the <b>message ID</b> from the provided Telegram callback
+     *
+     * @param update The Telegram update containing a callback
+     *
+     * @return A whole number of the <b>long</b> primitive type
+     */
+    private long getCallbackMessageId(@NotNull Update update) {
+        return update.getCallbackQuery().getMessage().getMessageId();
     }
 
     /**

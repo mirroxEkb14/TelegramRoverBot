@@ -62,19 +62,31 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (messageManager.isMessage(update)) {
-            if (messageManager.isStartCommand(update)) {
-                messageManager.sendWelcome(update);
-            } else if (messageManager.isHelpCommand(update)) {
-                messageManager.sendHelp(update);
-            } else if (messageManager.isSmartSearchButton(update)) {
-                messageManager.sendMood(update);
-            } else {
-                messageManager.sendEcho(update);
-            }
-            return;
+            handleMessage(update);
+        } else if (update.hasCallbackQuery()) {
+            handleCallback(update);
         }
-        if (inlineKeyboardBuilder.isMoodButton(update)) {
+    }
 
+    private void handleMessage(Update update) {
+        if (messageManager.isStartCommand(update)) {
+            messageManager.sendWelcome(update);
+        } else if (messageManager.isHelpCommand(update)) {
+            messageManager.sendHelp(update);
+        } else if (messageManager.isSmartSearchButton(update)) {
+            messageManager.sendMood(update);
+        } else {
+            messageManager.sendEcho(update);
+        }
+    }
+
+    private void handleCallback(Update update) {
+        if (inlineKeyboardBuilder.isMoodButton(update)) {
+            messageManager.sendCatalogue(update);
+        } else if (inlineKeyboardBuilder.isCatalogueButton(update)) {
+            messageManager.sendGenre(update);
+        } else if (inlineKeyboardBuilder.isGenreButton(update)) {
+            System.out.println("HERE");
         }
     }
 }
