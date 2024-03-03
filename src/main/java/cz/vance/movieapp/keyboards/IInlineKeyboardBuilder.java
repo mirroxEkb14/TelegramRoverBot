@@ -17,15 +17,21 @@ import java.util.function.BiFunction;
  */
 public interface IInlineKeyboardBuilder {
 
+    /**
+     * The <b>callback data</b> is a piece of information that will be sent to the bot when the user interacts with
+     * the button, which is typically used to identify which button was pressed
+     */
+    String CALLBACK_PREFIX = "_cb";
+
     BiFunction<String, UserMood, Boolean> userMoodValidator = (buttonCallback, mood) ->
         buttonCallback.equals(
-                mood.getCallback());
+                createCallback(mood.content()));
     BiFunction<String, Catalogue, Boolean> catalogueValidator = (buttonCallback, catalogue) ->
             buttonCallback.equals(
-                    catalogue.getCallback());
+                    createCallback(catalogue.content()));
     BiFunction<String, Genre, Boolean> genreValidator = (buttonCallback, genre) ->
             buttonCallback.equals(
-                    genre.getCallback());
+                    createCallback(genre.content()));
 
     /**
      * Builds and returns <b>the mood selection inline keyboard</b> containing the following buttons:
@@ -88,6 +94,17 @@ public interface IInlineKeyboardBuilder {
      * @see Genre
      */
     InlineKeyboardMarkup buildGenreKeyboard();
+
+    /**
+     * Creates a callback data for the passed inline button
+     *
+     * @param inlineButtonText Inline button text
+     *
+     * @return Created callback data
+     */
+    static @NotNull String createCallback(String inlineButtonText) {
+        return inlineButtonText + CALLBACK_PREFIX;
+    }
 
 //<editor-fold default-state="collapsed" desc="Mood Boolean Methods">
     default boolean isMoodButton(@NotNull Update botUpdate) {

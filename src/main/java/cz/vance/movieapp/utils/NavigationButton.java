@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
  * @see InlineKeyboardBuilder
  */
 public enum NavigationButton {
-    LEFT_ARROW("«"),
-    RIGHT_ARROW("»");
+    LEFT_ARROW("\ud83c\udf00"), // "«" left-pointing double angle quotation mark
+    RIGHT_ARROW("\ud83c\udf01"); // "»" right-pointing double angle quotation mark
 
 //<editor-fold default-state="collapsed" desc="Callback Data">
     /**

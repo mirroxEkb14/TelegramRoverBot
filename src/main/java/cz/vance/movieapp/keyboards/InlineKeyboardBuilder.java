@@ -45,22 +45,22 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
 
         firstInlineRow.add(inlineButtonBuilder.apply(
                 UserMood.DEPRESSION_BUTTON.content(),
-                UserMood.DEPRESSION_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(UserMood.DEPRESSION_BUTTON.content())));
         firstInlineRow.add(inlineButtonBuilder.apply(
                 UserMood.CHEERFUL_BUTTON.content(),
-                UserMood.CHEERFUL_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(UserMood.CHEERFUL_BUTTON.content())));
         firstInlineRow.add(inlineButtonBuilder.apply(
                 UserMood.FIGHTING_BUTTON.content(),
-                UserMood.FIGHTING_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(UserMood.FIGHTING_BUTTON.content())));
         secondInlineRow.add(inlineButtonBuilder.apply(
                 UserMood.FAMILY_BUTTON.content(),
-                UserMood.FAMILY_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(UserMood.FAMILY_BUTTON.content())));
         secondInlineRow.add(inlineButtonBuilder.apply(
                 UserMood.FRIENDS_BUTTON.content(),
-                UserMood.FRIENDS_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(UserMood.FRIENDS_BUTTON.content())));
         secondInlineRow.add(inlineButtonBuilder.apply(
                 UserMood.LOVE_BUTTON.content(),
-                UserMood.LOVE_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(UserMood.LOVE_BUTTON.content())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);
@@ -78,10 +78,10 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
 
         firstInlineRow.add(inlineButtonBuilder.apply(
                 Catalogue.MOVIE_BUTTON.content(),
-                Catalogue.MOVIE_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Catalogue.MOVIE_BUTTON.content())));
         firstInlineRow.add(inlineButtonBuilder.apply(
                 Catalogue.SERIES_BUTTON.content(),
-                Catalogue.SERIES_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Catalogue.SERIES_BUTTON.content())));
 
         inlineRows.add(firstInlineRow);
 
@@ -103,55 +103,55 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
 
         firstInlineRow.add(inlineButtonBuilder.apply(
                 Genre.COMEDY_BUTTON.content(),
-                Genre.COMEDY_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.COMEDY_BUTTON.content())));
         firstInlineRow.add(inlineButtonBuilder.apply(
                 Genre.DRAMA_BUTTON.content(),
-                Genre.DRAMA_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.DRAMA_BUTTON.content())));
         firstInlineRow.add(inlineButtonBuilder.apply(
                 Genre.MELODRAMA_BUTTON.content(),
-                Genre.MELODRAMA_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.MELODRAMA_BUTTON.content())));
         secondInlineRow.add(inlineButtonBuilder.apply(
                 Genre.THRILLER_BUTTON.content(),
-                Genre.THRILLER_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.THRILLER_BUTTON.content())));
         secondInlineRow.add(inlineButtonBuilder.apply(
                 Genre.ACTION_BUTTON.content(),
-                Genre.ACTION_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.ACTION_BUTTON.content())));
         secondInlineRow.add(inlineButtonBuilder.apply(
                 Genre.FICTION_BUTTON.content(),
-                Genre.FICTION_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.FICTION_BUTTON.content())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
                 Genre.DETECTIVE_BUTTON.content(),
-                Genre.DETECTIVE_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.DETECTIVE_BUTTON.content())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
                 Genre.FAMILY_BUTTON.content(),
-                Genre.FAMILY_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.FAMILY_BUTTON.content())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
                 Genre.SPORT_BUTTON.content(),
-                Genre.SPORT_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.SPORT_BUTTON.content())));
         fourthInlineRow.add(inlineButtonBuilder.apply(
                 Genre.FANTASY_BUTTON.content(),
-                Genre.FANTASY_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.FANTASY_BUTTON.content())));
         fourthInlineRow.add(inlineButtonBuilder.apply(
                 Genre.ANIMATION_BUTTON.content(),
-                Genre.ANIMATION_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.ANIMATION_BUTTON.content())));
         fourthInlineRow.add(inlineButtonBuilder.apply(
                 Genre.ADVENTURE_BUTTON.content(),
-                Genre.ADVENTURE_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.ADVENTURE_BUTTON.content())));
         fifthInlineRow.add(inlineButtonBuilder.apply(
                 Genre.BIOGRAPHY_BUTTON.content(),
-                Genre.BIOGRAPHY_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.BIOGRAPHY_BUTTON.content())));
         fifthInlineRow.add(inlineButtonBuilder.apply(
                 Genre.CRIMINAL_BUTTON.content(),
-                Genre.CRIMINAL_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.CRIMINAL_BUTTON.content())));
         fifthInlineRow.add(inlineButtonBuilder.apply(
                 Genre.DOCUMENTARY_BUTTON.content(),
-                Genre.DOCUMENTARY_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.DOCUMENTARY_BUTTON.content())));
         sixthInlineRow.add(inlineButtonBuilder.apply(
                 Genre.WAR_BUTTON.content(),
-                Genre.WAR_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.WAR_BUTTON.content())));
         sixthInlineRow.add(inlineButtonBuilder.apply(
                 Genre.MUSIC_BUTTON.content(),
-                Genre.MUSIC_BUTTON.getCallback()));
+                IInlineKeyboardBuilder.createCallback(Genre.MUSIC_BUTTON.content())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);

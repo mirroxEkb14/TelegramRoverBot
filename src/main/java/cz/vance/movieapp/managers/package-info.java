@@ -1,7 +1,11 @@
 /**
- * This <b>managers</b> package contains the source files of classes dealing with the management of sending
- * messages
+ * This <b>managers</b> package contains further packages with classes dealing with:
+ * <ul>
+ * <li> building Telegram messages;
+ * <li> sending Telegram messages;
+ * <li> update extraction (user's messages text and callbacks);
+ * </ul>
  *
- * @author amirov 12/22/2023
+ * @author amirov 2/29/2024
  */
 package cz.vance.movieapp.managers;

@@ -6,8 +6,10 @@ import java.util.Random;
 /**
  * This <b>SmartSearchRandomizer</b> class implements a set of basic operations for getting texts for message the bot
  * sends while <b>SmartSearch</b>
+ *
+ * @see ISmartSearchRandomizer
  */
-public final class SmartSearchRandomizer {
+public final class SmartSearchRandomizer implements ISmartSearchRandomizer {
 
     public static final Random random = new Random();
 
@@ -29,36 +31,20 @@ public final class SmartSearchRandomizer {
             "Well-well, what about a genre?");
 //</editor-fold>
 
-    /**
-     * Extracts a random element from the <b>moodSelection</b> list that contains all the possible texts when the
-     * user clicks <b>🎬 Smart search</b> and now a <b>mood selection keyboard</b> should appear
-     *
-     * @return A randomly chosen element from the <b>moodSelection</b> list
-     */
-    public static String getMoodMessage() {
+    @Override
+     public String getMoodMessage() {
         return moodSelection.get(
                 random.nextInt(moodSelection.size()));
     }
 
-    /**
-     * Extracts a random element from the <b>catalogueSelection</b> list that contains all the possible texts when the
-     * user clicks one of the <b>SmartSearch</b> buttons and now a <b>movie/series selection keyboard</b> should appear
-     *
-     * @return A randomly chosen element from the <b>catalogueSelection</b> list
-     */
-    public static String getCatalogueMessage() {
+    @Override
+    public String getCatalogueMessage() {
         return catalogueSelection.get(
                 random.nextInt(catalogueSelection.size()));
     }
 
-    /**
-     * Extracts a random element from the <b>genreSelection</b> list that contains all the possible texts when the
-     * user clicks one of the <b>movie/series selection</b> buttons and now a <b>genre selection keyboard</b> should
-     * appear
-     *
-     * @return A randomly chosen element from the <b>genreSelection</b> list
-     */
-    public static String getGenreMessage() {
+    @Override
+    public String getGenreMessage() {
         return genreSelection.get(
                 random.nextInt(genreSelection.size()));
     }

@@ -30,4 +30,14 @@ public final class UpdateExtractor implements IUpdateExtractor {
     public long getCallbackMessageId(@NotNull Update update) {
         return update.getCallbackQuery().getMessage().getMessageId();
     }
+
+    @Override
+    public boolean isCallbackQuery(@NotNull Update update) {
+        return update.hasCallbackQuery();
+    }
+
+    @Override
+    public String getCallbackQuery(@NotNull Update update) {
+        return update.getCallbackQuery().getData();
+    }
 }

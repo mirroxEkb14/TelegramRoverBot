@@ -1,4 +1,4 @@
-package cz.vance.movieapp.managers;
+package cz.vance.movieapp.managers.messages;
 
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.keyboards.InlineKeyboardBuilder;
@@ -7,12 +7,11 @@ import cz.vance.movieapp.managers.builders.IMessageBuilder;
 import cz.vance.movieapp.managers.builders.MessageBuilder;
 import cz.vance.movieapp.managers.updates.IUpdateExtractor;
 import cz.vance.movieapp.managers.updates.UpdateExtractor;
+import cz.vance.movieapp.randomizers.ISmartSearchRandomizer;
 import cz.vance.movieapp.randomizers.SmartSearchRandomizer;
 import cz.vance.movieapp.utils.BotMessage;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -46,7 +45,19 @@ public final class MessageManager implements IMessageManager {
      * This <b>constant</b> holds an instance of a class that extracts information from an incoming Telegram update
      */
     private final IUpdateExtractor updateExtractor = new UpdateExtractor();
+    /**
+     * This <b>constant</b> holds an instance of class that contains methods for phrase selection during the
+     * <b>Smart Search</b>
+     */
+    private final ISmartSearchRandomizer smartSearchRandomizer = new SmartSearchRandomizer();
 
+    /**
+     * Constructor
+     * <p>
+     * Initializes the <b>bot</b> constant variable
+     *
+     * @param bot An instance of the {@link TelegramRoverBot} object
+     */
     public MessageManager(TelegramLongPollingBot bot) {
         this.bot = bot;
     }
@@ -75,7 +86,7 @@ public final class MessageManager implements IMessageManager {
     @Override
     public void sendMood(Update botUpdate) {
         final long chatId = updateExtractor.getMessageChatId(botUpdate);
-        final String messageText = SmartSearchRandomizer.getMoodMessage();
+        final String messageText = smartSearchRandomizer.getMoodMessage();
         sendMood(chatId, messageText);
     }
 
@@ -83,7 +94,7 @@ public final class MessageManager implements IMessageManager {
     public void sendCatalogue(Update botUpdate) {
         final long chatId = updateExtractor.getCallbackChatId(botUpdate);
         final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
-        final String messageText = SmartSearchRandomizer.getCatalogueMessage();
+        final String messageText = smartSearchRandomizer.getCatalogueMessage();
         sendCatalogue(chatId, messageId, messageText);
     }
 
@@ -91,7 +102,7 @@ public final class MessageManager implements IMessageManager {
     public void sendGenre(Update botUpdate) {
         final long chatId = updateExtractor.getCallbackChatId(botUpdate);
         final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
-        final String messageText = SmartSearchRandomizer.getGenreMessage();
+        final String messageText = smartSearchRandomizer.getGenreMessage();
         sendGenre(chatId, messageId, messageText);
     }
 

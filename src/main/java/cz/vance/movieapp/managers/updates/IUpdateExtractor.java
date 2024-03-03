@@ -1,5 +1,6 @@
 package cz.vance.movieapp.managers.updates;
 
+import cz.vance.movieapp.utils.UserMood;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -46,4 +47,24 @@ public interface IUpdateExtractor {
      * @return A whole number of the <b>long</b> primitive type
      */
     long getCallbackMessageId(@NotNull Update update);
+
+    /**
+     * Checks if this update contains <b>callback data</b>
+     *
+     * @param update The <b>update</b> object
+     *
+     * @return <b>true</b> if this update contains callback data, <b>false</b> otherwise
+     */
+    boolean isCallbackQuery(@NotNull Update update);
+
+    /**
+     * Extracts the <b>callback query text</b> from an incoming update
+     *
+     * @param update The incoming <b>update</b> object
+     *
+     * @return A <b>string</b> object containing the callback text
+     *
+     * @see UserMood#getCallback()
+     */
+    String getCallbackQuery(@NotNull Update update);
 }

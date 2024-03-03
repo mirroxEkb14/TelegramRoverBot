@@ -1,4 +1,4 @@
-package cz.vance.movieapp.managers;
+package cz.vance.movieapp.managers.messages;
 
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.keyboards.IReplyKeyboardBuilder;
