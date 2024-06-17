@@ -8,7 +8,11 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 //</editor-fold>
 
 /**
- * This <b>TelegramRoverBotChat</b> class is an entry point into this program that calls the <b>main()</b> method
+ * Entry point for the application containing the <b>main</b> method.
+ * <p>
+ * Initializes the Telegram bot API.
+ * <br>
+ * Registers the TelegramRoverBot.
  *
  * @see TelegramRoverBot
  */

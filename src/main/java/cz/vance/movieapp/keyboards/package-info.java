@@ -1,6 +1,10 @@
 /**
- * This <b>keyboards</b> package provides the classes that work with the bot keyboards that provide <b>inline</b>
- * and <b>reply</b> buttons
+ * Provides source files for building Telegram bot keyboards (<b>inline</b> and <b>reply</b> buttons).
+ *
+ * @see cz.vance.movieapp.keyboards.IReplyKeyboardBuilder
+ * @see cz.vance.movieapp.keyboards.ReplyKeyboardBuilder
+ * @see cz.vance.movieapp.keyboards.IInlineKeyboardBuilder
+ * @see cz.vance.movieapp.keyboards.InlineKeyboardBuilder
  *
  * @author amirov 12/22/2023
  */

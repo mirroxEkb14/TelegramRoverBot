@@ -3,15 +3,15 @@ package cz.vance.movieapp.managers.builders;
 //<editor-fold default-state="collapsed" desc="Imports">
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 //</editor-fold>
 
 /**
- * This <b>MessageBuilder</b> class implements a set of basic operations for building Telegram messages
- *
- * @see IMessageBuilder
+ * Implements a set of basic operations for building Telegram messages (<b>SendMessage</b> objects).
  */
 public final class MessageBuilder implements IMessageBuilder {
 
@@ -23,6 +23,15 @@ public final class MessageBuilder implements IMessageBuilder {
         message.setText(messageText);
         message.setParseMode(PARSE_MODE);
         return message;
+    }
+
+    @Override
+    public @NotNull SendSticker buildTelegramSticker(long chatId,
+                                                     String stickerFileId) {
+        final SendSticker sticker = new SendSticker();
+        sticker.setChatId(chatId);
+        sticker.setSticker(new InputFile(stickerFileId));
+        return sticker;
     }
 
     @Override

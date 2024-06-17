@@ -6,8 +6,7 @@ import cz.vance.movieapp.utils.MainMenuButton;
 //</editor-fold>
 
 /**
- * This <b>IReplyKeyboardBuilder</b> interface declares a set of basic operations for creating custom reply
- * keyboards
+ * Declares a set of basic operations for creating custom reply keyboards.
  */
 public interface IReplyKeyboardBuilder {
 
@@ -20,7 +19,7 @@ public interface IReplyKeyboardBuilder {
      * <li> 🎭 Feedback
      * </ol>
      *
-     * @return Configured instance of <b>ReplyKeyboardMarkup</b>
+     * @return Configured instance of the <b>ReplyKeyboardMarkup</b>.
      *
      * @see MainMenuButton
      */

@@ -1,13 +1,9 @@
 package cz.vance.movieapp.utils;
 
-import cz.vance.movieapp.keyboards.InlineKeyboardBuilder;
-
 /**
- * This <b>UserMood</b> enum class contains the text for buttons of <b>user mood selection</b>
- * <p>
- * These texts are for buttons in <b>InlineKeyboardBuilder</b>
+ * Contains texts for buttons of the <b>user mood selection</b>.
  *
- * @see InlineKeyboardBuilder
+ * @see cz.vance.movieapp.keyboards.InlineKeyboardBuilder
  */
 public enum UserMood {
     DEPRESSION_BUTTON("\ud83c\udf27 Depressed"),
@@ -21,5 +17,5 @@ public enum UserMood {
 
     UserMood(String content) { this.content = content; }
 
-    public String content() { return content; }
+    public String getContent() { return content; }
 }

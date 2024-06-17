@@ -25,7 +25,6 @@
             <artifactId>telegrambots</artifactId>
             <version>${telegrambots.version}</version>
         </dependency>
-
         <!-- «SnakeYAML» library to read the configuration file
         Reference: https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
         <dependency>
@@ -33,7 +32,6 @@
             <artifactId>snakeyaml</artifactId>
             <version>${shakeyaml.version}</version>
         </dependency>
-
         <!-- «JUnit» framework to test individual units of the application to ensure they behave as expected
         Reference: https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
@@ -42,7 +40,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
         <!-- «Annotations» library provides additional information to the IntelliJ IDEA IDE improving code analysis,
         inspections, and code completion within the development environment
         Reference: https://mvnrepository.com/artifact/org.jetbrains/annotations -->
@@ -52,7 +49,5 @@
             <version>${annotations.version}</version>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
-
 </project>

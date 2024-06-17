@@ -1,19 +1,26 @@
 package cz.vance.movieapp.randomizers;
 
+//<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.managers.stickers.IStickerManager;
+import cz.vance.movieapp.managers.stickers.StickerManager;
+import cz.vance.movieapp.models.Sticker;
+import cz.vance.movieapp.utils.StickerCategory;
+
 import java.util.List;
 import java.util.Random;
+//</editor-fold>
 
 /**
- * This <b>SmartSearchRandomizer</b> class implements a set of basic operations for getting texts for message the bot
- * sends while <b>SmartSearch</b>
+ * Implements a set of basic operations for getting texts for messages the bot sends while the <b>SmartSearch</b>.
  *
  * @see ISmartSearchRandomizer
  */
 public final class SmartSearchRandomizer implements ISmartSearchRandomizer {
 
-    public static final Random random = new Random();
+    private static final Random random = new Random();
+    private static final IStickerManager stickerManager = StickerManager.getInstance();
 
-//<editor-fold default-state="collapsed" desc="Lists">
+    //<editor-fold default-state="collapsed" desc="Lists">
     private static final List<String> atLaunch = List.of(
             "It's a movie time! 3.. 2.. 1..",
             "Time to eat some popcorn then...");
@@ -29,23 +36,48 @@ public final class SmartSearchRandomizer implements ISmartSearchRandomizer {
     private static final List<String> genreSelection = List.of(
             "Ok then, here is maybe the most difficult part... choose a genre:",
             "Well-well, what about a genre?");
-//</editor-fold>
+    //</editor-fold>
 
     @Override
      public String getMoodMessage() {
         return moodSelection.get(
-                random.nextInt(moodSelection.size()));
+                getRandomIndex(moodSelection.size()));
     }
 
     @Override
     public String getCatalogueMessage() {
         return catalogueSelection.get(
-                random.nextInt(catalogueSelection.size()));
+                getRandomIndex(catalogueSelection.size()));
     }
 
     @Override
     public String getGenreMessage() {
         return genreSelection.get(
-                random.nextInt(genreSelection.size()));
+                getRandomIndex(genreSelection.size()));
     }
+
+    @Override
+    public String getRandomSmartSearchBeginningSticker() {
+        final List<Sticker> smartSearchStickers = stickerManager.getStickersByCategory(StickerCategory.SMART_SEARCH_BEGINNING);
+        final int randomIndex = getRandomIndex(smartSearchStickers.size());
+        return smartSearchStickers.get(randomIndex).fileId();
+    }
+
+    @Override
+    public String getRandomSmartSearchEndSticker() {
+        final List<Sticker> smartSearchStickers = stickerManager.getStickersByCategory(StickerCategory.SMART_SEARCH_END);
+        final int randomIndex = getRandomIndex(smartSearchStickers.size());
+        return smartSearchStickers.get(randomIndex).fileId();
+    }
+
+    @Override
+    public String getRandomWelcomeSticker() {
+        final List<Sticker> welcomeStickers = stickerManager.getStickersByCategory(StickerCategory.WELCOME);
+        final int randomIndex = getRandomIndex(welcomeStickers.size());
+        return welcomeStickers.get(randomIndex).fileId();
+    }
+
+    //<editor-fold default-state="collapsed" desc="Private Methods">
+    private int getRandomIndex(int size) { return random.nextInt(size); }
+    //</editor-fold>
 }

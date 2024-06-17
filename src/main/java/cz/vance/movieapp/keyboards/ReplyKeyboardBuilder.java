@@ -12,10 +12,7 @@ import java.util.List;
 //</editor-fold>
 
 /**
- * This <b>ReplyKeyboardBuilder</b> class implements a set of basic operations for creating custom reply
- * keyboards
- *
- * @see IReplyKeyboardBuilder
+ * Implements a set of basic operations for creating custom reply keyboards.
  */
 public final class ReplyKeyboardBuilder implements IReplyKeyboardBuilder {
 
@@ -29,13 +26,13 @@ public final class ReplyKeyboardBuilder implements IReplyKeyboardBuilder {
         final KeyboardRow secondRow = new KeyboardRow();
 
         firstRow.add(new KeyboardButton(
-                MainMenuButton.SMART_SEARCH_BUTTON.content()));
+                MainMenuButton.SMART_SEARCH_BUTTON.getContent()));
         firstRow.add(new KeyboardButton(
-                MainMenuButton.OUR_CHOICE_BUTTON.content()));
+                MainMenuButton.OUR_CHOICE_BUTTON.getContent()));
         firstRow.add(new KeyboardButton(
-                MainMenuButton.NO_IDEA_BUTTON.content()));
+                MainMenuButton.NO_IDEA_BUTTON.getContent()));
         secondRow.add(new KeyboardButton(
-                MainMenuButton.FEEDBACK_BUTTON.content()));
+                MainMenuButton.FEEDBACK_BUTTON.getContent()));
 
         keyboardRows.add(firstRow);
         keyboardRows.add(secondRow);

@@ -1,7 +1,6 @@
 package cz.vance.movieapp.bot;
 
 //<editor-fold default-state="collapsed" desc="Imports">
-import cz.vance.movieapp.config.TelegramRoverBotConfig;
 import cz.vance.movieapp.exceptions.ConfigException;
 import cz.vance.movieapp.keyboards.IInlineKeyboardBuilder;
 import cz.vance.movieapp.keyboards.InlineKeyboardBuilder;
@@ -16,9 +15,10 @@ import java.io.InputStream;
 //</editor-fold>
 
 /**
- * This <b>TelegramRoverBot</b> class represents the main implementation of a Telegram bot
+ * Handles incoming updates from Telegram (messages and callback queries).
+ * <br>
+ * Sends responses to the user (via {@link MessageManager}).
  *
- * @see TelegramLongPollingBot
  * @see <a href="https://github.com/rubenlagus/TelegramBots#telegram-bot-java-library">TelegramBots</a>
  */
 public final class TelegramRoverBot extends TelegramLongPollingBot {
@@ -30,19 +30,16 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
     private final IInlineKeyboardBuilder inlineKeyboardBuilder = new InlineKeyboardBuilder();
 
     /**
-     * Constructor
-     * <p>
-     * Loads configuration when creating the bot instance
+     * Calls the superclass constructor with the bot token obtained from the configuration file.
      */
-    public TelegramRoverBot() {
-        super(getConfig());
-    }
+    public TelegramRoverBot() { super(getConfig()); }
 
     /**
-     * Loads the <b>YAML</b> configuration from the <b>config.yml</b> file
+     * Loads the bot settings from the configuration file.
      *
-     * @throws ConfigException When the resource <b>CONFIG_FILE</b> cannot be found or loaded while
-     * the {@link Class#getResourceAsStream(String)} method attempts to locate and open it
+     * @return The string representation of the bot token.
+     *
+     * @throws ConfigException if the configuration file cannot be found or read.
      */
     private static String getConfig() throws ConfigException {
         try (InputStream input = TelegramRoverBot.class.getResourceAsStream(CONFIG_FILE)) {
@@ -51,53 +48,56 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
 
             final Yaml yaml = new Yaml();
             botConfig = yaml.loadAs(input, TelegramRoverBotConfig.class);
-
         } catch (IOException e) { e.printStackTrace(); }
+
         return botConfig.getTelegramBotToken();
     }
 
     @Override
     public String getBotUsername() { return botConfig.getTelegramBotUsername(); }
 
+    /**
+     * Determines whether the update is a <b>message</b> or a <b>callback query</b> and handles it accordingly.
+     *
+     * @param update The update received from Telegram.
+     */
     @Override
     public void onUpdateReceived(Update update) {
-        if (messageManager.isMessage(update)) {
+        if (messageManager.isMessage(update))
             handleMessage(update);
-        } else if (update.hasCallbackQuery()) {
+        else if (update.hasCallbackQuery())
             handleCallback(update);
-        }
     }
 
     /**
-     * Sends responses to the user based on the incoming user's message
+     * Delegates the processing of the incoming messages (based on their content) to the {@link MessageManager}.
      *
-     * @param update The instance of a Telegram update object
+     * @param update The update containing the message.
      */
     private void handleMessage(Update update) {
-        if (messageManager.isStartCommand(update)) {
+        if (messageManager.isStartCommand(update))
             messageManager.sendWelcome(update);
-        } else if (messageManager.isHelpCommand(update)) {
+        else if (messageManager.isHelpCommand(update))
             messageManager.sendHelp(update);
-        } else if (messageManager.isSmartSearchButton(update)) {
+        else if (messageManager.isSmartSearchButton(update))
             messageManager.sendMood(update);
-        } else {
+        else
             messageManager.sendEcho(update);
-        }
     }
 
     /**
-     * Sends responses to the user based on the incoming callbacks that are held in inline buttons
+     * Delegates the processing of the callback queries to the {@link MessageManager}.
+     * <br>
+     * The triggered inline keyboard buttons are tested via the {@link InlineKeyboardBuilder}.
      *
-     * @param update The instance of a Telegram update object
+     * @param update The update containing the callback query.
      */
     private void handleCallback(Update update) {
-        if (inlineKeyboardBuilder.isMoodButton(update)) {
+        if (inlineKeyboardBuilder.isMoodButton(update))
             messageManager.sendCatalogue(update);
-        } else if (inlineKeyboardBuilder.isCatalogueButton(update)) {
+        else if (inlineKeyboardBuilder.isCatalogueButton(update))
             messageManager.sendGenre(update);
-        } else if (inlineKeyboardBuilder.isGenreButton(update)) {
-
-        }
+        else if (inlineKeyboardBuilder.isGenreButton(update))
+            messageManager.sendMovie(update);
     }
 }
-

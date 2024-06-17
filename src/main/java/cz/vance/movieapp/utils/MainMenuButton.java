@@ -1,13 +1,9 @@
 package cz.vance.movieapp.utils;
 
-import cz.vance.movieapp.keyboards.ReplyKeyboardBuilder;
-
 /**
- * This <b>ReplyButton</b> enum class contains the text for buttons of <b>the main menu</b>
- * <p>
- * These texts are for buttons in <b>ReplyKeyboardMarkup</b>
+ * Contains texts for the <b>main menu</b> buttons.
  *
- * @see ReplyKeyboardBuilder
+ * @see cz.vance.movieapp.keyboards.ReplyKeyboardBuilder
  */
 public enum MainMenuButton {
     SMART_SEARCH_BUTTON("\ud83c\udfac Smart search"),
@@ -19,5 +15,5 @@ public enum MainMenuButton {
 
     MainMenuButton(String content) { this.content = content; }
 
-    public String content() { return content; }
+    public String getContent() { return content; }
 }

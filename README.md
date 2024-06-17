@@ -17,21 +17,29 @@ A telegram bot working with a movie database and offering users a convenient int
 
 - [Features](#features)
 - [Usage](#usage)
+- [Setting up SQLite database](#setting-up-sqlite-database)
 - [Contact](#contact)
 
-## Features
+### Features
 
 - Search for movies by user's mood
 - Get details about a specific movie
 - Personalized recommendations based on user preferences
 
-## Usage
+### Usage
 
 1. Start the Telegram bot
 2. Open a chat with the bot.
 3. Use commands like `/Smart search`, `/Our choice`, `/No idea`, and `/Feedback` to interact with the movie database
 
-## Contact
+### Setting up SQLite database
+
+To connect the <b>cinema.db</b> to the project, it is necessary to add the "sqlite-jdbc" .jar file to the project:
+- Download the file from the GitHub repository: [sqlite-jdbc](https://github.com/xerial/sqlite-jdbc);
+- Add the file to the project's dependencies (IntelliJ IDEA):
+  - <b>File</b> -> <b>Project Structure</b> -> <b>Modules</b> -> <b>Dependencies</b> -> <b>"+"</b> -> <b>JARs or Directories...</b>;
+
+### Contact
 
 [![LinkedIn Badge](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/daniyar-amirov-103467227)
 [![Gmail Badge](https://img.shields.io/badge/-Email-c14438?style=flat-square&logo=gmail&logoColor=white)](mailto:dancho.rancho07@gmail.com)

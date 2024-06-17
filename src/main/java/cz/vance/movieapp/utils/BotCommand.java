@@ -1,7 +1,7 @@
 package cz.vance.movieapp.utils;
 
 /**
- * This <b>BotCommand</b> enum class contains all the possible bot commands
+ * Contains all the texts fpr all the possible bot commands.
  */
 public enum BotCommand {
     START_COMMAND("/start"),

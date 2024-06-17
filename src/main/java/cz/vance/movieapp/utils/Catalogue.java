@@ -1,15 +1,11 @@
 package cz.vance.movieapp.utils;
 
-import cz.vance.movieapp.keyboards.InlineKeyboardBuilder;
-
 /**
- * This <b>Catalogue</b> enum class contains the text for buttons of <b>movies/series selection</b>
- * <p>
- * The keyboard with these texts is triggered when one of the <b>UserMood buttons</b> was clicked on
- * <p>
- * These texts are for buttons in <b>InlineKeyboardBuilder</b>
+ * Contains texts for the <b>movies/series selection</b> buttons.
+ * <br>
+ * The keyboard with these texts is triggered when one of the <b>user mood buttons</b> was clicked.
  *
- * @see InlineKeyboardBuilder
+ * @see cz.vance.movieapp.keyboards.InlineKeyboardBuilder
  * @see UserMood
  */
 public enum Catalogue {
@@ -20,5 +16,5 @@ public enum Catalogue {
 
     Catalogue(String content) { this.content = content; }
 
-    public String content() { return content; }
+    public String getContent() { return content; }
 }

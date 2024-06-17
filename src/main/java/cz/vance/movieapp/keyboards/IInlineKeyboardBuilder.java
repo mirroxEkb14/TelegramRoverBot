@@ -12,26 +12,39 @@ import java.util.function.BiFunction;
 //</editor-fold>
 
 /**
- * This <b>IInlineKeyboardBuilder</b> interface declares a set of basic operations for creating custom inline
- * keyboards
+ * Declares a set of basic operations for creating custom inline keyboards.
  */
 public interface IInlineKeyboardBuilder {
 
     /**
-     * The <b>callback data</b> is a piece of information that will be sent to the bot when the user interacts with
-     * the button, which is typically used to identify which button was pressed
+     * Prefix appended to each callback data (for each inline button).
+     * <p>
+     * The <b>callback data</b> — is a piece of information that will be sent to the bot when the user interacts with
+     * the inline button, which is typically used to identify which button was pressed.
      */
     String CALLBACK_PREFIX = "_cb";
 
+    //<editor-fold default-state="collapsed" desc="Validators">
+    /**
+     * Validator function checks if a button callback (that was clicked by the user) matches some of the
+     * {@link UserMood} inline buttons.
+     */
     BiFunction<String, UserMood, Boolean> userMoodValidator = (buttonCallback, mood) ->
         buttonCallback.equals(
-                createCallback(mood.content()));
+                getCreatedCallback(mood.getContent()));
+    /**
+     * Validator function checks if a button callback matches a {@link Catalogue} inline button.
+     */
     BiFunction<String, Catalogue, Boolean> catalogueValidator = (buttonCallback, catalogue) ->
             buttonCallback.equals(
-                    createCallback(catalogue.content()));
+                    getCreatedCallback(catalogue.getContent()));
+    /**
+     * Validator function checks if a button callback matches a {@link Genre} inline button.
+     */
     BiFunction<String, Genre, Boolean> genreValidator = (buttonCallback, genre) ->
             buttonCallback.equals(
-                    createCallback(genre.content()));
+                    getCreatedCallback(genre.getContent()));
+    //</editor-fold>
 
     /**
      * Builds and returns <b>the mood selection inline keyboard</b> containing the following buttons:
@@ -43,10 +56,9 @@ public interface IInlineKeyboardBuilder {
      * <li> 🍻 Friends
      * <li> 💋 Love
      * </ol>
-     * This keyboard is triggered when the <b>🎬 Smart search</b> button from <b>the main menu keyboard</b> was clicked
-     * on
+     * This keyboard is triggered when the <b>🎬 Smart search</b> button from <b>the main menu keyboard</b> was clicked.
      *
-     * @return Configured instance of <b>InlineKeyboardMarkup</b>
+     * @return Configured instance of the {@link InlineKeyboardMarkup}.
      *
      * @see UserMood
      */
@@ -58,9 +70,9 @@ public interface IInlineKeyboardBuilder {
      * <li> 📼 Movie
      * <li> 🎞 Series
      * </ol>
-     * This keyboard is triggered when one of the <b>mood selection</b> buttons was clicked on
+     * This keyboard is triggered when one of the <b>mood selection</b> buttons was clicked.
      *
-     * @return Configured instance of <b>InlineKeyboardMarkup</b>
+     * @return Configured instance of {@link InlineKeyboardMarkup}.
      *
      * @see Catalogue
      */
@@ -87,26 +99,25 @@ public interface IInlineKeyboardBuilder {
      * <li> 🪖 War
      * <li> 🎻 Music
      * </ol>
-     * This keyboard is triggered when one of the <b>movies/series selection</b> buttons was clicked on
+     * This keyboard is triggered when one of the <b>movies/series selection</b> buttons was clicked.
      *
-     * @return Configured instance of <b>InlineKeyboardMarkup</b>
+     * @return Configured instance of {@link InlineKeyboardMarkup}.
      *
      * @see Genre
      */
     InlineKeyboardMarkup buildGenreKeyboard();
 
     /**
-     * Creates a callback data for the passed inline button
+     * Creates a callback data string for the passed inline button by concatenating the button text with the
+     * {@link #CALLBACK_PREFIX}.
      *
-     * @param inlineButtonText Inline button text
+     * @param inlineButtonText The text of the inline button.
      *
-     * @return Created callback data
+     * @return The created callback data string.
      */
-    static @NotNull String createCallback(String inlineButtonText) {
-        return inlineButtonText + CALLBACK_PREFIX;
-    }
+    static @NotNull String getCreatedCallback(String inlineButtonText) { return inlineButtonText + CALLBACK_PREFIX; }
 
-//<editor-fold default-state="collapsed" desc="Mood Boolean Methods">
+    //<editor-fold default-state="collapsed" desc="Mood Boolean Methods">
     default boolean isMoodButton(@NotNull Update botUpdate) {
         return isDepressedButton(botUpdate) ||
                 isCheerfulButton(botUpdate) ||
@@ -151,9 +162,9 @@ public interface IInlineKeyboardBuilder {
                 botUpdate.getCallbackQuery().getData(),
                 UserMood.LOVE_BUTTON);
     }
-//</editor-fold>
+    //</editor-fold>
 
-//<editor-fold default-state="collapsed" desc="Catalogue Boolean Methods">
+    //<editor-fold default-state="collapsed" desc="Catalogue Boolean Methods">
     default boolean isCatalogueButton(@NotNull Update botUpdate) {
         return isMovieButton(botUpdate) ||
                 isSeriesButton(botUpdate);
@@ -170,9 +181,9 @@ public interface IInlineKeyboardBuilder {
                 botUpdate.getCallbackQuery().getData(),
                 Catalogue.SERIES_BUTTON);
     }
-//</editor-fold>
+    //</editor-fold>
 
-//<editor-fold default-state="collapsed" desc="Genre Boolean Methods">
+    //<editor-fold default-state="collapsed" desc="Genre Boolean Methods">
     default boolean isGenreButton(@NotNull Update botUpdate) {
         return isComedyButton(botUpdate) ||
                 isDramaButton(botUpdate) ||
@@ -294,5 +305,5 @@ public interface IInlineKeyboardBuilder {
                 botUpdate.getCallbackQuery().getData(),
                 Genre.MUSIC_BUTTON);
     }
-//</editor-fold>
+    //</editor-fold>
 }

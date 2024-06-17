@@ -1,5 +1,5 @@
 /**
- * This <b>exceptions</b> package contains the source files of custom exceptions
+ * This <b>exceptions</b> package contains classes representing custom exceptions.
  *
  * @author amirov 12/22/2023
  */

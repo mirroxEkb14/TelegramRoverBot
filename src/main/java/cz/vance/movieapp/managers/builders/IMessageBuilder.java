@@ -3,68 +3,77 @@ package cz.vance.movieapp.managers.builders;
 //<editor-fold default-state="collapsed" desc="Imports">
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 //</editor-fold>
 
 /**
- * This <b>IMessageBuilder</b> interface declares a set of basic operations that build Telegram messages
- *
- * @see SendMessage
- * @see EditMessageText
+ * Declares a set of basic operations that build Telegram messages (<b>SendMessage</b> objects).
  */
 public interface IMessageBuilder {
 
     String PARSE_MODE = "HTML";
 
     /**
-     * Builds a message with the specified <b>chat ID</b> and <b>message text</b>
+     * Builds a message with the specified <b>chat id</b> and <b>message text</b>.
      *
-     * @param chatId A whole number representing a chat ID
-     * @param messageText A string containing the text
+     * @param chatId Whole non-negative number representing the chat identifier.
+     * @param messageText String containing the message text.
      *
-     * @return A configured <b>SendMessage</b> instance with custom buttons
+     * @return Configured <b>SendMessage</b> instance.
      */
     @NotNull SendMessage buildTelegramMessage(long chatId,
                                               String messageText);
 
     /**
-     * Builds a message with the specified <b>chat ID</b>, <b>message text</b> and <b>reply keyboard</b>
+     * Builds a sticker with the specified <b>chat id</b> and <b>sticker file id</b>.
      *
-     * @param chatId A whole number representing a chat ID
-     * @param messageText A string containing the text
-     * @param keyboardMarkup A reply keyboard instance
+     * @param chatId Whole non-negative number representing the chat identifier.
+     * @param stickerFileId String containing the sticker file identifier.
      *
-     * @return A configured <b>SendMessage</b> instance with custom buttons
+     * @return Configured <b>SendSticker</b> instance.
+     */
+    @NotNull SendSticker buildTelegramSticker(long chatId,
+                                              String stickerFileId);
+
+    /**
+     * Builds a message with the specified <b>chat id</b>, <b>message text</b> and <b>reply keyboard</b>.
+     *
+     * @param chatId Whole non-negative number representing the chat identifier.
+     * @param messageText String containing the text.
+     * @param keyboardMarkup Reply keyboard instance.
+     *
+     * @return Configured <b>SendMessage</b> instance with custom buttons (keyboard).
      */
     @NotNull SendMessage buildTelegramMessage(long chatId,
                                               String messageText,
                                               ReplyKeyboardMarkup keyboardMarkup);
 
     /**
-     * Builds a message with the specified <b>chat ID</b>, <b>message text</b> and <b>inline keyboard</b>
+     * Builds a message with the specified <b>chat id</b>, <b>message text</b> and <b>inline keyboard</b>.
      *
-     * @param chatId A whole number representing a chat ID
-     * @param messageText A string containing the text
-     * @param keyboardMarkup An inline keyboard instance
+     * @param chatId Whole non-negative number representing the chat identifier.
+     * @param messageText String containing the text.
+     * @param keyboardMarkup Inline keyboard instance.
      *
-     * @return A configured <b>SendMessage</b> instance with custom buttons
+     * @return Configured <b>SendMessage</b> instance with a keyboard.
      */
     @NotNull SendMessage buildTelegramMessage(long chatId,
                                               String messageText,
                                               InlineKeyboardMarkup keyboardMarkup);
 
     /**
-     * Builds an edited message with the specified <b>chat ID</b>, <b>message ID</b>, <b>message text</b> and
-     * <b>inline keyboard</b>
+     * Builds an edited message with the specified <b>chat id</b>, <b>message id</b>, <b>message text</b> and
+     * <b>inline keyboard</b>.
      *
-     * @param callbackChatId A whole number representing a chat ID
-     * @param callbackMessageId A whole number representing a message ID
-     * @param messageText A string containing the text
-     * @param keyboardMarkup An inline keyboard instance
+     * @param callbackChatId Whole non-negative number representing the chat id.
+     * @param callbackMessageId Whole non-negative number representing the message identifier.
+     * @param messageText String containing the text.
+     * @param keyboardMarkup Inline keyboard instance.
      *
-     * @return A configured <b>EditMessageText</b> instance with custom buttons
+     * @return Configured <b>EditMessageText</b> instance with custom keyboard.
      */
     @NotNull EditMessageText buildTelegramMessage(long callbackChatId,
                                                   long callbackMessageId,

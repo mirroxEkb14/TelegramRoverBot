@@ -1,12 +1,13 @@
 package cz.vance.movieapp.utils;
 
+//<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.keyboards.IInlineKeyboardBuilder;
 import cz.vance.movieapp.keyboards.InlineKeyboardBuilder;
 import org.jetbrains.annotations.NotNull;
+//</editor-fold>
 
 /**
- * This <b>NavigationButton</b> enum class contains the text for <b>back/next</b> buttons
- * <p>
- * These texts are for buttons in <b>InlineKeyboardBuilder</b>
+ * Contains texts for the <b>back/next</b> buttons.
  *
  * @see InlineKeyboardBuilder
  */
@@ -14,21 +15,11 @@ public enum NavigationButton {
     LEFT_ARROW("\ud83c\udf00"), // "«" left-pointing double angle quotation mark
     RIGHT_ARROW("\ud83c\udf01"); // "»" right-pointing double angle quotation mark
 
-//<editor-fold default-state="collapsed" desc="Callback Data">
-    /**
-     * The <b>callback data</b> is a piece of information that will be sent to the bot when the user interacts with
-     * the button, which is typically used to identify which button was pressed
-     */
-    private static final String CALLBACK_PREFIX = "_cb";
-
-    public @NotNull String getCallback() {
-        return this + CALLBACK_PREFIX;
-    }
-//</editor-fold>
-
     private final String content;
 
     NavigationButton(String content) { this.content = content; }
 
-    public String content() { return content; }
+    public String getContent() { return content; }
+
+    public @NotNull String getCallback() { return this + IInlineKeyboardBuilder.CALLBACK_PREFIX; }
 }
