@@ -1,5 +1,10 @@
 package cz.vance.movieapp.managers.randomizers;
 
+//<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.models.UserSelection;
+import org.jetbrains.annotations.NotNull;
+//</editor-fold>
+
 /**
  * Declares a set of basic operations for getting messages that are sent to the user while <b>SmartSearch</b>.
  */
@@ -41,8 +46,16 @@ public interface IMessageRandomizer {
      * <br>
      * The bot sends this random message right after the <b>genre selection</b> for the user to check if the
      * data he entered is correct.
+     *
+     * @param userSelection the user's selection instance containing the data from the <b>smart search</b>.
      */
-    String getVerifyingMessage();
+    String getVerifyingMessage(@NotNull UserSelection userSelection);
+
+    /**
+     * Extracts a random element from the <b>onSmartSearchRebooted</b> list that contains all the possible texts when the
+     * user clicks the <b>no confirmation</b> inline button.
+     */
+    String getOnSmartSearchRebooted();
 
     /**
      * Extracts a random element from the <b>verified</b> list that contains all the possible texts when the
@@ -83,6 +96,25 @@ public interface IMessageRandomizer {
      * <b>no movies</b> message is sent.
      */
     String getOnFailureMessage();
+
+    /**
+     * Extracts a random element from the <b>onSmartSearchKeyboardRemoved</b> list that contains all the possible texts
+     * when the <b>smart search</b> is completed, the inline keyboard is removed.
+     */
+    String getOnSmartSearchKeyboardRemovedMessage();
+
+    /**
+     * Extracts a random element from the <b>onSmartSearchOldKeyboardRemoved</b> list that contains all the possible texts
+     * when the user tries to interact with the <b>smart search</b> inline keyboard that has been already sent to him.
+     */
+    String getOnSmartSearchOldKeyboardRemovedMessage();
+
+    /**
+     * Extracts a random element from the <b>onSmartSearchRepeatedKeyboardRemoved</b> list that contains all the possible
+     * texts when the user triggers the bot to send a new message with an inline keyboard, while the chat already
+     * contains a message with an inline keyboard.
+     */
+    String getOnSmartSearchRepeatedKeyboardRemovedMessage();
 
     /**
      * Extracts a random element from the <b>welcomes</b> list that contains all the possible texts when the

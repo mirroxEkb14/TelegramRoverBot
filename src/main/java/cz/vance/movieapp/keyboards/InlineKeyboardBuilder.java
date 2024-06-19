@@ -73,6 +73,7 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
 
         final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
         final List<InlineKeyboardButton> firstInlineRow = new ArrayList<>();
+        final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
                 botMessageManager.getMovieButton(),
@@ -80,8 +81,12 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         firstInlineRow.add(inlineButtonBuilder.apply(
                 botMessageManager.getSeriesButton(),
                 IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSeriesButton())));
+        secondInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getSmartSearchBackButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchBackButton())));
 
         inlineRows.add(firstInlineRow);
+        inlineRows.add(secondInlineRow);
 
         keyboardMarkup.setKeyboard(inlineRows);
         return keyboardMarkup;
@@ -98,6 +103,7 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> fourthInlineRow = new ArrayList<>();
         final List<InlineKeyboardButton> fifthInlineRow = new ArrayList<>();
         final List<InlineKeyboardButton> sixthInlineRow = new ArrayList<>();
+        final List<InlineKeyboardButton> seventhInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
                 botMessageManager.getComedyButton(),
@@ -150,6 +156,9 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         sixthInlineRow.add(inlineButtonBuilder.apply(
                 botMessageManager.getMusicButton(),
                 IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getMusicButton())));
+        seventhInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getSmartSearchBackButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchBackButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);
@@ -157,6 +166,32 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         inlineRows.add(fourthInlineRow);
         inlineRows.add(fifthInlineRow);
         inlineRows.add(sixthInlineRow);
+        inlineRows.add(seventhInlineRow);
+
+        keyboardMarkup.setKeyboard(inlineRows);
+        return keyboardMarkup;
+    }
+
+    @Override
+    public @NotNull InlineKeyboardMarkup buildConfirmationKeyboard() {
+        final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+
+        final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
+        final List<InlineKeyboardButton> firstInlineRow = new ArrayList<>();
+        final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
+
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getSmartSearchYesButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchYesButton())));
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getSmartSearchNoButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchNoButton())));
+        secondInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getSmartSearchBackButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchBackButton())));
+
+        inlineRows.add(firstInlineRow);
+        inlineRows.add(secondInlineRow);
 
         keyboardMarkup.setKeyboard(inlineRows);
         return keyboardMarkup;

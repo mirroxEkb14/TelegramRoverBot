@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Implements methods for getting bot messages from the {@link BotMessage} instance.
+ * <br>
+ * Contains a {@link BotMessage} instance providing all the possible texts for the bot messages.
  */
 public final class BotMessageManager implements IBotMessageManager {
 
@@ -51,6 +53,8 @@ public final class BotMessageManager implements IBotMessageManager {
     @Override
     public List<String> getVerifying() { return botMessage.getSmartSearchMessage().getVerifying(); }
     @Override
+    public List<String> getOnSmartSearchRebooted() { return botMessage.getSmartSearchMessage().getOnSmartSearchRebooted(); }
+    @Override
     public List<String> getVerified() { return botMessage.getSmartSearchMessage().getVerified(); }
     @Override
     public List<String> getSampling() { return botMessage.getSmartSearchMessage().getSampling(); }
@@ -60,6 +64,12 @@ public final class BotMessageManager implements IBotMessageManager {
     public List<String> getNoMovies() { return botMessage.getSmartSearchMessage().getNoMovies(); }
     @Override
     public List<String> getOnFailure() { return botMessage.getSmartSearchMessage().getOnFailure(); }
+    @Override
+    public List<String> getOnSmartSearchKeyboardRemoved() { return botMessage.getSmartSearchMessage().getOnSmartSearchKeyboardRemoved(); }
+    @Override
+    public List<String> getOnSmartSearchOldKeyboardRemoved() { return botMessage.getSmartSearchMessage().getOnSmartSearchOldKeyboardRemoved(); }
+    @Override
+    public List<String> getOnSmartSearchRepeatedKeyboardRemoved() { return botMessage.getSmartSearchMessage().getOnSmartSearchRepeatedKeyboardRemoved(); }
 
     @Override
     public int getAtLaunchGreetingsSize() { return botMessage.getSmartSearchMessage().getAtLaunchGreetings().size(); }
@@ -72,6 +82,8 @@ public final class BotMessageManager implements IBotMessageManager {
     @Override
     public int getVerifyingSize() { return botMessage.getSmartSearchMessage().getVerifying().size(); }
     @Override
+    public int getOnSmartSearchRebootedSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchRebooted().size(); }
+    @Override
     public int getVerifiedSize() { return botMessage.getSmartSearchMessage().getVerified().size(); }
     @Override
     public int getSamplingSize() { return botMessage.getSmartSearchMessage().getSampling().size(); }
@@ -81,6 +93,12 @@ public final class BotMessageManager implements IBotMessageManager {
     public int getNoMoviesSize() { return botMessage.getSmartSearchMessage().getNoMovies().size(); }
     @Override
     public int getOnFailureSize() { return botMessage.getSmartSearchMessage().getOnFailure().size(); }
+    @Override
+    public int getOnSmartSearchKeyboardRemovedSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchKeyboardRemoved().size(); }
+    @Override
+    public int getOnSmartSearchOldKeyboardRemovedSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchOldKeyboardRemoved().size(); }
+    @Override
+    public int getOnSmartSearchRepeatedKeyboardRemovedSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchRepeatedKeyboardRemoved().size(); }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Welcome Getters">
@@ -170,5 +188,11 @@ public final class BotMessageManager implements IBotMessageManager {
     public String getLeftArrowButton() { return botMessage.getInlineButton().getLeftArrowButton(); }
     @Override
     public String getRightArrowButton() { return botMessage.getInlineButton().getRightArrowButton(); }
+    @Override
+    public String getSmartSearchYesButton() { return botMessage.getInlineButton().getSmartSearchYesButton(); }
+    @Override
+    public String getSmartSearchNoButton() { return botMessage.getInlineButton().getSmartSearchNoButton(); }
+    @Override
+    public String getSmartSearchBackButton() { return botMessage.getInlineButton().getSmartSearchBackButton(); }
     //</editor-fold>
 }

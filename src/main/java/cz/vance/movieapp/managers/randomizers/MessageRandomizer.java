@@ -6,7 +6,9 @@ import cz.vance.movieapp.managers.messages.IBotMessageManager;
 import cz.vance.movieapp.managers.stickers.IStickerManager;
 import cz.vance.movieapp.managers.stickers.StickerManager;
 import cz.vance.movieapp.models.Sticker;
+import cz.vance.movieapp.models.UserSelection;
 import cz.vance.movieapp.utils.StickerCategory;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Random;
@@ -14,8 +16,8 @@ import java.util.Random;
 
 /**
  * Implements a set of basic operations for getting texts for messages the bot sends while the <b>SmartSearch</b>.
- *
- * @see IMessageRandomizer
+ * <br>
+ * Contains a {@link IBotMessageManager} instance providing all the possible texts for the bot messages.
  */
 public final class MessageRandomizer implements IMessageRandomizer {
 
@@ -48,9 +50,17 @@ public final class MessageRandomizer implements IMessageRandomizer {
     }
 
     @Override
-    public String getVerifyingMessage() {
-        return botMessageManager.getVerifying().get(
-                getRandomIndex(botMessageManager.getVerifyingSize()));
+    public String getVerifyingMessage(@NotNull UserSelection userSelection) {
+        return String.format(
+                botMessageManager.getVerifying().get(
+                        getRandomIndex(botMessageManager.getVerifyingSize())),
+                userSelection.getMood(), userSelection.getCatalogue(), userSelection.getGenre());
+    }
+
+    @Override
+    public String getOnSmartSearchRebooted() {
+        return botMessageManager.getOnSmartSearchRebooted().get(
+                getRandomIndex(botMessageManager.getOnSmartSearchRebootedSize()));
     }
 
     @Override
@@ -81,6 +91,24 @@ public final class MessageRandomizer implements IMessageRandomizer {
     public String getOnFailureMessage() {
         return botMessageManager.getOnFailure().get(
                 getRandomIndex(botMessageManager.getOnFailureSize()));
+    }
+
+    @Override
+    public String getOnSmartSearchKeyboardRemovedMessage() {
+        return botMessageManager.getOnSmartSearchKeyboardRemoved().get(
+                getRandomIndex(botMessageManager.getOnSmartSearchKeyboardRemovedSize()));
+    }
+
+    @Override
+    public String getOnSmartSearchOldKeyboardRemovedMessage() {
+        return botMessageManager.getOnSmartSearchOldKeyboardRemoved().get(
+                getRandomIndex(botMessageManager.getOnSmartSearchOldKeyboardRemovedSize()));
+    }
+
+    @Override
+    public String getOnSmartSearchRepeatedKeyboardRemovedMessage() {
+        return botMessageManager.getOnSmartSearchRepeatedKeyboardRemoved().get(
+                getRandomIndex(botMessageManager.getOnSmartSearchRepeatedKeyboardRemovedSize()));
     }
 
     @Override

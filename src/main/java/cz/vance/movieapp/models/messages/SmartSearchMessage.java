@@ -21,6 +21,10 @@ public final class SmartSearchMessage {
     private List<String> onFinish;
     private List<String> noMovies;
     private List<String> onFailure;
+    private List<String> onSmartSearchKeyboardRemoved;
+    private List<String> onSmartSearchOldKeyboardRemoved;
+    private List<String> onSmartSearchRepeatedKeyboardRemoved;
+    private List<String> onSmartSearchRebooted;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public List<String> getAtLaunchGreetings() { return atLaunchGreetings; }
@@ -33,6 +37,10 @@ public final class SmartSearchMessage {
     public List<String> getOnFinish() { return onFinish; }
     public List<String> getNoMovies() { return noMovies; }
     public List<String> getOnFailure() { return onFailure; }
+    public List<String> getOnSmartSearchKeyboardRemoved() { return onSmartSearchKeyboardRemoved; }
+    public List<String> getOnSmartSearchOldKeyboardRemoved() { return onSmartSearchOldKeyboardRemoved; }
+    public List<String> getOnSmartSearchRepeatedKeyboardRemoved() { return onSmartSearchRepeatedKeyboardRemoved; }
+    public List<String> getOnSmartSearchRebooted() { return onSmartSearchRebooted; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
@@ -46,5 +54,9 @@ public final class SmartSearchMessage {
     public void setOnFinish(List<String> onFinish) { this.onFinish = onFinish; }
     public void setNoMovies(List<String> noMovies) { this.noMovies = noMovies; }
     public void setOnFailure(List<String> onFailure) { this.onFailure = onFailure; }
+    public void setOnSmartSearchKeyboardRemoved(List<String> onSmartSearchKeyboardRemoved) { this.onSmartSearchKeyboardRemoved = onSmartSearchKeyboardRemoved; }
+    public void setOnSmartSearchOldKeyboardRemoved(List<String> onSmartSearchOldKeyboardRemoved) { this.onSmartSearchOldKeyboardRemoved = onSmartSearchOldKeyboardRemoved; }
+    public void setOnSmartSearchRepeatedKeyboardRemoved(List<String> onSmartSearchRepeatedKeyboardRemoved) { this.onSmartSearchRepeatedKeyboardRemoved = onSmartSearchRepeatedKeyboardRemoved; }
+    public void setOnSmartSearchRebooted(List<String> onSmartSearchRebooted) { this.onSmartSearchRebooted = onSmartSearchRebooted; }
     //</editor-fold>
 }

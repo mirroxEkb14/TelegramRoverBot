@@ -3,8 +3,6 @@ package cz.vance.movieapp.managers.updates;
 //<editor-fold defaultstate="collapsed" desc="Imports">
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
-import java.util.Optional;
 //</editor-fold>
 
 /**
@@ -13,7 +11,18 @@ import java.util.Optional;
 public final class UpdateExtractor implements IUpdateExtractor {
 
     @Override
-    public long getMessageChatId(@NotNull Update update) { return update.getMessage().getChatId(); }
+    public long getMessageChatId(@NotNull Update update) {
+        return messagePresenceChecker.apply(update.getMessage()) ?
+                update.getMessage().getChatId() :
+                messagePresenceChecker.apply(update.getCallbackQuery().getMessage()) ?
+                update.getCallbackQuery().getMessage().getChatId() : DEFAULT_ID;
+    }
+
+    @Override
+    public int getMessageId(@NotNull Update update) {
+        return messagePresenceChecker.apply(update.getMessage()) ?
+                update.getMessage().getMessageId() : DEFAULT_ID;
+    }
 
     @Override
     public String getMessageText(@NotNull Update update) { return update.getMessage().getText(); }

@@ -101,6 +101,15 @@ public interface IMessageManager {
     void sendGenre(Update botUpdate);
 
     /**
+     * Sends a message with <b>confirmation</b> of the user's choice.
+     *
+     * @param botUpdate The received update.
+     *
+     * @see IInlineKeyboardBuilder#buildConfirmationKeyboard()
+     */
+    void sendConfirmation(Update botUpdate);
+
+    /**
      * Sends a message with the <b>movies</b> from the DB at the end of the <b>smart search</b>.
      * <br>
      * Removes inline keyboard with the help of which the user was selecting mood, catalogue, and genre.

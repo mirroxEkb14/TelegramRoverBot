@@ -15,11 +15,15 @@ public interface IBotMessageManager {
     List<String> getCatalogueSelection();
     List<String> getGenreSelection();
     List<String> getVerifying();
+    List<String> getOnSmartSearchRebooted();
     List<String> getVerified();
     List<String> getSampling();
     List<String> getOnFinish();
     List<String> getNoMovies();
     List<String> getOnFailure();
+    List<String> getOnSmartSearchKeyboardRemoved();
+    List<String> getOnSmartSearchOldKeyboardRemoved();
+    List<String> getOnSmartSearchRepeatedKeyboardRemoved();
 
     List<String> getWelcomes();
     List<String> getHelps();
@@ -30,11 +34,15 @@ public interface IBotMessageManager {
     int getCatalogueSelectionSize();
     int getGenreSelectionSize();
     int getVerifyingSize();
+    int getOnSmartSearchRebootedSize();
     int getVerifiedSize();
     int getSamplingSize();
     int getOnFinishSize();
     int getNoMoviesSize();
     int getOnFailureSize();
+    int getOnSmartSearchKeyboardRemovedSize();
+    int getOnSmartSearchOldKeyboardRemovedSize();
+    int getOnSmartSearchRepeatedKeyboardRemovedSize();
 
     int getWelcomesSize();
     int getHelpsSize();
@@ -73,4 +81,7 @@ public interface IBotMessageManager {
     String getMusicButton();
     String getLeftArrowButton();
     String getRightArrowButton();
+    String getSmartSearchYesButton();
+    String getSmartSearchNoButton();
+    String getSmartSearchBackButton();
 }

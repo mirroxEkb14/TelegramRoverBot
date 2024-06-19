@@ -31,7 +31,7 @@ public final class UserSelectionManager implements IUserSelectionManager {
     //</editor-fold>
 
     @Override
-    public void initializeUserSelection(long chatId) { userSelections.put(chatId, new UserSelection(chatId)); }
+    public void initializeUserSelection(long chatId) { userSelections.put(chatId, new UserSelection()); }
 
     @Override
     public void putMood(long chatId, String mood) {

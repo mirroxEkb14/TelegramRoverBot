@@ -37,6 +37,12 @@ public interface IInlineKeyboardBuilder {
     BiFunction<String, String, Boolean> genreValidator = (buttonCallback, genre) ->
             buttonCallback.equals(
                     getCreatedCallback(genre));
+    /**
+     * Validator function checks if a button callback matches a <b>confirmation inline button</b> (yes/no button).
+     */
+    BiFunction<String, String, Boolean> confirmationValidator = (buttonCallback, confirmation) ->
+            buttonCallback.equals(
+                    getCreatedCallback(confirmation));
     //</editor-fold>
 
     /**
@@ -53,7 +59,7 @@ public interface IInlineKeyboardBuilder {
      *
      * @return Configured instance of the {@link InlineKeyboardMarkup}.
      */
-    InlineKeyboardMarkup buildMoodKeyboard();
+    @NotNull InlineKeyboardMarkup buildMoodKeyboard();
 
     /**
      * Builds and returns <b>the movie/series selection inline keyboard</b> containing the following buttons:
@@ -65,7 +71,7 @@ public interface IInlineKeyboardBuilder {
      *
      * @return Configured instance of {@link InlineKeyboardMarkup}.
      */
-    InlineKeyboardMarkup buildCatalogueKeyboard();
+    @NotNull InlineKeyboardMarkup buildCatalogueKeyboard();
 
     /**
      * Builds and returns <b>the genre selection inline keyboard</b> containing the following buttons:
@@ -92,7 +98,19 @@ public interface IInlineKeyboardBuilder {
      *
      * @return Configured instance of {@link InlineKeyboardMarkup}.
      */
-    InlineKeyboardMarkup buildGenreKeyboard();
+    @NotNull InlineKeyboardMarkup buildGenreKeyboard();
+
+    /**
+     * Builds and returns <b>the confirmation inline keyboard</b> containing the following buttons:
+     * <ol>
+     * <li> ✅ Yes
+     * <li> ❌ No
+     * </ol>
+     * This keyboard is triggered when one of the <b>genre selection</b> buttons was clicked.
+     *
+     * @return Configured instance of {@link InlineKeyboardMarkup}.
+     */
+    @NotNull InlineKeyboardMarkup buildConfirmationKeyboard();
 
     /**
      * Creates a callback data string for the passed inline button by concatenating the button text with the
@@ -291,6 +309,25 @@ public interface IInlineKeyboardBuilder {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
                 BotMessageManager.getInstance().getMusicButton());
+    }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="Confirmation Boolean Methods">
+    default boolean isSmartSearchConfirmationButton(@NotNull Update botUpdate) {
+        return isSmartSearchYesButton(botUpdate) ||
+                isSmartSearchNoButton(botUpdate);
+    }
+
+    default boolean isSmartSearchYesButton(@NotNull Update botUpdate) {
+        return confirmationValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getSmartSearchYesButton());
+    }
+
+    default boolean isSmartSearchNoButton(@NotNull Update botUpdate) {
+        return confirmationValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getSmartSearchNoButton());
     }
     //</editor-fold>
 }

@@ -2,7 +2,11 @@ package cz.vance.movieapp.managers.updates;
 
 //<editor-fold default-state="collapsed" desc="Imports">
 import org.jetbrains.annotations.NotNull;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+import java.util.Objects;
+import java.util.function.Function;
 //</editor-fold>
 
 /**
@@ -10,14 +14,29 @@ import org.telegram.telegrambots.meta.api.objects.Update;
  */
 public interface IUpdateExtractor {
 
+    Function<Message, Boolean> messagePresenceChecker = Objects::nonNull;
+    int DEFAULT_ID = -1;
+
     /**
      * Extracts the <b>chat id</b> from a message.
+     * <br>
+     * In case the <b>message chat id</b> is <b>null</b>, the method checks the <b>callback message chat id</b>. If it
+     * is also <b>null</b>, the method returns the <b>default id</b>.
      *
      * @param update The bot's <b>update</b> object.
      *
      * @return A whole non-negative number of the <b>long</b> primitive type.
      */
     long getMessageChatId(@NotNull Update update);
+
+    /**
+     * Extracts the <b>message id</b> from a message.
+     *
+     * @param update The bot's <b>update</b> object.
+     *
+     * @return A whole non-negative number of the <b>long</b> primitive type.
+     */
+    int getMessageId(@NotNull Update update);
 
     /**
      * Retrieves the <b>text</b> from a message.

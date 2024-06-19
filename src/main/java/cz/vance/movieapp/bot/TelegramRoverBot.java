@@ -98,6 +98,8 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
         else if (inlineKeyboardBuilder.isCatalogueButton(update))
             messageManager.sendGenre(update);
         else if (inlineKeyboardBuilder.isGenreButton(update))
+            messageManager.sendConfirmation(update);
+        else if (inlineKeyboardBuilder.isSmartSearchConfirmationButton(update))
             messageManager.sendMovie(update);
     }
 }

@@ -9,7 +9,7 @@ public final class UserSelection {
     private String catalogue;
     private String genre;
 
-    public UserSelection(long chatId) {}
+    public UserSelection() {}
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public String getMood() { return mood; }
