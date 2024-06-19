@@ -1,7 +1,8 @@
 package cz.vance.movieapp.keyboards;
 
 //<editor-fold default-state="collapsed" desc="Imports">
-import cz.vance.movieapp.utils.MainMenuButton;
+import cz.vance.movieapp.managers.messages.BotMessageManager;
+import cz.vance.movieapp.managers.messages.IBotMessageManager;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
@@ -16,6 +17,8 @@ import java.util.List;
  */
 public final class ReplyKeyboardBuilder implements IReplyKeyboardBuilder {
 
+    private final IBotMessageManager botMessageManager = BotMessageManager.getInstance();
+
     @Override
     public @NotNull ReplyKeyboardMarkup buildMainMenuKeyboard() {
         final ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
@@ -26,13 +29,13 @@ public final class ReplyKeyboardBuilder implements IReplyKeyboardBuilder {
         final KeyboardRow secondRow = new KeyboardRow();
 
         firstRow.add(new KeyboardButton(
-                MainMenuButton.SMART_SEARCH_BUTTON.getContent()));
+                botMessageManager.getSmartSearchReplyButton()));
         firstRow.add(new KeyboardButton(
-                MainMenuButton.OUR_CHOICE_BUTTON.getContent()));
+                botMessageManager.getOurChoiceReplyButton()));
         firstRow.add(new KeyboardButton(
-                MainMenuButton.NO_IDEA_BUTTON.getContent()));
+                botMessageManager.getNoIdeasReplyButton()));
         secondRow.add(new KeyboardButton(
-                MainMenuButton.FEEDBACK_BUTTON.getContent()));
+                botMessageManager.getFeedbackReplyButton()));
 
         keyboardRows.add(firstRow);
         keyboardRows.add(secondRow);

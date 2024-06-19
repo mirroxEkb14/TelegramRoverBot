@@ -1,9 +1,8 @@
 package cz.vance.movieapp.keyboards;
 
 //<editor-fold default-state="collapsed" desc="Imports">
-import cz.vance.movieapp.utils.Catalogue;
-import cz.vance.movieapp.utils.Genre;
-import cz.vance.movieapp.utils.UserMood;
+import cz.vance.movieapp.managers.messages.BotMessageManager;
+import cz.vance.movieapp.managers.messages.IBotMessageManager;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -17,6 +16,8 @@ import java.util.function.BiFunction;
  * Implements a set of basic operations for creating custom inline keyboards.
  */
 public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
+
+    private final IBotMessageManager botMessageManager = BotMessageManager.getInstance();
 
     /**
      * Functional interface builds an inline button.
@@ -41,23 +42,23 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
-                UserMood.DEPRESSION_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(UserMood.DEPRESSION_BUTTON.getContent())));
+                botMessageManager.getDepressionInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDepressionInlineButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                UserMood.CHEERFUL_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(UserMood.CHEERFUL_BUTTON.getContent())));
+                botMessageManager.getCheerfulInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getCheerfulInlineButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                UserMood.FIGHTING_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(UserMood.FIGHTING_BUTTON.getContent())));
+                botMessageManager.getFightingInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFightingInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                UserMood.FAMILY_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(UserMood.FAMILY_BUTTON.getContent())));
+                botMessageManager.getFamilyInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFamilyInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                UserMood.FRIENDS_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(UserMood.FRIENDS_BUTTON.getContent())));
+                botMessageManager.getFriendsInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFriendsInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                UserMood.LOVE_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(UserMood.LOVE_BUTTON.getContent())));
+                botMessageManager.getLoveInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getLoveInlineButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);
@@ -74,11 +75,11 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> firstInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
-                Catalogue.MOVIE_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Catalogue.MOVIE_BUTTON.getContent())));
+                botMessageManager.getMovieButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getMovieButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                Catalogue.SERIES_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Catalogue.SERIES_BUTTON.getContent())));
+                botMessageManager.getSeriesButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSeriesButton())));
 
         inlineRows.add(firstInlineRow);
 
@@ -99,56 +100,56 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> sixthInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
-                Genre.COMEDY_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.COMEDY_BUTTON.getContent())));
+                botMessageManager.getComedyButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getComedyButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                Genre.DRAMA_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.DRAMA_BUTTON.getContent())));
+                botMessageManager.getDramaButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDramaButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                Genre.MELODRAMA_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.MELODRAMA_BUTTON.getContent())));
+                botMessageManager.getMelodramaButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getMelodramaButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                Genre.THRILLER_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.THRILLER_BUTTON.getContent())));
+                botMessageManager.getThrillerButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getThrillerButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                Genre.ACTION_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.ACTION_BUTTON.getContent())));
+                botMessageManager.getActionButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getActionButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                Genre.FICTION_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.FICTION_BUTTON.getContent())));
+                botMessageManager.getFictionButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFictionButton())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
-                Genre.DETECTIVE_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.DETECTIVE_BUTTON.getContent())));
+                botMessageManager.getDetectiveButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDetectiveButton())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
-                Genre.FAMILY_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.FAMILY_BUTTON.getContent())));
+                botMessageManager.getFamilyInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFamilyInlineButton())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
-                Genre.SPORT_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.SPORT_BUTTON.getContent())));
+                botMessageManager.getSportButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSportButton())));
         fourthInlineRow.add(inlineButtonBuilder.apply(
-                Genre.FANTASY_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.FANTASY_BUTTON.getContent())));
+                botMessageManager.getFantasyButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFantasyButton())));
         fourthInlineRow.add(inlineButtonBuilder.apply(
-                Genre.ANIMATION_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.ANIMATION_BUTTON.getContent())));
+                botMessageManager.getAnimationButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getAnimationButton())));
         fourthInlineRow.add(inlineButtonBuilder.apply(
-                Genre.ADVENTURE_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.ADVENTURE_BUTTON.getContent())));
+                botMessageManager.getAdventureButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getAdventureButton())));
         fifthInlineRow.add(inlineButtonBuilder.apply(
-                Genre.BIOGRAPHY_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.BIOGRAPHY_BUTTON.getContent())));
+                botMessageManager.getBiographyButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getBiographyButton())));
         fifthInlineRow.add(inlineButtonBuilder.apply(
-                Genre.CRIMINAL_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.CRIMINAL_BUTTON.getContent())));
+                botMessageManager.getCriminalButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getCriminalButton())));
         fifthInlineRow.add(inlineButtonBuilder.apply(
-                Genre.DOCUMENTARY_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.DOCUMENTARY_BUTTON.getContent())));
+                botMessageManager.getDocumentaryButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDocumentaryButton())));
         sixthInlineRow.add(inlineButtonBuilder.apply(
-                Genre.WAR_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.WAR_BUTTON.getContent())));
+                botMessageManager.getWarButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getWarButton())));
         sixthInlineRow.add(inlineButtonBuilder.apply(
-                Genre.MUSIC_BUTTON.getContent(),
-                IInlineKeyboardBuilder.getCreatedCallback(Genre.MUSIC_BUTTON.getContent())));
+                botMessageManager.getMusicButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getMusicButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);

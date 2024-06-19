@@ -1,6 +1,7 @@
 package cz.vance.movieapp.managers.selections;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.managers.CallbackQueryExtractor;
 import cz.vance.movieapp.models.UserSelection;
 
 import java.util.HashMap;
@@ -30,17 +31,29 @@ public final class UserSelectionManager implements IUserSelectionManager {
     //</editor-fold>
 
     @Override
-    public void initializeUserSelection(long chatId) { userSelections.put(chatId, new UserSelection()); }
+    public void initializeUserSelection(long chatId) { userSelections.put(chatId, new UserSelection(chatId)); }
 
     @Override
-    public void putMood(long chatId, String mood) { userSelections.get(chatId).setMood(mood); }
+    public void putMood(long chatId, String mood) {
+        final String moodText = CallbackQueryExtractor.extractCallbackQueryPrefix(mood);
+        userSelections.get(chatId).setMood(moodText);
+    }
 
     @Override
-    public void putCatalogue(long chatId, String catalogue) { userSelections.get(chatId).setCatalogue(catalogue); }
+    public void putCatalogue(long chatId, String catalogue) {
+        final String catalogueText = CallbackQueryExtractor.extractCallbackQueryPrefix(catalogue);
+        userSelections.get(chatId).setCatalogue(catalogueText);
+    }
 
     @Override
-    public void putGenre(long chatId, String genre) { userSelections.get(chatId).setGenre(genre); }
+    public void putGenre(long chatId, String genre) {
+        final String genreText = CallbackQueryExtractor.extractCallbackQueryPrefix(genre);
+        userSelections.get(chatId).setGenre(genreText);
+    }
 
     @Override
     public UserSelection getUserSelection(long chatId) { return userSelections.get(chatId); }
+
+    @Override
+    public void removeUserSelection(long chatId) { userSelections.remove(chatId); }
 }

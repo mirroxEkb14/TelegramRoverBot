@@ -1,11 +1,8 @@
 package cz.vance.movieapp.managers.updates;
 
-//<editor-fold defaultstate="collapsed" desc="Imports">
-import cz.vance.movieapp.utils.UserMood;
+//<editor-fold default-state="collapsed" desc="Imports">
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
-import java.util.Optional;
 //</editor-fold>
 
 /**

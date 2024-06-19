@@ -5,11 +5,11 @@ package cz.vance.movieapp.models;
  */
 public final class UserSelection {
 
-    public String mood;
-    public String catalogue;
-    public String genre;
+    private String mood;
+    private String catalogue;
+    private String genre;
 
-    public UserSelection() {}
+    public UserSelection(long chatId) {}
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public String getMood() { return mood; }

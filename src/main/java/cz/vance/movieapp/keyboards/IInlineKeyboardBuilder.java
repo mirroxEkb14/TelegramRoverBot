@@ -1,9 +1,10 @@
 package cz.vance.movieapp.keyboards;
 
 //<editor-fold default-state="collapsed" desc="Imports">
-import cz.vance.movieapp.utils.UserMood;
-import cz.vance.movieapp.utils.Catalogue;
-import cz.vance.movieapp.utils.Genre;
+import cz.vance.movieapp.managers.CallbackQueryExtractor;
+import static cz.vance.movieapp.managers.CallbackQueryExtractor.CALLBACK_QUERY_PREFIX;
+
+import cz.vance.movieapp.managers.messages.BotMessageManager;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -16,34 +17,26 @@ import java.util.function.BiFunction;
  */
 public interface IInlineKeyboardBuilder {
 
-    /**
-     * Prefix appended to each callback data (for each inline button).
-     * <p>
-     * The <b>callback data</b> — is a piece of information that will be sent to the bot when the user interacts with
-     * the inline button, which is typically used to identify which button was pressed.
-     */
-    String CALLBACK_PREFIX = "_cb";
-
     //<editor-fold default-state="collapsed" desc="Validators">
     /**
      * Validator function checks if a button callback (that was clicked by the user) matches some of the
-     * {@link UserMood} inline buttons.
+     * <b>user mood inline buttons</b>.
      */
-    BiFunction<String, UserMood, Boolean> userMoodValidator = (buttonCallback, mood) ->
+    BiFunction<String, String, Boolean> userMoodValidator = (buttonCallback, mood) ->
         buttonCallback.equals(
-                getCreatedCallback(mood.getContent()));
+                getCreatedCallback(mood));
     /**
-     * Validator function checks if a button callback matches a {@link Catalogue} inline button.
+     * Validator function checks if a button callback matches a <b>catalogue inline button</b>.
      */
-    BiFunction<String, Catalogue, Boolean> catalogueValidator = (buttonCallback, catalogue) ->
+    BiFunction<String, String, Boolean> catalogueValidator = (buttonCallback, catalogue) ->
             buttonCallback.equals(
-                    getCreatedCallback(catalogue.getContent()));
+                    getCreatedCallback(catalogue));
     /**
-     * Validator function checks if a button callback matches a {@link Genre} inline button.
+     * Validator function checks if a button callback matches a <b>genre inline button</b>.
      */
-    BiFunction<String, Genre, Boolean> genreValidator = (buttonCallback, genre) ->
+    BiFunction<String, String, Boolean> genreValidator = (buttonCallback, genre) ->
             buttonCallback.equals(
-                    getCreatedCallback(genre.getContent()));
+                    getCreatedCallback(genre));
     //</editor-fold>
 
     /**
@@ -59,8 +52,6 @@ public interface IInlineKeyboardBuilder {
      * This keyboard is triggered when the <b>🎬 Smart search</b> button from <b>the main menu keyboard</b> was clicked.
      *
      * @return Configured instance of the {@link InlineKeyboardMarkup}.
-     *
-     * @see UserMood
      */
     InlineKeyboardMarkup buildMoodKeyboard();
 
@@ -73,8 +64,6 @@ public interface IInlineKeyboardBuilder {
      * This keyboard is triggered when one of the <b>mood selection</b> buttons was clicked.
      *
      * @return Configured instance of {@link InlineKeyboardMarkup}.
-     *
-     * @see Catalogue
      */
     InlineKeyboardMarkup buildCatalogueKeyboard();
 
@@ -102,20 +91,18 @@ public interface IInlineKeyboardBuilder {
      * This keyboard is triggered when one of the <b>movies/series selection</b> buttons was clicked.
      *
      * @return Configured instance of {@link InlineKeyboardMarkup}.
-     *
-     * @see Genre
      */
     InlineKeyboardMarkup buildGenreKeyboard();
 
     /**
      * Creates a callback data string for the passed inline button by concatenating the button text with the
-     * {@link #CALLBACK_PREFIX}.
+     * {@link CallbackQueryExtractor#CALLBACK_QUERY_PREFIX}.
      *
      * @param inlineButtonText The text of the inline button.
      *
      * @return The created callback data string.
      */
-    static @NotNull String getCreatedCallback(String inlineButtonText) { return inlineButtonText + CALLBACK_PREFIX; }
+    static @NotNull String getCreatedCallback(String inlineButtonText) { return inlineButtonText + CALLBACK_QUERY_PREFIX; }
 
     //<editor-fold default-state="collapsed" desc="Mood Boolean Methods">
     default boolean isMoodButton(@NotNull Update botUpdate) {
@@ -130,37 +117,37 @@ public interface IInlineKeyboardBuilder {
     default boolean isDepressedButton(@NotNull Update botUpdate) {
         return userMoodValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                UserMood.DEPRESSION_BUTTON);
+                BotMessageManager.getInstance().getDepressionInlineButton());
     }
 
     default boolean isCheerfulButton(@NotNull Update botUpdate) {
         return userMoodValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                UserMood.CHEERFUL_BUTTON);
+                BotMessageManager.getInstance().getCheerfulInlineButton());
     }
 
     default boolean isFightingButton(@NotNull Update botUpdate) {
         return userMoodValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                UserMood.FIGHTING_BUTTON);
+                BotMessageManager.getInstance().getFightingInlineButton());
     }
 
     default boolean isFamilyMoodButton(@NotNull Update botUpdate) {
         return userMoodValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                UserMood.FAMILY_BUTTON);
+                BotMessageManager.getInstance().getFamilyButton());
     }
 
     default boolean isFriendsButton(@NotNull Update botUpdate) {
         return userMoodValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                UserMood.FRIENDS_BUTTON);
+                BotMessageManager.getInstance().getFriendsInlineButton());
     }
 
     default boolean isLoveButton(@NotNull Update botUpdate) {
         return userMoodValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                UserMood.LOVE_BUTTON);
+                BotMessageManager.getInstance().getLoveInlineButton());
     }
     //</editor-fold>
 
@@ -173,13 +160,13 @@ public interface IInlineKeyboardBuilder {
     default boolean isMovieButton(@NotNull Update botUpdate) {
         return catalogueValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Catalogue.MOVIE_BUTTON);
+                BotMessageManager.getInstance().getMovieButton());
     }
 
     default boolean isSeriesButton(@NotNull Update botUpdate) {
         return catalogueValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Catalogue.SERIES_BUTTON);
+                BotMessageManager.getInstance().getSeriesButton());
     }
     //</editor-fold>
 
@@ -207,103 +194,103 @@ public interface IInlineKeyboardBuilder {
     default boolean isComedyButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.COMEDY_BUTTON);
+                BotMessageManager.getInstance().getComedyButton());
     }
 
     default boolean isDramaButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.DRAMA_BUTTON);
+                BotMessageManager.getInstance().getDramaButton());
     }
 
     default boolean isMelodramaButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.MELODRAMA_BUTTON);
+                BotMessageManager.getInstance().getMelodramaButton());
     }
 
     default boolean isThrillerButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.THRILLER_BUTTON);
+                BotMessageManager.getInstance().getThrillerButton());
     }
 
     default boolean isActionButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.ACTION_BUTTON);
+                BotMessageManager.getInstance().getActionButton());
     }
 
     default boolean isFictionButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.FICTION_BUTTON);
+                BotMessageManager.getInstance().getFictionButton());
     }
 
     default boolean isDetectiveButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.DETECTIVE_BUTTON);
+                BotMessageManager.getInstance().getDetectiveButton());
     }
 
     default boolean isSportButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.SPORT_BUTTON);
+                BotMessageManager.getInstance().getSportButton());
     }
 
     default boolean isFamilyGenreButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.FAMILY_BUTTON);
+                BotMessageManager.getInstance().getFamilyButton());
     }
 
     default boolean isFantasyButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.FANTASY_BUTTON);
+                BotMessageManager.getInstance().getFantasyButton());
     }
 
     default boolean isAnimationButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.ANIMATION_BUTTON);
+                BotMessageManager.getInstance().getAnimationButton());
     }
 
     default boolean isAdventureButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.ADVENTURE_BUTTON);
+                BotMessageManager.getInstance().getAdventureButton());
     }
 
     default boolean isBiographyButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.BIOGRAPHY_BUTTON);
+                BotMessageManager.getInstance().getBiographyButton());
     }
 
     default boolean isCriminalButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.CRIMINAL_BUTTON);
+                BotMessageManager.getInstance().getCriminalButton());
     }
 
     default boolean isDocumentaryButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.DOCUMENTARY_BUTTON);
+                BotMessageManager.getInstance().getDocumentaryButton());
     }
 
     default boolean isWarButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.WAR_BUTTON);
+                BotMessageManager.getInstance().getWarButton());
     }
 
     default boolean isMusicButton(@NotNull Update botUpdate) {
         return genreValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                Genre.MUSIC_BUTTON);
+                BotMessageManager.getInstance().getMusicButton());
     }
     //</editor-fold>
 }

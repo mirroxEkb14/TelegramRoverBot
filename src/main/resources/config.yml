@@ -1,3 +1,3 @@
-telegramBotToken: bot_token
-telegramBotUsername: bot_username
-telegramAdminId: admin_id
+telegramBotToken: # bot_token
+telegramBotUsername: # bot_username
+telegramAdminId: # admin_id

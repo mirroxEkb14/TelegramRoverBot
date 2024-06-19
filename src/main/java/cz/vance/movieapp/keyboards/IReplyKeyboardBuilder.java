@@ -2,7 +2,6 @@ package cz.vance.movieapp.keyboards;
 
 //<editor-fold default-state="collapsed" desc="Imports">
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import cz.vance.movieapp.utils.MainMenuButton;
 //</editor-fold>
 
 /**
@@ -20,8 +19,6 @@ public interface IReplyKeyboardBuilder {
      * </ol>
      *
      * @return Configured instance of the <b>ReplyKeyboardMarkup</b>.
-     *
-     * @see MainMenuButton
      */
     ReplyKeyboardMarkup buildMainMenuKeyboard();
 }

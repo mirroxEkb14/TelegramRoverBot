@@ -6,6 +6,7 @@
  * <li> update extraction (user's message texts and callbacks);
  * </ul>
  *
+ * @see cz.vance.movieapp.managers.CallbackQueryExtractor
  * @author amirov 2/29/2024
  */
 package cz.vance.movieapp.managers;

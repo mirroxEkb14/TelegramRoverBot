@@ -2,10 +2,6 @@ package cz.vance.movieapp.managers.selections;
 
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.models.UserSelection;
-import cz.vance.movieapp.utils.MainMenuButton;
-import cz.vance.movieapp.utils.UserMood;
-import cz.vance.movieapp.utils.Catalogue;
-import cz.vance.movieapp.utils.Genre;
 //</editor-fold>
 
 /**
@@ -16,7 +12,7 @@ public interface IUserSelectionManager {
     /**
      * Initializes the user's selections for the <b>smart search</b> based on the chat ID.
      * <br>
-     * Is called when the user starts the <b>smart search</b> by pressing the {@link MainMenuButton#SMART_SEARCH_BUTTON}.
+     * Is called when the user starts the <b>smart search</b> by pressing the <b>smart search reply keyboard button</b>.
      *
      * @param chatId Whole non-negative number that uniquely identifies the chat.
      */
@@ -25,7 +21,7 @@ public interface IUserSelectionManager {
     /**
      * Puts the selected user's mood into the user's selections.
      * <br>
-     * Is called when the user presses one of the {@link UserMood} buttons.
+     * Is called when the user presses one of the <b>user mood buttons</b>.
      *
      * @param chatId Whole non-negative number that uniquely identifies the chat.
      * @param mood The user's mood selection.
@@ -35,7 +31,7 @@ public interface IUserSelectionManager {
     /**
      * Puts the selected catalogue into the user's selections.
      * <br>
-     * Is called when the user presses one of the {@link Catalogue} buttons.
+     * Is called when the user presses one of the <b>catalogue buttons</b>.
      *
      * @param chatId Whole non-negative number that uniquely identifies the chat.
      * @param catalogue The catalogue selection.
@@ -45,7 +41,7 @@ public interface IUserSelectionManager {
     /**
      * Puts the selected genre into the user's selections.
      * <br>
-     * Is called when the user presses one of the {@link Genre} buttons.
+     * Is called when the user presses one of the <b>genre buttons</b>.
      *
      * @param chatId Whole non-negative number that uniquely identifies the chat.
      * @param genre The genre selection.
@@ -55,11 +51,20 @@ public interface IUserSelectionManager {
     /**
      * Returns the user's selections for the <b>smart search</b>.
      * <br>
-     * Is called when the user presses one of the {@link Genre} buttons (the last step of the <b>smart search</b>).
+     * Is called when the user presses one of the <b>genre buttons</b> (the last step of the <b>smart search</b>).
      *
      * @param chatId Whole non-negative number that uniquely identifies the chat.
      *
      * @return The <b>UserSelection</b> object holding user's selections during <b>smart search</b>.
      */
     UserSelection getUserSelection(long chatId);
+
+    /**
+     * Removes the user's selection object by the <b>key</b>.
+     * <br>
+     * Is called when the user finishes the <b>smart search</b>.
+     *
+     * @param chatId Whole non-negative number that uniquely identifies the chat (the <b>key</b> for the map).
+     */
+    void removeUserSelection(long chatId);
 }

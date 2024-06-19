@@ -4,7 +4,6 @@ package cz.vance.movieapp.managers.messages;
 import cz.vance.movieapp.keyboards.IReplyKeyboardBuilder;
 import cz.vance.movieapp.keyboards.IInlineKeyboardBuilder;
 import cz.vance.movieapp.utils.BotCommand;
-import cz.vance.movieapp.utils.MainMenuButton;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -102,7 +101,9 @@ public interface IMessageManager {
     void sendGenre(Update botUpdate);
 
     /**
-     * Sends a message with the <b>next movie</b> from the DB.
+     * Sends a message with the <b>movies</b> from the DB at the end of the <b>smart search</b>.
+     * <br>
+     * Removes inline keyboard with the help of which the user was selecting mood, catalogue, and genre.
      *
      * @param botUpdate The received update.
      */
@@ -118,7 +119,7 @@ public interface IMessageManager {
 
         return smartSearchValidator.test(
                 messageText,
-                MainMenuButton.SMART_SEARCH_BUTTON.getContent());
+                BotMessageManager.getInstance().getSmartSearchReplyButton());
     }
 
     default boolean isStartCommand(Update botUpdate) { return startCommandValidator.test(botUpdate); }
