@@ -24,6 +24,9 @@ public interface IBotMessageManager {
     List<String> getOnSmartSearchKeyboardRemoved();
     List<String> getOnSmartSearchOldKeyboardRemoved();
     List<String> getOnSmartSearchRepeatedKeyboardRemoved();
+    List<String> getOnSmartSearchCatalogueBack();
+    List<String> getOnSmartSearchGenreBack();
+    List<String> getOnSmartSearchConfirmationBack();
 
     List<String> getWelcomes();
     List<String> getHelps();
@@ -43,6 +46,9 @@ public interface IBotMessageManager {
     int getOnSmartSearchKeyboardRemovedSize();
     int getOnSmartSearchOldKeyboardRemovedSize();
     int getOnSmartSearchRepeatedKeyboardRemovedSize();
+    int getOnSmartSearchCatalogueBackSize();
+    int getOnSmartSearchGenreBackSize();
+    int getOnSmartSearchConfirmationBackSize();
 
     int getWelcomesSize();
     int getHelpsSize();

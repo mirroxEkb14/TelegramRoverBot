@@ -70,6 +70,12 @@ public final class BotMessageManager implements IBotMessageManager {
     public List<String> getOnSmartSearchOldKeyboardRemoved() { return botMessage.getSmartSearchMessage().getOnSmartSearchOldKeyboardRemoved(); }
     @Override
     public List<String> getOnSmartSearchRepeatedKeyboardRemoved() { return botMessage.getSmartSearchMessage().getOnSmartSearchRepeatedKeyboardRemoved(); }
+    @Override
+    public List<String> getOnSmartSearchCatalogueBack() { return botMessage.getSmartSearchMessage().getOnSmartSearchCatalogueBack(); }
+    @Override
+    public List<String> getOnSmartSearchGenreBack() { return botMessage.getSmartSearchMessage().getOnSmartSearchGenreBack(); }
+    @Override
+    public List<String> getOnSmartSearchConfirmationBack() { return botMessage.getSmartSearchMessage().getOnSmartSearchConfirmationBack(); }
 
     @Override
     public int getAtLaunchGreetingsSize() { return botMessage.getSmartSearchMessage().getAtLaunchGreetings().size(); }
@@ -99,6 +105,12 @@ public final class BotMessageManager implements IBotMessageManager {
     public int getOnSmartSearchOldKeyboardRemovedSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchOldKeyboardRemoved().size(); }
     @Override
     public int getOnSmartSearchRepeatedKeyboardRemovedSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchRepeatedKeyboardRemoved().size(); }
+    @Override
+    public int getOnSmartSearchCatalogueBackSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchCatalogueBack().size(); }
+    @Override
+    public int getOnSmartSearchGenreBackSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchGenreBack().size(); }
+    @Override
+    public int getOnSmartSearchConfirmationBackSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchConfirmationBack().size(); }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Welcome Getters">

@@ -240,11 +240,7 @@ public final class MessageManager implements IMessageManager {
             return;
         }
 
-        if (isOldInlineKeyboard(chatId, messageId)) {
-            handleOldInlineKeyboard(chatId, messageId);
-            return;
-        }
-
+        removeMessageInlineKeyboard(chatId, messageId);
         processSmartSearch(chatId, messageId, stickerFileId);
     }
 
@@ -286,8 +282,6 @@ public final class MessageManager implements IMessageManager {
      *     <li>Sending a <b>sticker</b>;</li>
      *     <li>Pausing the program before sending the <b>movie message</b> to imitate the process of search;</li>
      *     <li>Sending the <b>movie message</b>;</li>
-     *     <li>Removing the <b>inline keyboard</b>;</li>
-     *     <li>Editing the <b>message text</b> to inform the user that the inline keyboard has been removed;</li>
      *     <li>Removing the user's latest message id;</li>
      *     <li>Removing the <b>user's selection</b>;</li>
      *     <li>Pausing the program before sending a new mood message;</li>
@@ -308,14 +302,81 @@ public final class MessageManager implements IMessageManager {
         ProgramSleeper.pauseSmartSearchBeforeSendingMovie();
         sendMessage(chatId, movieMessageText);
 
-        removeMessageInlineKeyboard(chatId, messageId);
-        editMessageText(
-                chatId,
-                messageId,
-                messageRandomizer.getOnSmartSearchRepeatedKeyboardRemovedMessage());
-
         latestMessageIds.remove(chatId);
         userSelectionManager.removeUserSelection(chatId);
+    }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="Overridden 'handleSmartSearchBack' Method">
+    @Override
+    public void handleSmartSearchBack(Update botUpdate) {
+        final long chatId = updateExtractor.getCallbackChatId(botUpdate);
+        final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
+
+        if (isOldInlineKeyboard(chatId, messageId)) {
+            handleOldInlineKeyboard(chatId, messageId);
+            return;
+        }
+
+        final UserSelection userSelection = userSelectionManager.getUserSelection(chatId);
+
+        if (userSelection.isOnlyMoodSelected())
+            handleSmartSearchBackToMood(chatId, messageId);
+        else if (userSelection.isOnlyCatalogueSelected())
+            handleSmartSearchBackToCatalogue(chatId, messageId);
+        else if (userSelection.isOnlyGenreSelected())
+            handleSmartSearchBackToGenre(chatId, messageId);
+    }
+
+    /**
+     * Handles the <b>smart search</b> back button:
+     * <ul>
+     *     <li>Nullifies the user's mood selection;</li>
+     *     <li>Sends a message (with attached inline keyboard with the <b>mood selection</b>) to the user that he is
+     *     going back to the <b>mood selection</b>;</li>
+     * </ul>
+     */
+    private void handleSmartSearchBackToMood(long chatId, long messageId) {
+        final String messageText = messageRandomizer.getOnSmartSearchCatalogueBackMessage();
+
+        final UserSelection userSelection = userSelectionManager.getUserSelection(chatId);
+        userSelection.nullifyMood();
+
+        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildMoodKeyboard());
+    }
+
+    /**
+     * Handles the <b>smart search</b> back button:
+     * <ul>
+     *     <li>Nullifies the user's catalogue selection;</li>
+     *     <li>Sends a message (with attached inline keyboard with the <b>catalogue selection</b>) to the user that he
+     *     is going back to the <b>movies/series selection</b>;</li>
+     * </ul>
+     */
+    private void handleSmartSearchBackToCatalogue(long chatId, long messageId) {
+        final String messageText = messageRandomizer.getOnSmartSearchCatalogueBackMessage();
+
+        final UserSelection userSelection = userSelectionManager.getUserSelection(chatId);
+        userSelection.nullifyCatalogue();
+
+        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildCatalogueKeyboard());
+    }
+
+    /**
+     * Handles the <b>smart search</b> back button:
+     * <ul>
+     *     <li>Nullifies the user's genre selection;</li>
+     *     <li>Sends a message (with attached inline keyboard with the <b>genre selection</b>) to the user that he is
+     *     going back to the <b>genre selection</b>;</li>
+     * </ul>
+     */
+    private void handleSmartSearchBackToGenre(long chatId, long messageId) {
+        final String messageText = messageRandomizer.getOnSmartSearchGenreBackMessage();
+
+        final UserSelection userSelection = userSelectionManager.getUserSelection(chatId);
+        userSelection.nullifyGenre();
+
+        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildGenreKeyboard());
     }
     //</editor-fold>
 

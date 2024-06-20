@@ -25,6 +25,9 @@ public final class SmartSearchMessage {
     private List<String> onSmartSearchOldKeyboardRemoved;
     private List<String> onSmartSearchRepeatedKeyboardRemoved;
     private List<String> onSmartSearchRebooted;
+    private List<String> onSmartSearchCatalogueBack;
+    private List<String> onSmartSearchGenreBack;
+    private List<String> onSmartSearchConfirmationBack;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public List<String> getAtLaunchGreetings() { return atLaunchGreetings; }
@@ -41,6 +44,9 @@ public final class SmartSearchMessage {
     public List<String> getOnSmartSearchOldKeyboardRemoved() { return onSmartSearchOldKeyboardRemoved; }
     public List<String> getOnSmartSearchRepeatedKeyboardRemoved() { return onSmartSearchRepeatedKeyboardRemoved; }
     public List<String> getOnSmartSearchRebooted() { return onSmartSearchRebooted; }
+    public List<String> getOnSmartSearchCatalogueBack() { return onSmartSearchCatalogueBack; }
+    public List<String> getOnSmartSearchGenreBack() { return onSmartSearchGenreBack; }
+    public List<String> getOnSmartSearchConfirmationBack() { return onSmartSearchConfirmationBack; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
@@ -58,5 +64,8 @@ public final class SmartSearchMessage {
     public void setOnSmartSearchOldKeyboardRemoved(List<String> onSmartSearchOldKeyboardRemoved) { this.onSmartSearchOldKeyboardRemoved = onSmartSearchOldKeyboardRemoved; }
     public void setOnSmartSearchRepeatedKeyboardRemoved(List<String> onSmartSearchRepeatedKeyboardRemoved) { this.onSmartSearchRepeatedKeyboardRemoved = onSmartSearchRepeatedKeyboardRemoved; }
     public void setOnSmartSearchRebooted(List<String> onSmartSearchRebooted) { this.onSmartSearchRebooted = onSmartSearchRebooted; }
+    public void setOnSmartSearchCatalogueBack(List<String> onSmartSearchCatalogueBack) { this.onSmartSearchCatalogueBack = onSmartSearchCatalogueBack; }
+    public void setOnSmartSearchGenreBack(List<String> onSmartSearchGenreBack) { this.onSmartSearchGenreBack = onSmartSearchGenreBack; }
+    public void setOnSmartSearchConfirmationBack(List<String> onSmartSearchConfirmationBack) { this.onSmartSearchConfirmationBack = onSmartSearchConfirmationBack; }
     //</editor-fold>
 }

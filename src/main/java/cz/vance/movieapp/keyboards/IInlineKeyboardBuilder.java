@@ -40,9 +40,15 @@ public interface IInlineKeyboardBuilder {
     /**
      * Validator function checks if a button callback matches a <b>confirmation inline button</b> (yes/no button).
      */
-    BiFunction<String, String, Boolean> confirmationValidator = (buttonCallback, confirmation) ->
+    BiFunction<String, String, Boolean> smartSearchConfirmationValidator = (buttonCallback, confirmation) ->
             buttonCallback.equals(
                     getCreatedCallback(confirmation));
+    /**
+     * Validator function checks if a button callback matches a <b>back inline button</b> during the <b>smart search</b>.
+     */
+    BiFunction<String, String, Boolean> smartSearchBackValidator = (buttonCallback, back) ->
+            buttonCallback.equals(
+                    getCreatedCallback(back));
     //</editor-fold>
 
     /**
@@ -312,22 +318,30 @@ public interface IInlineKeyboardBuilder {
     }
     //</editor-fold>
 
-    //<editor-fold default-state="collapsed" desc="Confirmation Boolean Methods">
+    //<editor-fold default-state="collapsed" desc="Smart Search Confirmation Boolean Methods">
     default boolean isSmartSearchConfirmationButton(@NotNull Update botUpdate) {
         return isSmartSearchYesButton(botUpdate) ||
                 isSmartSearchNoButton(botUpdate);
     }
 
     default boolean isSmartSearchYesButton(@NotNull Update botUpdate) {
-        return confirmationValidator.apply(
+        return smartSearchConfirmationValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
                 BotMessageManager.getInstance().getSmartSearchYesButton());
     }
 
     default boolean isSmartSearchNoButton(@NotNull Update botUpdate) {
-        return confirmationValidator.apply(
+        return smartSearchConfirmationValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
                 BotMessageManager.getInstance().getSmartSearchNoButton());
+    }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="Search Boolean Methods">
+    default boolean isSmartSearchBackButton(@NotNull Update botUpdate) {
+        return smartSearchBackValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getSmartSearchBackButton());
     }
     //</editor-fold>
 }

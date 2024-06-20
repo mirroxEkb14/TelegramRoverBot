@@ -112,6 +112,24 @@ public final class MessageRandomizer implements IMessageRandomizer {
     }
 
     @Override
+    public String getOnSmartSearchCatalogueBackMessage() {
+        return botMessageManager.getOnSmartSearchCatalogueBack().get(
+                getRandomIndex(botMessageManager.getOnSmartSearchCatalogueBackSize()));
+    }
+
+    @Override
+    public String getOnSmartSearchGenreBackMessage() {
+        return botMessageManager.getOnSmartSearchGenreBack().get(
+                getRandomIndex(botMessageManager.getOnSmartSearchGenreBackSize()));
+    }
+
+    @Override
+    public String getOnSmartSearchConfirmationBackMessage() {
+        return botMessageManager.getOnSmartSearchConfirmationBack().get(
+                getRandomIndex(botMessageManager.getOnSmartSearchConfirmationBackSize()));
+    }
+
+    @Override
     public String getWelcomeMessage() {
         return botMessageManager.getWelcomes().get(
                 getRandomIndex(botMessageManager.getWelcomesSize()));

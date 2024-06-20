@@ -52,15 +52,11 @@ public interface IMessageManager {
      * <p>
      * An <b>update</b> — bears information about various events that occur in a chat, such as <b>new messages</b>,
      * <b>edited messages</b>, <b>channel posts</b>, and more.
-     *
-     * @param botUpdate The received update.
      */
     void sendEcho(Update botUpdate);
 
     /**
      * Sends a welcome message when a user <b>starts the bot for the first time</b> with the <b>main menu keyboard</b>.
-     *
-     * @param botUpdate The incoming update.
      *
      * @see IReplyKeyboardBuilder#buildMainMenuKeyboard()
      */
@@ -68,15 +64,11 @@ public interface IMessageManager {
 
     /**
      * Sends a help message when a user enters the <b>/help</b> command.
-     *
-     * @param botUpdate The incoming update.
      */
     void sendHelp(Update botUpdate);
 
     /**
      * Sends a message with <b>user's mood selection</b>.
-     *
-     * @param botUpdate The received update.
      *
      * @see IInlineKeyboardBuilder#buildMoodKeyboard()
      */
@@ -85,8 +77,6 @@ public interface IMessageManager {
     /**
      * Sends a message with <b>movie/series selection</b>.
      *
-     * @param botUpdate The received update.
-     *
      * @see IInlineKeyboardBuilder#buildCatalogueKeyboard()
      */
     void sendCatalogue(Update botUpdate);
@@ -94,16 +84,12 @@ public interface IMessageManager {
     /**
      * Sends a message with <b>genre selection</b>.
      *
-     * @param botUpdate The received update.
-     *
      * @see IInlineKeyboardBuilder#buildGenreKeyboard()
      */
     void sendGenre(Update botUpdate);
 
     /**
      * Sends a message with <b>confirmation</b> of the user's choice.
-     *
-     * @param botUpdate The received update.
      *
      * @see IInlineKeyboardBuilder#buildConfirmationKeyboard()
      */
@@ -113,10 +99,13 @@ public interface IMessageManager {
      * Sends a message with the <b>movies</b> from the DB at the end of the <b>smart search</b>.
      * <br>
      * Removes inline keyboard with the help of which the user was selecting mood, catalogue, and genre.
-     *
-     * @param botUpdate The received update.
      */
     void sendMovie(Update botUpdate);
+
+    /**
+     * Handles the <b>back button</b> during the <b>smart search</b>.
+     */
+    void handleSmartSearchBack(Update botUpdate);
 
     //<editor-fold default-state="collapsed" desc="Boolean Methods">
     default boolean isMessage(Update botUpdate) { return messageExistenceValidator.test(botUpdate); }

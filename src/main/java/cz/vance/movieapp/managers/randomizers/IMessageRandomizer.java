@@ -117,6 +117,27 @@ public interface IMessageRandomizer {
     String getOnSmartSearchRepeatedKeyboardRemovedMessage();
 
     /**
+     * Extracts a random element from the <b>onSmartSearchCatalogueBack</b> list that contains all the possible texts
+     * when the user clicks the <b>back</b> inline button when he selects <b>movies/series</b> (catalogue); and now
+     * goes back to the <b>mood</b> selection.
+     */
+    String getOnSmartSearchCatalogueBackMessage();
+
+    /**
+     * Extracts a random element from the <b>onSmartSearchGenreBack</b> list that contains all the possible texts
+     * when the user clicks the <b>back</b> inline button when he selects <b>genre</b>; and now goes back to the
+     * <b>movies/series</b> selection.
+     */
+    String getOnSmartSearchGenreBackMessage();
+
+    /**
+     * Extracts a random element from the <b>onSmartSearchConfirmationBack</b> list that contains all the possible texts
+     * when the user clicks the <b>back</b> inline button when he verifies the data he entered; and now goes back to the
+     * <b>genre</b> selection.
+     */
+    String getOnSmartSearchConfirmationBackMessage();
+
+    /**
      * Extracts a random element from the <b>welcomes</b> list that contains all the possible texts when the
      * user starts the conversation with the bot for the first time or when enters the appropriate <b>/start</b> command.
      */

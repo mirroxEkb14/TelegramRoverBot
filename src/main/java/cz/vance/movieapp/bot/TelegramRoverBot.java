@@ -101,5 +101,7 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
             messageManager.sendConfirmation(update);
         else if (inlineKeyboardBuilder.isSmartSearchConfirmationButton(update))
             messageManager.sendMovie(update);
+        else if (inlineKeyboardBuilder.isSmartSearchBackButton(update))
+            messageManager.handleSmartSearchBack(update);
     }
 }
