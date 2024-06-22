@@ -34,7 +34,7 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
     };
 
     @Override
-    public @NotNull InlineKeyboardMarkup buildMoodKeyboard() {
+    public @NotNull InlineKeyboardMarkup buildSmartSearchMoodKeyboard() {
         final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
 
         final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
@@ -68,7 +68,7 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
     }
 
     @Override
-    public @NotNull InlineKeyboardMarkup buildCatalogueKeyboard() {
+    public @NotNull InlineKeyboardMarkup buildSmartSearchCatalogueKeyboard() {
         final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
 
         final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
@@ -93,7 +93,7 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
     }
 
     @Override
-    public @NotNull InlineKeyboardMarkup buildGenreKeyboard() {
+    public @NotNull InlineKeyboardMarkup buildSmartSearchGenreKeyboard() {
         final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
 
         final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
@@ -173,7 +173,7 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
     }
 
     @Override
-    public @NotNull InlineKeyboardMarkup buildConfirmationKeyboard() {
+    public @NotNull InlineKeyboardMarkup buildSmartSearchConfirmationKeyboard() {
         final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
 
         final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
@@ -189,6 +189,75 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         secondInlineRow.add(inlineButtonBuilder.apply(
                 botMessageManager.getSmartSearchBackButton(),
                 IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchBackButton())));
+
+        inlineRows.add(firstInlineRow);
+        inlineRows.add(secondInlineRow);
+
+        keyboardMarkup.setKeyboard(inlineRows);
+        return keyboardMarkup;
+    }
+
+    @Override
+    public @NotNull InlineKeyboardMarkup buildNoIdeaFirstMovieKeyboard() {
+        final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+
+        final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
+        final List<InlineKeyboardButton> firstInlineRow = new ArrayList<>();
+        final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
+
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getNoIdeaNextMovieButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaNextMovieButton())));
+        secondInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getNoIdeaToMainMenuButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaToMainMenuButton())));
+
+        inlineRows.add(firstInlineRow);
+        inlineRows.add(secondInlineRow);
+
+        keyboardMarkup.setKeyboard(inlineRows);
+        return keyboardMarkup;
+    }
+
+    @Override
+    public @NotNull InlineKeyboardMarkup buildNoIdeaInterimMovieKeyboard() {
+        final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+
+        final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
+        final List<InlineKeyboardButton> firstInlineRow = new ArrayList<>();
+        final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
+
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getNoIdeaPreviousMovieButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaPreviousMovieButton())));
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getNoIdeaNextMovieButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaNextMovieButton())));
+        secondInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getNoIdeaToMainMenuButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaToMainMenuButton())));
+
+        inlineRows.add(firstInlineRow);
+        inlineRows.add(secondInlineRow);
+
+        keyboardMarkup.setKeyboard(inlineRows);
+        return keyboardMarkup;
+    }
+
+    @Override
+    public @NotNull InlineKeyboardMarkup buildNoIdeaLastMovieKeyboard() {
+        final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+
+        final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
+        final List<InlineKeyboardButton> firstInlineRow = new ArrayList<>();
+        final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
+
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getNoIdeaPreviousMovieButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaPreviousMovieButton())));
+        secondInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getNoIdeaToMainMenuButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaToMainMenuButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);

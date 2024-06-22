@@ -17,6 +17,7 @@ import cz.vance.movieapp.managers.updates.IUpdateExtractor;
 import cz.vance.movieapp.managers.updates.UpdateExtractor;
 import cz.vance.movieapp.models.BotMessage;
 import cz.vance.movieapp.models.Movie;
+import cz.vance.movieapp.models.UserPhoto;
 import cz.vance.movieapp.models.UserSelection;
 import cz.vance.movieapp.managers.randomizers.IMessageRandomizer;
 import cz.vance.movieapp.managers.randomizers.MessageRandomizer;
@@ -89,11 +90,33 @@ public final class MessageManager implements IMessageManager {
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Latest Message Handler">
+    /**
+     * Is always called on the first step of each <b>main menu mods</b>, because each mode means sending a new message
+     * and the id of this message should be stored in the map.
+     * <br>
+     * Previously stored message ids are removed.
+     */
     private final Consumer<Message> latestMessageHandler = message -> {
         if (IUpdateExtractor.messagePresenceChecker.apply(message)) {
             final long chatId = message.getChatId();
             final int messageId = message.getMessageId();
+            latestMessageIds.clear();
             latestMessageIds.put(chatId, messageId);
+        }
+    };
+
+    /**
+     * Is called when some of the <b>'main menu' reply keyboard buttons</b> were pressed.
+     * <br>
+     * If the user, for instance, is in the <b>smart search</b> mode (meaning selects a <b>mood</b>, <b>catalogue</b>,
+     * <b>genre</b> or <b>confirmation inline button</b>) and then, not finishing the search, presses one of the
+     * <b>'main menu' reply keyboard buttons</b>, the bot removes the current <b>inline keyboard</b> and sends a new
+     * message.
+     */
+    private final Consumer<Long> modeProcessingHandler = chatId -> {
+        if (!latestMessageIds.isEmpty()){
+            handleRepeatedInlineKeyboard(chatId, latestMessageIds.get(chatId));
+            latestMessageIds.remove(chatId);
         }
     };
     //</editor-fold>
@@ -127,9 +150,11 @@ public final class MessageManager implements IMessageManager {
         } else if (IUpdateExtractor.hasSticker(botUpdate)) {
             final String stickerFileId = updateExtractor.getStickerFileId(botUpdate);
             sendEchoSticker(chatId, stickerFileId);
-        } else if (IUpdateExtractor.hasPhoto(botUpdate) || IUpdateExtractor.hasDocument(botUpdate) ||
-                IUpdateExtractor.hasVideo(botUpdate) || IUpdateExtractor.hasAudio(botUpdate) ||
-                IUpdateExtractor.hasVoice(botUpdate)) {
+        } else if (IUpdateExtractor.hasPhoto(botUpdate)) {
+            final UserPhoto userPhoto = updateExtractor.getUserPhoto(botUpdate);
+            sendEchoPhoto(chatId, userPhoto);
+        } else if (IUpdateExtractor.hasDocument(botUpdate) || IUpdateExtractor.hasVideo(botUpdate) ||
+                IUpdateExtractor.hasAudio(botUpdate) || IUpdateExtractor.hasVoice(botUpdate)) {
             sendUnknownInput(chatId);
         }
     }
@@ -153,30 +178,27 @@ public final class MessageManager implements IMessageManager {
     }
 
     @Override
-    public void sendMood(Update botUpdate) {
+    public void sendSmartSearchMood(Update botUpdate) {
         final long chatId = updateExtractor.getMessageChatId(botUpdate);
-        final String atLaunchText = messageRandomizer.getAtLaunchMessage();
-        final String messageText = messageRandomizer.getMoodMessage();
-        final String stickerFileId = messageRandomizer.getBeginningSticker();
+        final String atLaunchGreetingsText = messageRandomizer.getSmartSearchAtLaunchGreetingsMessage();
+        final String messageText = messageRandomizer.getSmartSearchMoodMessage();
+        final String stickerFileId = messageRandomizer.getSmartSearchBeginningSticker();
 
-        if (!latestMessageIds.isEmpty()){
-            handleRepeatedInlineKeyboard(chatId, latestMessageIds.get(chatId));
-            latestMessageIds.remove(chatId);
-        }
+        modeProcessingHandler.accept(chatId);
 
         userSelectionManager.initializeUserSelection(chatId);
 
-        sendMessage(chatId, atLaunchText);
+        sendMessage(chatId, atLaunchGreetingsText);
         ProgramSleeper.pauseSmartSearchBeforeSendingMood();
 
         sendSticker(chatId, stickerFileId);
 
-        final Message moodMessage = sendMessage(chatId, messageText, inlineKeyboardBuilder.buildMoodKeyboard());
+        final Message moodMessage = sendMessage(chatId, messageText, inlineKeyboardBuilder.buildSmartSearchMoodKeyboard());
         latestMessageHandler.accept(moodMessage);
     }
 
     @Override
-    public void sendCatalogue(Update botUpdate) {
+    public void sendSmartSearchCatalogue(Update botUpdate) {
         final long chatId = updateExtractor.getCallbackChatId(botUpdate);
         final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
 
@@ -185,19 +207,19 @@ public final class MessageManager implements IMessageManager {
             return;
         }
 
-        final String messageText = messageRandomizer.getCatalogueMessage();
+        final String messageText = messageRandomizer.getSmartSearchCatalogueMessage();
 
         final String mood = updateExtractor.getCallbackQuery(botUpdate);
         userSelectionManager.putMood(chatId, mood);
 
-        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildCatalogueKeyboard());
+        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildSmartSearchCatalogueKeyboard());
     }
 
     @Override
-    public void sendGenre(Update botUpdate) {
+    public void sendSmartSearchGenre(Update botUpdate) {
         final long chatId = updateExtractor.getCallbackChatId(botUpdate);
         final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
-        final String messageText = messageRandomizer.getGenreMessage();
+        final String messageText = messageRandomizer.getSmartSearchGenreMessage();
 
         if (isOldInlineKeyboard(chatId, messageId)) {
             handleOldInlineKeyboard(chatId, messageId);
@@ -207,11 +229,11 @@ public final class MessageManager implements IMessageManager {
         final String catalogue = updateExtractor.getCallbackQuery(botUpdate);
         userSelectionManager.putCatalogue(chatId, catalogue);
 
-        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildGenreKeyboard());
+        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildSmartSearchGenreKeyboard());
     }
 
     @Override
-    public void sendConfirmation(Update botUpdate) {
+    public void sendSmartSearchConfirmation(Update botUpdate) {
         final long chatId = updateExtractor.getCallbackChatId(botUpdate);
         final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
 
@@ -223,17 +245,17 @@ public final class MessageManager implements IMessageManager {
         final String genre = updateExtractor.getCallbackQuery(botUpdate);
         userSelectionManager.putGenre(chatId, genre);
 
-        final String messageText = messageRandomizer.getVerifyingMessage(
+        final String messageText = messageRandomizer.getSmartSearchVerifyingMessage(
                 userSelectionManager.getUserSelection(chatId));
-        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildConfirmationKeyboard());
+        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildSmartSearchConfirmationKeyboard());
     }
 
     //<editor-fold default-state="collapsed" desc="Overridden 'sendMovie' Method">
     @Override
-    public void sendMovie(Update botUpdate) {
+    public void sendSmartSearchMovie(Update botUpdate) {
         final long chatId = updateExtractor.getCallbackChatId(botUpdate);
         final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
-        final String stickerFileId = messageRandomizer.getEndSticker();
+        final String stickerFileId = messageRandomizer.getSmartSearchEndSticker();
 
         if (isSmartSearchNoButtonPressed(botUpdate)) {
             handleSmartSearchNoConfirmationButton(chatId, messageId, botUpdate);
@@ -241,7 +263,7 @@ public final class MessageManager implements IMessageManager {
         }
 
         removeMessageInlineKeyboard(chatId, messageId);
-        processSmartSearch(chatId, messageId, stickerFileId);
+        processSmartSearch(chatId, stickerFileId);
     }
 
     /**
@@ -270,7 +292,7 @@ public final class MessageManager implements IMessageManager {
         userSelectionManager.removeUserSelection(chatId);
 
         ProgramSleeper.pauseSmartSearchBeforeReboot();
-        sendMood(botUpdate);
+        sendSmartSearchMood(botUpdate);
     }
 
     /**
@@ -289,7 +311,6 @@ public final class MessageManager implements IMessageManager {
      * </ul>
      */
     private void processSmartSearch(long chatId,
-                                    long messageId,
                                     String stickerFileId) {
         final UserSelection userSelection = userSelectionManager.getUserSelection(chatId);
         final List<Movie> smartSearchMovies = movieRecord.getSmartSearchMovies(userSelection);
@@ -342,7 +363,7 @@ public final class MessageManager implements IMessageManager {
         final UserSelection userSelection = userSelectionManager.getUserSelection(chatId);
         userSelection.nullifyMood();
 
-        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildMoodKeyboard());
+        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildSmartSearchMoodKeyboard());
     }
 
     /**
@@ -359,7 +380,7 @@ public final class MessageManager implements IMessageManager {
         final UserSelection userSelection = userSelectionManager.getUserSelection(chatId);
         userSelection.nullifyCatalogue();
 
-        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildCatalogueKeyboard());
+        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildSmartSearchCatalogueKeyboard());
     }
 
     /**
@@ -376,9 +397,116 @@ public final class MessageManager implements IMessageManager {
         final UserSelection userSelection = userSelectionManager.getUserSelection(chatId);
         userSelection.nullifyGenre();
 
-        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildGenreKeyboard());
+        sendMessage(chatId, messageId, messageText, inlineKeyboardBuilder.buildSmartSearchGenreKeyboard());
     }
     //</editor-fold>
+
+    @Override
+    public void sendNoIdeaFirstMovie(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final String atLaunchGreetingsText = messageRandomizer.getNoIdeaAtLaunchGreetingsMessage();
+        final String stickerFileId = messageRandomizer.getNoIdeaBeginningSticker();
+
+        modeProcessingHandler.accept(chatId);
+
+        final Movie noIdeaFirstMovie = movieRecord.getCurrentNoIdeaMovie();
+        final String noIdeaFirstMovieText = messageFormatter.getNoIdeaMovieMessage(noIdeaFirstMovie);
+
+        sendSticker(chatId, stickerFileId);
+        sendMessage(chatId, atLaunchGreetingsText);
+        ProgramSleeper.pauseNoIdeaBeforeSendingFirstMovie();
+
+        final Message firstMovieMessage = sendMessage(chatId, noIdeaFirstMovieText, inlineKeyboardBuilder.buildNoIdeaFirstMovieKeyboard());
+        latestMessageHandler.accept(firstMovieMessage);
+    }
+
+    //<editor-fold default-state="collapsed" desc="Overridden 'sendNoIdeaPreviousMovie' and 'sendNoIdeaNextMovie' Methods">
+    @Override
+    public void sendNoIdeaPreviousMovie(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
+
+        if (isOldInlineKeyboard(chatId, messageId)) {
+            handleOldInlineKeyboard(chatId, messageId);
+            return;
+        }
+
+        final InlineKeyboardMarkup inlineKeyboardMarkup = getNoIdeaAppropriateInlineKeyboard(botUpdate);
+        movieRecord.moveToPreviousNoIdeaMovie();
+
+        final Movie noIdeaPreviousMovie = movieRecord.getCurrentNoIdeaMovie();
+        final String noIdeaPreviousMovieText = messageFormatter.getNoIdeaMovieMessage(noIdeaPreviousMovie);
+
+        sendMessage(chatId, messageId, noIdeaPreviousMovieText, inlineKeyboardMarkup);
+    }
+
+    @Override
+    public void sendNoIdeaNextMovie(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
+
+        if (isOldInlineKeyboard(chatId, messageId)) {
+            handleOldInlineKeyboard(chatId, messageId);
+            return;
+        }
+
+        final InlineKeyboardMarkup inlineKeyboardMarkup = getNoIdeaAppropriateInlineKeyboard(botUpdate);
+        handleNoIdeaNoMoviesLeft(chatId);
+        movieRecord.moveToNextNoIdeaMovie();
+
+        final Movie noIdeaNextMovie = movieRecord.getCurrentNoIdeaMovie();
+        final String noIdeaNextMovieText = messageFormatter.getNoIdeaMovieMessage(noIdeaNextMovie);
+
+        sendMessage(chatId, messageId, noIdeaNextMovieText, inlineKeyboardMarkup);
+    }
+
+    /**
+     * Returns a {@link InlineKeyboardMarkup} instance by checking:
+     * <ul>
+     *     <li>if the next movie to be displayed is the first in the list, then the <b>previous movie inline keyboard
+     *     button</b> should not be present in the markup;</li>
+     *     <li>if the next movie to be displayed is the last in the list, then the <b>next movie inline keyboard
+     *     button</b> should not be present in the markup;</li>
+     *     <li>if the next movie to be displayed is neither the first nor the last in the list, then the <b>previous/next
+     *     movie inline keyboard buttons</b> should be present in the markup;</li>
+     * </ul>
+     *
+     * @param botUpdate the {@link Update} instance to check what <b>inline keyboard</b> was pressed.
+     */
+    private InlineKeyboardMarkup getNoIdeaAppropriateInlineKeyboard(Update botUpdate) {
+        if (inlineKeyboardBuilder.isNoIdeaPreviousMovieButton(botUpdate) && movieRecord.isNoIdeaPreviousMovieFirst())
+            return inlineKeyboardBuilder.buildNoIdeaFirstMovieKeyboard();
+        else if (inlineKeyboardBuilder.isNoIdeaNextMovieButton(botUpdate) && movieRecord.isNoIdeaNextMovieLast())
+            return inlineKeyboardBuilder.buildNoIdeaLastMovieKeyboard();
+        else
+            return inlineKeyboardBuilder.buildNoIdeaInterimMovieKeyboard();
+    }
+
+    /**
+     * In case the user is on the last movie available in the DB, the bot sends a notification message about it.
+     */
+    private void handleNoIdeaNoMoviesLeft(long chatId) {
+        if (movieRecord.isNoIdeaNextMovieLast()) {
+            final String messageText = messageRandomizer.getNoIdeaNoMoviesLeftMessage();
+            sendMessage(chatId, messageText);
+        }
+    }
+    //</editor-fold>
+
+    @Override
+    public void handleNoIdeaToMainMenu(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
+        final String messageText = messageRandomizer.getNoIdeaToMainMenuMessage();
+
+        if (isOldInlineKeyboard(chatId, messageId)) {
+            handleOldInlineKeyboard(chatId, messageId);
+            return;
+        }
+
+        removeMessageInlineKeyboard(chatId, messageId);
+        sendMessage(chatId, messageText);
+    }
 
     /* ---------------- Private Helper Methods -------------- */
 
@@ -396,6 +524,15 @@ public final class MessageManager implements IMessageManager {
         try {
             bot.execute(
                     messageBuilder.buildTelegramSticker(chatId, stickerFileId));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendEchoPhoto(long chatId, UserPhoto userPhoto) {
+        try {
+            bot.execute(
+                    messageBuilder.buildTelegramPhoto(chatId, userPhoto));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

@@ -14,7 +14,7 @@ public interface IMessageRandomizer {
      * Extracts a random element from the <b>atLaunch</b> list that contains the texts that are sent right after the
      * user clicks the <b>🎬 Smart search</b> button.
      */
-    String getAtLaunchMessage();
+    String getSmartSearchAtLaunchGreetingsMessage();
 
     /**
      * Extracts a random element from the <b>moodSelection</b> list that contains all the possible texts when the
@@ -22,7 +22,7 @@ public interface IMessageRandomizer {
      * <br>
      * The bot sends this random message before the <b>mood selection keyboard</b> appearing.
      */
-    String getMoodMessage();
+    String getSmartSearchMoodMessage();
 
     /**
      * Extracts a random element from the <b>catalogueSelection</b> list that contains all the possible texts when the
@@ -30,7 +30,7 @@ public interface IMessageRandomizer {
      * <br>
      * The bot sends this random message before the <b>movie/series selection keyboard</b> appearing.
      */
-    String getCatalogueMessage();
+    String getSmartSearchCatalogueMessage();
 
     /**
      * Extracts a random element from the <b>genreSelection</b> list that contains all the possible texts when the
@@ -38,7 +38,7 @@ public interface IMessageRandomizer {
      * <br>
      * The bot sends this random message before the <b>genre selection keyboard</b> appearing.
      */
-    String getGenreMessage();
+    String getSmartSearchGenreMessage();
 
     /**
      * Extracts a random element from the <b>verifying</b> list that contains all the possible texts when the
@@ -49,7 +49,7 @@ public interface IMessageRandomizer {
      *
      * @param userSelection the user's selection instance containing the data from the <b>smart search</b>.
      */
-    String getVerifyingMessage(@NotNull UserSelection userSelection);
+    String getSmartSearchVerifyingMessage(@NotNull UserSelection userSelection);
 
     /**
      * Extracts a random element from the <b>onSmartSearchRebooted</b> list that contains all the possible texts when the
@@ -64,7 +64,7 @@ public interface IMessageRandomizer {
      * The bot sends this random message right after he interacts with some inline buttons on the <b>verifying</b>
      * message.
      */
-    String getVerifiedMessage();
+    String getSmartSearchVerifiedMessage();
 
     /**
      * Extracts a random element from the <b>sampling</b> list that contains all the possible texts when the
@@ -75,13 +75,13 @@ public interface IMessageRandomizer {
      * <br>
      * The bot sends this random message right after the pause after the genre selection has passed.
      */
-    String getSamplingMessage();
+    String getSmartSearchSamplingMessage();
 
     /**
      * Extracts a random element from the <b>onFinish</b> list that contains all the possible texts when the
      * <b>smart search</b> has finished successfully/unsuccessfully.
      */
-    String getOnFinishMessage();
+    String getSmartSearchOnFinishMessage();
 
     /**
      * Extracts a random element from the <b>noMovies</b> list that contains all the possible texts when the
@@ -89,13 +89,13 @@ public interface IMessageRandomizer {
      * <br>
      * The bot sends this random message right after the pause after the genre selection has passed.
      */
-    String getNoMoviesMessage();
+    String getSmartSearchNoMoviesMessage();
 
     /**
      * Extracts a random element from the <b>onFailure</b> list that contains all the possible texts when the
      * <b>no movies</b> message is sent.
      */
-    String getOnFailureMessage();
+    String getSmartSearchOnFailureMessage();
 
     /**
      * Extracts a random element from the <b>onSmartSearchKeyboardRemoved</b> list that contains all the possible texts
@@ -138,6 +138,24 @@ public interface IMessageRandomizer {
     String getOnSmartSearchConfirmationBackMessage();
 
     /**
+     * Extracts a random element from the <b>noIdeaAtLaunchGreetings</b> list that contains all the possible texts
+     * when the user clicks the <b>no idea</b> reply button in the <b>main menu</b>.
+     */
+    String getNoIdeaAtLaunchGreetingsMessage();
+
+    /**
+     * Extracts a random element from the <b>noIdeaNoMoviesLeft</b> list that contains all the possible texts
+     * when the user during the <b>no idea</b> went through all the movies/series and there are no more left in the DB.
+     */
+    String getNoIdeaNoMoviesLeftMessage();
+
+    /**
+     * Extracts a random element from the <b>noIdeaToMainMenu</b> list that contains all the possible texts
+     * when the user during the <b>no idea</b> goes back to the <b>main menu</b>.
+     */
+    String getNoIdeaToMainMenuMessage();
+
+    /**
      * Extracts a random element from the <b>welcomes</b> list that contains all the possible texts when the
      * user starts the conversation with the bot for the first time or when enters the appropriate <b>/start</b> command.
      */
@@ -161,7 +179,7 @@ public interface IMessageRandomizer {
      *
      * @return The file id of a random sticker.
      */
-    String getBeginningSticker();
+    String getSmartSearchBeginningSticker();
 
     /**
      * Extracts a random sticker from the <b>.json sticker file</b> for the <b>end</b> of the <b>smart search</b> feature,
@@ -169,7 +187,15 @@ public interface IMessageRandomizer {
      *
      * @return The file id of a random sticker.
      */
-    String getEndSticker();
+    String getSmartSearchEndSticker();
+
+    /**
+     * Extracts a random sticker from the <b>.json sticker file</b> for the <b>no idea</b> feature, when the user
+     * presses the <b>no idea</b> reply button.
+     *
+     * @return The file id of a random sticker.
+     */
+    String getNoIdeaBeginningSticker();
 
     /**
      * Extracts a random sticker from the <b>.json sticker file</b> for the <b>welcome</b> greeting.

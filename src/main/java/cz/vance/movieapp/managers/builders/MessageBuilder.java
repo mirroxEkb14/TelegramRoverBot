@@ -1,8 +1,10 @@
 package cz.vance.movieapp.managers.builders;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.models.UserPhoto;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -15,6 +17,17 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
  */
 public final class MessageBuilder implements IMessageBuilder {
 
+    /**
+     * Alternative implementation using <b>builder</b>:
+     * <pre>{@code
+     *      return SendMessage
+     *                 .builder()
+     *                 .chatId(chatId)
+     *                 .text(messageText)
+     *                 .parseMode(PARSE_MODE)
+     *                 .build();
+     * }</pre>
+     */
     @Override
     public @NotNull SendMessage buildTelegramMessage(long chatId,
                                                      String messageText) {
@@ -28,34 +41,49 @@ public final class MessageBuilder implements IMessageBuilder {
     @Override
     public @NotNull SendSticker buildTelegramSticker(long chatId,
                                                      String stickerFileId) {
-        final SendSticker sticker = new SendSticker();
-        sticker.setChatId(chatId);
-        sticker.setSticker(new InputFile(stickerFileId));
-        return sticker;
+        return SendSticker
+                .builder()
+                .chatId(chatId)
+                .sticker(new InputFile(stickerFileId))
+                .build();
+    }
+
+    @Override
+    public @NotNull SendPhoto buildTelegramPhoto(long chatId,
+                                                 @NotNull UserPhoto userPhoto) {
+        return SendPhoto
+                .builder()
+                .chatId(chatId)
+                .photo(new InputFile(userPhoto.fileId()))
+                .caption(userPhoto.outputCaption())
+                .parseMode(PARSE_MODE)
+                .build();
     }
 
     @Override
     public @NotNull SendMessage buildTelegramMessage(long chatId,
                                                      String messageText,
                                                      ReplyKeyboardMarkup keyboardMarkup) {
-        final SendMessage message = new SendMessage();
-        message.setChatId(chatId);
-        message.setText(messageText);
-        message.setReplyMarkup(keyboardMarkup);
-        message.setParseMode(PARSE_MODE);
-        return message;
+        return SendMessage
+                .builder()
+                .chatId(chatId)
+                .text(messageText)
+                .replyMarkup(keyboardMarkup)
+                .parseMode(PARSE_MODE)
+                .build();
     }
 
     @Override
     public @NotNull SendMessage buildTelegramMessage(long chatId,
                                                      String messageText,
                                                      InlineKeyboardMarkup keyboardMarkup) {
-        final SendMessage message = new SendMessage();
-        message.setChatId(chatId);
-        message.setText(messageText);
-        message.setReplyMarkup(keyboardMarkup);
-        message.setParseMode(PARSE_MODE);
-        return message;
+        return SendMessage
+                .builder()
+                .chatId(chatId)
+                .text(messageText)
+                .replyMarkup(keyboardMarkup)
+                .parseMode(PARSE_MODE)
+                .build();
     }
 
     @Override
@@ -63,12 +91,13 @@ public final class MessageBuilder implements IMessageBuilder {
                                                          long callbackMessageId,
                                                          String messageText,
                                                          InlineKeyboardMarkup keyboardMarkup) {
-        final EditMessageText editedMessage = new EditMessageText();
-        editedMessage.setChatId(callbackChatId);
-        editedMessage.setMessageId(Math.toIntExact(callbackMessageId));
-        editedMessage.setText(messageText);
-        editedMessage.setReplyMarkup(keyboardMarkup);
-        editedMessage.setParseMode(PARSE_MODE);
-        return editedMessage;
+        return EditMessageText
+                .builder()
+                .chatId(callbackChatId)
+                .messageId(Math.toIntExact(callbackMessageId))
+                .text(messageText)
+                .replyMarkup(keyboardMarkup)
+                .parseMode(PARSE_MODE)
+                .build();
     }
 }

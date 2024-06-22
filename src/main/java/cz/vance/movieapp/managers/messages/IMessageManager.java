@@ -40,11 +40,10 @@ public interface IMessageManager {
             t.getMessage().getText() != null &&  t.getMessage().getText().equals(
                     BotCommand.HELP_COMMAND.content());
     /**
-     * Validator tests if the incoming update's message text is equal to the <b>smart search button</b> content.
-     *
-     * @see IMessageManager#isSmartSearchButton(Update)
+     * Validator tests if the incoming update's message text is equal to the <b>smart search/no idea/our choice/feedback
+     * button</b> content (other string value).
      */
-    BiPredicate<String, String> smartSearchValidator = String::equalsIgnoreCase;
+    BiPredicate<String, String> stringValidator = String::equalsIgnoreCase;
     //</editor-fold>
 
     /**
@@ -70,42 +69,70 @@ public interface IMessageManager {
     /**
      * Sends a message with <b>user's mood selection</b>.
      *
-     * @see IInlineKeyboardBuilder#buildMoodKeyboard()
+     * @see IInlineKeyboardBuilder#buildSmartSearchMoodKeyboard()
      */
-    void sendMood(Update botUpdate);
+    void sendSmartSearchMood(Update botUpdate);
 
     /**
      * Sends a message with <b>movie/series selection</b>.
      *
-     * @see IInlineKeyboardBuilder#buildCatalogueKeyboard()
+     * @see IInlineKeyboardBuilder#buildSmartSearchCatalogueKeyboard()
      */
-    void sendCatalogue(Update botUpdate);
+    void sendSmartSearchCatalogue(Update botUpdate);
 
     /**
      * Sends a message with <b>genre selection</b>.
      *
-     * @see IInlineKeyboardBuilder#buildGenreKeyboard()
+     * @see IInlineKeyboardBuilder#buildSmartSearchGenreKeyboard()
      */
-    void sendGenre(Update botUpdate);
+    void sendSmartSearchGenre(Update botUpdate);
 
     /**
      * Sends a message with <b>confirmation</b> of the user's choice.
      *
-     * @see IInlineKeyboardBuilder#buildConfirmationKeyboard()
+     * @see IInlineKeyboardBuilder#buildSmartSearchConfirmationKeyboard()
      */
-    void sendConfirmation(Update botUpdate);
+    void sendSmartSearchConfirmation(Update botUpdate);
 
     /**
      * Sends a message with the <b>movies</b> from the DB at the end of the <b>smart search</b>.
      * <br>
      * Removes inline keyboard with the help of which the user was selecting mood, catalogue, and genre.
      */
-    void sendMovie(Update botUpdate);
+    void sendSmartSearchMovie(Update botUpdate);
 
     /**
      * Handles the <b>back button</b> during the <b>smart search</b>.
      */
     void handleSmartSearchBack(Update botUpdate);
+
+    /**
+     * Sends a message with the <b>'no idea' first movie</b> text.
+     *
+     * @see IInlineKeyboardBuilder#buildNoIdeaFirstMovieKeyboard()
+     */
+    void sendNoIdeaFirstMovie(Update botUpdate);
+
+    /**
+     * Sends a message with the <b>'no idea' previous movie</b> text.
+     *
+     * @see IInlineKeyboardBuilder#buildNoIdeaInterimMovieKeyboard()
+     */
+    void sendNoIdeaPreviousMovie(Update botUpdate);
+
+    /**
+     * Sends a message with the <b>'no idea' next movie</b> text.
+     *
+     * @see IInlineKeyboardBuilder#buildNoIdeaInterimMovieKeyboard()
+     */
+    void sendNoIdeaNextMovie(Update botUpdate);
+
+    /**
+     * Sends a message indicating that the user is going from the <b>no idea mode</b> to the <b>main menu</b>.
+     * <br>
+     * The inline keyboard is removed.
+     */
+    void handleNoIdeaToMainMenu(Update botUpdate);
 
     //<editor-fold default-state="collapsed" desc="Boolean Methods">
     default boolean isMessage(Update botUpdate) { return messageExistenceValidator.test(botUpdate); }
@@ -115,7 +142,7 @@ public interface IMessageManager {
         if (messageText == null)
             return false;
 
-        return smartSearchValidator.test(
+        return stringValidator.test(
                 messageText,
                 BotMessageManager.getInstance().getSmartSearchReplyButton());
     }
@@ -123,5 +150,15 @@ public interface IMessageManager {
     default boolean isStartCommand(Update botUpdate) { return startCommandValidator.test(botUpdate); }
 
     default boolean isHelpCommand(Update botUpdate) { return helpCommandValidator.test(botUpdate); }
+
+    default boolean isNoIdeaButton(@NotNull Update botUpdate) {
+        String messageText = botUpdate.getMessage().getText();
+        if (messageText == null)
+            return false;
+
+        return stringValidator.test(
+                messageText,
+                BotMessageManager.getInstance().getNoIdeaReplyButton());
+    }
     //</editor-fold>
 }

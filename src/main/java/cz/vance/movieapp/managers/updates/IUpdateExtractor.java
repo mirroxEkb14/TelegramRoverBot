@@ -1,6 +1,7 @@
 package cz.vance.movieapp.managers.updates;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.models.UserPhoto;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -39,6 +40,33 @@ public interface IUpdateExtractor {
     int getMessageId(@NotNull Update update);
 
     /**
+     * Extracts the <b>user id</b> from a message.
+     *
+     * @param update The bot's <b>update</b> object.
+     *
+     * @return A whole non-negative number of the <b>long</b> primitive type.
+     */
+    long getUserId(@NotNull Update update);
+
+    /**
+     * Extracts the <b>first name</b> of the user from a message.
+     *
+     * @param update The bot's <b>update</b> object.
+     *
+     * @return The first name of the user of the <b>String</b> type.
+     */
+    String getUserFirstName(@NotNull Update update);
+
+    /**
+     * Extracts the <b>last name</b> of the user from a message.
+     *
+     * @param update The bot's <b>update</b> object.
+     *
+     * @return The last name of the user of the <b>String</b> type.
+     */
+    String getUserLastName(@NotNull Update update);
+
+    /**
      * Retrieves the <b>text</b> from a message.
      *
      * @param update The <b>update</b> object.
@@ -55,6 +83,17 @@ public interface IUpdateExtractor {
      * @return <b>String</b> object containing the identifier.
      */
     String getStickerFileId(@NotNull Update update);
+
+    /**
+     * Forms a {@link UserPhoto} object from the incoming update.
+     * <br>
+     * It is the biggest photo from the array with photo objects with different sizes.
+     *
+     * @param update The <b>update</b> object to extract the photo from.
+     *
+     * @return {@link UserPhoto} object containing all the necessary data of the photo that was sent to the bot.
+     */
+    @NotNull UserPhoto getUserPhoto(@NotNull Update update);
 
     /**
      * Extracts the <b>chat id</b> from the provided callback.

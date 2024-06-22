@@ -23,6 +23,7 @@ public final class ReplyKeyboardBuilder implements IReplyKeyboardBuilder {
     public @NotNull ReplyKeyboardMarkup buildMainMenuKeyboard() {
         final ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         keyboardMarkup.setResizeKeyboard(true);
+        keyboardMarkup.setOneTimeKeyboard(false);
 
         final List<KeyboardRow> keyboardRows = new ArrayList<>();
         final KeyboardRow firstRow = new KeyboardRow();
@@ -33,7 +34,7 @@ public final class ReplyKeyboardBuilder implements IReplyKeyboardBuilder {
         firstRow.add(new KeyboardButton(
                 botMessageManager.getOurChoiceReplyButton()));
         firstRow.add(new KeyboardButton(
-                botMessageManager.getNoIdeasReplyButton()));
+                botMessageManager.getNoIdeaReplyButton()));
         secondRow.add(new KeyboardButton(
                 botMessageManager.getFeedbackReplyButton()));
 

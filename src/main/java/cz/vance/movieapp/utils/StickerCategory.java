@@ -6,7 +6,8 @@ package cz.vance.movieapp.utils;
 public enum StickerCategory {
     WELCOME("Welcome"),
     SMART_SEARCH_BEGINNING("SmartSearchBeginning"),
-    SMART_SEARCH_END("SmartSearchEnd");
+    SMART_SEARCH_END("SmartSearchEnd"),
+    NO_IDEA_BEGINNING("NoIdeaBeginning");
 
     private final String content;
 

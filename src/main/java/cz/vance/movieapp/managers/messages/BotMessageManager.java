@@ -43,27 +43,27 @@ public final class BotMessageManager implements IBotMessageManager {
 
     //<editor-fold default-state="collapsed" desc="Smart Search Getters">
     @Override
-    public List<String> getAtLaunchGreetings() { return botMessage.getSmartSearchMessage().getAtLaunchGreetings(); }
+    public List<String> getSmartSearchAtLaunchGreetings() { return botMessage.getSmartSearchMessage().getSmartSearchAtLaunchGreetings(); }
     @Override
-    public List<String> getMoodSelection() { return botMessage.getSmartSearchMessage().getMoodSelection(); }
+    public List<String> getSmartSearchMoodSelection() { return botMessage.getSmartSearchMessage().getSmartSearchMoodSelection(); }
     @Override
-    public List<String> getCatalogueSelection() { return botMessage.getSmartSearchMessage().getCatalogueSelection(); }
+    public List<String> getSmartSearchCatalogueSelection() { return botMessage.getSmartSearchMessage().getSmartSearchCatalogueSelection(); }
     @Override
-    public List<String> getGenreSelection() { return botMessage.getSmartSearchMessage().getGenreSelection(); }
+    public List<String> getSmartSearchGenreSelection() { return botMessage.getSmartSearchMessage().getSmartSearchGenreSelection(); }
     @Override
-    public List<String> getVerifying() { return botMessage.getSmartSearchMessage().getVerifying(); }
+    public List<String> getSmartSearchVerifying() { return botMessage.getSmartSearchMessage().getSmartSearchVerifying(); }
     @Override
     public List<String> getOnSmartSearchRebooted() { return botMessage.getSmartSearchMessage().getOnSmartSearchRebooted(); }
     @Override
-    public List<String> getVerified() { return botMessage.getSmartSearchMessage().getVerified(); }
+    public List<String> getSmartSearchVerified() { return botMessage.getSmartSearchMessage().getSmartSearchVerified(); }
     @Override
-    public List<String> getSampling() { return botMessage.getSmartSearchMessage().getSampling(); }
+    public List<String> getSmartSearchSampling() { return botMessage.getSmartSearchMessage().getSmartSearchSampling(); }
     @Override
-    public List<String> getOnFinish() { return botMessage.getSmartSearchMessage().getOnFinish(); }
+    public List<String> getSmartSearchOnFinish() { return botMessage.getSmartSearchMessage().getSmartSearchOnFinish(); }
     @Override
-    public List<String> getNoMovies() { return botMessage.getSmartSearchMessage().getNoMovies(); }
+    public List<String> getSmartSearchNoMovies() { return botMessage.getSmartSearchMessage().getSmartSearchNoMovies(); }
     @Override
-    public List<String> getOnFailure() { return botMessage.getSmartSearchMessage().getOnFailure(); }
+    public List<String> getSmartSearchOnFailure() { return botMessage.getSmartSearchMessage().getSmartSearchOnFailure(); }
     @Override
     public List<String> getOnSmartSearchKeyboardRemoved() { return botMessage.getSmartSearchMessage().getOnSmartSearchKeyboardRemoved(); }
     @Override
@@ -78,27 +78,27 @@ public final class BotMessageManager implements IBotMessageManager {
     public List<String> getOnSmartSearchConfirmationBack() { return botMessage.getSmartSearchMessage().getOnSmartSearchConfirmationBack(); }
 
     @Override
-    public int getAtLaunchGreetingsSize() { return botMessage.getSmartSearchMessage().getAtLaunchGreetings().size(); }
+    public int getSmartSearchAtLaunchGreetingsSize() { return botMessage.getSmartSearchMessage().getSmartSearchAtLaunchGreetings().size(); }
     @Override
-    public int getMoodSelectionSize() { return botMessage.getSmartSearchMessage().getMoodSelection().size(); }
+    public int getSmartSearchMoodSelectionSize() { return botMessage.getSmartSearchMessage().getSmartSearchMoodSelection().size(); }
     @Override
-    public int getCatalogueSelectionSize() { return botMessage.getSmartSearchMessage().getCatalogueSelection().size(); }
+    public int getSmartSearchCatalogueSelectionSize() { return botMessage.getSmartSearchMessage().getSmartSearchCatalogueSelection().size(); }
     @Override
-    public int getGenreSelectionSize() { return botMessage.getSmartSearchMessage().getGenreSelection().size(); }
+    public int getSmartSearchGenreSelectionSize() { return botMessage.getSmartSearchMessage().getSmartSearchGenreSelection().size(); }
     @Override
-    public int getVerifyingSize() { return botMessage.getSmartSearchMessage().getVerifying().size(); }
+    public int getSmartSearchVerifyingSize() { return botMessage.getSmartSearchMessage().getSmartSearchVerifying().size(); }
     @Override
     public int getOnSmartSearchRebootedSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchRebooted().size(); }
     @Override
-    public int getVerifiedSize() { return botMessage.getSmartSearchMessage().getVerified().size(); }
+    public int getSmartSearchVerifiedSize() { return botMessage.getSmartSearchMessage().getSmartSearchVerified().size(); }
     @Override
-    public int getSamplingSize() { return botMessage.getSmartSearchMessage().getSampling().size(); }
+    public int getSmartSearchSamplingSize() { return botMessage.getSmartSearchMessage().getSmartSearchSampling().size(); }
     @Override
-    public int getOnFinishSize() { return botMessage.getSmartSearchMessage().getOnFinish().size(); }
+    public int getSmartSearchOnFinishSize() { return botMessage.getSmartSearchMessage().getSmartSearchOnFinish().size(); }
     @Override
-    public int getNoMoviesSize() { return botMessage.getSmartSearchMessage().getNoMovies().size(); }
+    public int getSmartSearchNoMoviesSize() { return botMessage.getSmartSearchMessage().getSmartSearchNoMovies().size(); }
     @Override
-    public int getOnFailureSize() { return botMessage.getSmartSearchMessage().getOnFailure().size(); }
+    public int getSmartSearchOnFailureSize() { return botMessage.getSmartSearchMessage().getSmartSearchOnFailure().size(); }
     @Override
     public int getOnSmartSearchKeyboardRemovedSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchKeyboardRemoved().size(); }
     @Override
@@ -111,6 +111,16 @@ public final class BotMessageManager implements IBotMessageManager {
     public int getOnSmartSearchGenreBackSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchGenreBack().size(); }
     @Override
     public int getOnSmartSearchConfirmationBackSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchConfirmationBack().size(); }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="No Idea Getters">
+    public List<String> getNoIdeaAtLaunchGreetings() { return botMessage.getNoIdeaMessage().getNoIdeaAtLaunchGreetings(); }
+    public List<String> getNoIdeaNoMoviesLeft() { return botMessage.getNoIdeaMessage().getNoIdeaNoMoviesLeft(); }
+    public List<String> getNoIdeaToMainMenu() { return botMessage.getNoIdeaMessage().getNoIdeaToMainMenu(); }
+
+    public int getNoIdeaAtLaunchGreetingsSize() { return botMessage.getNoIdeaMessage().getNoIdeaAtLaunchGreetings().size(); }
+    public int getNoIdeaNoMoviesLeftSize() { return botMessage.getNoIdeaMessage().getNoIdeaNoMoviesLeft().size(); }
+    public int getNoIdeaToMainMenuSize() { return botMessage.getNoIdeaMessage().getNoIdeaToMainMenu().size(); }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Welcome Getters">
@@ -140,7 +150,7 @@ public final class BotMessageManager implements IBotMessageManager {
     @Override
     public String getOurChoiceReplyButton() { return botMessage.getReplyButton().getOurChoiceReplyButton(); }
     @Override
-    public String getNoIdeasReplyButton() { return botMessage.getReplyButton().getNoIdeasReplyButton(); }
+    public String getNoIdeaReplyButton() { return botMessage.getReplyButton().getNoIdeaReplyButton(); }
     @Override
     public String getFeedbackReplyButton() { return botMessage.getReplyButton().getFeedbackReplyButton(); }
     //</editor-fold>
@@ -197,14 +207,20 @@ public final class BotMessageManager implements IBotMessageManager {
     @Override
     public String getMusicButton() { return botMessage.getInlineButton().getMusicButton(); }
     @Override
-    public String getLeftArrowButton() { return botMessage.getInlineButton().getLeftArrowButton(); }
-    @Override
-    public String getRightArrowButton() { return botMessage.getInlineButton().getRightArrowButton(); }
-    @Override
     public String getSmartSearchYesButton() { return botMessage.getInlineButton().getSmartSearchYesButton(); }
     @Override
     public String getSmartSearchNoButton() { return botMessage.getInlineButton().getSmartSearchNoButton(); }
     @Override
     public String getSmartSearchBackButton() { return botMessage.getInlineButton().getSmartSearchBackButton(); }
+    @Override
+    public String getLeftArrowButton() { return botMessage.getInlineButton().getLeftArrowButton(); }
+    @Override
+    public String getRightArrowButton() { return botMessage.getInlineButton().getRightArrowButton(); }
+    @Override
+    public String getNoIdeaNextMovieButton() { return botMessage.getInlineButton().getNoIdeaNextMovieButton(); }
+    @Override
+    public String getNoIdeaPreviousMovieButton() { return botMessage.getInlineButton().getNoIdeaPreviousMovieButton(); }
+    @Override
+    public String getNoIdeaToMainMenuButton() { return botMessage.getInlineButton().getNoIdeaToMainMenuButton(); }
     //</editor-fold>
 }

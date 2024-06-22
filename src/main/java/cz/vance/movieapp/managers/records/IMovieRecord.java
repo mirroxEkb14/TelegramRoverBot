@@ -4,6 +4,7 @@ package cz.vance.movieapp.managers.records;
 import cz.vance.movieapp.models.Movie;
 import cz.vance.movieapp.models.UserSelection;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.List;
 //</editor-fold>
@@ -13,38 +14,39 @@ import java.util.List;
  */
 public interface IMovieRecord {
 
-//    /**
-//     * Filters the movies based on selected user's mood, catalogue, and genre (the result of the <b>smart search</b>).
-//     */
-//    void filterMovies(@NotNull String mood,
-//                      @NotNull String catalogue,
-//                      @NotNull String genre);
-//
-//    /**
-//     * Moves to the next movie in the filtered list.
-//     * <br>
-//     * If the end of the list is reached, it wraps around to the first movie.
-//     */
-//    void moveToNextMovie();
-//
-//    /**
-//     * Moves to the previous movie in the filtered list.
-//     * <br>
-//     * If the beginning of the list is reached, it wraps around to the last movie.
-//     */
-//    void moveToPreviousMovie();
-//
-//    /**
-//     * Returns the current movie being displayed.
-//     *
-//     * @return The current movie instance.
-//     */
-//    Movie getCurrentMovie();
-
     /**
      * Returns the list of movies that were sorted by the results of the last <b>smart search</b>.
      *
      * @return The <b>list</b> of movies.
      */
-    List<Movie> getSmartSearchMovies(@NotNull UserSelection userSelection);
+    @Unmodifiable List<Movie> getSmartSearchMovies(@NotNull UserSelection userSelection);
+
+    /**
+     * Moves to the next movie during the <b>no idea</b> feature.
+     * <br>
+     * If the end of the list is reached, it wraps around to the first movie.
+     */
+    void moveToNextNoIdeaMovie();
+
+    /**
+     * Moves to the previous movie during the <b>no idea</b> feature.
+     * <br>
+     * If the beginning of the list is reached, it wraps around to the last movie.
+     */
+    void moveToPreviousNoIdeaMovie();
+
+    /**
+     * Returns a <b>boolean value</b>, whether the next movie to be displayed to the user is the first movie from DB or not.
+     */
+    boolean isNoIdeaPreviousMovieFirst();
+
+    /**
+     * Returns a <b>boolean value</b>, whether the next movie to be displayed to the user is the last movie from DB or not.
+     */
+    boolean isNoIdeaNextMovieLast();
+
+    /**
+     * Returns the movie to be displayed to the user for the <b>no idea</b> feature.
+     */
+    Movie getCurrentNoIdeaMovie();
 }

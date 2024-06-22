@@ -49,6 +49,24 @@ public interface IInlineKeyboardBuilder {
     BiFunction<String, String, Boolean> smartSearchBackValidator = (buttonCallback, back) ->
             buttonCallback.equals(
                     getCreatedCallback(back));
+    /**
+     * Validator function checks if a button callback matches a <b>previous movie inline button</b> during the <b>no idea</b>.
+     */
+    BiFunction<String, String, Boolean> noIdeaPreviousMovieValidator = (buttonCallback, previous) ->
+            buttonCallback.equals(
+                    getCreatedCallback(previous));
+    /**
+     * Validator function checks if a button callback matches a <b>next movie inline button</b> during the <b>no idea</b>.
+     */
+    BiFunction<String, String, Boolean> noIdeaNextMovieValidator = (buttonCallback, next) ->
+            buttonCallback.equals(
+                    getCreatedCallback(next));
+    /**
+     * Validator function checks if a button callback matches a <b>back to main menu inline button</b> during the <b>no idea</b>.
+     */
+    BiFunction<String, String, Boolean> noIdeaToMainMenuValidator = (buttonCallback, back) ->
+            buttonCallback.equals(
+                    getCreatedCallback(back));
     //</editor-fold>
 
     /**
@@ -65,7 +83,7 @@ public interface IInlineKeyboardBuilder {
      *
      * @return Configured instance of the {@link InlineKeyboardMarkup}.
      */
-    @NotNull InlineKeyboardMarkup buildMoodKeyboard();
+    @NotNull InlineKeyboardMarkup buildSmartSearchMoodKeyboard();
 
     /**
      * Builds and returns <b>the movie/series selection inline keyboard</b> containing the following buttons:
@@ -77,7 +95,7 @@ public interface IInlineKeyboardBuilder {
      *
      * @return Configured instance of {@link InlineKeyboardMarkup}.
      */
-    @NotNull InlineKeyboardMarkup buildCatalogueKeyboard();
+    @NotNull InlineKeyboardMarkup buildSmartSearchCatalogueKeyboard();
 
     /**
      * Builds and returns <b>the genre selection inline keyboard</b> containing the following buttons:
@@ -104,7 +122,7 @@ public interface IInlineKeyboardBuilder {
      *
      * @return Configured instance of {@link InlineKeyboardMarkup}.
      */
-    @NotNull InlineKeyboardMarkup buildGenreKeyboard();
+    @NotNull InlineKeyboardMarkup buildSmartSearchGenreKeyboard();
 
     /**
      * Builds and returns <b>the confirmation inline keyboard</b> containing the following buttons:
@@ -116,7 +134,46 @@ public interface IInlineKeyboardBuilder {
      *
      * @return Configured instance of {@link InlineKeyboardMarkup}.
      */
-    @NotNull InlineKeyboardMarkup buildConfirmationKeyboard();
+    @NotNull InlineKeyboardMarkup buildSmartSearchConfirmationKeyboard();
+
+    /**
+     * Builds and returns <b>the 'no idea' first movie inline keyboard</b> containing the following button:
+     * <ol>
+     *     <li> Следующий ➡
+     *     <li> ↙️ В главное меню
+     * </ol>
+     * This keyboard is triggered when the user interacts with the <b>'no idea' reply keyboard button</b>.
+     *
+     * @return Configured instance of {@link InlineKeyboardMarkup}.
+     */
+    @NotNull InlineKeyboardMarkup buildNoIdeaFirstMovieKeyboard();
+
+    /**
+     * Builds and returns <b>the 'no idea' interim movie inline keyboard</b> containing the following button:
+     * <ol>
+     *     <li> ⬅ Предыдущий
+     *     <li> Следующий ➡
+     *     <li> ↙️ В главное меню
+     * </ol>
+     * This keyboard is triggered when the user interacts with one of the <b>inline keyboard buttons during 'no idea'</b>,
+     * representing <b>the previous movie</b> or <b>the next movie</b>.
+     *
+     * @return Configured instance of {@link InlineKeyboardMarkup}.
+     */
+    @NotNull InlineKeyboardMarkup buildNoIdeaInterimMovieKeyboard();
+
+    /**
+     * Builds and returns <b>the 'no idea' last movie inline keyboard</b> containing the following button:
+     * <ol>
+     *     <li> ⬅ Предыдущий
+     *     <li> ↙️ В главное меню
+     * </ol>
+     * This keyboard is triggered when the user interacts with the <b>next movie inline keyboard button during the
+     * 'no idea'</b>.
+     *
+     * @return Configured instance of {@link InlineKeyboardMarkup}.
+     */
+    @NotNull InlineKeyboardMarkup buildNoIdeaLastMovieKeyboard();
 
     /**
      * Creates a callback data string for the passed inline button by concatenating the button text with the
@@ -128,8 +185,8 @@ public interface IInlineKeyboardBuilder {
      */
     static @NotNull String getCreatedCallback(String inlineButtonText) { return inlineButtonText + CALLBACK_QUERY_PREFIX; }
 
-    //<editor-fold default-state="collapsed" desc="Mood Boolean Methods">
-    default boolean isMoodButton(@NotNull Update botUpdate) {
+    //<editor-fold default-state="collapsed" desc="'Smart Search' Mood Boolean Methods">
+    default boolean isSmartSearchMoodButton(@NotNull Update botUpdate) {
         return isDepressedButton(botUpdate) ||
                 isCheerfulButton(botUpdate) ||
                 isFightingButton(botUpdate) ||
@@ -175,8 +232,8 @@ public interface IInlineKeyboardBuilder {
     }
     //</editor-fold>
 
-    //<editor-fold default-state="collapsed" desc="Catalogue Boolean Methods">
-    default boolean isCatalogueButton(@NotNull Update botUpdate) {
+    //<editor-fold default-state="collapsed" desc="'Smart Search' Catalogue Boolean Methods">
+    default boolean isSmartSearchCatalogueButton(@NotNull Update botUpdate) {
         return isMovieButton(botUpdate) ||
                 isSeriesButton(botUpdate);
     }
@@ -194,8 +251,8 @@ public interface IInlineKeyboardBuilder {
     }
     //</editor-fold>
 
-    //<editor-fold default-state="collapsed" desc="Genre Boolean Methods">
-    default boolean isGenreButton(@NotNull Update botUpdate) {
+    //<editor-fold default-state="collapsed" desc="'Smart Search' Genre Boolean Methods">
+    default boolean isSmartSearchGenreButton(@NotNull Update botUpdate) {
         return isComedyButton(botUpdate) ||
                 isDramaButton(botUpdate) ||
                 isMelodramaButton(botUpdate) ||
@@ -318,7 +375,7 @@ public interface IInlineKeyboardBuilder {
     }
     //</editor-fold>
 
-    //<editor-fold default-state="collapsed" desc="Smart Search Confirmation Boolean Methods">
+    //<editor-fold default-state="collapsed" desc="'Smart Search' Confirmation Boolean Methods">
     default boolean isSmartSearchConfirmationButton(@NotNull Update botUpdate) {
         return isSmartSearchYesButton(botUpdate) ||
                 isSmartSearchNoButton(botUpdate);
@@ -337,11 +394,31 @@ public interface IInlineKeyboardBuilder {
     }
     //</editor-fold>
 
-    //<editor-fold default-state="collapsed" desc="Search Boolean Methods">
+    //<editor-fold default-state="collapsed" desc="'Smart Search' Back Boolean Methods">
     default boolean isSmartSearchBackButton(@NotNull Update botUpdate) {
         return smartSearchBackValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
                 BotMessageManager.getInstance().getSmartSearchBackButton());
+    }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="'No Idea' Boolean Methods">
+    default boolean isNoIdeaPreviousMovieButton(@NotNull Update botUpdate) {
+        return noIdeaPreviousMovieValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getNoIdeaPreviousMovieButton());
+    }
+
+    default boolean isNoIdeaNextMovieButton(@NotNull Update botUpdate) {
+        return noIdeaNextMovieValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getNoIdeaNextMovieButton());
+    }
+
+    default boolean isNoIdeaToMainMenuButton(@NotNull Update botUpdate) {
+        return noIdeaToMainMenuValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getNoIdeaToMainMenuButton());
     }
     //</editor-fold>
 }

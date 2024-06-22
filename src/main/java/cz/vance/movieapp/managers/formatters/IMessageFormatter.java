@@ -27,4 +27,11 @@ public interface IMessageFormatter {
      * @return The output message with a sample text.
      */
     @NotNull String getSmartSearchNoMoviesMessage();
+
+    /**
+     * Forms a reply to the user when the bot has to send a movie during the <b>no idea</b> mode.
+     *
+     * @return The output message with a sample text and the input movie.
+     */
+    @NotNull String getNoIdeaMovieMessage(@NotNull Movie movie);
 }

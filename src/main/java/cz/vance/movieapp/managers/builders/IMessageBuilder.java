@@ -1,8 +1,10 @@
 package cz.vance.movieapp.managers.builders;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.models.UserPhoto;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -37,6 +39,13 @@ public interface IMessageBuilder {
      */
     @NotNull SendSticker buildTelegramSticker(long chatId,
                                               String stickerFileId);
+
+    /**
+     * Builds a photo with the specified <b>chat id</b> and the <b>user photo</b> object containing all the necessary
+     * data about the photo.
+     */
+    @NotNull SendPhoto buildTelegramPhoto(long chatId,
+                                          @NotNull UserPhoto userPhoto);
 
     /**
      * Builds a message with the specified <b>chat id</b>, <b>message text</b> and <b>reply keyboard</b>.

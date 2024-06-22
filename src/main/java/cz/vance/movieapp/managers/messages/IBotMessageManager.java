@@ -10,17 +10,17 @@ import cz.vance.movieapp.models.BotMessage;
  */
 public interface IBotMessageManager {
 
-    List<String> getAtLaunchGreetings();
-    List<String> getMoodSelection();
-    List<String> getCatalogueSelection();
-    List<String> getGenreSelection();
-    List<String> getVerifying();
+    List<String> getSmartSearchAtLaunchGreetings();
+    List<String> getSmartSearchMoodSelection();
+    List<String> getSmartSearchCatalogueSelection();
+    List<String> getSmartSearchGenreSelection();
+    List<String> getSmartSearchVerifying();
     List<String> getOnSmartSearchRebooted();
-    List<String> getVerified();
-    List<String> getSampling();
-    List<String> getOnFinish();
-    List<String> getNoMovies();
-    List<String> getOnFailure();
+    List<String> getSmartSearchVerified();
+    List<String> getSmartSearchSampling();
+    List<String> getSmartSearchOnFinish();
+    List<String> getSmartSearchNoMovies();
+    List<String> getSmartSearchOnFailure();
     List<String> getOnSmartSearchKeyboardRemoved();
     List<String> getOnSmartSearchOldKeyboardRemoved();
     List<String> getOnSmartSearchRepeatedKeyboardRemoved();
@@ -28,21 +28,25 @@ public interface IBotMessageManager {
     List<String> getOnSmartSearchGenreBack();
     List<String> getOnSmartSearchConfirmationBack();
 
+    List<String> getNoIdeaAtLaunchGreetings();
+    List<String> getNoIdeaNoMoviesLeft();
+    List<String> getNoIdeaToMainMenu();
+
     List<String> getWelcomes();
     List<String> getHelps();
     List<String> getUnknownInputs();
 
-    int getAtLaunchGreetingsSize();
-    int getMoodSelectionSize();
-    int getCatalogueSelectionSize();
-    int getGenreSelectionSize();
-    int getVerifyingSize();
+    int getSmartSearchAtLaunchGreetingsSize();
+    int getSmartSearchMoodSelectionSize();
+    int getSmartSearchCatalogueSelectionSize();
+    int getSmartSearchGenreSelectionSize();
+    int getSmartSearchVerifyingSize();
     int getOnSmartSearchRebootedSize();
-    int getVerifiedSize();
-    int getSamplingSize();
-    int getOnFinishSize();
-    int getNoMoviesSize();
-    int getOnFailureSize();
+    int getSmartSearchVerifiedSize();
+    int getSmartSearchSamplingSize();
+    int getSmartSearchOnFinishSize();
+    int getSmartSearchNoMoviesSize();
+    int getSmartSearchOnFailureSize();
     int getOnSmartSearchKeyboardRemovedSize();
     int getOnSmartSearchOldKeyboardRemovedSize();
     int getOnSmartSearchRepeatedKeyboardRemovedSize();
@@ -50,13 +54,17 @@ public interface IBotMessageManager {
     int getOnSmartSearchGenreBackSize();
     int getOnSmartSearchConfirmationBackSize();
 
+    int getNoIdeaAtLaunchGreetingsSize();
+    int getNoIdeaNoMoviesLeftSize();
+    int getNoIdeaToMainMenuSize();
+
     int getWelcomesSize();
     int getHelpsSize();
     int getUnknownInputsSize();
 
     String getSmartSearchReplyButton();
     String getOurChoiceReplyButton();
-    String getNoIdeasReplyButton();
+    String getNoIdeaReplyButton();
     String getFeedbackReplyButton();
 
     String getDepressionInlineButton();
@@ -85,9 +93,14 @@ public interface IBotMessageManager {
     String getDocumentaryButton();
     String getWarButton();
     String getMusicButton();
-    String getLeftArrowButton();
-    String getRightArrowButton();
     String getSmartSearchYesButton();
     String getSmartSearchNoButton();
     String getSmartSearchBackButton();
+
+    String getLeftArrowButton();
+    String getRightArrowButton();
+
+    String getNoIdeaNextMovieButton();
+    String getNoIdeaPreviousMovieButton();
+    String getNoIdeaToMainMenuButton();
 }

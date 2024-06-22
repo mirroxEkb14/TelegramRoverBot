@@ -26,34 +26,34 @@ public final class MessageRandomizer implements IMessageRandomizer {
     private static final IStickerManager stickerManager = StickerManager.getInstance();
 
     @Override
-    public String getAtLaunchMessage() {
-        return botMessageManager.getAtLaunchGreetings().get(
-                getRandomIndex(botMessageManager.getAtLaunchGreetingsSize()));
+    public String getSmartSearchAtLaunchGreetingsMessage() {
+        return botMessageManager.getSmartSearchAtLaunchGreetings().get(
+                getRandomIndex(botMessageManager.getSmartSearchAtLaunchGreetingsSize()));
     }
 
     @Override
-     public String getMoodMessage() {
-        return botMessageManager.getMoodSelection().get(
-                getRandomIndex(botMessageManager.getMoodSelectionSize()));
+     public String getSmartSearchMoodMessage() {
+        return botMessageManager.getSmartSearchMoodSelection().get(
+                getRandomIndex(botMessageManager.getSmartSearchMoodSelectionSize()));
     }
 
     @Override
-    public String getCatalogueMessage() {
-        return botMessageManager.getCatalogueSelection().get(
-                getRandomIndex(botMessageManager.getCatalogueSelectionSize()));
+    public String getSmartSearchCatalogueMessage() {
+        return botMessageManager.getSmartSearchCatalogueSelection().get(
+                getRandomIndex(botMessageManager.getSmartSearchCatalogueSelectionSize()));
     }
 
     @Override
-    public String getGenreMessage() {
-        return botMessageManager.getGenreSelection().get(
-                getRandomIndex(botMessageManager.getGenreSelectionSize()));
+    public String getSmartSearchGenreMessage() {
+        return botMessageManager.getSmartSearchGenreSelection().get(
+                getRandomIndex(botMessageManager.getSmartSearchGenreSelectionSize()));
     }
 
     @Override
-    public String getVerifyingMessage(@NotNull UserSelection userSelection) {
+    public String getSmartSearchVerifyingMessage(@NotNull UserSelection userSelection) {
         return String.format(
-                botMessageManager.getVerifying().get(
-                        getRandomIndex(botMessageManager.getVerifyingSize())),
+                botMessageManager.getSmartSearchVerifying().get(
+                        getRandomIndex(botMessageManager.getSmartSearchVerifyingSize())),
                 userSelection.getMood(), userSelection.getCatalogue(), userSelection.getGenre());
     }
 
@@ -64,33 +64,33 @@ public final class MessageRandomizer implements IMessageRandomizer {
     }
 
     @Override
-    public String getVerifiedMessage() {
-        return botMessageManager.getVerified().get(
-                getRandomIndex(botMessageManager.getVerifiedSize()));
+    public String getSmartSearchVerifiedMessage() {
+        return botMessageManager.getSmartSearchVerified().get(
+                getRandomIndex(botMessageManager.getSmartSearchVerifiedSize()));
     }
 
     @Override
-    public String getSamplingMessage() {
-        return botMessageManager.getSampling().get(
-                getRandomIndex(botMessageManager.getSamplingSize()));
+    public String getSmartSearchSamplingMessage() {
+        return botMessageManager.getSmartSearchSampling().get(
+                getRandomIndex(botMessageManager.getSmartSearchSamplingSize()));
     }
 
     @Override
-    public String getOnFinishMessage() {
-        return botMessageManager.getOnFinish().get(
-                getRandomIndex(botMessageManager.getOnFinishSize()));
+    public String getSmartSearchOnFinishMessage() {
+        return botMessageManager.getSmartSearchOnFinish().get(
+                getRandomIndex(botMessageManager.getSmartSearchOnFinishSize()));
     }
 
     @Override
-    public String getNoMoviesMessage() {
-        return botMessageManager.getNoMovies().get(
-                getRandomIndex(botMessageManager.getNoMoviesSize()));
+    public String getSmartSearchNoMoviesMessage() {
+        return botMessageManager.getSmartSearchNoMovies().get(
+                getRandomIndex(botMessageManager.getSmartSearchNoMoviesSize()));
     }
 
     @Override
-    public String getOnFailureMessage() {
-        return botMessageManager.getOnFailure().get(
-                getRandomIndex(botMessageManager.getOnFailureSize()));
+    public String getSmartSearchOnFailureMessage() {
+        return botMessageManager.getSmartSearchOnFailure().get(
+                getRandomIndex(botMessageManager.getSmartSearchOnFailureSize()));
     }
 
     @Override
@@ -130,6 +130,24 @@ public final class MessageRandomizer implements IMessageRandomizer {
     }
 
     @Override
+    public String getNoIdeaAtLaunchGreetingsMessage() {
+        return botMessageManager.getNoIdeaAtLaunchGreetings().get(
+                getRandomIndex(botMessageManager.getNoIdeaAtLaunchGreetingsSize()));
+    }
+
+    @Override
+    public String getNoIdeaNoMoviesLeftMessage() {
+        return botMessageManager.getNoIdeaNoMoviesLeft().get(
+                getRandomIndex(botMessageManager.getNoIdeaNoMoviesLeftSize()));
+    }
+
+    @Override
+    public String getNoIdeaToMainMenuMessage() {
+        return botMessageManager.getNoIdeaToMainMenu().get(
+                getRandomIndex(botMessageManager.getNoIdeaToMainMenuSize()));
+    }
+
+    @Override
     public String getWelcomeMessage() {
         return botMessageManager.getWelcomes().get(
                 getRandomIndex(botMessageManager.getWelcomesSize()));
@@ -142,17 +160,24 @@ public final class MessageRandomizer implements IMessageRandomizer {
     public String getUnknownInputMessage() { return botMessageManager.getUnknownInputs().get(0); }
 
     @Override
-    public String getBeginningSticker() {
+    public String getSmartSearchBeginningSticker() {
         final List<Sticker> smartSearchStickers = stickerManager.getStickersByCategory(StickerCategory.SMART_SEARCH_BEGINNING);
         final int randomIndex = getRandomIndex(smartSearchStickers.size());
         return smartSearchStickers.get(randomIndex).fileId();
     }
 
     @Override
-    public String getEndSticker() {
+    public String getSmartSearchEndSticker() {
         final List<Sticker> smartSearchStickers = stickerManager.getStickersByCategory(StickerCategory.SMART_SEARCH_END);
         final int randomIndex = getRandomIndex(smartSearchStickers.size());
         return smartSearchStickers.get(randomIndex).fileId();
+    }
+
+    @Override
+    public String getNoIdeaBeginningSticker() {
+        final List<Sticker> noIdeaStickers = stickerManager.getStickersByCategory(StickerCategory.NO_IDEA_BEGINNING);
+        final int randomIndex = getRandomIndex(noIdeaStickers.size());
+        return noIdeaStickers.get(randomIndex).fileId();
     }
 
     @Override

@@ -30,11 +30,14 @@ public final class InlineButton {
     private String documentaryButton;
     private String warButton;
     private String musicButton;
-    private String leftArrowButton; // "«" left-pointing double angle quotation mark
-    private String rightArrowButton; // "»" right-pointing double angle quotation mark
     private String smartSearchYesButton;
     private String smartSearchNoButton;
     private String smartSearchBackButton;
+    private String leftArrowButton; // "«" left-pointing double angle quotation mark
+    private String rightArrowButton; // "»" right-pointing double angle quotation mark
+    private String noIdeaNextMovieButton;
+    private String noIdeaPreviousMovieButton;
+    private String noIdeaToMainMenuButton;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public String getDepressionInlineButton() { return depressionInlineButton; }
@@ -62,11 +65,14 @@ public final class InlineButton {
     public String getDocumentaryButton() { return documentaryButton; }
     public String getWarButton() { return warButton; }
     public String getMusicButton() { return musicButton; }
-    public String getLeftArrowButton() { return leftArrowButton; }
-    public String getRightArrowButton() { return rightArrowButton; }
     public String getSmartSearchYesButton() { return smartSearchYesButton; }
     public String getSmartSearchNoButton() { return smartSearchNoButton; }
     public String getSmartSearchBackButton() { return smartSearchBackButton; }
+    public String getLeftArrowButton() { return leftArrowButton; }
+    public String getRightArrowButton() { return rightArrowButton; }
+    public String getNoIdeaNextMovieButton() { return noIdeaNextMovieButton; }
+    public String getNoIdeaPreviousMovieButton() { return noIdeaPreviousMovieButton; }
+    public String getNoIdeaToMainMenuButton() { return noIdeaToMainMenuButton; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
@@ -95,10 +101,13 @@ public final class InlineButton {
     public void setDocumentaryButton(String documentaryButton) { this.documentaryButton = documentaryButton; }
     public void setWarButton(String warButton) { this.warButton = warButton; }
     public void setMusicButton(String musicButton) { this.musicButton = musicButton; }
-    public void setLeftArrowButton(String leftArrowButton) { this.leftArrowButton = leftArrowButton; }
-    public void setRightArrowButton(String rightArrowButton) { this.rightArrowButton = rightArrowButton; }
     public void setSmartSearchYesButton(String smartSearchYesButton) { this.smartSearchYesButton = smartSearchYesButton; }
     public void setSmartSearchNoButton(String smartSearchNoButton) { this.smartSearchNoButton = smartSearchNoButton; }
     public void setSmartSearchBackButton(String smartSearchBackButton) { this.smartSearchBackButton = smartSearchBackButton; }
+    public void setLeftArrowButton(String leftArrowButton) { this.leftArrowButton = leftArrowButton; }
+    public void setRightArrowButton(String rightArrowButton) { this.rightArrowButton = rightArrowButton; }
+    public void setNoIdeaNextMovieButton(String noIdeaNextMovieButton) { this.noIdeaNextMovieButton = noIdeaNextMovieButton; }
+    public void setNoIdeaPreviousMovieButton(String noIdeaPreviousMovieButton) { this.noIdeaPreviousMovieButton = noIdeaPreviousMovieButton; }
+    public void setNoIdeaToMainMenuButton(String noIdeaToMainMenuButton) { this.noIdeaToMainMenuButton = noIdeaToMainMenuButton; }
     //</editor-fold>
 }

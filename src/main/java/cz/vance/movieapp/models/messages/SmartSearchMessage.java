@@ -11,16 +11,16 @@ import java.util.List;
  */
 public final class SmartSearchMessage {
 
-    private List<String> atLaunchGreetings;
-    private List<String> moodSelection;
-    private List<String> catalogueSelection;
-    private List<String> genreSelection;
-    private List<String> verifying;
-    private List<String> verified;
-    private List<String> sampling;
-    private List<String> onFinish;
-    private List<String> noMovies;
-    private List<String> onFailure;
+    private List<String> smartSearchAtLaunchGreetings;
+    private List<String> smartSearchMoodSelection;
+    private List<String> smartSearchCatalogueSelection;
+    private List<String> smartSearchGenreSelection;
+    private List<String> smartSearchVerifying;
+    private List<String> smartSearchVerified;
+    private List<String> smartSearchSampling;
+    private List<String> smartSearchOnFinish;
+    private List<String> smartSearchNoMovies;
+    private List<String> smartSearchOnFailure;
     private List<String> onSmartSearchKeyboardRemoved;
     private List<String> onSmartSearchOldKeyboardRemoved;
     private List<String> onSmartSearchRepeatedKeyboardRemoved;
@@ -30,16 +30,16 @@ public final class SmartSearchMessage {
     private List<String> onSmartSearchConfirmationBack;
 
     //<editor-fold default-state="collapsed" desc="Getters">
-    public List<String> getAtLaunchGreetings() { return atLaunchGreetings; }
-    public List<String> getMoodSelection() { return moodSelection; }
-    public List<String> getCatalogueSelection() { return catalogueSelection; }
-    public List<String> getGenreSelection() { return genreSelection; }
-    public List<String> getVerifying() { return verifying; }
-    public List<String> getVerified() { return verified; }
-    public List<String> getSampling() { return sampling; }
-    public List<String> getOnFinish() { return onFinish; }
-    public List<String> getNoMovies() { return noMovies; }
-    public List<String> getOnFailure() { return onFailure; }
+    public List<String> getSmartSearchAtLaunchGreetings() { return smartSearchAtLaunchGreetings; }
+    public List<String> getSmartSearchMoodSelection() { return smartSearchMoodSelection; }
+    public List<String> getSmartSearchCatalogueSelection() { return smartSearchCatalogueSelection; }
+    public List<String> getSmartSearchGenreSelection() { return smartSearchGenreSelection; }
+    public List<String> getSmartSearchVerifying() { return smartSearchVerifying; }
+    public List<String> getSmartSearchVerified() { return smartSearchVerified; }
+    public List<String> getSmartSearchSampling() { return smartSearchSampling; }
+    public List<String> getSmartSearchOnFinish() { return smartSearchOnFinish; }
+    public List<String> getSmartSearchNoMovies() { return smartSearchNoMovies; }
+    public List<String> getSmartSearchOnFailure() { return smartSearchOnFailure; }
     public List<String> getOnSmartSearchKeyboardRemoved() { return onSmartSearchKeyboardRemoved; }
     public List<String> getOnSmartSearchOldKeyboardRemoved() { return onSmartSearchOldKeyboardRemoved; }
     public List<String> getOnSmartSearchRepeatedKeyboardRemoved() { return onSmartSearchRepeatedKeyboardRemoved; }
@@ -50,16 +50,16 @@ public final class SmartSearchMessage {
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
-    public void setAtLaunchGreetings(List<String> atLaunchGreetings) { this.atLaunchGreetings = atLaunchGreetings; }
-    public void setMoodSelection(List<String> moodSelection) { this.moodSelection = moodSelection; }
-    public void setCatalogueSelection(List<String> catalogueSelection) { this.catalogueSelection = catalogueSelection; }
-    public void setGenreSelection(List<String> genreSelection) { this.genreSelection = genreSelection; }
-    public void setVerifying(List<String> verifying) { this.verifying = verifying; }
-    public void setVerified(List<String> verified) { this.verified = verified; }
-    public void setSampling(List<String> sampling) { this.sampling = sampling; }
-    public void setOnFinish(List<String> onFinish) { this.onFinish = onFinish; }
-    public void setNoMovies(List<String> noMovies) { this.noMovies = noMovies; }
-    public void setOnFailure(List<String> onFailure) { this.onFailure = onFailure; }
+    public void setSmartSearchAtLaunchGreetings(List<String> smartSearchAtLaunchGreetings) { this.smartSearchAtLaunchGreetings = smartSearchAtLaunchGreetings; }
+    public void setSmartSearchMoodSelection(List<String> smartSearchMoodSelection) { this.smartSearchMoodSelection = smartSearchMoodSelection; }
+    public void setSmartSearchCatalogueSelection(List<String> smartSearchCatalogueSelection) { this.smartSearchCatalogueSelection = smartSearchCatalogueSelection; }
+    public void setSmartSearchGenreSelection(List<String> smartSearchGenreSelection) { this.smartSearchGenreSelection = smartSearchGenreSelection; }
+    public void setSmartSearchVerifying(List<String> smartSearchVerifying) { this.smartSearchVerifying = smartSearchVerifying; }
+    public void setSmartSearchVerified(List<String> smartSearchVerified) { this.smartSearchVerified = smartSearchVerified; }
+    public void setSmartSearchSampling(List<String> smartSearchSampling) { this.smartSearchSampling = smartSearchSampling; }
+    public void setSmartSearchOnFinish(List<String> smartSearchOnFinish) { this.smartSearchOnFinish = smartSearchOnFinish; }
+    public void setSmartSearchNoMovies(List<String> smartSearchNoMovies) { this.smartSearchNoMovies = smartSearchNoMovies; }
+    public void setSmartSearchOnFailure(List<String> smartSearchOnFailure) { this.smartSearchOnFailure = smartSearchOnFailure; }
     public void setOnSmartSearchKeyboardRemoved(List<String> onSmartSearchKeyboardRemoved) { this.onSmartSearchKeyboardRemoved = onSmartSearchKeyboardRemoved; }
     public void setOnSmartSearchOldKeyboardRemoved(List<String> onSmartSearchOldKeyboardRemoved) { this.onSmartSearchOldKeyboardRemoved = onSmartSearchOldKeyboardRemoved; }
     public void setOnSmartSearchRepeatedKeyboardRemoved(List<String> onSmartSearchRepeatedKeyboardRemoved) { this.onSmartSearchRepeatedKeyboardRemoved = onSmartSearchRepeatedKeyboardRemoved; }

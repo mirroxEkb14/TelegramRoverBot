@@ -11,10 +11,11 @@ import cz.vance.movieapp.models.messages.*;
  */
 public final class BotMessage {
 
-    private SmartSearchMessage smartSearchMessage;
+    private CommandMessage commandMessage;
     private ReplyButton replyButton;
     private InlineButton inlineButton;
-    private CommandMessage commandMessage;
+    private SmartSearchMessage smartSearchMessage;
+    private NoIdeaMessage noIdeaMessage;
 
     //<editor-fold default-state="collapsed" desc="Singleton">
     private static BotMessage instance;
@@ -29,16 +30,18 @@ public final class BotMessage {
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Getters">
-    public SmartSearchMessage getSmartSearchMessage() { return smartSearchMessage; }
+    public CommandMessage getCommandMessage() { return commandMessage; }
     public ReplyButton getReplyButton() { return replyButton; }
     public InlineButton getInlineButton() { return inlineButton; }
-    public CommandMessage getCommandMessage() { return commandMessage; }
+    public SmartSearchMessage getSmartSearchMessage() { return smartSearchMessage; }
+    public NoIdeaMessage getNoIdeaMessage() { return noIdeaMessage; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
-    public void setSmartSearchMessage(SmartSearchMessage smartSearchMessage) { this.smartSearchMessage = smartSearchMessage; }
+    public void setCommandMessage(CommandMessage commandMessage) { this.commandMessage = commandMessage; }
     public void setReplyButton(ReplyButton replyButton) { this.replyButton = replyButton; }
     public void setInlineButton(InlineButton inlineButton) { this.inlineButton = inlineButton; }
-    public void setCommandMessage(CommandMessage commandMessage) { this.commandMessage = commandMessage; }
+    public void setSmartSearchMessage(SmartSearchMessage smartSearchMessage) { this.smartSearchMessage = smartSearchMessage; }
+    public void setNoIdeaMessage(NoIdeaMessage noIdeaMessage) { this.noIdeaMessage = noIdeaMessage; }
     //</editor-fold>
 }

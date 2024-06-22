@@ -6,6 +6,7 @@ import cz.vance.movieapp.database.ICinemaDatabase;
 import cz.vance.movieapp.models.Movie;
 import cz.vance.movieapp.models.UserSelection;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +28,12 @@ public final class MovieRecord implements IMovieRecord {
     /**
      * Contains the movies that were sorted by the results of the last <b>smart search</b>.
      */
-    private static final List<Movie> currentMovies = new ArrayList<>();
+    private static final List<Movie> smartSearchCurrentMovies = new ArrayList<>();
 
-//    private static int currentMovieIndex = 0;
+    /**
+     * Contains the index of the current movie displayed to the user from the {@link #movies} list.
+     */
+    private static int noIdeaCurrentMovieIndex = 0;
 
     //<editor-fold default-state="collapsed" desc="Singleton">
     private static MovieRecord instance;
@@ -56,44 +60,6 @@ public final class MovieRecord implements IMovieRecord {
             movies.addAll(cinemaDB.getMovies());
     }
 
-//    /**
-//     * Updates the {@link MovieRecord#currentMovies} list with the filtered results.
-//     * <br>
-//     * Alternative with the lambda expressions:
-//     * <pre>{@code
-//     *      movies.stream()
-//     *          .filter(movie -> isAppropriateMovie(movie, mood, catalogue, genre))
-//     *          .forEach(currentMovies::add);
-//     *      }
-//     * </pre>
-//     */
-//    @Override
-//    public void filterMovies(@NotNull String mood,
-//                             @NotNull String catalogue,
-//                             @NotNull String genre) {
-//        currentMovies.clear();
-//        for (Movie movie : movies) {
-//            if (isAppropriateMovie(movie, mood, catalogue, genre))
-//                currentMovies.add(movie);
-//        }
-//        resetCurrentMovieIndex();
-//    }
-//
-//    @Override
-//    public void moveToNextMovie() {
-//        if (!currentMovies.isEmpty())
-//            currentMovieIndex = (currentMovieIndex + 1) % currentMovies.size();
-//    }
-//
-//    @Override
-//    public void moveToPreviousMovie() {
-//        if (!currentMovies.isEmpty())
-//            currentMovieIndex = (currentMovieIndex - 1 + currentMovies.size()) % currentMovies.size();
-//    }
-//
-//    @Override
-//    public Movie getCurrentMovie() { return currentMovies.get(currentMovieIndex); }
-
     /**
      * Alternative with the lambda expressions:
      * <pre>{@code
@@ -104,18 +70,33 @@ public final class MovieRecord implements IMovieRecord {
      * </pre>
      */
     @Override
-    public List<Movie> getSmartSearchMovies(@NotNull UserSelection userSelection) {
+    public @Unmodifiable List<Movie> getSmartSearchMovies(@NotNull UserSelection userSelection) {
         final String mood = userSelection.getMood();
         final String catalogue = userSelection.getCatalogue();
         final String genre = userSelection.getGenre();
 
-        currentMovies.clear();
+        smartSearchCurrentMovies.clear();
         for (Movie movie : movies) {
             if (isAppropriateMovie(movie, mood, catalogue, genre))
-                currentMovies.add(movie);
+                smartSearchCurrentMovies.add(movie);
         }
-        return List.copyOf(currentMovies);
+        return List.copyOf(smartSearchCurrentMovies);
     }
+
+    @Override
+    public void moveToNextNoIdeaMovie() { noIdeaCurrentMovieIndex++; }
+
+    @Override
+    public void moveToPreviousNoIdeaMovie() { noIdeaCurrentMovieIndex--; }
+
+    @Override
+    public boolean isNoIdeaPreviousMovieFirst() { return noIdeaCurrentMovieIndex - 1 == 0; }
+
+    @Override
+    public boolean isNoIdeaNextMovieLast() { return noIdeaCurrentMovieIndex + 1 == movies.size(); }
+
+    @Override
+    public Movie getCurrentNoIdeaMovie() { return movies.get(noIdeaCurrentMovieIndex); }
 
     //<editor-fold default-state="collapsed" desc="Private Boolean Methods">
     /**
@@ -136,9 +117,5 @@ public final class MovieRecord implements IMovieRecord {
                 catalogue.contains(movie.rusCatalogue()) &&
                 genre.contains(movie.rusGenre());
     }
-    //</editor-fold>
-
-    //<editor-fold default-state="collapsed" desc="Private 'currentMovieIndex' Methods">
-//    private void resetCurrentMovieIndex() { currentMovieIndex = 0; }
     //</editor-fold>
 }

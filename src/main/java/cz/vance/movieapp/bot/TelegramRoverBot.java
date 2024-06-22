@@ -4,6 +4,7 @@ package cz.vance.movieapp.bot;
 import cz.vance.movieapp.exceptions.ConfigException;
 import cz.vance.movieapp.keyboards.IInlineKeyboardBuilder;
 import cz.vance.movieapp.keyboards.InlineKeyboardBuilder;
+import cz.vance.movieapp.managers.MessageLogger;
 import cz.vance.movieapp.managers.messages.IMessageManager;
 import cz.vance.movieapp.managers.messages.MessageManager;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -80,9 +81,13 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
         else if (messageManager.isHelpCommand(update))
             messageManager.sendHelp(update);
         else if (messageManager.isSmartSearchButton(update))
-            messageManager.sendMood(update);
+            messageManager.sendSmartSearchMood(update);
+        else if (messageManager.isNoIdeaButton(update))
+            messageManager.sendNoIdeaFirstMovie(update);
         else
             messageManager.sendEcho(update);
+
+        MessageLogger.log(update);
     }
 
     /**
@@ -93,15 +98,21 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
      * @param update The update containing the callback query.
      */
     private void handleCallback(Update update) {
-        if (inlineKeyboardBuilder.isMoodButton(update))
-            messageManager.sendCatalogue(update);
-        else if (inlineKeyboardBuilder.isCatalogueButton(update))
-            messageManager.sendGenre(update);
-        else if (inlineKeyboardBuilder.isGenreButton(update))
-            messageManager.sendConfirmation(update);
+        if (inlineKeyboardBuilder.isSmartSearchMoodButton(update))
+            messageManager.sendSmartSearchCatalogue(update);
+        else if (inlineKeyboardBuilder.isSmartSearchCatalogueButton(update))
+            messageManager.sendSmartSearchGenre(update);
+        else if (inlineKeyboardBuilder.isSmartSearchGenreButton(update))
+            messageManager.sendSmartSearchConfirmation(update);
         else if (inlineKeyboardBuilder.isSmartSearchConfirmationButton(update))
-            messageManager.sendMovie(update);
+            messageManager.sendSmartSearchMovie(update);
         else if (inlineKeyboardBuilder.isSmartSearchBackButton(update))
             messageManager.handleSmartSearchBack(update);
+        else if (inlineKeyboardBuilder.isNoIdeaPreviousMovieButton(update))
+            messageManager.sendNoIdeaPreviousMovie(update);
+        else if (inlineKeyboardBuilder.isNoIdeaNextMovieButton(update))
+            messageManager.sendNoIdeaNextMovie(update);
+        else if (inlineKeyboardBuilder.isNoIdeaToMainMenuButton(update))
+            messageManager.handleNoIdeaToMainMenu(update);
     }
 }
