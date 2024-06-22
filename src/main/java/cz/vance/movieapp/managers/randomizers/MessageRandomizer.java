@@ -148,6 +148,29 @@ public final class MessageRandomizer implements IMessageRandomizer {
     }
 
     @Override
+    public String getWeRecommendAtLaunchGreetingsMessage() {
+        return botMessageManager.getWeRecommendAtLaunchGreetings().get(
+                getRandomIndex(botMessageManager.getWeRecommendAtLaunchGreetingsSize()));
+    }
+
+    @Override
+    public String getWeRecommendPleasantViewingMessage() {
+        return botMessageManager.getWeRecommendPleasantViewing().get(
+                getRandomIndex(botMessageManager.getWeRecommendPleasantViewingSize()));
+    }
+
+    @Override
+    public String getWeRecommendRusSampleMovieMessage() {
+        return botMessageManager.getWeRecommendRusSampleMovieMessage();
+    }
+
+    @Override
+    public String getWeRecommendToMainMenuMessage() {
+        return botMessageManager.getWeRecommendToMainMenu().get(
+                getRandomIndex(botMessageManager.getWeRecommendToMainMenuSize()));
+    }
+
+    @Override
     public String getWelcomeMessage() {
         return botMessageManager.getWelcomes().get(
                 getRandomIndex(botMessageManager.getWelcomesSize()));

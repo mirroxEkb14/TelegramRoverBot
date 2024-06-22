@@ -16,6 +16,18 @@ public final class CallbackQueryExtractor {
      * the inline button, which is typically used to identify which button was pressed.
      */
     public static final String CALLBACK_QUERY_PREFIX = "_cb";
+    /**
+     * Unique prefix for the <b>no idea</b> callback query.
+     * <br>
+     * The <b>next/previous inline keyboard buttons</b> during the <b>no idea</b> and <b>we recommend</b> scenarios have
+     * the same texts, so the callback queries, in case of the {@link #CALLBACK_QUERY_PREFIX}, would be the same. That
+     * is why it is necessary to have a unique prefix for each scenario.
+     */
+    public static final String NO_IDEA_CALLBACK_QUERY_PREFIX = "_cbNoIdea";
+    /**
+     * Unique prefix for the <b>we recommend</b> callback query.
+     */
+    public static final String WE_RECOMMEND_CALLBACK_QUERY_PREFIX = "_cbWeRecommend";
 
     /**
      * Extracts the <b>callback data</b> from the given <b>callback query</b>.

@@ -16,6 +16,7 @@ public final class MessageFormatter implements IMessageFormatter {
 
     private final IMessageRandomizer smartSearchRandomizer = new MessageRandomizer();
 
+    //<editor-fold default-state="collapsed" desc="Message Sample Constants">
     /**
      * Example of output:
      * <pre>{@code
@@ -41,6 +42,7 @@ public final class MessageFormatter implements IMessageFormatter {
      * }</pre>
      */
     private final String NO_IDEA_MOVIE_MESSAGE_SAMPLE = "%s, %d\n\n%s";
+    //</editor-fold>
 
     @Override
     public @NotNull String getSmartSearchMovieMessage(@NotNull List<Movie> smartSearchMovies) {
@@ -64,5 +66,30 @@ public final class MessageFormatter implements IMessageFormatter {
                 movie.rusName(),
                 movie.releaseYear(),
                 movie.rusLink());
+    }
+
+    /**
+     * Example of output:
+     * <pre>{@code
+     *      Название: Табу
+     *      Жанр: Триллер/Драма
+     *      Год: 2017
+     *      Режиссёр: Андерс Энгстрем, Кристоффер Нюхольм
+     *      В топ ролях: Том Харди, Дэвид Хейман, Джонатан Прайс, Уна Чаплин
+     *      Сюжет: Искатель приключений Джеймс Кезайя Делейни строит свою собственную корабельную империю в начале XIX века.
+     *
+     *      больше информации... (https://www.imdb.com/title/tt3647998/?ref_=fn_al_tt_1)
+     * }</pre>
+     */
+    @Override
+    public @NotNull String getWeRecommendMovieMessage(@NotNull Movie movie) {
+        return String.format(smartSearchRandomizer.getWeRecommendRusSampleMovieMessage(),
+                movie.rusName(),
+                movie.rusGenre(),
+                movie.releaseYear(),
+                movie.rusDirector(),
+                movie.rusCast(),
+                movie.rusStoryline(),
+                movie.detailsLink());
     }
 }

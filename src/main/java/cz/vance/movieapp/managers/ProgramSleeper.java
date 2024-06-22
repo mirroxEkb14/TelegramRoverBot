@@ -13,6 +13,7 @@ public final class ProgramSleeper {
     public static void pauseSmartSearchBeforeSendingMovie() { pauseExecution(1100, 1400); }
     public static void pauseSmartSearchBeforeReboot() { pauseExecution(800, 1000); }
     public static void pauseNoIdeaBeforeSendingFirstMovie() { pauseExecution(1000, 1300); }
+    public static void pauseWeRecommendBeforeSendingFirstMovie() { pauseExecution(1200, 1500); }
 
     /**
      * Pauses the execution for a random duration between the specified minimum and maximum milliseconds.

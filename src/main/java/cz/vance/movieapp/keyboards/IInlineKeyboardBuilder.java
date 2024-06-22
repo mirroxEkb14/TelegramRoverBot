@@ -3,6 +3,8 @@ package cz.vance.movieapp.keyboards;
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.managers.CallbackQueryExtractor;
 import static cz.vance.movieapp.managers.CallbackQueryExtractor.CALLBACK_QUERY_PREFIX;
+import static cz.vance.movieapp.managers.CallbackQueryExtractor.NO_IDEA_CALLBACK_QUERY_PREFIX;
+import static cz.vance.movieapp.managers.CallbackQueryExtractor.WE_RECOMMEND_CALLBACK_QUERY_PREFIX;
 
 import cz.vance.movieapp.managers.messages.BotMessageManager;
 import org.jetbrains.annotations.NotNull;
@@ -17,56 +19,25 @@ import java.util.function.BiFunction;
  */
 public interface IInlineKeyboardBuilder {
 
-    //<editor-fold default-state="collapsed" desc="Validators">
+    //<editor-fold default-state="collapsed" desc="Callback Data Validator Functions">
     /**
-     * Validator function checks if a button callback (that was clicked by the user) matches some of the
-     * <b>user mood inline buttons</b>.
+     * @see #getCreatedCallback(String)
      */
-    BiFunction<String, String, Boolean> userMoodValidator = (buttonCallback, mood) ->
-        buttonCallback.equals(
-                getCreatedCallback(mood));
-    /**
-     * Validator function checks if a button callback matches a <b>catalogue inline button</b>.
-     */
-    BiFunction<String, String, Boolean> catalogueValidator = (buttonCallback, catalogue) ->
+    BiFunction<String, String, Boolean> callbackDataStringValidator = (buttonCallback, buttonText) ->
             buttonCallback.equals(
-                    getCreatedCallback(catalogue));
+                    getCreatedCallback(buttonText));
     /**
-     * Validator function checks if a button callback matches a <b>genre inline button</b>.
+     * @see #getNoIdeaCreatedCallback(String)
      */
-    BiFunction<String, String, Boolean> genreValidator = (buttonCallback, genre) ->
+    BiFunction<String, String, Boolean> noIdeasCallbackDataStringValidator = (buttonCallback, buttonText) ->
             buttonCallback.equals(
-                    getCreatedCallback(genre));
+                    getNoIdeaCreatedCallback(buttonText));
     /**
-     * Validator function checks if a button callback matches a <b>confirmation inline button</b> (yes/no button).
+     * @see #getWeRecommendCreatedCallback(String)
      */
-    BiFunction<String, String, Boolean> smartSearchConfirmationValidator = (buttonCallback, confirmation) ->
+    BiFunction<String, String, Boolean> weRecommendCallbackDataStringValidator = (buttonCallback, buttonText) ->
             buttonCallback.equals(
-                    getCreatedCallback(confirmation));
-    /**
-     * Validator function checks if a button callback matches a <b>back inline button</b> during the <b>smart search</b>.
-     */
-    BiFunction<String, String, Boolean> smartSearchBackValidator = (buttonCallback, back) ->
-            buttonCallback.equals(
-                    getCreatedCallback(back));
-    /**
-     * Validator function checks if a button callback matches a <b>previous movie inline button</b> during the <b>no idea</b>.
-     */
-    BiFunction<String, String, Boolean> noIdeaPreviousMovieValidator = (buttonCallback, previous) ->
-            buttonCallback.equals(
-                    getCreatedCallback(previous));
-    /**
-     * Validator function checks if a button callback matches a <b>next movie inline button</b> during the <b>no idea</b>.
-     */
-    BiFunction<String, String, Boolean> noIdeaNextMovieValidator = (buttonCallback, next) ->
-            buttonCallback.equals(
-                    getCreatedCallback(next));
-    /**
-     * Validator function checks if a button callback matches a <b>back to main menu inline button</b> during the <b>no idea</b>.
-     */
-    BiFunction<String, String, Boolean> noIdeaToMainMenuValidator = (buttonCallback, back) ->
-            buttonCallback.equals(
-                    getCreatedCallback(back));
+                    getWeRecommendCreatedCallback(buttonText));
     //</editor-fold>
 
     /**
@@ -176,6 +147,24 @@ public interface IInlineKeyboardBuilder {
     @NotNull InlineKeyboardMarkup buildNoIdeaLastMovieKeyboard();
 
     /**
+     * Builds and returns <b>the 'we recommend' interim movie inline keyboard</b> containing the following button:
+     * <ol>
+     *     <li> ⬅ Предыдущий
+     *     <li> Следующий ➡
+     *     <li> 📺 Смотреть
+     *     <li> ↙️ В главное меню
+     * </ol>
+     * This keyboard is triggered when the user interacts with one of the <b>inline keyboard buttons during 'we recommend'</b>,
+     * representing <b>the previous movie</b> or <b>the next movie</b>.
+     *
+     * @param watchUrl The URL to the recommended movie.
+     *
+     * @return Configured instance of {@link InlineKeyboardMarkup}.
+     */
+    @NotNull InlineKeyboardMarkup buildWeRecommendInterimMovieKeyboard(String watchUrl);
+
+    //<editor-fold default-state="collapsed" desc="Created Callbacks Getters">
+    /**
      * Creates a callback data string for the passed inline button by concatenating the button text with the
      * {@link CallbackQueryExtractor#CALLBACK_QUERY_PREFIX}.
      *
@@ -184,6 +173,25 @@ public interface IInlineKeyboardBuilder {
      * @return The created callback data string.
      */
     static @NotNull String getCreatedCallback(String inlineButtonText) { return inlineButtonText + CALLBACK_QUERY_PREFIX; }
+    /**
+     * Creates a callback data string for the <b>'no idea' inline button</b> by concatenating the button text with the
+     * {@link CallbackQueryExtractor#NO_IDEA_CALLBACK_QUERY_PREFIX}.
+     *
+     * @param inlineButtonText The text of the inline button.
+     *
+     * @return The created callback data string.
+     */
+    static @NotNull String getNoIdeaCreatedCallback(String inlineButtonText) { return inlineButtonText + NO_IDEA_CALLBACK_QUERY_PREFIX; }
+    /**
+     * Creates a callback data string for the <b>'we recommend' inline button</b> by concatenating the button text with
+     * the {@link CallbackQueryExtractor#WE_RECOMMEND_CALLBACK_QUERY_PREFIX}.
+     *
+     * @param inlineButtonText The text of the inline button.
+     *
+     * @return The created callback data string.
+     */
+    static @NotNull String getWeRecommendCreatedCallback(String inlineButtonText) { return inlineButtonText + WE_RECOMMEND_CALLBACK_QUERY_PREFIX; }
+    //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="'Smart Search' Mood Boolean Methods">
     default boolean isSmartSearchMoodButton(@NotNull Update botUpdate) {
@@ -196,39 +204,39 @@ public interface IInlineKeyboardBuilder {
     }
 
     default boolean isDepressedButton(@NotNull Update botUpdate) {
-        return userMoodValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getDepressionInlineButton());
+                BotMessageManager.getInstance().getDepressionMoodInlineButton());
     }
 
     default boolean isCheerfulButton(@NotNull Update botUpdate) {
-        return userMoodValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getCheerfulInlineButton());
+                BotMessageManager.getInstance().getCheerfulMoodInlineButton());
     }
 
     default boolean isFightingButton(@NotNull Update botUpdate) {
-        return userMoodValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getFightingInlineButton());
+                BotMessageManager.getInstance().getFightingMoodInlineButton());
     }
 
     default boolean isFamilyMoodButton(@NotNull Update botUpdate) {
-        return userMoodValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getFamilyButton());
+                BotMessageManager.getInstance().getFamilyInlineButton());
     }
 
     default boolean isFriendsButton(@NotNull Update botUpdate) {
-        return userMoodValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getFriendsInlineButton());
+                BotMessageManager.getInstance().getFriendsMoodInlineButton());
     }
 
     default boolean isLoveButton(@NotNull Update botUpdate) {
-        return userMoodValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getLoveInlineButton());
+                BotMessageManager.getInstance().getLoveMoodInlineButton());
     }
     //</editor-fold>
 
@@ -239,15 +247,15 @@ public interface IInlineKeyboardBuilder {
     }
 
     default boolean isMovieButton(@NotNull Update botUpdate) {
-        return catalogueValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getMovieButton());
+                BotMessageManager.getInstance().getMovieInlineButton());
     }
 
     default boolean isSeriesButton(@NotNull Update botUpdate) {
-        return catalogueValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getSeriesButton());
+                BotMessageManager.getInstance().getSeriesInlineButton());
     }
     //</editor-fold>
 
@@ -273,105 +281,105 @@ public interface IInlineKeyboardBuilder {
     }
 
     default boolean isComedyButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getComedyButton());
+                BotMessageManager.getInstance().getComedyInlineButton());
     }
 
     default boolean isDramaButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getDramaButton());
+                BotMessageManager.getInstance().getDramaInlineButton());
     }
 
     default boolean isMelodramaButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getMelodramaButton());
+                BotMessageManager.getInstance().getMelodramaInlineButton());
     }
 
     default boolean isThrillerButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getThrillerButton());
+                BotMessageManager.getInstance().getThrillerInlineButton());
     }
 
     default boolean isActionButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getActionButton());
+                BotMessageManager.getInstance().getActionInlineButton());
     }
 
     default boolean isFictionButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getFictionButton());
+                BotMessageManager.getInstance().getFictionInlineButton());
     }
 
     default boolean isDetectiveButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getDetectiveButton());
+                BotMessageManager.getInstance().getDetectiveInlineButton());
     }
 
     default boolean isSportButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getSportButton());
+                BotMessageManager.getInstance().getSportInlineButton());
     }
 
     default boolean isFamilyGenreButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getFamilyButton());
+                BotMessageManager.getInstance().getFamilyInlineButton());
     }
 
     default boolean isFantasyButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getFantasyButton());
+                BotMessageManager.getInstance().getFantasyInlineButton());
     }
 
     default boolean isAnimationButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getAnimationButton());
+                BotMessageManager.getInstance().getAnimationInlineButton());
     }
 
     default boolean isAdventureButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getAdventureButton());
+                BotMessageManager.getInstance().getAdventureInlineButton());
     }
 
     default boolean isBiographyButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getBiographyButton());
+                BotMessageManager.getInstance().getBiographyInlineButton());
     }
 
     default boolean isCriminalButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getCriminalButton());
+                BotMessageManager.getInstance().getCriminalInlineButton());
     }
 
     default boolean isDocumentaryButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getDocumentaryButton());
+                BotMessageManager.getInstance().getDocumentaryInlineButton());
     }
 
     default boolean isWarButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getWarButton());
+                BotMessageManager.getInstance().getWarInlineButton());
     }
 
     default boolean isMusicButton(@NotNull Update botUpdate) {
-        return genreValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getMusicButton());
+                BotMessageManager.getInstance().getMusicInlineButton());
     }
     //</editor-fold>
 
@@ -382,43 +390,69 @@ public interface IInlineKeyboardBuilder {
     }
 
     default boolean isSmartSearchYesButton(@NotNull Update botUpdate) {
-        return smartSearchConfirmationValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getSmartSearchYesButton());
+                BotMessageManager.getInstance().getSmartSearchYesInlineButton());
     }
 
     default boolean isSmartSearchNoButton(@NotNull Update botUpdate) {
-        return smartSearchConfirmationValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getSmartSearchNoButton());
+                BotMessageManager.getInstance().getSmartSearchNoInlineButton());
     }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="'Smart Search' Back Boolean Methods">
     default boolean isSmartSearchBackButton(@NotNull Update botUpdate) {
-        return smartSearchBackValidator.apply(
+        return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getSmartSearchBackButton());
+                BotMessageManager.getInstance().getSmartSearchBackInlineButton());
     }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="'No Idea' Boolean Methods">
     default boolean isNoIdeaPreviousMovieButton(@NotNull Update botUpdate) {
-        return noIdeaPreviousMovieValidator.apply(
+        return noIdeasCallbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getNoIdeaPreviousMovieButton());
+                BotMessageManager.getInstance().getNoIdeaPreviousMovieInlineButton());
     }
 
     default boolean isNoIdeaNextMovieButton(@NotNull Update botUpdate) {
-        return noIdeaNextMovieValidator.apply(
+        return noIdeasCallbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getNoIdeaNextMovieButton());
+                BotMessageManager.getInstance().getNoIdeaNextMovieInlineButton());
     }
 
     default boolean isNoIdeaToMainMenuButton(@NotNull Update botUpdate) {
-        return noIdeaToMainMenuValidator.apply(
+        return noIdeasCallbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getNoIdeaToMainMenuButton());
+                BotMessageManager.getInstance().getNoIdeaToMainMenuInlineButton());
+    }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="'We Recommend' Boolean Methods">
+    default boolean isWeRecommendPreviousMovieButton(@NotNull Update botUpdate) {
+        return weRecommendCallbackDataStringValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getWeRecommendPreviousMovieInlineButton());
+    }
+
+    default boolean isWeRecommendNextMovieButton(@NotNull Update botUpdate) {
+        return weRecommendCallbackDataStringValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getWeRecommendNextMovieInlineButton());
+    }
+
+    default boolean isWeRecommendToMainMenuButton(@NotNull Update botUpdate) {
+        return weRecommendCallbackDataStringValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getWeRecommendToMainMenuInlineButton());
+    }
+
+    default boolean isWeRecommendWatchButton(@NotNull Update botUpdate) {
+        return weRecommendCallbackDataStringValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getWeRecommendWatchInlineButton());
     }
     //</editor-fold>
 }

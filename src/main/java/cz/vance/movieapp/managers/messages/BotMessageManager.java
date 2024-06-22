@@ -41,7 +41,7 @@ public final class BotMessageManager implements IBotMessageManager {
         }
     }
 
-    //<editor-fold default-state="collapsed" desc="Smart Search Getters">
+    //<editor-fold default-state="collapsed" desc="'Smart Search' Getters">
     @Override
     public List<String> getSmartSearchAtLaunchGreetings() { return botMessage.getSmartSearchMessage().getSmartSearchAtLaunchGreetings(); }
     @Override
@@ -113,7 +113,7 @@ public final class BotMessageManager implements IBotMessageManager {
     public int getOnSmartSearchConfirmationBackSize() { return botMessage.getSmartSearchMessage().getOnSmartSearchConfirmationBack().size(); }
     //</editor-fold>
 
-    //<editor-fold default-state="collapsed" desc="No Idea Getters">
+    //<editor-fold default-state="collapsed" desc="'No Idea' Getters">
     public List<String> getNoIdeaAtLaunchGreetings() { return botMessage.getNoIdeaMessage().getNoIdeaAtLaunchGreetings(); }
     public List<String> getNoIdeaNoMoviesLeft() { return botMessage.getNoIdeaMessage().getNoIdeaNoMoviesLeft(); }
     public List<String> getNoIdeaToMainMenu() { return botMessage.getNoIdeaMessage().getNoIdeaToMainMenu(); }
@@ -121,6 +121,17 @@ public final class BotMessageManager implements IBotMessageManager {
     public int getNoIdeaAtLaunchGreetingsSize() { return botMessage.getNoIdeaMessage().getNoIdeaAtLaunchGreetings().size(); }
     public int getNoIdeaNoMoviesLeftSize() { return botMessage.getNoIdeaMessage().getNoIdeaNoMoviesLeft().size(); }
     public int getNoIdeaToMainMenuSize() { return botMessage.getNoIdeaMessage().getNoIdeaToMainMenu().size(); }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="'We Recommend' Getters">
+    public List<String> getWeRecommendAtLaunchGreetings() { return botMessage.getWeRecommendMessage().getWeRecommendAtLaunchGreetings(); }
+    public List<String> getWeRecommendPleasantViewing() { return botMessage.getWeRecommendMessage().getWeRecommendPleasantViewing(); }
+    public String getWeRecommendRusSampleMovieMessage() { return botMessage.getWeRecommendMessage().getWeRecommendRusSampleMovieMessage(); }
+    public List<String> getWeRecommendToMainMenu() { return botMessage.getWeRecommendMessage().getWeRecommendToMainMenu(); }
+
+    public int getWeRecommendAtLaunchGreetingsSize() { return botMessage.getWeRecommendMessage().getWeRecommendAtLaunchGreetings().size(); }
+    public int getWeRecommendPleasantViewingSize() { return botMessage.getWeRecommendMessage().getWeRecommendPleasantViewing().size(); }
+    public int getWeRecommendToMainMenuSize() { return botMessage.getWeRecommendMessage().getWeRecommendToMainMenu().size(); }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Welcome Getters">
@@ -148,79 +159,87 @@ public final class BotMessageManager implements IBotMessageManager {
     @Override
     public String getSmartSearchReplyButton() { return botMessage.getReplyButton().getSmartSearchReplyButton(); }
     @Override
-    public String getOurChoiceReplyButton() { return botMessage.getReplyButton().getOurChoiceReplyButton(); }
-    @Override
     public String getNoIdeaReplyButton() { return botMessage.getReplyButton().getNoIdeaReplyButton(); }
+    @Override
+    public String getWeRecommendReplyButton() { return botMessage.getReplyButton().getWeRecommendReplyButton(); }
     @Override
     public String getFeedbackReplyButton() { return botMessage.getReplyButton().getFeedbackReplyButton(); }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Inline Keyboard Button Getters">
     @Override
-    public String getDepressionInlineButton() { return botMessage.getInlineButton().getDepressionInlineButton(); }
+    public String getDepressionMoodInlineButton() { return botMessage.getInlineButton().getDepressionMoodInlineButton(); }
     @Override
-    public String getCheerfulInlineButton() { return botMessage.getInlineButton().getCheerfulInlineButton(); }
+    public String getCheerfulMoodInlineButton() { return botMessage.getInlineButton().getCheerfulMoodInlineButton(); }
     @Override
-    public String getFightingInlineButton() { return botMessage.getInlineButton().getFightingInlineButton(); }
+    public String getFightingMoodInlineButton() { return botMessage.getInlineButton().getFightingMoodInlineButton(); }
+    @Override
+    public String getFamilyMoodInlineButton() { return botMessage.getInlineButton().getFamilyMoodInlineButton(); }
+    @Override
+    public String getFriendsMoodInlineButton() { return botMessage.getInlineButton().getFriendsMoodInlineButton(); }
+    @Override
+    public String getLoveMoodInlineButton() { return botMessage.getInlineButton().getLoveMoodInlineButton(); }
+    @Override
+    public String getMovieInlineButton() { return botMessage.getInlineButton().getMovieInlineButton(); }
+    @Override
+    public String getSeriesInlineButton() { return botMessage.getInlineButton().getSeriesInlineButton(); }
+    @Override
+    public String getComedyInlineButton() { return botMessage.getInlineButton().getComedyInlineButton(); }
+    @Override
+    public String getDramaInlineButton() { return botMessage.getInlineButton().getDramaInlineButton(); }
+    @Override
+    public String getMelodramaInlineButton() { return botMessage.getInlineButton().getMelodramaInlineButton(); }
+    @Override
+    public String getThrillerInlineButton() { return botMessage.getInlineButton().getThrillerInlineButton(); }
+    @Override
+    public String getActionInlineButton() { return botMessage.getInlineButton().getActionInlineButton(); }
+    @Override
+    public String getFictionInlineButton() { return botMessage.getInlineButton().getFictionInlineButton(); }
+    @Override
+    public String getDetectiveInlineButton() { return botMessage.getInlineButton().getDetectiveInlineButton(); }
     @Override
     public String getFamilyInlineButton() { return botMessage.getInlineButton().getFamilyInlineButton(); }
     @Override
-    public String getFriendsInlineButton() { return botMessage.getInlineButton().getFriendsInlineButton(); }
+    public String getSportInlineButton() { return botMessage.getInlineButton().getSportInlineButton(); }
     @Override
-    public String getLoveInlineButton() { return botMessage.getInlineButton().getLoveInlineButton(); }
+    public String getFantasyInlineButton() { return botMessage.getInlineButton().getFantasyInlineButton(); }
     @Override
-    public String getMovieButton() { return botMessage.getInlineButton().getMovieButton(); }
+    public String getAnimationInlineButton() { return botMessage.getInlineButton().getAnimationInlineButton(); }
     @Override
-    public String getSeriesButton() { return botMessage.getInlineButton().getSeriesButton(); }
+    public String getAdventureInlineButton() { return botMessage.getInlineButton().getAdventureInlineButton(); }
     @Override
-    public String getComedyButton() { return botMessage.getInlineButton().getComedyButton(); }
+    public String getBiographyInlineButton() { return botMessage.getInlineButton().getBiographyInlineButton(); }
     @Override
-    public String getDramaButton() { return botMessage.getInlineButton().getDramaButton(); }
+    public String getCriminalInlineButton() { return botMessage.getInlineButton().getCriminalInlineButton(); }
     @Override
-    public String getMelodramaButton() { return botMessage.getInlineButton().getMelodramaButton(); }
+    public String getDocumentaryInlineButton() { return botMessage.getInlineButton().getDocumentaryInlineButton(); }
     @Override
-    public String getThrillerButton() { return botMessage.getInlineButton().getThrillerButton(); }
+    public String getWarInlineButton() { return botMessage.getInlineButton().getWarInlineButton(); }
     @Override
-    public String getActionButton() { return botMessage.getInlineButton().getActionButton(); }
+    public String getMusicInlineButton() { return botMessage.getInlineButton().getMusicInlineButton(); }
     @Override
-    public String getFictionButton() { return botMessage.getInlineButton().getFictionButton(); }
+    public String getSmartSearchYesInlineButton() { return botMessage.getInlineButton().getSmartSearchYesInlineButton(); }
     @Override
-    public String getDetectiveButton() { return botMessage.getInlineButton().getDetectiveButton(); }
+    public String getSmartSearchNoInlineButton() { return botMessage.getInlineButton().getSmartSearchNoInlineButton(); }
     @Override
-    public String getFamilyButton() { return botMessage.getInlineButton().getFamilyButton(); }
+    public String getSmartSearchBackInlineButton() { return botMessage.getInlineButton().getSmartSearchBackInlineButton(); }
     @Override
-    public String getSportButton() { return botMessage.getInlineButton().getSportButton(); }
+    public String getLeftArrowInlineButton() { return botMessage.getInlineButton().getLeftArrowInlineButton(); }
     @Override
-    public String getFantasyButton() { return botMessage.getInlineButton().getFantasyButton(); }
+    public String getRightArrowInlineButton() { return botMessage.getInlineButton().getRightArrowInlineButton(); }
     @Override
-    public String getAnimationButton() { return botMessage.getInlineButton().getAnimationButton(); }
+    public String getNoIdeaNextMovieInlineButton() { return botMessage.getInlineButton().getNoIdeaNextMovieInlineButton(); }
     @Override
-    public String getAdventureButton() { return botMessage.getInlineButton().getAdventureButton(); }
+    public String getNoIdeaPreviousMovieInlineButton() { return botMessage.getInlineButton().getNoIdeaPreviousMovieInlineButton(); }
     @Override
-    public String getBiographyButton() { return botMessage.getInlineButton().getBiographyButton(); }
+    public String getNoIdeaToMainMenuInlineButton() { return botMessage.getInlineButton().getNoIdeaToMainMenuInlineButton(); }
     @Override
-    public String getCriminalButton() { return botMessage.getInlineButton().getCriminalButton(); }
+    public String getWeRecommendNextMovieInlineButton() { return botMessage.getInlineButton().getWeRecommendNextMovieInlineButton(); }
     @Override
-    public String getDocumentaryButton() { return botMessage.getInlineButton().getDocumentaryButton(); }
+    public String getWeRecommendPreviousMovieInlineButton() { return botMessage.getInlineButton().getWeRecommendPreviousMovieInlineButton(); }
     @Override
-    public String getWarButton() { return botMessage.getInlineButton().getWarButton(); }
+    public String getWeRecommendToMainMenuInlineButton() { return botMessage.getInlineButton().getWeRecommendToMainMenuInlineButton(); }
     @Override
-    public String getMusicButton() { return botMessage.getInlineButton().getMusicButton(); }
-    @Override
-    public String getSmartSearchYesButton() { return botMessage.getInlineButton().getSmartSearchYesButton(); }
-    @Override
-    public String getSmartSearchNoButton() { return botMessage.getInlineButton().getSmartSearchNoButton(); }
-    @Override
-    public String getSmartSearchBackButton() { return botMessage.getInlineButton().getSmartSearchBackButton(); }
-    @Override
-    public String getLeftArrowButton() { return botMessage.getInlineButton().getLeftArrowButton(); }
-    @Override
-    public String getRightArrowButton() { return botMessage.getInlineButton().getRightArrowButton(); }
-    @Override
-    public String getNoIdeaNextMovieButton() { return botMessage.getInlineButton().getNoIdeaNextMovieButton(); }
-    @Override
-    public String getNoIdeaPreviousMovieButton() { return botMessage.getInlineButton().getNoIdeaPreviousMovieButton(); }
-    @Override
-    public String getNoIdeaToMainMenuButton() { return botMessage.getInlineButton().getNoIdeaToMainMenuButton(); }
+    public String getWeRecommendWatchInlineButton() { return botMessage.getInlineButton().getWeRecommendWatchInlineButton(); }
     //</editor-fold>
 }

@@ -16,6 +16,7 @@ public final class BotMessage {
     private InlineButton inlineButton;
     private SmartSearchMessage smartSearchMessage;
     private NoIdeaMessage noIdeaMessage;
+    private WeRecommendMessage weRecommendMessage;
 
     //<editor-fold default-state="collapsed" desc="Singleton">
     private static BotMessage instance;
@@ -35,6 +36,7 @@ public final class BotMessage {
     public InlineButton getInlineButton() { return inlineButton; }
     public SmartSearchMessage getSmartSearchMessage() { return smartSearchMessage; }
     public NoIdeaMessage getNoIdeaMessage() { return noIdeaMessage; }
+    public WeRecommendMessage getWeRecommendMessage() { return weRecommendMessage; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
@@ -43,5 +45,6 @@ public final class BotMessage {
     public void setInlineButton(InlineButton inlineButton) { this.inlineButton = inlineButton; }
     public void setSmartSearchMessage(SmartSearchMessage smartSearchMessage) { this.smartSearchMessage = smartSearchMessage; }
     public void setNoIdeaMessage(NoIdeaMessage noIdeaMessage) { this.noIdeaMessage = noIdeaMessage; }
+    public void setWeRecommendMessage(WeRecommendMessage weRecommendMessage) { this.weRecommendMessage = weRecommendMessage; }
     //</editor-fold>
 }

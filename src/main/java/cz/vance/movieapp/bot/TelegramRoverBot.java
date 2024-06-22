@@ -84,6 +84,8 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
             messageManager.sendSmartSearchMood(update);
         else if (messageManager.isNoIdeaButton(update))
             messageManager.sendNoIdeaFirstMovie(update);
+        else if (messageManager.isWeRecommendButton(update))
+            messageManager.sendWeRecommendFirstMovie(update);
         else
             messageManager.sendEcho(update);
 
@@ -114,5 +116,13 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
             messageManager.sendNoIdeaNextMovie(update);
         else if (inlineKeyboardBuilder.isNoIdeaToMainMenuButton(update))
             messageManager.handleNoIdeaToMainMenu(update);
+        else if (inlineKeyboardBuilder.isWeRecommendPreviousMovieButton(update))
+            messageManager.sendWeRecommendPreviousMovie(update);
+        else if (inlineKeyboardBuilder.isWeRecommendNextMovieButton(update))
+            messageManager.sendWeRecommendNextMovie(update);
+        else if (inlineKeyboardBuilder.isWeRecommendWatchButton(update))
+            messageManager.sendWeRecommendWatch(update);
+        else if (inlineKeyboardBuilder.isWeRecommendToMainMenuButton(update))
+            messageManager.handleWeRecommendToMainMenu(update);
     }
 }

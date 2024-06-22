@@ -156,6 +156,30 @@ public interface IMessageRandomizer {
     String getNoIdeaToMainMenuMessage();
 
     /**
+     * Extracts a random element from the <b>weRecommendAtLaunchGreetings</b> list that contains all the possible texts
+     * when the user clicks the <b>we recommend</b> reply button in the <b>main menu</b>.
+     */
+    String getWeRecommendAtLaunchGreetingsMessage();
+
+    /**
+     * Extracts a random element from the <b>weRecommendPleasantViewing</b> list that contains all the possible texts
+     * when the user during the <b>we recommend</b> presses the <b>watch inline keyboard button</b>.
+     */
+    String getWeRecommendPleasantViewingMessage();
+
+    /**
+     * Extracts the <b>weRecommendRusSampleMovie</b> string that contains the sample text to display to the user during
+     * the <b>we recommend</b> mode.
+     */
+    String getWeRecommendRusSampleMovieMessage();
+
+    /**
+     * Extracts a random element from the <b>weRecommendToMainMenu</b> list that contains all the possible texts
+     * when the user during the <b>we recommend</b> goes back to the <b>main menu</b>.
+     */
+    String getWeRecommendToMainMenuMessage();
+
+    /**
      * Extracts a random element from the <b>welcomes</b> list that contains all the possible texts when the
      * user starts the conversation with the bot for the first time or when enters the appropriate <b>/start</b> command.
      */

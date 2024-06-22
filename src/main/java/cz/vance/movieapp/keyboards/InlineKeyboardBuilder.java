@@ -42,23 +42,23 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getDepressionInlineButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDepressionInlineButton())));
+                botMessageManager.getDepressionMoodInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDepressionMoodInlineButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getCheerfulInlineButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getCheerfulInlineButton())));
+                botMessageManager.getCheerfulMoodInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getCheerfulMoodInlineButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getFightingInlineButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFightingInlineButton())));
+                botMessageManager.getFightingMoodInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFightingMoodInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getFamilyInlineButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFamilyInlineButton())));
+                botMessageManager.getFamilyMoodInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFamilyMoodInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getFriendsInlineButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFriendsInlineButton())));
+                botMessageManager.getFriendsMoodInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFriendsMoodInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getLoveInlineButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getLoveInlineButton())));
+                botMessageManager.getLoveMoodInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getLoveMoodInlineButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);
@@ -76,14 +76,14 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getMovieButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getMovieButton())));
+                botMessageManager.getMovieInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getMovieInlineButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getSeriesButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSeriesButton())));
+                botMessageManager.getSeriesInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSeriesInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getSmartSearchBackButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchBackButton())));
+                botMessageManager.getSmartSearchBackInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchBackInlineButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);
@@ -106,59 +106,59 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> seventhInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getComedyButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getComedyButton())));
+                botMessageManager.getComedyInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getComedyInlineButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getDramaButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDramaButton())));
+                botMessageManager.getDramaInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDramaInlineButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getMelodramaButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getMelodramaButton())));
+                botMessageManager.getMelodramaInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getMelodramaInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getThrillerButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getThrillerButton())));
+                botMessageManager.getThrillerInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getThrillerInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getActionButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getActionButton())));
+                botMessageManager.getActionInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getActionInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getFictionButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFictionButton())));
+                botMessageManager.getFictionInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFictionInlineButton())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getDetectiveButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDetectiveButton())));
+                botMessageManager.getDetectiveInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDetectiveInlineButton())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getFamilyInlineButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFamilyInlineButton())));
+                botMessageManager.getFamilyMoodInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFamilyMoodInlineButton())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getSportButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSportButton())));
+                botMessageManager.getSportInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSportInlineButton())));
         fourthInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getFantasyButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFantasyButton())));
+                botMessageManager.getFantasyInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFantasyInlineButton())));
         fourthInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getAnimationButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getAnimationButton())));
+                botMessageManager.getAnimationInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getAnimationInlineButton())));
         fourthInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getAdventureButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getAdventureButton())));
+                botMessageManager.getAdventureInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getAdventureInlineButton())));
         fifthInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getBiographyButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getBiographyButton())));
+                botMessageManager.getBiographyInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getBiographyInlineButton())));
         fifthInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getCriminalButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getCriminalButton())));
+                botMessageManager.getCriminalInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getCriminalInlineButton())));
         fifthInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getDocumentaryButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDocumentaryButton())));
+                botMessageManager.getDocumentaryInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDocumentaryInlineButton())));
         sixthInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getWarButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getWarButton())));
+                botMessageManager.getWarInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getWarInlineButton())));
         sixthInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getMusicButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getMusicButton())));
+                botMessageManager.getMusicInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getMusicInlineButton())));
         seventhInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getSmartSearchBackButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchBackButton())));
+                botMessageManager.getSmartSearchBackInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchBackInlineButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);
@@ -181,14 +181,14 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getSmartSearchYesButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchYesButton())));
+                botMessageManager.getSmartSearchYesInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchYesInlineButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getSmartSearchNoButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchNoButton())));
+                botMessageManager.getSmartSearchNoInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchNoInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getSmartSearchBackButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchBackButton())));
+                botMessageManager.getSmartSearchBackInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSmartSearchBackInlineButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);
@@ -206,11 +206,11 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getNoIdeaNextMovieButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaNextMovieButton())));
+                botMessageManager.getNoIdeaNextMovieInlineButton(),
+                IInlineKeyboardBuilder.getNoIdeaCreatedCallback(botMessageManager.getNoIdeaNextMovieInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getNoIdeaToMainMenuButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaToMainMenuButton())));
+                botMessageManager.getNoIdeaToMainMenuInlineButton(),
+                IInlineKeyboardBuilder.getNoIdeaCreatedCallback(botMessageManager.getNoIdeaToMainMenuInlineButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);
@@ -228,14 +228,14 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getNoIdeaPreviousMovieButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaPreviousMovieButton())));
+                botMessageManager.getNoIdeaPreviousMovieInlineButton(),
+                IInlineKeyboardBuilder.getNoIdeaCreatedCallback(botMessageManager.getNoIdeaPreviousMovieInlineButton())));
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getNoIdeaNextMovieButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaNextMovieButton())));
+                botMessageManager.getNoIdeaNextMovieInlineButton(),
+                IInlineKeyboardBuilder.getNoIdeaCreatedCallback(botMessageManager.getNoIdeaNextMovieInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getNoIdeaToMainMenuButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaToMainMenuButton())));
+                botMessageManager.getNoIdeaToMainMenuInlineButton(),
+                IInlineKeyboardBuilder.getNoIdeaCreatedCallback(botMessageManager.getNoIdeaToMainMenuInlineButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);
@@ -253,11 +253,42 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
 
         firstInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getNoIdeaPreviousMovieButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaPreviousMovieButton())));
+                botMessageManager.getNoIdeaPreviousMovieInlineButton(),
+                IInlineKeyboardBuilder.getNoIdeaCreatedCallback(botMessageManager.getNoIdeaPreviousMovieInlineButton())));
         secondInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getNoIdeaToMainMenuButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getNoIdeaToMainMenuButton())));
+                botMessageManager.getNoIdeaToMainMenuInlineButton(),
+                IInlineKeyboardBuilder.getNoIdeaCreatedCallback(botMessageManager.getNoIdeaToMainMenuInlineButton())));
+
+        inlineRows.add(firstInlineRow);
+        inlineRows.add(secondInlineRow);
+
+        keyboardMarkup.setKeyboard(inlineRows);
+        return keyboardMarkup;
+    }
+
+    @Override
+    public @NotNull InlineKeyboardMarkup buildWeRecommendInterimMovieKeyboard(String watchUrl) {
+        final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+
+        final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
+        final List<InlineKeyboardButton> firstInlineRow = new ArrayList<>();
+        final List<InlineKeyboardButton> secondInlineRow = new ArrayList<>();
+
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getWeRecommendPreviousMovieInlineButton(),
+                IInlineKeyboardBuilder.getWeRecommendCreatedCallback(botMessageManager.getWeRecommendPreviousMovieInlineButton())));
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getWeRecommendNextMovieInlineButton(),
+                IInlineKeyboardBuilder.getWeRecommendCreatedCallback(botMessageManager.getWeRecommendNextMovieInlineButton())));
+        secondInlineRow.add(InlineKeyboardButton
+                .builder()
+                .text(botMessageManager.getWeRecommendWatchInlineButton())
+                .callbackData(IInlineKeyboardBuilder.getWeRecommendCreatedCallback(botMessageManager.getWeRecommendWatchInlineButton()))
+                .url(watchUrl)
+                .build());
+        secondInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getNoIdeaToMainMenuInlineButton(),
+                IInlineKeyboardBuilder.getWeRecommendCreatedCallback(botMessageManager.getNoIdeaToMainMenuInlineButton())));
 
         inlineRows.add(firstInlineRow);
         inlineRows.add(secondInlineRow);

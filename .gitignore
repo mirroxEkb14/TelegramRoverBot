@@ -6,3 +6,6 @@ out/
 
 # Maven target directory containing compiled classes, JARs, and other build-related files
 target/
+
+# Incoming messages logs
+src/main/resources/message-logs.log

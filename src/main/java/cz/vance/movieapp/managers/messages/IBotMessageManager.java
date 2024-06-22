@@ -32,6 +32,11 @@ public interface IBotMessageManager {
     List<String> getNoIdeaNoMoviesLeft();
     List<String> getNoIdeaToMainMenu();
 
+    List<String> getWeRecommendAtLaunchGreetings();
+    List<String> getWeRecommendPleasantViewing();
+    String getWeRecommendRusSampleMovieMessage();
+    List<String> getWeRecommendToMainMenu();
+
     List<String> getWelcomes();
     List<String> getHelps();
     List<String> getUnknownInputs();
@@ -58,49 +63,58 @@ public interface IBotMessageManager {
     int getNoIdeaNoMoviesLeftSize();
     int getNoIdeaToMainMenuSize();
 
+    int getWeRecommendAtLaunchGreetingsSize();
+    int getWeRecommendPleasantViewingSize();
+    int getWeRecommendToMainMenuSize();
+
     int getWelcomesSize();
     int getHelpsSize();
     int getUnknownInputsSize();
 
     String getSmartSearchReplyButton();
-    String getOurChoiceReplyButton();
+    String getWeRecommendReplyButton();
     String getNoIdeaReplyButton();
     String getFeedbackReplyButton();
 
-    String getDepressionInlineButton();
-    String getCheerfulInlineButton();
-    String getFightingInlineButton();
+    String getDepressionMoodInlineButton();
+    String getCheerfulMoodInlineButton();
+    String getFightingMoodInlineButton();
+    String getFamilyMoodInlineButton();
+    String getFriendsMoodInlineButton();
+    String getLoveMoodInlineButton();
+
+    String getMovieInlineButton();
+    String getSeriesInlineButton();
+    String getComedyInlineButton();
+    String getDramaInlineButton();
+    String getMelodramaInlineButton();
+    String getThrillerInlineButton();
+    String getActionInlineButton();
+    String getFictionInlineButton();
+    String getDetectiveInlineButton();
     String getFamilyInlineButton();
-    String getFriendsInlineButton();
-    String getLoveInlineButton();
+    String getSportInlineButton();
+    String getFantasyInlineButton();
+    String getAnimationInlineButton();
+    String getAdventureInlineButton();
+    String getBiographyInlineButton();
+    String getCriminalInlineButton();
+    String getDocumentaryInlineButton();
+    String getWarInlineButton();
+    String getMusicInlineButton();
+    String getSmartSearchYesInlineButton();
+    String getSmartSearchNoInlineButton();
+    String getSmartSearchBackInlineButton();
 
-    String getMovieButton();
-    String getSeriesButton();
-    String getComedyButton();
-    String getDramaButton();
-    String getMelodramaButton();
-    String getThrillerButton();
-    String getActionButton();
-    String getFictionButton();
-    String getDetectiveButton();
-    String getFamilyButton();
-    String getSportButton();
-    String getFantasyButton();
-    String getAnimationButton();
-    String getAdventureButton();
-    String getBiographyButton();
-    String getCriminalButton();
-    String getDocumentaryButton();
-    String getWarButton();
-    String getMusicButton();
-    String getSmartSearchYesButton();
-    String getSmartSearchNoButton();
-    String getSmartSearchBackButton();
+    String getLeftArrowInlineButton();
+    String getRightArrowInlineButton();
 
-    String getLeftArrowButton();
-    String getRightArrowButton();
+    String getNoIdeaNextMovieInlineButton();
+    String getNoIdeaPreviousMovieInlineButton();
+    String getNoIdeaToMainMenuInlineButton();
 
-    String getNoIdeaNextMovieButton();
-    String getNoIdeaPreviousMovieButton();
-    String getNoIdeaToMainMenuButton();
+    String getWeRecommendNextMovieInlineButton();
+    String getWeRecommendPreviousMovieInlineButton();
+    String getWeRecommendToMainMenuInlineButton();
+    String getWeRecommendWatchInlineButton();
 }

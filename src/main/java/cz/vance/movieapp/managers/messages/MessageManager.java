@@ -409,7 +409,7 @@ public final class MessageManager implements IMessageManager {
 
         modeProcessingHandler.accept(chatId);
 
-        final Movie noIdeaFirstMovie = movieRecord.getCurrentNoIdeaMovie();
+        final Movie noIdeaFirstMovie = movieRecord.getNoIdeaCurrentMovie();
         final String noIdeaFirstMovieText = messageFormatter.getNoIdeaMovieMessage(noIdeaFirstMovie);
 
         sendSticker(chatId, stickerFileId);
@@ -432,9 +432,9 @@ public final class MessageManager implements IMessageManager {
         }
 
         final InlineKeyboardMarkup inlineKeyboardMarkup = getNoIdeaAppropriateInlineKeyboard(botUpdate);
-        movieRecord.moveToPreviousNoIdeaMovie();
+        movieRecord.moveNoIdeaToPreviousMovie();
 
-        final Movie noIdeaPreviousMovie = movieRecord.getCurrentNoIdeaMovie();
+        final Movie noIdeaPreviousMovie = movieRecord.getNoIdeaCurrentMovie();
         final String noIdeaPreviousMovieText = messageFormatter.getNoIdeaMovieMessage(noIdeaPreviousMovie);
 
         sendMessage(chatId, messageId, noIdeaPreviousMovieText, inlineKeyboardMarkup);
@@ -452,9 +452,9 @@ public final class MessageManager implements IMessageManager {
 
         final InlineKeyboardMarkup inlineKeyboardMarkup = getNoIdeaAppropriateInlineKeyboard(botUpdate);
         handleNoIdeaNoMoviesLeft(chatId);
-        movieRecord.moveToNextNoIdeaMovie();
+        movieRecord.moveNoIdeaToNextMovie();
 
-        final Movie noIdeaNextMovie = movieRecord.getCurrentNoIdeaMovie();
+        final Movie noIdeaNextMovie = movieRecord.getNoIdeaCurrentMovie();
         final String noIdeaNextMovieText = messageFormatter.getNoIdeaMovieMessage(noIdeaNextMovie);
 
         sendMessage(chatId, messageId, noIdeaNextMovieText, inlineKeyboardMarkup);
@@ -506,6 +506,113 @@ public final class MessageManager implements IMessageManager {
 
         removeMessageInlineKeyboard(chatId, messageId);
         sendMessage(chatId, messageText);
+
+        latestMessageIds.remove(chatId);
+    }
+
+    @Override
+    public void sendWeRecommendFirstMovie(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final String atLaunchGreetingsText = messageRandomizer.getWeRecommendAtLaunchGreetingsMessage();
+
+        modeProcessingHandler.accept(chatId);
+
+        final Movie weRecommendFirstMovie = movieRecord.getWeRecommendCurrentMovie();
+        final String movieDetailsUrl = weRecommendFirstMovie.detailsLink();
+        final String weRecommendFirstMovieText = messageFormatter.getWeRecommendMovieMessage(weRecommendFirstMovie);
+
+        sendMessage(chatId, atLaunchGreetingsText);
+        ProgramSleeper.pauseWeRecommendBeforeSendingFirstMovie();
+
+        final Message firstMovieMessage = sendMessage(
+                chatId,
+                weRecommendFirstMovieText,
+                inlineKeyboardBuilder.buildWeRecommendInterimMovieKeyboard(movieDetailsUrl));
+        latestMessageHandler.accept(firstMovieMessage);
+    }
+
+    //<editor-fold default-state="collapsed" desc="Overridden 'sendWeRecommendPreviousMovie' and 'sendWeRecommendNextMovie' Methods">
+    @Override
+    public void sendWeRecommendPreviousMovie(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
+
+        if (isOldInlineKeyboard(chatId, messageId)) {
+            handleOldInlineKeyboard(chatId, messageId);
+            return;
+        }
+
+        movieRecord.moveWeRecommendToPreviousMovie();
+        processWeRecommend(chatId, messageId);
+    }
+
+    @Override
+    public void sendWeRecommendNextMovie(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
+
+        if (isOldInlineKeyboard(chatId, messageId)) {
+            handleOldInlineKeyboard(chatId, messageId);
+            return;
+        }
+        movieRecord.moveWeRecommendToNextMovie();
+        processWeRecommend(chatId, messageId);
+    }
+
+    /**
+     * Processes the <b>We Recommend</b> movie by:
+     * <ul>
+     *     <li>getting the next movie to display (whether the <b>previous/next movie inline keyboard button</b> was pressed);</li>
+     *     <li>building the <b>movie details url</b>;</li>
+     *     <li>building the <b>movie message text</b>;</li>
+     *     <li>sending the <b>movie message</b> to the user.</li>
+     * </ul>
+     */
+    private void processWeRecommend(long chatId, long messageId) {
+        final Movie nextMovieToDisplay = movieRecord.getWeRecommendCurrentMovie();
+        final String movieDetailsUrl = nextMovieToDisplay.detailsLink();
+        final String weRecommendNextMovieText = messageFormatter.getWeRecommendMovieMessage(nextMovieToDisplay);
+
+        sendMessage(
+                chatId,
+                messageId,
+                weRecommendNextMovieText,
+                inlineKeyboardBuilder.buildWeRecommendInterimMovieKeyboard(movieDetailsUrl));
+    }
+    //</editor-fold>
+
+    @Override
+    public void sendWeRecommendWatch(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
+        final String messageText = messageRandomizer.getWeRecommendPleasantViewingMessage();
+
+        if (isOldInlineKeyboard(chatId, messageId)) {
+            handleOldInlineKeyboard(chatId, messageId);
+            return;
+        }
+
+        removeMessageInlineKeyboard(chatId, messageId);
+        sendMessage(chatId, messageText);
+
+        latestMessageIds.remove(chatId);
+    }
+
+    @Override
+    public void handleWeRecommendToMainMenu(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
+        final String messageText = messageRandomizer.getWeRecommendToMainMenuMessage();
+
+        if (isOldInlineKeyboard(chatId, messageId)) {
+            handleOldInlineKeyboard(chatId, messageId);
+            return;
+        }
+
+        removeMessageInlineKeyboard(chatId, messageId);
+        sendMessage(chatId, messageText);
+
+        latestMessageIds.remove(chatId);
     }
 
     /* ---------------- Private Helper Methods -------------- */

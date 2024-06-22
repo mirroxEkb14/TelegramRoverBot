@@ -5,109 +5,121 @@ package cz.vance.movieapp.models.messages;
  */
 public final class InlineButton {
 
-    private String depressionInlineButton;
-    private String cheerfulInlineButton;
-    private String fightingInlineButton;
+    private String depressionMoodInlineButton;
+    private String cheerfulMoodInlineButton;
+    private String fightingMoodInlineButton;
+    private String familyMoodInlineButton;
+    private String friendsMoodInlineButton;
+    private String loveMoodInlineButton;
+    private String movieInlineButton;
+    private String seriesInlineButton;
+    private String comedyInlineButton;
+    private String dramaInlineButton;
+    private String melodramaInlineButton;
+    private String thrillerInlineButton;
+    private String actionInlineButton;
+    private String fictionInlineButton;
+    private String detectiveInlineButton;
     private String familyInlineButton;
-    private String friendsInlineButton;
-    private String loveInlineButton;
-    private String movieButton;
-    private String seriesButton;
-    private String comedyButton;
-    private String dramaButton;
-    private String melodramaButton;
-    private String thrillerButton;
-    private String actionButton;
-    private String fictionButton;
-    private String detectiveButton;
-    private String familyButton;
-    private String sportButton;
-    private String fantasyButton;
-    private String animationButton;
-    private String adventureButton;
-    private String biographyButton;
-    private String criminalButton;
-    private String documentaryButton;
-    private String warButton;
-    private String musicButton;
-    private String smartSearchYesButton;
-    private String smartSearchNoButton;
-    private String smartSearchBackButton;
-    private String leftArrowButton; // "«" left-pointing double angle quotation mark
-    private String rightArrowButton; // "»" right-pointing double angle quotation mark
-    private String noIdeaNextMovieButton;
-    private String noIdeaPreviousMovieButton;
-    private String noIdeaToMainMenuButton;
+    private String sportInlineButton;
+    private String fantasyInlineButton;
+    private String animationInlineButton;
+    private String adventureInlineButton;
+    private String biographyInlineButton;
+    private String criminalInlineButton;
+    private String documentaryInlineButton;
+    private String warInlineButton;
+    private String musicInlineButton;
+    private String smartSearchYesInlineButton;
+    private String smartSearchNoInlineButton;
+    private String smartSearchBackInlineButton;
+    private String leftArrowInlineButton; // "«" left-pointing double angle quotation mark
+    private String rightArrowInlineButton; // "»" right-pointing double angle quotation mark
+    private String noIdeaNextMovieInlineButton;
+    private String noIdeaPreviousMovieInlineButton;
+    private String noIdeaToMainMenuInlineButton;
+    private String weRecommendNextMovieInlineButton;
+    private String weRecommendPreviousMovieInlineButton;
+    private String weRecommendToMainMenuInlineButton;
+    private String weRecommendWatchInlineButton;
 
     //<editor-fold default-state="collapsed" desc="Getters">
-    public String getDepressionInlineButton() { return depressionInlineButton; }
-    public String getCheerfulInlineButton() { return cheerfulInlineButton; }
-    public String getFightingInlineButton() { return fightingInlineButton; }
+    public String getDepressionMoodInlineButton() { return depressionMoodInlineButton; }
+    public String getCheerfulMoodInlineButton() { return cheerfulMoodInlineButton; }
+    public String getFightingMoodInlineButton() { return fightingMoodInlineButton; }
+    public String getFamilyMoodInlineButton() { return familyMoodInlineButton; }
+    public String getFriendsMoodInlineButton() { return friendsMoodInlineButton; }
+    public String getLoveMoodInlineButton() { return loveMoodInlineButton; }
+    public String getMovieInlineButton() { return movieInlineButton; }
+    public String getSeriesInlineButton() { return seriesInlineButton; }
+    public String getComedyInlineButton() { return comedyInlineButton; }
+    public String getDramaInlineButton() { return dramaInlineButton; }
+    public String getMelodramaInlineButton() { return melodramaInlineButton; }
+    public String getThrillerInlineButton() { return thrillerInlineButton; }
+    public String getActionInlineButton() { return actionInlineButton; }
+    public String getFictionInlineButton() { return fictionInlineButton; }
+    public String getDetectiveInlineButton() { return detectiveInlineButton; }
     public String getFamilyInlineButton() { return familyInlineButton; }
-    public String getFriendsInlineButton() { return friendsInlineButton; }
-    public String getLoveInlineButton() { return loveInlineButton; }
-    public String getMovieButton() { return movieButton; }
-    public String getSeriesButton() { return seriesButton; }
-    public String getComedyButton() { return comedyButton; }
-    public String getDramaButton() { return dramaButton; }
-    public String getMelodramaButton() { return melodramaButton; }
-    public String getThrillerButton() { return thrillerButton; }
-    public String getActionButton() { return actionButton; }
-    public String getFictionButton() { return fictionButton; }
-    public String getDetectiveButton() { return detectiveButton; }
-    public String getFamilyButton() { return familyButton; }
-    public String getSportButton() { return sportButton; }
-    public String getFantasyButton() { return fantasyButton; }
-    public String getAnimationButton() { return animationButton; }
-    public String getAdventureButton() { return adventureButton; }
-    public String getBiographyButton() { return biographyButton; }
-    public String getCriminalButton() { return criminalButton; }
-    public String getDocumentaryButton() { return documentaryButton; }
-    public String getWarButton() { return warButton; }
-    public String getMusicButton() { return musicButton; }
-    public String getSmartSearchYesButton() { return smartSearchYesButton; }
-    public String getSmartSearchNoButton() { return smartSearchNoButton; }
-    public String getSmartSearchBackButton() { return smartSearchBackButton; }
-    public String getLeftArrowButton() { return leftArrowButton; }
-    public String getRightArrowButton() { return rightArrowButton; }
-    public String getNoIdeaNextMovieButton() { return noIdeaNextMovieButton; }
-    public String getNoIdeaPreviousMovieButton() { return noIdeaPreviousMovieButton; }
-    public String getNoIdeaToMainMenuButton() { return noIdeaToMainMenuButton; }
+    public String getSportInlineButton() { return sportInlineButton; }
+    public String getFantasyInlineButton() { return fantasyInlineButton; }
+    public String getAnimationInlineButton() { return animationInlineButton; }
+    public String getAdventureInlineButton() { return adventureInlineButton; }
+    public String getBiographyInlineButton() { return biographyInlineButton; }
+    public String getCriminalInlineButton() { return criminalInlineButton; }
+    public String getDocumentaryInlineButton() { return documentaryInlineButton; }
+    public String getWarInlineButton() { return warInlineButton; }
+    public String getMusicInlineButton() { return musicInlineButton; }
+    public String getSmartSearchYesInlineButton() { return smartSearchYesInlineButton; }
+    public String getSmartSearchNoInlineButton() { return smartSearchNoInlineButton; }
+    public String getSmartSearchBackInlineButton() { return smartSearchBackInlineButton; }
+    public String getLeftArrowInlineButton() { return leftArrowInlineButton; }
+    public String getRightArrowInlineButton() { return rightArrowInlineButton; }
+    public String getNoIdeaNextMovieInlineButton() { return noIdeaNextMovieInlineButton; }
+    public String getNoIdeaPreviousMovieInlineButton() { return noIdeaPreviousMovieInlineButton; }
+    public String getNoIdeaToMainMenuInlineButton() { return noIdeaToMainMenuInlineButton; }
+    public String getWeRecommendNextMovieInlineButton() { return weRecommendNextMovieInlineButton; }
+    public String getWeRecommendPreviousMovieInlineButton() { return weRecommendPreviousMovieInlineButton; }
+    public String getWeRecommendToMainMenuInlineButton() { return weRecommendToMainMenuInlineButton; }
+    public String getWeRecommendWatchInlineButton() { return weRecommendWatchInlineButton; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
-    public void setDepressionInlineButton(String depressionInlineButton) { this.depressionInlineButton = depressionInlineButton; }
-    public void setCheerfulInlineButton(String cheerfulInlineButton) { this.cheerfulInlineButton = cheerfulInlineButton; }
-    public void setFightingInlineButton(String fightingInlineButton) { this.fightingInlineButton = fightingInlineButton; }
+    public void setDepressionMoodInlineButton(String depressionMoodInlineButton) { this.depressionMoodInlineButton = depressionMoodInlineButton; }
+    public void setCheerfulMoodInlineButton(String cheerfulMoodInlineButton) { this.cheerfulMoodInlineButton = cheerfulMoodInlineButton; }
+    public void setFightingMoodInlineButton(String fightingMoodInlineButton) { this.fightingMoodInlineButton = fightingMoodInlineButton; }
+    public void setFamilyMoodInlineButton(String familyMoodInlineButton) { this.familyMoodInlineButton = familyMoodInlineButton; }
+    public void setFriendsMoodInlineButton(String friendsMoodInlineButton) { this.friendsMoodInlineButton = friendsMoodInlineButton; }
+    public void setLoveMoodInlineButton(String loveMoodInlineButton) { this.loveMoodInlineButton = loveMoodInlineButton; }
+    public void setMovieInlineButton(String movieInlineButton) { this.movieInlineButton = movieInlineButton; }
+    public void setSeriesInlineButton(String seriesInlineButton) { this.seriesInlineButton = seriesInlineButton; }
+    public void setComedyInlineButton(String comedyInlineButton) { this.comedyInlineButton = comedyInlineButton; }
+    public void setDramaInlineButton(String dramaInlineButton) { this.dramaInlineButton = dramaInlineButton; }
+    public void setMelodramaInlineButton(String melodramaInlineButton) { this.melodramaInlineButton = melodramaInlineButton; }
+    public void setThrillerInlineButton(String thrillerInlineButton) { this.thrillerInlineButton = thrillerInlineButton; }
+    public void setActionInlineButton(String actionInlineButton) { this.actionInlineButton = actionInlineButton; }
+    public void setFictionInlineButton(String fictionInlineButton) { this.fictionInlineButton = fictionInlineButton; }
+    public void setDetectiveInlineButton(String detectiveInlineButton) { this.detectiveInlineButton = detectiveInlineButton; }
     public void setFamilyInlineButton(String familyInlineButton) { this.familyInlineButton = familyInlineButton; }
-    public void setFriendsInlineButton(String friendsInlineButton) { this.friendsInlineButton = friendsInlineButton; }
-    public void setLoveInlineButton(String loveInlineButton) { this.loveInlineButton = loveInlineButton; }
-    public void setMovieButton(String movieButton) { this.movieButton = movieButton; }
-    public void setSeriesButton(String seriesButton) { this.seriesButton = seriesButton; }
-    public void setComedyButton(String comedyButton) { this.comedyButton = comedyButton; }
-    public void setDramaButton(String dramaButton) { this.dramaButton = dramaButton; }
-    public void setMelodramaButton(String melodramaButton) { this.melodramaButton = melodramaButton; }
-    public void setThrillerButton(String thrillerButton) { this.thrillerButton = thrillerButton; }
-    public void setActionButton(String actionButton) { this.actionButton = actionButton; }
-    public void setFictionButton(String fictionButton) { this.fictionButton = fictionButton; }
-    public void setDetectiveButton(String detectiveButton) { this.detectiveButton = detectiveButton; }
-    public void setFamilyButton(String familyButton) { this.familyButton = familyButton; }
-    public void setSportButton(String sportButton) { this.sportButton = sportButton; }
-    public void setFantasyButton(String fantasyButton) { this.fantasyButton = fantasyButton; }
-    public void setAnimationButton(String animationButton) { this.animationButton = animationButton; }
-    public void setAdventureButton(String adventureButton) { this.adventureButton = adventureButton; }
-    public void setBiographyButton(String biographyButton) { this.biographyButton = biographyButton; }
-    public void setCriminalButton(String criminalButton) { this.criminalButton = criminalButton; }
-    public void setDocumentaryButton(String documentaryButton) { this.documentaryButton = documentaryButton; }
-    public void setWarButton(String warButton) { this.warButton = warButton; }
-    public void setMusicButton(String musicButton) { this.musicButton = musicButton; }
-    public void setSmartSearchYesButton(String smartSearchYesButton) { this.smartSearchYesButton = smartSearchYesButton; }
-    public void setSmartSearchNoButton(String smartSearchNoButton) { this.smartSearchNoButton = smartSearchNoButton; }
-    public void setSmartSearchBackButton(String smartSearchBackButton) { this.smartSearchBackButton = smartSearchBackButton; }
-    public void setLeftArrowButton(String leftArrowButton) { this.leftArrowButton = leftArrowButton; }
-    public void setRightArrowButton(String rightArrowButton) { this.rightArrowButton = rightArrowButton; }
-    public void setNoIdeaNextMovieButton(String noIdeaNextMovieButton) { this.noIdeaNextMovieButton = noIdeaNextMovieButton; }
-    public void setNoIdeaPreviousMovieButton(String noIdeaPreviousMovieButton) { this.noIdeaPreviousMovieButton = noIdeaPreviousMovieButton; }
-    public void setNoIdeaToMainMenuButton(String noIdeaToMainMenuButton) { this.noIdeaToMainMenuButton = noIdeaToMainMenuButton; }
+    public void setSportInlineButton(String sportInlineButton) { this.sportInlineButton = sportInlineButton; }
+    public void setFantasyInlineButton(String fantasyInlineButton) { this.fantasyInlineButton = fantasyInlineButton; }
+    public void setAnimationInlineButton(String animationInlineButton) { this.animationInlineButton = animationInlineButton; }
+    public void setAdventureInlineButton(String adventureInlineButton) { this.adventureInlineButton = adventureInlineButton; }
+    public void setBiographyInlineButton(String biographyInlineButton) { this.biographyInlineButton = biographyInlineButton; }
+    public void setCriminalInlineButton(String criminalInlineButton) { this.criminalInlineButton = criminalInlineButton; }
+    public void setDocumentaryInlineButton(String documentaryInlineButton) { this.documentaryInlineButton = documentaryInlineButton; }
+    public void setWarInlineButton(String warInlineButton) { this.warInlineButton = warInlineButton; }
+    public void setMusicInlineButton(String musicInlineButton) { this.musicInlineButton = musicInlineButton; }
+    public void setSmartSearchYesInlineButton(String smartSearchYesInlineButton) { this.smartSearchYesInlineButton = smartSearchYesInlineButton; }
+    public void setSmartSearchNoInlineButton(String smartSearchNoInlineButton) { this.smartSearchNoInlineButton = smartSearchNoInlineButton; }
+    public void setSmartSearchBackInlineButton(String smartSearchBackInlineButton) { this.smartSearchBackInlineButton = smartSearchBackInlineButton; }
+    public void setLeftArrowInlineButton(String leftArrowInlineButton) { this.leftArrowInlineButton = leftArrowInlineButton; }
+    public void setRightArrowInlineButton(String rightArrowInlineButton) { this.rightArrowInlineButton = rightArrowInlineButton; }
+    public void setNoIdeaNextMovieInlineButton(String noIdeaNextMovieInlineButton) { this.noIdeaNextMovieInlineButton = noIdeaNextMovieInlineButton; }
+    public void setNoIdeaPreviousMovieInlineButton(String noIdeaPreviousMovieInlineButton) { this.noIdeaPreviousMovieInlineButton = noIdeaPreviousMovieInlineButton; }
+    public void setNoIdeaToMainMenuInlineButton(String noIdeaToMainMenuInlineButton) { this.noIdeaToMainMenuInlineButton = noIdeaToMainMenuInlineButton; }
+    public void setWeRecommendNextMovieInlineButton(String weRecommendNextMovieInlineButton) { this.weRecommendNextMovieInlineButton = weRecommendNextMovieInlineButton; }
+    public void setWeRecommendPreviousMovieInlineButton(String weRecommendPreviousMovieInlineButton) { this.weRecommendPreviousMovieInlineButton = weRecommendPreviousMovieInlineButton; }
+    public void setWeRecommendToMainMenuInlineButton(String weRecommendToMainMenuInlineButton) { this.weRecommendToMainMenuInlineButton = weRecommendToMainMenuInlineButton; }
+    public void setWeRecommendWatchInlineButton(String weRecommendWatchInlineButton) { this.weRecommendWatchInlineButton = weRecommendWatchInlineButton; }
     //</editor-fold>
 }

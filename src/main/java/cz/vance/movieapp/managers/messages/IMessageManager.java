@@ -134,6 +134,41 @@ public interface IMessageManager {
      */
     void handleNoIdeaToMainMenu(Update botUpdate);
 
+    /**
+     * Sends a message with the <b>'we recommend' first movie</b> text.
+     *
+     * @see IInlineKeyboardBuilder#buildWeRecommendFirstMovieKeyboard()
+     */
+    void sendWeRecommendFirstMovie(Update botUpdate);
+
+    /**
+     * Sends a message with the <b>'our choice' previous movie</b> text.
+     *
+     * @see IInlineKeyboardBuilder#buildWeRecommendInterimMovieKeyboard()
+     */
+    void sendWeRecommendPreviousMovie(Update botUpdate);
+
+    /**
+     * Sends a message with the <b>'our choice' next movie</b> text.
+     *
+     * @see IInlineKeyboardBuilder#buildWeRecommendInterimMovieKeyboard()
+     */
+    void sendWeRecommendNextMovie(Update botUpdate);
+
+    /**
+     * Sends a message indicating that the user selected to watch the current movie and the search has ended.
+     * <br>
+     * The inline keyboard is removed.
+     */
+    void sendWeRecommendWatch(Update botUpdate);
+
+    /**
+     * Sends a message indicating that the user is going from the <b>'our choice' mode</b> to the <b>main menu</b>.
+     * <br>
+     * The inline keyboard is removed.
+     */
+    void handleWeRecommendToMainMenu(Update botUpdate);
+
     //<editor-fold default-state="collapsed" desc="Boolean Methods">
     default boolean isMessage(Update botUpdate) { return messageExistenceValidator.test(botUpdate); }
 
@@ -159,6 +194,16 @@ public interface IMessageManager {
         return stringValidator.test(
                 messageText,
                 BotMessageManager.getInstance().getNoIdeaReplyButton());
+    }
+
+    default boolean isWeRecommendButton(@NotNull Update botUpdate) {
+        String messageText = botUpdate.getMessage().getText();
+        if (messageText == null)
+            return false;
+
+        return stringValidator.test(
+                messageText,
+                BotMessageManager.getInstance().getWeRecommendReplyButton());
     }
     //</editor-fold>
 }

@@ -12,7 +12,7 @@ public final class ReplyButton {
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public String getSmartSearchReplyButton() { return smartSearchReplyButton; }
-    public String getOurChoiceReplyButton() { return ourChoiceReplyButton; }
+    public String getWeRecommendReplyButton() { return ourChoiceReplyButton; }
     public String getNoIdeaReplyButton() { return noIdeaReplyButton; }
     public String getFeedbackReplyButton() { return feedbackReplyButton; }
     //</editor-fold>

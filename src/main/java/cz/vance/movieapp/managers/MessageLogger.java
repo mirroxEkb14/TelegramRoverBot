@@ -25,7 +25,7 @@ public final class MessageLogger {
 
     private static final IUpdateExtractor updateExtractor = new UpdateExtractor();
 
-    private static final String LOG_FILE = "src/main/resources/message-log.log";
+    private static final String LOG_FILE = "src/main/resources/message-logs.log";
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     // Configures the ObjectMapper to pretty-print the JSON output.
