@@ -82,6 +82,8 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
             messageManager.sendWelcome(update);
         else if (messageManager.isHelpCommand(update))
             messageManager.sendHelp(update);
+        else if (messageManager.isLangCommand(update))
+            messageManager.sendLang(update);
         else if (messageManager.isSmartSearchButton(update))
             messageManager.sendSmartSearchMood(update);
         else if (messageManager.isNoIdeaButton(update))

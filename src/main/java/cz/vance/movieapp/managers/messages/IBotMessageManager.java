@@ -10,6 +10,16 @@ import cz.vance.movieapp.models.BotMessage;
  */
 public interface IBotMessageManager {
 
+    /**
+     * Loads a new {@link BotMessage} instance with another language.
+     */
+    void changeBotMessageLanguage();
+
+    /**
+     * Returns a <b>boolean value</b>, whether the current language is English.
+     */
+    boolean isEngLanguage();
+
     List<String> getSmartSearchAtLaunchGreetings();
     List<String> getSmartSearchMoodSelection();
     List<String> getSmartSearchCatalogueSelection();
@@ -44,6 +54,7 @@ public interface IBotMessageManager {
 
     List<String> getWelcomes();
     List<String> getHelps();
+    List<String> getLangMessage();
     List<String> getUnknownInputs();
 
     int getSmartSearchAtLaunchGreetingsSize();
@@ -78,6 +89,7 @@ public interface IBotMessageManager {
 
     int getWelcomesSize();
     int getHelpsSize();
+    int getLangMessageSize();
     int getUnknownInputsSize();
 
     String getSmartSearchReplyButton();

@@ -15,13 +15,21 @@ import java.util.List;
  */
 public final class BotMessageManager implements IBotMessageManager {
 
-    private static final String JSON_FILE_PATH = "/bot-messages.json";
+    private static final String JSON_RUS_FILE_PATH = "/bot-messages_rus.json";
+    private static final String JSON_ENG_FILE_PATH = "/bot-messages_eng.json";
     private BotMessage botMessage;
+
+    /**
+     * Indicates the language of the bot messages.
+     * <br>
+     * By default (when the bot is launched), the language is set to Russian.
+     */
+    private static boolean isEngLanguage;
 
     //<editor-fold default-state="collapsed" desc="Singleton">
     private static BotMessageManager instance;
 
-    private BotMessageManager() { loadBotMessages(); }
+    private BotMessageManager() { loadBotMessages(isEngLanguage); }
 
     public static BotMessageManager getInstance() {
         if (instance == null)
@@ -30,16 +38,25 @@ public final class BotMessageManager implements IBotMessageManager {
     }
     //</editor-fold>
 
-    private void loadBotMessages() {
+    private void loadBotMessages(boolean isEngFile) {
         try {
-            ObjectMapper mapper = new ObjectMapper();
+            final ObjectMapper mapper = new ObjectMapper();
             botMessage = mapper.readValue(
-                    BotMessageManager.class.getResourceAsStream(JSON_FILE_PATH),
+                    BotMessageManager.class.getResourceAsStream(isEngFile ? JSON_ENG_FILE_PATH : JSON_RUS_FILE_PATH),
                     BotMessage.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void changeBotMessageLanguage() {
+        updateLanguageTracker();
+        loadBotMessages(isEngLanguage);
+    }
+
+    @Override
+    public boolean isEngLanguage() { return isEngLanguage; }
 
     //<editor-fold default-state="collapsed" desc="'Smart Search' Getters">
     @Override
@@ -159,6 +176,13 @@ public final class BotMessageManager implements IBotMessageManager {
     public int getHelpsSize() { return botMessage.getCommandMessage().getHelps().size(); }
     //</editor-fold>
 
+    //<editor-fold default-state="collapsed" desc="Lang Getters">
+    @Override
+    public List<String> getLangMessage() { return botMessage.getCommandMessage().getLangMessage(); }
+    @Override
+    public int getLangMessageSize() { return botMessage.getCommandMessage().getLangMessage().size(); }
+    //</editor-fold>
+
     //<editor-fold default-state="collapsed" desc="Unknown Input Getters">
     @Override
     public List<String> getUnknownInputs() { return botMessage.getCommandMessage().getUnknownInputs(); }
@@ -257,4 +281,6 @@ public final class BotMessageManager implements IBotMessageManager {
     @Override
     public String getSendFeedbackNoInlineButton() { return botMessage.getInlineButton().getSendFeedbackNoInlineButton(); }
     //</editor-fold>
+
+    private void updateLanguageTracker() { isEngLanguage = !isEngLanguage; }
 }

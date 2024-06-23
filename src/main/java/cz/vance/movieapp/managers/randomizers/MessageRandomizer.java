@@ -77,8 +77,10 @@ public final class MessageRandomizer implements IMessageRandomizer {
 
     @Override
     public String getSmartSearchOnFinishMessage() {
-        return botMessageManager.getSmartSearchOnFinish().get(
-                getRandomIndex(botMessageManager.getSmartSearchOnFinishSize()));
+        return String.format(
+                botMessageManager.getSmartSearchOnFinish().get(
+                        getRandomIndex(botMessageManager.getSmartSearchOnFinishSize())),
+                botMessageManager.getSendFeedbackReplyButton());
     }
 
     @Override
@@ -203,6 +205,10 @@ public final class MessageRandomizer implements IMessageRandomizer {
 
     @Override
     public String getHelpMessage() { return botMessageManager.getHelps().get(0); }
+
+    @Override
+    public String getLangMessage() { return botMessageManager.getLangMessage().get(
+            getRandomIndex(botMessageManager.getLangMessageSize())); }
 
     @Override
     public String getUnknownInputMessage() { return botMessageManager.getUnknownInputs().get(0); }

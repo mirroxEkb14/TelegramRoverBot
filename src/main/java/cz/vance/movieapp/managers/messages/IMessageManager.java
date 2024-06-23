@@ -40,6 +40,15 @@ public interface IMessageManager {
             t.getMessage().getText() != null &&  t.getMessage().getText().equals(
                     BotCommand.HELP_COMMAND.content());
     /**
+     * Validator checks if the text of the incoming update represents the <b>lang command</b>.
+     *
+     * @see BotCommand#LANG_COMMAND
+     */
+    Predicate<Update> langCommandValidator = t ->
+            t.getMessage().getText() != null &&  t.getMessage().getText().equals(
+                    BotCommand.LANG_COMMAND.content());
+
+    /**
      * Validator tests if the incoming update's message text is equal to the <b>smart search/no idea/our choice/feedback
      * button</b> content (other string value).
      */
@@ -65,6 +74,11 @@ public interface IMessageManager {
      * Sends a help message when a user enters the <b>/help</b> command.
      */
     void sendHelp(Update botUpdate);
+
+    /**
+     * Handles the language change when the user changes the bot messages language, i.e. <b>/lang</b> command.
+     */
+    void sendLang(Update botUpdate);
 
     /**
      * Sends a message with <b>user's mood selection</b>.
@@ -206,6 +220,8 @@ public interface IMessageManager {
     default boolean isStartCommand(Update botUpdate) { return startCommandValidator.test(botUpdate); }
 
     default boolean isHelpCommand(Update botUpdate) { return helpCommandValidator.test(botUpdate); }
+
+    default boolean isLangCommand(Update botUpdate) { return langCommandValidator.test(botUpdate); }
 
     default boolean isNoIdeaButton(@NotNull Update botUpdate) {
         String messageText = botUpdate.getMessage().getText();

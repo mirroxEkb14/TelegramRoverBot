@@ -19,18 +19,6 @@ public final class BotMessage {
     private WeRecommendMessage weRecommendMessage;
     private SendFeedbackMessage sendFeedbackMessage;
 
-    //<editor-fold default-state="collapsed" desc="Singleton">
-    private static BotMessage instance;
-
-    private BotMessage() {}
-
-    public static BotMessage getInstance() {
-        if (instance == null)
-            instance = new BotMessage();
-        return instance;
-    }
-    //</editor-fold>
-
     //<editor-fold default-state="collapsed" desc="Getters">
     public CommandMessage getCommandMessage() { return commandMessage; }
     public ReplyButton getReplyButton() { return replyButton; }

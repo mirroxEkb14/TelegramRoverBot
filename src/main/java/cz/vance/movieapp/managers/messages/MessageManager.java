@@ -74,11 +74,14 @@ public final class MessageManager implements IMessageManager {
      * (including <b>chat id</b>, <b>message text</b>, <b>message id</b> etc.).
      */
     private final IUpdateExtractor updateExtractor;
-
     /**
      * Instance of the {@link MessageRandomizer} class that returns phrase strings during the <b>smart search</b>.
      */
     private final IMessageRandomizer messageRandomizer;
+    /**
+     * Instance of the {@link BotMessageManager} class enables changing the language of the bot messages.
+     */
+    private final IBotMessageManager botMessageManager;
 
     /**
      * Stores the latest message id for each chat id.
@@ -144,6 +147,8 @@ public final class MessageManager implements IMessageManager {
 
         messageRandomizer = new MessageRandomizer();
 
+        botMessageManager = BotMessageManager.getInstance();
+
         this.bot = bot;
     }
     //</editor-fold>
@@ -183,6 +188,16 @@ public final class MessageManager implements IMessageManager {
         final String messageText = messageRandomizer.getHelpMessage();
 
         sendHelp(chatId, messageText);
+    }
+
+    @Override
+    public void sendLang(Update botUpdate) {
+        botMessageManager.changeBotMessageLanguage();
+
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final String messageText = messageRandomizer.getLangMessage();
+
+        sendLang(chatId, messageText);
     }
 
     @Override
@@ -330,6 +345,9 @@ public final class MessageManager implements IMessageManager {
         sendSticker(chatId, stickerFileId);
         ProgramSleeper.pauseSmartSearchBeforeSendingMovie();
         sendMessage(chatId, movieMessageText);
+
+        ProgramSleeper.pauseSmartSearchAfterSendingMovie();
+        sendMessage(chatId, messageRandomizer.getSmartSearchOnFinishMessage());
 
         latestMessageIds.remove(chatId);
         userSelectionManager.removeUserSelection(chatId);
@@ -771,6 +789,20 @@ public final class MessageManager implements IMessageManager {
         try {
             bot.execute(
                     messageBuilder.buildTelegramMessage(chatId, messageText));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="Lang Message Sender">
+    private void sendLang(long chatId, String messageText) {
+        try {
+            bot.execute(
+                    messageBuilder.buildTelegramMessage(
+                            chatId,
+                            messageText,
+                            replyKeyboardBuilder.buildMainMenuKeyboard()));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

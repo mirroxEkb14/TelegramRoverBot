@@ -6,6 +6,7 @@ import cz.vance.movieapp.models.UserSelection;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 //</editor-fold>
 
 /**
@@ -17,6 +18,12 @@ public final class UserSelectionManager implements IUserSelectionManager {
      * Stores user's selections during the <b>smart search</b>.
      */
     private final Map<Long, UserSelection> userSelections;
+    /**
+     * Function extracts the text from the button that contains not only the text, but also an emoji with a white space
+     * between.
+     */
+    private final Function<String, String> emojiExtractor = (buttonText) ->
+        buttonText.substring(buttonText.indexOf(" ") + 1);
 
     //<editor-fold default-state="collapsed" desc="Singleton">
     private static UserSelectionManager instance;
@@ -35,19 +42,22 @@ public final class UserSelectionManager implements IUserSelectionManager {
 
     @Override
     public void putMood(long chatId, String mood) {
-        final String moodText = CallbackQueryExtractor.extractCallbackQueryPrefix(mood);
+        final String moodTextWithEmoji = CallbackQueryExtractor.extractCallbackQueryPrefix(mood);
+        final String moodText = emojiExtractor.apply(moodTextWithEmoji);
         userSelections.get(chatId).setMood(moodText);
     }
 
     @Override
     public void putCatalogue(long chatId, String catalogue) {
-        final String catalogueText = CallbackQueryExtractor.extractCallbackQueryPrefix(catalogue);
+        final String catalogueTextWithEmoji = CallbackQueryExtractor.extractCallbackQueryPrefix(catalogue);
+        final String catalogueText = emojiExtractor.apply(catalogueTextWithEmoji);
         userSelections.get(chatId).setCatalogue(catalogueText);
     }
 
     @Override
     public void putGenre(long chatId, String genre) {
-        final String genreText = CallbackQueryExtractor.extractCallbackQueryPrefix(genre);
+        final String genreTextWithEmoji = CallbackQueryExtractor.extractCallbackQueryPrefix(genre);
+        final String genreText = emojiExtractor.apply(genreTextWithEmoji);
         userSelections.get(chatId).setGenre(genreText);
     }
 

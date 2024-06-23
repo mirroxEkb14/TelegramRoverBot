@@ -1,0 +1,98 @@
+{
+  "commandMessage":
+  {
+    "welcomes": ["Welcome %s!\nI'm - <b>%s</b>, created to be your own movie-guide\nLet's pick some movie", "Howdy %s!\nMy name's <b>%s</b>, an avid lover of movies\nLet me find you some good movie"],
+    "helps": ["<u>\ud83c\udfacSmart Search</u>\niis a sampling of movies and series based on your preferences: mood, genre, movie/series. This is the point of me existing. I try to make a perfect selection for you according to your current spiritual state\n<u>\ud83c\udfafWe recommend</u>\nOpens soon...\n<u>\ud83d\udc40No idea</u>\nOpens soon...\n<u>\ud83c\udfadSend feedback</u>\nis an option that allows you share your good or bad experience about a watched movie. All your comments read the admins themselves, so you could say hello. The more feedbacks you leave, the more smarter I'm becoming\ud83d\udc68\u200d\ud83c\udf93"],
+    "langMessage": ["The language has been changed to English\uD83C\uddec\ud83c\udde7", "Now I can speak English!\uD83C\uddec\ud83c\udde7"],
+    "unknownInputs": ["I beg your pardon, but you've sent an unknown content to me."]
+  },
+  "replyButton":
+  {
+    "smartSearchReplyButton": "\ud83c\udfac Smart Search",
+    "ourChoiceReplyButton": "\ud83c\udfaf We Recommend",
+    "noIdeaReplyButton": "\ud83d\udc40 No Idea",
+    "sendFeedbackReplyButton": "\ud83c\udfad Send Feedback"
+  },
+  "inlineButton":
+  {
+    "depressionMoodInlineButton": "\ud83c\udf27 Depressed",
+    "cheerfulMoodInlineButton": "\ud83d\udc83 Сheerful",
+    "fightingMoodInlineButton": "\ud83d\ude3c Fighting",
+    "familyMoodInlineButton": "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67\u200d\ud83d\udc66 Family",
+    "friendsMoodInlineButton": "\ud83c\udf7b Friends",
+    "loveMoodInlineButton": "\ud83d\udc8b Love",
+    "movieInlineButton": "\ud83d\udcfc Movie",
+    "seriesInlineButton": "\ud83c\udf9e\ufe0f Series",
+    "comedyInlineButton": "\ud83d\udd7a Comedy",
+    "dramaInlineButton": "\ud83d\udc94 Drama",
+    "melodramaInlineButton": "\ud83d\udc98 Melodrama",
+    "thrillerInlineButton": "\ud83d\udd2b Thriller",
+    "actionInlineButton": "\ud83d\udd25 Action",
+    "fictionInlineButton": "\ud83e\uddd9\ud83c\udffb Fiction",
+    "detectiveInlineButton": "\ud83d\udd75\ud83c\udffc Detective",
+    "familyInlineButton": "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc66 Family",
+    "sportInlineButton": "\ud83c\udfc0 Fantasy",
+    "fantasyInlineButton": "\ud83d\udd2e Sport",
+    "animationInlineButton": "\ud83e\uddf8 Animation",
+    "adventureInlineButton": "\ud83c\udf92 Adventure",
+    "biographyInlineButton": "\ud83d\udcd6 Biography",
+    "criminalInlineButton": "\ud83d\udc65 Criminal",
+    "documentaryInlineButton": "\ud83c\udfa5 Documentary",
+    "warInlineButton": "\ud83e\ude96 War",
+    "musicInlineButton": "\ud83c\udfbb Music",
+    "leftArrowInlineButton": "\ud83c\udf00",
+    "rightArrowInlineButton": "\ud83c\udf01",
+    "smartSearchYesInlineButton": "\u2714\ufe0f Yes",
+    "smartSearchNoInlineButton": "\u2716\ufe0f No",
+    "smartSearchBackInlineButton": "\u2b05 Back",
+    "noIdeaNextMovieInlineButton": "Next \u27a1",
+    "noIdeaPreviousMovieInlineButton": "\u2b05 Back",
+    "noIdeaToMainMenuInlineButton": "\u2199\ufe0f To main menu",
+    "weRecommendNextMovieInlineButton": "Next \u27a1",
+    "weRecommendPreviousMovieInlineButton": "\u2b05 Back",
+    "weRecommendToMainMenuInlineButton": "\u2199\ufe0f To main menu",
+    "weRecommendWatchInlineButton": "\ud83d\udcfa Watch",
+    "sendFeedbackYesInlineButton": "\u2714\ufe0f Yes",
+    "sendFeedbackNoInlineButton": "\u2716\ufe0f No"
+  },
+  "smartSearchMessage":
+  {
+    "smartSearchAtLaunchGreetings": ["It's a movie time! 3.. 2.. 1..", "Time to eat some popcorn then..."],
+    "smartSearchMoodSelection": ["Now, let me know your spirit condition", "Share your mood with me"],
+    "smartSearchCatalogueSelection": ["Understood, now you'd want to watch...", "Roger that, now would you rather watch a movie or start watching some cool series?"],
+    "smartSearchGenreSelection": ["Ok then, here is maybe the most difficult part... choose a genre:", "Well-well, what about a genre?"],
+    "smartSearchVerifying": ["Did I catch you right?\n\nMood: <b>%s</b>\nCategory: <b>%s</b>\nGenre: <b>%s</b>", "Let's make sure I got everything correct\ud83d\ude4f\n\nMood: <b>%s</b>\nCategory: <b>%s</b>\nGenre: <b>%s</b>"],
+    "smartSearchVerified": ["Great, let's find something for you!", "Brilliant, give me a minute to find something..."],
+    "smartSearchSampling": ["Look at that, I've got something for you!\n\u261e", "You'll definitely find something for yourself here\n\u261e", "Well, it wasn't that simple... but I made a sampling for you anyway!\n\u261e"],
+    "smartSearchOnFinish": ["Don't forget to share your impressions with me through '%s' after watching", "Don't forget about '%s', I'd be very pleased to take a review from you!", "I'm ready to hear you out after watching - '%s'"],
+    "smartSearchNoMovies" : ["I'm very sorry, but I couldn't find movies that would satisfy your preferences", "Oh, it's very strange... but it seems like I can't offer anything to you for the time being", "My apologies, I wasn't able to make a sampling, it seems like the collection of ours is not perfect"],
+    "smartSearchOnFailure": ["Maybe I could make up for it by offering some of my other options\ud83e\udd7a", "Maybe you could try out something different while I'm working on expanding our library?", "You could test another mix of moods and genres"],
+    "onSmartSearchKeyboardRemoved": ["Your selection is ready! Pleasant viewing\uD83E\uDD17", "Movie selection has been sent! I hope, you'll find something interesting\uD83E\uDD7A", "Your selection is ready! It's high time you grabbed some popcorn\uD83D\uDE08"],
+    "onSmartSearchOldKeyboardRemoved": ["An old keyboard was removed\uD83E\uDEE1", "That was an old keyboard, start a new selection!", "An old irrelevant keyboard was removed\uD83E\uDD27"],
+    "onSmartSearchRepeatedKeyboardRemoved": ["Some time ago there was a keyboard here⚰️", "Irrelevant keyboard was removed☠️", "A keyboard was already irrelevant\uD83D\uDC80"],
+    "onSmartSearchRebooted": ["Let's start over, then\uD83D\uDE80", "Ok, let's start over✏️", "Ok then, it's worth trying one more time\uD83D\uDCCC"],
+    "onSmartSearchCatalogueBack": ["Your mood changes so quickly...", "Want to change the mood?", "Making a step back..."],
+    "onSmartSearchGenreBack": ["Changed your mind?", "Getting back..."],
+    "onSmartSearchConfirmationBack": ["Have you changed your mind about selected genre?", "Changing the genre...", "Getting back to the genre selection..."]
+  },
+  "noIdeaMessage":
+  {
+    "noIdeaAtLaunchGreetings": ["Hmm... what can I find...", "Okay then, let's find something for you", "What would you like to watch right now..."],
+    "noIdeaNoMoviesLeft": ["It seems like we're out of movies\ud83d\ude10 Sorry...", "It turns out to be our library is not internal... We're sorry", "No movies left\ud83e\udee1"],
+    "noIdeaToMainMenu": ["Let's get back to the main menu...", "You can always continue the search in this mode starting with the movie you finished on", "Back to the menu..."]
+  },
+  "weRecommendMessage":
+  {
+    "weRecommendAtLaunchGreetings": ["Pleasant viewing \ud83d\ude0a", "I hope it won't be so hard to choose \ud83d\ude05", "It's time you stocked up on some popcorn \ud83c\udf7f", "Star our 'top' movies!"],
+    "weRecommendPleasantViewing": ["I think you'll definitely like the movie!", "It's time you stocked up on some yummies\ud83e\udd6a", "Nice choice!"],
+    "weRecommendRusSampleMovieMessage": "<b>Name</b>: %s\n<b>Genre</b>: %s\n<b>Release year</b>: %s\n<b>Director</b>: %s\n<b>Top cast</b>: %s\n<b>Storyline</b>: %s\n\n<a href='%s'>more details...</a>",
+    "weRecommendToMainMenu": ["Let's get back to the main menu...", "You can always continue the search in this mode starting with the movie you finished on", "Back to the menu..."]
+  },
+  "sendFeedbackMessage":
+  {
+    "sendFeedbackAtLaunchGreetings": "Leave your opinion about offered movies and bot work in general:\n<b>1.</b> What would you want to add/remove from the bot?\n<b>2.</b> How did you like movie selections? You can star each category separately\n<b>3.</b> Maybe, you noticed some mistakes in bot work? Spelling mistakes in its messages, incorrect (illogical) keyboard navigation?",
+    "sendFeedbackConfirmation": ["Do you really want to send your feedback?\n\n%s", "Are we sending your feedback?\n\n%s", "Did I catch your opinion right?\n\n%s"],
+    "sendFeedbackNoConfirmationMessage": ["Ok then, your message will remain only between us\uD83E\uDD2B", "Don't send, roger that\uD83E\uDEE2", "Well, the Admins do not need to know about it...\uD83D\uDE36"],
+    "sendFeedbackYesConfirmationMessage": ["The feedback has been sent!\uD83D\uDE08", "The Admins already have your feedback on the post!\uD83D\uDCEC"]
+  }
+}

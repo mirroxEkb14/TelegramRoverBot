@@ -218,6 +218,12 @@ public interface IMessageRandomizer {
     String getHelpMessage();
 
     /**
+     * Extracts a random element from the <b>langMessage</b> list that contains all the possible texts when the user
+     * changes the language of the bot using the <b>/lang</b> command.
+     */
+    String getLangMessage();
+
+    /**
      * Extracts the only one element from the <b>unknownInput</b> list that contains the text when the user enters
      * some unknown input.
      */

@@ -11,6 +11,7 @@ public final class ProgramSleeper {
 
     public static void pauseSmartSearchBeforeSendingMood() { pauseExecution(900, 1300); }
     public static void pauseSmartSearchBeforeSendingMovie() { pauseExecution(1100, 1400); }
+    public static void pauseSmartSearchAfterSendingMovie() { pauseExecution(800, 900); }
     public static void pauseSmartSearchBeforeReboot() { pauseExecution(800, 1000); }
     public static void pauseNoIdeaBeforeSendingFirstMovie() { pauseExecution(1000, 1300); }
     public static void pauseWeRecommendBeforeSendingFirstMovie() { pauseExecution(1200, 1500); }

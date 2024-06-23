@@ -3,6 +3,8 @@ package cz.vance.movieapp.managers.records;
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.database.CinemaDatabase;
 import cz.vance.movieapp.database.ICinemaDatabase;
+import cz.vance.movieapp.managers.messages.BotMessageManager;
+import cz.vance.movieapp.managers.messages.IBotMessageManager;
 import cz.vance.movieapp.models.Movie;
 import cz.vance.movieapp.models.UserSelection;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +22,7 @@ import java.util.List;
 public final class MovieRecord implements IMovieRecord {
 
     private final ICinemaDatabase cinemaDB;
+    private final IBotMessageManager botMessageManager;
 
     /**
      * Contains <b>all the movies</b> from the DB.
@@ -49,6 +52,7 @@ public final class MovieRecord implements IMovieRecord {
 
     private MovieRecord() {
         cinemaDB = CinemaDatabase.getInstance();
+        botMessageManager = BotMessageManager.getInstance();
         loadMovies();
     }
 
@@ -147,9 +151,33 @@ public final class MovieRecord implements IMovieRecord {
                                        @NotNull String mood,
                                        @NotNull String catalogue,
                                        @NotNull String genre) {
-        return mood.contains(movie.rusMood()) &&
-                catalogue.contains(movie.rusCatalogue()) &&
-                genre.contains(movie.rusGenre());
+        return botMessageManager.isEngLanguage() ?
+                isAppropriateEngMovie(movie, mood, catalogue, genre) :
+                isAppropriateRusMovie(movie, mood, catalogue, genre);
+    }
+
+    /**
+     * Returns a <b>boolean value</b>, indicating whether the movie (in Russian) is appropriate for the user's selection.
+     */
+    private boolean isAppropriateRusMovie(@NotNull Movie movie,
+                                          @NotNull String mood,
+                                          @NotNull String catalogue,
+                                          @NotNull String genre) {
+        return movie.rusMood().contains(mood) &&
+                movie.rusCatalogue().contains(catalogue) &&
+                movie.rusGenre().contains(genre);
+    }
+
+    /**
+     * Returns a <b>boolean value</b>, indicating whether the movie (in English) is appropriate for the user's selection.
+     */
+    private boolean isAppropriateEngMovie(@NotNull Movie movie,
+                                          @NotNull String mood,
+                                          @NotNull String catalogue,
+                                          @NotNull String genre) {
+        return movie.engMood().contains(mood) &&
+                movie.engCatalogue().contains(catalogue) &&
+                movie.engGenre().contains(genre);
     }
     //</editor-fold>
 }
