@@ -8,19 +8,19 @@ public final class ReplyButton {
     public String smartSearchReplyButton;
     public String ourChoiceReplyButton;
     public String noIdeaReplyButton;
-    public String feedbackReplyButton;
+    public String sendFeedbackReplyButton;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public String getSmartSearchReplyButton() { return smartSearchReplyButton; }
     public String getWeRecommendReplyButton() { return ourChoiceReplyButton; }
     public String getNoIdeaReplyButton() { return noIdeaReplyButton; }
-    public String getFeedbackReplyButton() { return feedbackReplyButton; }
+    public String getSendFeedbackReplyButton() { return sendFeedbackReplyButton; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
     public void setSmartSearchReplyButton(String smartSearchReplyButton) { this.smartSearchReplyButton = smartSearchReplyButton; }
     public void setOurChoiceReplyButton(String ourChoiceReplyButton) { this.ourChoiceReplyButton = ourChoiceReplyButton; }
     public void setNoIdeaReplyButton(String noIdeaReplyButton) { this.noIdeaReplyButton = noIdeaReplyButton; }
-    public void setFeedbackReplyButton(String feedbackReplyButton) { this.feedbackReplyButton = feedbackReplyButton; }
+    public void setSendFeedbackReplyButton(String sendFeedbackReplyButton) { this.sendFeedbackReplyButton = sendFeedbackReplyButton; }
     //</editor-fold>
 }

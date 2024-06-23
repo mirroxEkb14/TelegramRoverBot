@@ -137,21 +137,21 @@ public interface IMessageManager {
     /**
      * Sends a message with the <b>'we recommend' first movie</b> text.
      *
-     * @see IInlineKeyboardBuilder#buildWeRecommendFirstMovieKeyboard()
+     * @see IInlineKeyboardBuilder#buildWeRecommendInterimMovieKeyboard(String)
      */
     void sendWeRecommendFirstMovie(Update botUpdate);
 
     /**
      * Sends a message with the <b>'our choice' previous movie</b> text.
      *
-     * @see IInlineKeyboardBuilder#buildWeRecommendInterimMovieKeyboard()
+     * @see IInlineKeyboardBuilder#buildWeRecommendInterimMovieKeyboard(String)
      */
     void sendWeRecommendPreviousMovie(Update botUpdate);
 
     /**
      * Sends a message with the <b>'our choice' next movie</b> text.
      *
-     * @see IInlineKeyboardBuilder#buildWeRecommendInterimMovieKeyboard()
+     * @see IInlineKeyboardBuilder#buildWeRecommendInterimMovieKeyboard(String)
      */
     void sendWeRecommendNextMovie(Update botUpdate);
 
@@ -168,6 +168,27 @@ public interface IMessageManager {
      * The inline keyboard is removed.
      */
     void handleWeRecommendToMainMenu(Update botUpdate);
+
+    /**
+     * Sends a message asking the user to send a message with his <b>feedback</b>.
+     */
+    void sendFeedbackAtLaunchGreetings(Update botUpdate);
+
+    /**
+     * Sends a message with the <b>confirmation inline keyboard buttons</b> for the user to choose, if he wants to save
+     * the message he sent as feedback.
+     */
+    void sendFeedbackConfirmation(Update botUpdate);
+
+    /**
+     * Sends a message with the <b>farewell message</b> at the end of the <b>send feedback</b> process.
+     */
+    void sendFeedbackAtEndFarewell(Update botUpdate);
+
+    /**
+     * Return a <b>boolean value</b> indicating if the user has pressed the <b>send feedback reply keyboard button</b>.
+     */
+    boolean isSendFeedbackPressed();
 
     //<editor-fold default-state="collapsed" desc="Boolean Methods">
     default boolean isMessage(Update botUpdate) { return messageExistenceValidator.test(botUpdate); }
@@ -204,6 +225,16 @@ public interface IMessageManager {
         return stringValidator.test(
                 messageText,
                 BotMessageManager.getInstance().getWeRecommendReplyButton());
+    }
+
+    default boolean isSendFeedbackButton(@NotNull Update botUpdate) {
+        String messageText = botUpdate.getMessage().getText();
+        if (messageText == null)
+            return false;
+
+        return stringValidator.test(
+                messageText,
+                BotMessageManager.getInstance().getSendFeedbackReplyButton());
     }
     //</editor-fold>
 }

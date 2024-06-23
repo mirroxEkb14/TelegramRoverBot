@@ -180,6 +180,32 @@ public interface IMessageRandomizer {
     String getWeRecommendToMainMenuMessage();
 
     /**
+     * Extract the <b>sendFeedbackAtLaunchGreetings</b> string that contains the text when the user clicks the <b>send
+     * feedback</b> reply button in the <b>main menu</b>.
+     */
+    String getSendFeedbackAtLaunchGreetingsMessage();
+
+    /**
+     * Extracts a random element from the <b>sendFeedbackConfirmation</b> list that contains all the possible texts
+     * when the user during the <b>send feedback</b> presses the <b>confirmation</b> inline keyboard button.
+     *
+     * @param userFeedback <b>String</b> object representing user's feedback message.
+     */
+    String getSendFeedbackConfirmationMessage(String userFeedback);
+
+    /**
+     * Extracts a random element from the <b>sendFeedbackNoConfirmation</b> list that contains all the possible texts
+     * when the user during the <b>send feedback</b> presses the <b>no confirmation</b> inline keyboard button.
+     */
+    String getSendFeedbackNoConfirmationMessage();
+
+    /**
+     * Extracts the <b>sendFeedbackYesConfirmation</b> string that contains the text when the user during the <b>send
+     * feedback</b> presses the <b>yes confirmation</b> inline keyboard button.
+     */
+    String getSendFeedbackYesConfirmationMessage();
+
+    /**
      * Extracts a random element from the <b>welcomes</b> list that contains all the possible texts when the
      * user starts the conversation with the bot for the first time or when enters the appropriate <b>/start</b> command.
      */

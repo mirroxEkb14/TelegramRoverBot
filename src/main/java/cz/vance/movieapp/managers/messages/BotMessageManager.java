@@ -134,6 +134,17 @@ public final class BotMessageManager implements IBotMessageManager {
     public int getWeRecommendToMainMenuSize() { return botMessage.getWeRecommendMessage().getWeRecommendToMainMenu().size(); }
     //</editor-fold>
 
+    //<editor-fold default-state="collapsed" desc="'Send Feedback' Getters">
+    public String getSendFeedbackAtLaunchGreetings() { return botMessage.getSendFeedbackMessage().getSendFeedbackAtLaunchGreetings(); }
+    public List<String> getSendFeedbackConfirmation() { return botMessage.getSendFeedbackMessage().getSendFeedbackConfirmation(); }
+    public List<String> getSendFeedbackNoConfirmationMessage() { return botMessage.getSendFeedbackMessage().getSendFeedbackNoConfirmationMessage(); }
+    public List<String> getSendFeedbackYesConfirmationMessage() { return botMessage.getSendFeedbackMessage().getSendFeedbackYesConfirmationMessage(); }
+
+    public int getSendFeedbackConfirmationSize() { return botMessage.getSendFeedbackMessage().getSendFeedbackConfirmation().size(); }
+    public int getSendFeedbackNoConfirmationMessageSize() { return botMessage.getSendFeedbackMessage().getSendFeedbackNoConfirmationMessage().size(); }
+    public int getSendFeedbackYesConfirmationMessageSize() { return botMessage.getSendFeedbackMessage().getSendFeedbackYesConfirmationMessage().size(); }
+    //</editor-fold>
+
     //<editor-fold default-state="collapsed" desc="Welcome Getters">
     @Override
     public List<String> getWelcomes() { return botMessage.getCommandMessage().getWelcomes(); }
@@ -163,7 +174,7 @@ public final class BotMessageManager implements IBotMessageManager {
     @Override
     public String getWeRecommendReplyButton() { return botMessage.getReplyButton().getWeRecommendReplyButton(); }
     @Override
-    public String getFeedbackReplyButton() { return botMessage.getReplyButton().getFeedbackReplyButton(); }
+    public String getSendFeedbackReplyButton() { return botMessage.getReplyButton().getSendFeedbackReplyButton(); }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Inline Keyboard Button Getters">
@@ -241,5 +252,9 @@ public final class BotMessageManager implements IBotMessageManager {
     public String getWeRecommendToMainMenuInlineButton() { return botMessage.getInlineButton().getWeRecommendToMainMenuInlineButton(); }
     @Override
     public String getWeRecommendWatchInlineButton() { return botMessage.getInlineButton().getWeRecommendWatchInlineButton(); }
+    @Override
+    public String getSendFeedbackYesInlineButton() { return botMessage.getInlineButton().getSendFeedbackYesInlineButton(); }
+    @Override
+    public String getSendFeedbackNoInlineButton() { return botMessage.getInlineButton().getSendFeedbackNoInlineButton(); }
     //</editor-fold>
 }

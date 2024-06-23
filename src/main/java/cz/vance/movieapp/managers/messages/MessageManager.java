@@ -10,15 +10,14 @@ import cz.vance.movieapp.managers.builders.IMessageBuilder;
 import cz.vance.movieapp.managers.builders.MessageBuilder;
 import cz.vance.movieapp.managers.formatters.IMessageFormatter;
 import cz.vance.movieapp.managers.formatters.MessageFormatter;
+import cz.vance.movieapp.managers.records.FeedbackRecord;
+import cz.vance.movieapp.managers.records.IFeedbackRecord;
 import cz.vance.movieapp.managers.records.IMovieRecord;
 import cz.vance.movieapp.managers.selections.IUserSelectionManager;
 import cz.vance.movieapp.managers.selections.UserSelectionManager;
 import cz.vance.movieapp.managers.updates.IUpdateExtractor;
 import cz.vance.movieapp.managers.updates.UpdateExtractor;
-import cz.vance.movieapp.models.BotMessage;
-import cz.vance.movieapp.models.Movie;
-import cz.vance.movieapp.models.UserPhoto;
-import cz.vance.movieapp.models.UserSelection;
+import cz.vance.movieapp.models.*;
 import cz.vance.movieapp.managers.randomizers.IMessageRandomizer;
 import cz.vance.movieapp.managers.randomizers.MessageRandomizer;
 import cz.vance.movieapp.managers.records.MovieRecord;
@@ -59,6 +58,7 @@ public final class MessageManager implements IMessageManager {
 
     private final IUserSelectionManager userSelectionManager;
     private final IMovieRecord movieRecord;
+    private final IFeedbackRecord feedbackRecord;
     private final IMessageFormatter messageFormatter;
 
     private final IReplyKeyboardBuilder replyKeyboardBuilder;
@@ -87,6 +87,13 @@ public final class MessageManager implements IMessageManager {
      * removed.
      */
     private final HashMap<Long, Integer> latestMessageIds = new HashMap<>();
+
+    /**
+     * Is used to determine if the user pressed the <b>send feedback</b> reply keyboard button.
+     * <br>
+     * Is then used to extract the user's feedback message.
+     */
+    private static boolean isSendFeedbackPressed;
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Latest Message Handler">
@@ -125,6 +132,7 @@ public final class MessageManager implements IMessageManager {
     public MessageManager(TelegramLongPollingBot bot) {
         userSelectionManager = UserSelectionManager.getInstance();
         movieRecord = MovieRecord.getInstance();
+        feedbackRecord = FeedbackRecord.getInstance();
 
         messageFormatter = new MessageFormatter();
 
@@ -615,6 +623,91 @@ public final class MessageManager implements IMessageManager {
         latestMessageIds.remove(chatId);
     }
 
+    @Override
+    public void sendFeedbackAtLaunchGreetings(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final String messageText = messageRandomizer.getSendFeedbackAtLaunchGreetingsMessage();
+
+        modeProcessingHandler.accept(chatId);
+
+        sendMessage(chatId, messageText);
+        updateIsSendFeedbackPressed();
+    }
+
+    @Override
+    public void sendFeedbackConfirmation(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final String userFeedbackText = updateExtractor.getMessageText(botUpdate);
+        final String messageText = messageRandomizer.getSendFeedbackConfirmationMessage(userFeedbackText);
+
+        modeProcessingHandler.accept(chatId);
+
+        final Message feedbackConfirmationMessage = sendMessage(
+                chatId,
+                messageText,
+                inlineKeyboardBuilder.buildSendFeedbackConfirmationKeyboard());
+        latestMessageHandler.accept(feedbackConfirmationMessage);
+    }
+
+    //<editor-fold default-state="collapsed" desc="Overridden 'sendFeedbackAtEndFarewell' Method">
+    @Override
+    public void sendFeedbackAtEndFarewell(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
+
+        if (isOldInlineKeyboard(chatId, messageId)) {
+            handleOldInlineKeyboard(chatId, messageId);
+            return;
+        }
+
+        if (inlineKeyboardBuilder.isSendFeedbackNoButton(botUpdate)) {
+            handleSendFeedbackNoButton(chatId, messageId);
+            updateIsSendFeedbackPressed();
+            return;
+        }
+        handleSendFeedbackYesButton(chatId, messageId, botUpdate);
+        updateIsSendFeedbackPressed();
+    }
+
+    /**
+     * Handles the <b>No</b> button press for the <b>Send Feedback</b> message:
+     * <ul>
+     *     <li>removes the <b>inline keyboard</b>;</li>
+     *     <li>sends the <b>'send feedback' no confirmation</b> message;</li>
+     *     <li>removes the <b>latest message id</b> from the <b>latest message ids</b> map.</li>
+     * </ul>
+     */
+    private void handleSendFeedbackNoButton(long chatId, long messageId) {
+        removeMessageInlineKeyboard(chatId, messageId);
+        sendMessage(chatId, messageRandomizer.getSendFeedbackNoConfirmationMessage());
+
+        latestMessageIds.remove(chatId);
+    }
+
+    /**
+     * Handles the <b>Yes</b> button press for the <b>Send Feedback</b> message:
+     * <ul>
+     *     <li>removes the <b>inline keyboard</b>;</li>
+     *     <li>sends the <b>'send feedback' yes confirmation</b> message;</li>
+     *     <li>removes the <b>latest message id</b> from the <b>latest message ids</b> map.</li>
+     * </ul>
+     */
+    private void handleSendFeedbackYesButton(long chatId,
+                                             long messageId,
+                                             Update botUpdate) {
+        final Feedback feedback = new Feedback((int)chatId, updateExtractor.getSendFeedbackCallbackMessageText(botUpdate));
+        feedbackRecord.insertFeedback(feedback);
+
+        removeMessageInlineKeyboard(chatId, messageId);
+        sendMessage(chatId, messageRandomizer.getSendFeedbackYesConfirmationMessage());
+
+        latestMessageIds.remove(chatId);
+    }
+    //</editor-fold>
+
+    @Override
+    public boolean isSendFeedbackPressed() { return isSendFeedbackPressed; }
+
     /* ---------------- Private Helper Methods -------------- */
 
     //<editor-fold default-state="collapsed" desc="Echo Message Sender">
@@ -831,6 +924,8 @@ public final class MessageManager implements IMessageManager {
         return !latestMessageIds.containsKey(chatId) || latestMessageIds.get(chatId) != (int)messageId;
     }
     //</editor-fold>
+
+    private void updateIsSendFeedbackPressed() { isSendFeedbackPressed = !isSendFeedbackPressed; }
 
     /* ------------------------------------------------------ */
 }

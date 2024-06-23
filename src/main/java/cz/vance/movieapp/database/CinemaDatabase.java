@@ -1,7 +1,9 @@
 package cz.vance.movieapp.database;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.models.Feedback;
 import cz.vance.movieapp.models.Movie;
+import cz.vance.movieapp.utils.columns.FeedbackColumnLabel;
 import cz.vance.movieapp.utils.columns.MovieColumnLabel;
 import org.jetbrains.annotations.NotNull;
 
@@ -86,5 +88,39 @@ public final class CinemaDatabase implements ICinemaDatabase {
             e.printStackTrace();
         }
         return movies;
+    }
+
+    @Override
+    public void insertFeedback(@NotNull Feedback feedback) {
+        final String query = "INSERT INTO feedbacks (tg_id, feedback_text) VALUES (?, ?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, feedback.getTgId());
+            stmt.setString(2, feedback.getFeedbackText());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public @NotNull List<Feedback> getFeedbacks() {
+        final List<Feedback> feedbacks = new ArrayList<>();
+        final String query = "SELECT * FROM feedbacks";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query);
+             final ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                feedbacks.add(new Feedback(
+                        rs.getInt(FeedbackColumnLabel.ID.getContent()),
+                        rs.getInt(FeedbackColumnLabel.TG_ID.getContent()),
+                        rs.getString(FeedbackColumnLabel.FEEDBACK_TEXT.getContent())
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return feedbacks;
     }
 }

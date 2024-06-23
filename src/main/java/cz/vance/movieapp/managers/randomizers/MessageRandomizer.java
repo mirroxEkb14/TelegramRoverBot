@@ -171,6 +171,31 @@ public final class MessageRandomizer implements IMessageRandomizer {
     }
 
     @Override
+    public String getSendFeedbackAtLaunchGreetingsMessage() {
+        return botMessageManager.getSendFeedbackAtLaunchGreetings();
+    }
+
+    @Override
+    public String getSendFeedbackConfirmationMessage(String userFeedback) {
+        return String.format(
+                botMessageManager.getSendFeedbackConfirmation().get(
+                        getRandomIndex(botMessageManager.getSendFeedbackConfirmationSize())),
+                userFeedback);
+    }
+
+    @Override
+    public String getSendFeedbackNoConfirmationMessage() {
+        return botMessageManager.getSendFeedbackNoConfirmationMessage().get(
+                getRandomIndex(botMessageManager.getSendFeedbackNoConfirmationMessageSize()));
+    }
+
+    @Override
+    public String getSendFeedbackYesConfirmationMessage() {
+        return botMessageManager.getSendFeedbackYesConfirmationMessage().get(
+                getRandomIndex(botMessageManager.getSendFeedbackYesConfirmationMessageSize()));
+    }
+
+    @Override
     public String getWelcomeMessage() {
         return botMessageManager.getWelcomes().get(
                 getRandomIndex(botMessageManager.getWelcomesSize()));

@@ -17,6 +17,7 @@ public final class BotMessage {
     private SmartSearchMessage smartSearchMessage;
     private NoIdeaMessage noIdeaMessage;
     private WeRecommendMessage weRecommendMessage;
+    private SendFeedbackMessage sendFeedbackMessage;
 
     //<editor-fold default-state="collapsed" desc="Singleton">
     private static BotMessage instance;
@@ -37,6 +38,7 @@ public final class BotMessage {
     public SmartSearchMessage getSmartSearchMessage() { return smartSearchMessage; }
     public NoIdeaMessage getNoIdeaMessage() { return noIdeaMessage; }
     public WeRecommendMessage getWeRecommendMessage() { return weRecommendMessage; }
+    public SendFeedbackMessage getSendFeedbackMessage() { return sendFeedbackMessage; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
@@ -46,5 +48,6 @@ public final class BotMessage {
     public void setSmartSearchMessage(SmartSearchMessage smartSearchMessage) { this.smartSearchMessage = smartSearchMessage; }
     public void setNoIdeaMessage(NoIdeaMessage noIdeaMessage) { this.noIdeaMessage = noIdeaMessage; }
     public void setWeRecommendMessage(WeRecommendMessage weRecommendMessage) { this.weRecommendMessage = weRecommendMessage; }
+    public void setSendFeedbackMessage(SendFeedbackMessage sendFeedbackMessage) { this.sendFeedbackMessage = sendFeedbackMessage; }
     //</editor-fold>
 }

@@ -36,7 +36,7 @@ public final class ReplyKeyboardBuilder implements IReplyKeyboardBuilder {
         firstRow.add(new KeyboardButton(
                 botMessageManager.getNoIdeaReplyButton()));
         secondRow.add(new KeyboardButton(
-                botMessageManager.getFeedbackReplyButton()));
+                botMessageManager.getSendFeedbackReplyButton()));
 
         keyboardRows.add(firstRow);
         keyboardRows.add(secondRow);

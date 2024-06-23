@@ -54,6 +54,19 @@ public final class UpdateExtractor implements IUpdateExtractor {
     public String getMessageText(@NotNull Update update) { return update.getMessage().getText(); }
 
     @Override
+    public String getCallbackMessageText(@NotNull Update update) { return update.getCallbackQuery().getMessage().getText(); }
+
+    @Override
+    public @NotNull String getSendFeedbackCallbackMessageText(@NotNull Update update) {
+        final String originalText = update.getCallbackQuery().getMessage().getText();
+        int firstNewlineIndex = originalText.indexOf(LINE_SEPARATOR);
+
+        if (firstNewlineIndex != -1)
+            return originalText.substring(firstNewlineIndex + 1).trim();
+        return originalText.trim();
+    }
+
+    @Override
     public String getStickerFileId(@NotNull Update update) { return update.getMessage().getSticker().getFileId(); }
 
     @Override

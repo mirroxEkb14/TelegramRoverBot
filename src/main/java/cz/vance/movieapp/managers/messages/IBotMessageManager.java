@@ -37,6 +37,11 @@ public interface IBotMessageManager {
     String getWeRecommendRusSampleMovieMessage();
     List<String> getWeRecommendToMainMenu();
 
+    String getSendFeedbackAtLaunchGreetings();
+    List<String> getSendFeedbackConfirmation();
+    List<String> getSendFeedbackNoConfirmationMessage();
+    List<String> getSendFeedbackYesConfirmationMessage();
+
     List<String> getWelcomes();
     List<String> getHelps();
     List<String> getUnknownInputs();
@@ -67,6 +72,10 @@ public interface IBotMessageManager {
     int getWeRecommendPleasantViewingSize();
     int getWeRecommendToMainMenuSize();
 
+    int getSendFeedbackConfirmationSize();
+    int getSendFeedbackNoConfirmationMessageSize();
+    int getSendFeedbackYesConfirmationMessageSize();
+
     int getWelcomesSize();
     int getHelpsSize();
     int getUnknownInputsSize();
@@ -74,7 +83,7 @@ public interface IBotMessageManager {
     String getSmartSearchReplyButton();
     String getWeRecommendReplyButton();
     String getNoIdeaReplyButton();
-    String getFeedbackReplyButton();
+    String getSendFeedbackReplyButton();
 
     String getDepressionMoodInlineButton();
     String getCheerfulMoodInlineButton();
@@ -117,4 +126,7 @@ public interface IBotMessageManager {
     String getWeRecommendPreviousMovieInlineButton();
     String getWeRecommendToMainMenuInlineButton();
     String getWeRecommendWatchInlineButton();
+
+    String getSendFeedbackYesInlineButton();
+    String getSendFeedbackNoInlineButton();
 }

@@ -76,7 +76,9 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
      * @param update The update containing the message.
      */
     private void handleMessage(Update update) {
-        if (messageManager.isStartCommand(update))
+        if (messageManager.isSendFeedbackPressed())
+            messageManager.sendFeedbackConfirmation(update);
+        else if (messageManager.isStartCommand(update))
             messageManager.sendWelcome(update);
         else if (messageManager.isHelpCommand(update))
             messageManager.sendHelp(update);
@@ -86,6 +88,8 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
             messageManager.sendNoIdeaFirstMovie(update);
         else if (messageManager.isWeRecommendButton(update))
             messageManager.sendWeRecommendFirstMovie(update);
+        else if (messageManager.isSendFeedbackButton(update))
+            messageManager.sendFeedbackAtLaunchGreetings(update);
         else
             messageManager.sendEcho(update);
 
@@ -124,5 +128,7 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
             messageManager.sendWeRecommendWatch(update);
         else if (inlineKeyboardBuilder.isWeRecommendToMainMenuButton(update))
             messageManager.handleWeRecommendToMainMenu(update);
+        else if (inlineKeyboardBuilder.isSendFeedbackConfirmationButton(update))
+            messageManager.sendFeedbackAtEndFarewell(update);
     }
 }

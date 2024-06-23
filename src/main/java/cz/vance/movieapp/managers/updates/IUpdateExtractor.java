@@ -16,6 +16,7 @@ import java.util.function.Function;
 public interface IUpdateExtractor {
 
     Function<Message, Boolean> messagePresenceChecker = Objects::nonNull;
+    String LINE_SEPARATOR = "\n";
     int DEFAULT_ID = -1;
 
     /**
@@ -74,6 +75,26 @@ public interface IUpdateExtractor {
      * @return The text of the <b>String</b> type.
      */
     String getMessageText(@NotNull Update update);
+
+    /**
+     * Extracts the <b>callback message text</b> from a message.
+     *
+     * @param update The <b>update</b> object to extract the callback message from.
+     *
+     * @return <b>String</b> object containing the callback message text.
+     */
+    String getCallbackMessageText(@NotNull Update update);
+
+    /**
+     * Extracts the <b>send feedback callback message text</b> from a message that represents the user's feedback message.
+     * <br>
+     * As the message also contains the bot's default message, the method extracts only user's feedback message.
+     *
+     * @param update The <b>update</b> object to extract the callback message from.
+     *
+     * @return <b>String</b> object containing the callback message text.
+     */
+    @NotNull String getSendFeedbackCallbackMessageText(@NotNull Update update);
 
     /**
      * Extracts the <b>sticker file id</b> from a message.

@@ -296,4 +296,24 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         keyboardMarkup.setKeyboard(inlineRows);
         return keyboardMarkup;
     }
+
+    @Override
+    public @NotNull InlineKeyboardMarkup buildSendFeedbackConfirmationKeyboard() {
+        final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+
+        final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
+        final List<InlineKeyboardButton> firstInlineRow = new ArrayList<>();
+
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getSendFeedbackYesInlineButton(),
+                IInlineKeyboardBuilder.getSendFeedbackCreatedCallback(botMessageManager.getSendFeedbackYesInlineButton())));
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getSendFeedbackNoInlineButton(),
+                IInlineKeyboardBuilder.getSendFeedbackCreatedCallback(botMessageManager.getSendFeedbackNoInlineButton())));
+
+        inlineRows.add(firstInlineRow);
+
+        keyboardMarkup.setKeyboard(inlineRows);
+        return keyboardMarkup;
+    }
 }

@@ -28,6 +28,10 @@ public final class CallbackQueryExtractor {
      * Unique prefix for the <b>we recommend</b> callback query.
      */
     public static final String WE_RECOMMEND_CALLBACK_QUERY_PREFIX = "_cbWeRecommend";
+    /**
+     * Unique prefix for the <b>send feedback</b> callback query.
+     */
+    public static final String SEND_FEEDBACK_CALLBACK_QUERY_PREFIX = "_cbSendFeedback";
 
     /**
      * Extracts the <b>callback data</b> from the given <b>callback query</b>.

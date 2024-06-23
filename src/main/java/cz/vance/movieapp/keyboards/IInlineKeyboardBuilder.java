@@ -2,9 +2,6 @@ package cz.vance.movieapp.keyboards;
 
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.managers.CallbackQueryExtractor;
-import static cz.vance.movieapp.managers.CallbackQueryExtractor.CALLBACK_QUERY_PREFIX;
-import static cz.vance.movieapp.managers.CallbackQueryExtractor.NO_IDEA_CALLBACK_QUERY_PREFIX;
-import static cz.vance.movieapp.managers.CallbackQueryExtractor.WE_RECOMMEND_CALLBACK_QUERY_PREFIX;
 
 import cz.vance.movieapp.managers.messages.BotMessageManager;
 import org.jetbrains.annotations.NotNull;
@@ -12,6 +9,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 import java.util.function.BiFunction;
+
+import static cz.vance.movieapp.managers.CallbackQueryExtractor.*;
 //</editor-fold>
 
 /**
@@ -38,6 +37,12 @@ public interface IInlineKeyboardBuilder {
     BiFunction<String, String, Boolean> weRecommendCallbackDataStringValidator = (buttonCallback, buttonText) ->
             buttonCallback.equals(
                     getWeRecommendCreatedCallback(buttonText));
+    /**
+     * @see #getSendFeedbackCreatedCallback(String)
+     */
+    BiFunction<String, String, Boolean> sendFeedbackCallbackDataStringValidator = (buttonCallback, buttonText) ->
+            buttonCallback.equals(
+                    getSendFeedbackCreatedCallback(buttonText));
     //</editor-fold>
 
     /**
@@ -163,6 +168,19 @@ public interface IInlineKeyboardBuilder {
      */
     @NotNull InlineKeyboardMarkup buildWeRecommendInterimMovieKeyboard(String watchUrl);
 
+    /**
+     * Builds and returns <b>the 'send feedback' confirmation inline keyboard</b> containing the following button:
+     * <ol>
+     *      <li> ✅ Yes
+     *      <li> ❌ No
+     * </ol>
+     * This keyboard is triggered when the user interacts with the <b>'send feedback' reply keyboard button</b> and sends
+     * the feedback message.
+     *
+     * @return Configured instance of {@link InlineKeyboardMarkup}.
+     */
+    @NotNull InlineKeyboardMarkup buildSendFeedbackConfirmationKeyboard();
+
     //<editor-fold default-state="collapsed" desc="Created Callbacks Getters">
     /**
      * Creates a callback data string for the passed inline button by concatenating the button text with the
@@ -191,6 +209,15 @@ public interface IInlineKeyboardBuilder {
      * @return The created callback data string.
      */
     static @NotNull String getWeRecommendCreatedCallback(String inlineButtonText) { return inlineButtonText + WE_RECOMMEND_CALLBACK_QUERY_PREFIX; }
+    /**
+     * Creates a callback data string for the <b>'send feedback' inline button</b> by concatenating the button text with
+     * the {@link CallbackQueryExtractor#SEND_FEEDBACK_CALLBACK_QUERY_PREFIX}.
+     *
+     * @param inlineButtonText The text of the inline button.
+     *
+     * @return The created callback data string.
+     */
+    static @NotNull String getSendFeedbackCreatedCallback(String inlineButtonText) { return inlineButtonText + SEND_FEEDBACK_CALLBACK_QUERY_PREFIX; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="'Smart Search' Mood Boolean Methods">
@@ -453,6 +480,25 @@ public interface IInlineKeyboardBuilder {
         return weRecommendCallbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
                 BotMessageManager.getInstance().getWeRecommendWatchInlineButton());
+    }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="'Send Feedback' Boolean Methods">
+    default boolean isSendFeedbackConfirmationButton(@NotNull Update botUpdate) {
+        return isSendFeedbackYesButton(botUpdate) ||
+                isSendFeedbackNoButton(botUpdate);
+    }
+
+    default boolean isSendFeedbackNoButton(@NotNull Update botUpdate) {
+        return sendFeedbackCallbackDataStringValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getSendFeedbackNoInlineButton());
+    }
+
+    default boolean isSendFeedbackYesButton(@NotNull Update botUpdate) {
+        return sendFeedbackCallbackDataStringValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getSendFeedbackYesInlineButton());
     }
     //</editor-fold>
 }

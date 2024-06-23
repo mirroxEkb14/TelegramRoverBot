@@ -10,7 +10,7 @@ import java.util.List;
 //</editor-fold>
 
 /**
- * Declares a set of basic operations for managing the movies from the appropriate movie table from the DB
+ * Declares a set of basic operations for <b>managing the movies</b> from the appropriate <b>movie table</b> from the DB.
  */
 public interface IMovieRecord {
 

@@ -22,7 +22,7 @@ public final class MovieRecord implements IMovieRecord {
     private final ICinemaDatabase cinemaDB;
 
     /**
-     * Contains all the movies from the DB.
+     * Contains <b>all the movies</b> from the DB.
      */
     private static final List<Movie> movies = new ArrayList<>();
     /**

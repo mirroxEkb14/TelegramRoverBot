@@ -20,22 +20,22 @@ public final class MessageBuilder implements IMessageBuilder {
     /**
      * Alternative implementation using <b>builder</b>:
      * <pre>{@code
-     *      return SendMessage
-     *                 .builder()
-     *                 .chatId(chatId)
-     *                 .text(messageText)
-     *                 .parseMode(PARSE_MODE)
-     *                 .build();
+     *      final SendMessage message = new SendMessage();
+     *      message.setChatId(chatId);
+     *      message.setText(messageText);
+     *      message.setParseMode(PARSE_MODE);
+     *      return message;
      * }</pre>
      */
     @Override
     public @NotNull SendMessage buildTelegramMessage(long chatId,
                                                      String messageText) {
-        final SendMessage message = new SendMessage();
-        message.setChatId(chatId);
-        message.setText(messageText);
-        message.setParseMode(PARSE_MODE);
-        return message;
+        return SendMessage
+                .builder()
+                .chatId(chatId)
+                .text(messageText)
+                .parseMode(PARSE_MODE)
+                .build();
     }
 
     @Override
