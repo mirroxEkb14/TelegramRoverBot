@@ -214,6 +214,12 @@ public final class MessageRandomizer implements IMessageRandomizer {
     public String getUnknownInputMessage() { return botMessageManager.getUnknownInputs().get(0); }
 
     @Override
+    public String getOnBotTerminatedMessage() {
+        return botMessageManager.getOnBotTerminatedMessage().get(
+                getRandomIndex(botMessageManager.getOnBotTerminatedMessageSize()));
+    }
+
+    @Override
     public String getSmartSearchBeginningSticker() {
         final List<Sticker> smartSearchStickers = stickerManager.getStickersByCategory(StickerCategory.SMART_SEARCH_BEGINNING);
         final int randomIndex = getRandomIndex(smartSearchStickers.size());

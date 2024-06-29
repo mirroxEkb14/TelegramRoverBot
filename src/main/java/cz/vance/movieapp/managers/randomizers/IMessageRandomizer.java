@@ -230,6 +230,12 @@ public interface IMessageRandomizer {
     String getUnknownInputMessage();
 
     /**
+     * Extracts the only one element from the <b>onBotTerminatedMessage</b> list that contains the text for the user
+     * when the bot is terminated.
+     */
+    String getOnBotTerminatedMessage();
+
+    /**
      * Extracts a random sticker from the <b>.json sticker file</b> for the <b>smart search</b> feature, when
      * the user presses the <b>smart search</b> reply button.
      *

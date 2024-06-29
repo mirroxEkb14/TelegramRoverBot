@@ -190,6 +190,13 @@ public final class BotMessageManager implements IBotMessageManager {
     public int getUnknownInputsSize() { return botMessage.getCommandMessage().getUnknownInputs().size(); }
     //</editor-fold>
 
+    //<editor-fold default-state="collapsed" desc="On Bot Terminated Getters">
+    @Override
+    public List<String> getOnBotTerminatedMessage() { return botMessage.getOnBotTerminatedMessage(); }
+    @Override
+    public int getOnBotTerminatedMessageSize() { return botMessage.getOnBotTerminatedMessage().size(); }
+    //</editor-fold>
+
     //<editor-fold default-state="collapsed" desc="Reply Keyboard Button Getters">
     @Override
     public String getSmartSearchReplyButton() { return botMessage.getReplyButton().getSmartSearchReplyButton(); }

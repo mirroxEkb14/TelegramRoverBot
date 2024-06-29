@@ -24,16 +24,17 @@ import cz.vance.movieapp.managers.records.MovieRecord;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import cz.vance.movieapp.bot.TelegramRoverBot;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 //</editor-fold>
 
@@ -90,6 +91,13 @@ public final class MessageManager implements IMessageManager {
      * removed.
      */
     private final HashMap<Long, Integer> latestMessageIds = new HashMap<>();
+
+    /**
+     * Stores the <b>chat ids</b> of all the users who have launched the bot.
+     * <br>
+     * Is used to determine the <b>chat id</b> to remove the reply keyboard when the bot is terminated.
+     */
+    private final Set<Long> chatIds = new HashSet<>();
 
     /**
      * Is used to determine if the user pressed the <b>send feedback</b> reply keyboard button.
@@ -726,6 +734,15 @@ public final class MessageManager implements IMessageManager {
     @Override
     public boolean isSendFeedbackPressed() { return isSendFeedbackPressed; }
 
+    @Override
+    public void removeReplyKeyboard() { chatIds.forEach(this::removeMenuReplyKeyboard); }
+
+    @Override
+    public void addChatId(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        chatIds.add(chatId);
+    }
+
     /* ---------------- Private Helper Methods -------------- */
 
     //<editor-fold default-state="collapsed" desc="Echo Message Sender">
@@ -883,8 +900,8 @@ public final class MessageManager implements IMessageManager {
     /**
      * Removes the inline keyboard from the specified message.
      *
-     * @param chatId The chat ID where the message is located.
-     * @param messageId The message ID of the message to update.
+     * @param chatId The <b>chat id</b> where the message is located.
+     * @param messageId The <b>message id</b> of the message to update.
      */
     private void removeMessageInlineKeyboard(long chatId, long messageId) {
         final EditMessageReplyMarkup editMessageReplyMarkup = new EditMessageReplyMarkup();
@@ -899,6 +916,13 @@ public final class MessageManager implements IMessageManager {
         }
     }
 
+    /**
+     * Edits the text of the specified message.
+     *
+     * @param chatId The <b>chat id</b> where the message is located.
+     * @param messageId The <b>message id</b> of the message to update.
+     * @param messageText The <b>new text</b> to set for the message.
+     */
     private void editMessageText(long chatId,
                                  long messageId,
                                  String messageText) {
@@ -909,6 +933,24 @@ public final class MessageManager implements IMessageManager {
 
         try {
             bot.execute(editMessageText);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void removeMenuReplyKeyboard(long chatId) {
+        final SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(
+                messageRandomizer.getOnBotTerminatedMessage());
+
+        final ReplyKeyboardRemove keyboardRemove = new ReplyKeyboardRemove();
+        keyboardRemove.setRemoveKeyboard(true);
+
+        message.setReplyMarkup(keyboardRemove);
+
+        try {
+            bot.execute(message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

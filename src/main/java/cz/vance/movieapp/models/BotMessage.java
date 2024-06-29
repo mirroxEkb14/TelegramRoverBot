@@ -2,6 +2,8 @@ package cz.vance.movieapp.models;
 
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.models.messages.*;
+
+import java.util.List;
 //</editor-fold>
 
 /**
@@ -18,6 +20,7 @@ public final class BotMessage {
     private NoIdeaMessage noIdeaMessage;
     private WeRecommendMessage weRecommendMessage;
     private SendFeedbackMessage sendFeedbackMessage;
+    private List<String> onBotTerminatedMessage;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public CommandMessage getCommandMessage() { return commandMessage; }
@@ -27,6 +30,7 @@ public final class BotMessage {
     public NoIdeaMessage getNoIdeaMessage() { return noIdeaMessage; }
     public WeRecommendMessage getWeRecommendMessage() { return weRecommendMessage; }
     public SendFeedbackMessage getSendFeedbackMessage() { return sendFeedbackMessage; }
+    public List<String> getOnBotTerminatedMessage() { return onBotTerminatedMessage; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
@@ -37,5 +41,6 @@ public final class BotMessage {
     public void setNoIdeaMessage(NoIdeaMessage noIdeaMessage) { this.noIdeaMessage = noIdeaMessage; }
     public void setWeRecommendMessage(WeRecommendMessage weRecommendMessage) { this.weRecommendMessage = weRecommendMessage; }
     public void setSendFeedbackMessage(SendFeedbackMessage sendFeedbackMessage) { this.sendFeedbackMessage = sendFeedbackMessage; }
+    public void setOnBotTerminatedMessage(List<String> onBotTerminatedMessage) { this.onBotTerminatedMessage = onBotTerminatedMessage; }
     //</editor-fold>
 }

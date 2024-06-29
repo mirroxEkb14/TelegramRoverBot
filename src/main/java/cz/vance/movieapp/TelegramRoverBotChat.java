@@ -19,11 +19,18 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 public final class TelegramRoverBotChat {
 
     public static void main(String[] args) {
+        final TelegramRoverBot bot = new TelegramRoverBot();
+
+        // bot registration
         try {
             final TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            botsApi.registerBot(new TelegramRoverBot());
+            botsApi.registerBot(bot);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+
+        // shutdown hook (on bot termination)
+        Runtime.getRuntime().addShutdownHook(
+                new Thread(bot::removeReplyKeyboard));
     }
 }

@@ -57,6 +57,8 @@ public interface IBotMessageManager {
     List<String> getLangMessage();
     List<String> getUnknownInputs();
 
+    List<String> getOnBotTerminatedMessage();
+
     int getSmartSearchAtLaunchGreetingsSize();
     int getSmartSearchMoodSelectionSize();
     int getSmartSearchCatalogueSelectionSize();
@@ -91,6 +93,8 @@ public interface IBotMessageManager {
     int getHelpsSize();
     int getLangMessageSize();
     int getUnknownInputsSize();
+
+    int getOnBotTerminatedMessageSize();
 
     String getSmartSearchReplyButton();
     String getWeRecommendReplyButton();

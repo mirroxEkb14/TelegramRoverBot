@@ -71,11 +71,18 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
     }
 
     /**
+     * Removes the <b>reply keyboard</b> for the user when the bot is terminated.
+     */
+    public void removeReplyKeyboard() { messageManager.removeReplyKeyboard(); }
+
+    /**
      * Delegates the processing of the incoming messages (based on their content) to the {@link MessageManager}.
      *
      * @param update The update containing the message.
      */
     private void handleMessage(Update update) {
+        messageManager.addChatId(update);
+
         if (messageManager.isSendFeedbackPressed())
             messageManager.sendFeedbackConfirmation(update);
         else if (messageManager.isStartCommand(update))
@@ -106,6 +113,8 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
      * @param update The update containing the callback query.
      */
     private void handleCallback(Update update) {
+        messageManager.addChatId(update);
+
         if (inlineKeyboardBuilder.isSmartSearchMoodButton(update))
             messageManager.sendSmartSearchCatalogue(update);
         else if (inlineKeyboardBuilder.isSmartSearchCatalogueButton(update))

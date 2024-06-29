@@ -204,6 +204,16 @@ public interface IMessageManager {
      */
     boolean isSendFeedbackPressed();
 
+    /**
+     * Sends a new messages with the removed <b>reply keyboard</b> when the bot is terminated.
+     */
+    void removeReplyKeyboard();
+
+    /**
+     * Adds the <b>chat id</b> to the list to keep track of the users who have interacted with the bot.
+     */
+    void addChatId(Update botUpdate);
+
     //<editor-fold default-state="collapsed" desc="Boolean Methods">
     default boolean isMessage(Update botUpdate) { return messageExistenceValidator.test(botUpdate); }
 
