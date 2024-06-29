@@ -251,7 +251,7 @@ public interface IInlineKeyboardBuilder {
     default boolean isFamilyMoodButton(@NotNull Update botUpdate) {
         return callbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
-                BotMessageManager.getInstance().getFamilyInlineButton());
+                BotMessageManager.getInstance().getFamilyMoodInlineButton());
     }
 
     default boolean isFriendsButton(@NotNull Update botUpdate) {

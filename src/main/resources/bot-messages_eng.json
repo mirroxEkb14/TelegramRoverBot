@@ -16,7 +16,7 @@
   "inlineButton":
   {
     "depressionMoodInlineButton": "\ud83c\udf27 Depressed",
-    "cheerfulMoodInlineButton": "\ud83d\udc83 Сheerful",
+    "cheerfulMoodInlineButton": "\ud83d\udc83 Cheerful",
     "fightingMoodInlineButton": "\ud83d\ude3c Fighting",
     "familyMoodInlineButton": "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67\u200d\ud83d\udc66 Family",
     "friendsMoodInlineButton": "\ud83c\udf7b Friends",
@@ -85,7 +85,7 @@
   {
     "weRecommendAtLaunchGreetings": ["Pleasant viewing \ud83d\ude0a", "I hope it won't be so hard to choose \ud83d\ude05", "It's time you stocked up on some popcorn \ud83c\udf7f", "Star our 'top' movies!"],
     "weRecommendPleasantViewing": ["I think you'll definitely like the movie!", "It's time you stocked up on some yummies\ud83e\udd6a", "Nice choice!"],
-    "weRecommendRusSampleMovieMessage": "<b>Name</b>: %s\n<b>Genre</b>: %s\n<b>Release year</b>: %s\n<b>Director</b>: %s\n<b>Top cast</b>: %s\n<b>Storyline</b>: %s\n\n<a href='%s'>more details...</a>",
+    "weRecommendSampleMovieMessage": "<b>Name</b>: %s\n<b>Genre</b>: %s\n<b>Release year</b>: %s\n<b>Director</b>: %s\n<b>Top cast</b>: %s\n<b>Storyline</b>: %s\n\n<a href='%s'>more details...</a>",
     "weRecommendToMainMenu": ["Let's get back to the main menu...", "You can always continue the search in this mode starting with the movie you finished on", "Back to the menu..."]
   },
   "sendFeedbackMessage":

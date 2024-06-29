@@ -162,8 +162,8 @@ public final class MessageRandomizer implements IMessageRandomizer {
     }
 
     @Override
-    public String getWeRecommendRusSampleMovieMessage() {
-        return botMessageManager.getWeRecommendRusSampleMovieMessage();
+    public String getWeRecommendSampleMovieMessage() {
+        return botMessageManager.getWeRecommendSampleMovieMessage();
     }
 
     @Override

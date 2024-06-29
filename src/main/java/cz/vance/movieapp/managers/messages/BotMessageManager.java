@@ -143,7 +143,7 @@ public final class BotMessageManager implements IBotMessageManager {
     //<editor-fold default-state="collapsed" desc="'We Recommend' Getters">
     public List<String> getWeRecommendAtLaunchGreetings() { return botMessage.getWeRecommendMessage().getWeRecommendAtLaunchGreetings(); }
     public List<String> getWeRecommendPleasantViewing() { return botMessage.getWeRecommendMessage().getWeRecommendPleasantViewing(); }
-    public String getWeRecommendRusSampleMovieMessage() { return botMessage.getWeRecommendMessage().getWeRecommendRusSampleMovieMessage(); }
+    public String getWeRecommendSampleMovieMessage() { return botMessage.getWeRecommendMessage().getWeRecommendSampleMovieMessage(); }
     public List<String> getWeRecommendToMainMenu() { return botMessage.getWeRecommendMessage().getWeRecommendToMainMenu(); }
 
     public int getWeRecommendAtLaunchGreetingsSize() { return botMessage.getWeRecommendMessage().getWeRecommendAtLaunchGreetings().size(); }

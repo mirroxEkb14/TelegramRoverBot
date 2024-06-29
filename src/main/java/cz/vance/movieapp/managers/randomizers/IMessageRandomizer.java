@@ -171,7 +171,7 @@ public interface IMessageRandomizer {
      * Extracts the <b>weRecommendRusSampleMovie</b> string that contains the sample text to display to the user during
      * the <b>we recommend</b> mode.
      */
-    String getWeRecommendRusSampleMovieMessage();
+    String getWeRecommendSampleMovieMessage();
 
     /**
      * Extracts a random element from the <b>weRecommendToMainMenu</b> list that contains all the possible texts

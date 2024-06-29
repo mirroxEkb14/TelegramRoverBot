@@ -44,7 +44,7 @@ public interface IBotMessageManager {
 
     List<String> getWeRecommendAtLaunchGreetings();
     List<String> getWeRecommendPleasantViewing();
-    String getWeRecommendRusSampleMovieMessage();
+    String getWeRecommendSampleMovieMessage();
     List<String> getWeRecommendToMainMenu();
 
     String getSendFeedbackAtLaunchGreetings();
