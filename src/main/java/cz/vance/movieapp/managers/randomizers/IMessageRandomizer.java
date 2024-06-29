@@ -230,6 +230,30 @@ public interface IMessageRandomizer {
     String getUnknownInputMessage();
 
     /**
+     * Extracts a random element from the <b>onSmartSearchDeviation</b> list that contains all the possible texts
+     * when the user deviates from the <b>smart search</b> feature (tries to call the <b>/lang</b> command while this mode).
+     */
+    String getOnSmartSearchDeviationMessage();
+
+    /**
+     * Extracts a random element from the <b>onWeRecommendDeviation</b> list that contains all the possible texts
+     * when the user deviates from the <b>we recommend</b> feature (tries to call the <b>/lang</b> command while this mode).
+     */
+    String getOnWeRecommendDeviationMessage();
+
+    /**
+     * Extracts a random element from the <b>onNoIdeaDeviation</b> list that contains all the possible texts
+     * when the user deviates from the <b>no idea</b> feature (tries to call the <b>/lang</b> command while this mode).
+     */
+    String getOnNoIdeaDeviationMessage();
+
+    /**
+     * Extracts a random element from the <b>onSendFeedbackDeviation</b> list that contains all the possible texts
+     * when the user deviates from the <b>send feedback</b> feature (tries to call the <b>/lang</b> command while this mode).
+     */
+    String getOnSendFeedbackDeviationMessage();
+
+    /**
      * Extracts the only one element from the <b>onBotTerminatedMessage</b> list that contains the text for the user
      * when the bot is terminated.
      */

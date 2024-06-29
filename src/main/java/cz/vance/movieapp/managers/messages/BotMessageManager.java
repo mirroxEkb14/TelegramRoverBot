@@ -190,6 +190,25 @@ public final class BotMessageManager implements IBotMessageManager {
     public int getUnknownInputsSize() { return botMessage.getCommandMessage().getUnknownInputs().size(); }
     //</editor-fold>
 
+    //<editor-fold default-state="collapsed" desc="Deviation Message Getters">
+    @Override
+    public List<String> getOnSmartSearchDeviation() { return botMessage.getDeviationMessage().getOnSmartSearchDeviation(); }
+    @Override
+    public List<String> getOnWeRecommendDeviation() { return botMessage.getDeviationMessage().getOnWeRecommendDeviation(); }
+    @Override
+    public List<String> getOnNoIdeaDeviation() { return botMessage.getDeviationMessage().getOnNoIdeaDeviation(); }
+    @Override
+    public List<String> getOnSendFeedbackDeviation() { return botMessage.getDeviationMessage().getOnSendFeedbackDeviation(); }
+    @Override
+    public int getOnSmartSearchDeviationSize() { return botMessage.getDeviationMessage().getOnSmartSearchDeviation().size(); }
+    @Override
+    public int getOnWeRecommendDeviationSize() { return botMessage.getDeviationMessage().getOnWeRecommendDeviation().size(); }
+    @Override
+    public int getOnNoIdeaDeviationSize() { return botMessage.getDeviationMessage().getOnNoIdeaDeviation().size(); }
+    @Override
+    public int getOnSendFeedbackDeviationSize() { return botMessage.getDeviationMessage().getOnSendFeedbackDeviation().size(); }
+    //</editor-fold>
+
     //<editor-fold default-state="collapsed" desc="On Bot Terminated Getters">
     @Override
     public List<String> getOnBotTerminatedMessage() { return botMessage.getOnBotTerminatedMessage(); }

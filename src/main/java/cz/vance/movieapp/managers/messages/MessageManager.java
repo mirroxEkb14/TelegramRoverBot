@@ -57,6 +57,8 @@ public final class MessageManager implements IMessageManager {
      */
     private final TelegramLongPollingBot bot;
 
+    private final ModeTracker modeTracker;
+
     private final IUserSelectionManager userSelectionManager;
     private final IMovieRecord movieRecord;
     private final IFeedbackRecord feedbackRecord;
@@ -141,6 +143,8 @@ public final class MessageManager implements IMessageManager {
 
     //<editor-fold default-state="collapsed" desc="Constructor">
     public MessageManager(TelegramLongPollingBot bot) {
+        modeTracker = ModeTracker.getInstance();
+
         userSelectionManager = UserSelectionManager.getInstance();
         movieRecord = MovieRecord.getInstance();
         feedbackRecord = FeedbackRecord.getInstance();
@@ -200,11 +204,24 @@ public final class MessageManager implements IMessageManager {
 
     @Override
     public void sendLang(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        if (modeTracker.isSmartSearchActive()) {
+            sendMessage(chatId, messageRandomizer.getOnSmartSearchDeviationMessage());
+            return;
+        } else if (modeTracker.isWeRecommendActive()) {
+            sendMessage(chatId, messageRandomizer.getOnWeRecommendDeviationMessage());
+            return;
+        } else if (modeTracker.isNoIdeaActive()) {
+            sendMessage(chatId, messageRandomizer.getOnNoIdeaDeviationMessage());
+            return;
+        } else if (modeTracker.isSendFeedbackActive()) {
+            sendMessage(chatId, messageRandomizer.getOnSendFeedbackDeviationMessage());
+            return;
+        }
+
         botMessageManager.changeBotMessageLanguage();
 
-        final long chatId = updateExtractor.getMessageChatId(botUpdate);
         final String messageText = messageRandomizer.getLangMessage();
-
         sendLang(chatId, messageText);
     }
 
@@ -217,6 +234,7 @@ public final class MessageManager implements IMessageManager {
 
         modeProcessingHandler.accept(chatId);
 
+        modeTracker.activateSmartSearch();
         userSelectionManager.initializeUserSelection(chatId);
 
         sendMessage(chatId, atLaunchGreetingsText);
@@ -294,6 +312,7 @@ public final class MessageManager implements IMessageManager {
         }
 
         removeMessageInlineKeyboard(chatId, messageId);
+        modeTracker.deactivateSmartSearch();
         processSmartSearch(chatId, stickerFileId);
     }
 
@@ -452,6 +471,7 @@ public final class MessageManager implements IMessageManager {
 
         final Message firstMovieMessage = sendMessage(chatId, noIdeaFirstMovieText, inlineKeyboardBuilder.buildNoIdeaFirstMovieKeyboard());
         latestMessageHandler.accept(firstMovieMessage);
+        modeTracker.activateNoIdea();
     }
 
     //<editor-fold default-state="collapsed" desc="Overridden 'sendNoIdeaPreviousMovie' and 'sendNoIdeaNextMovie' Methods">
@@ -542,6 +562,7 @@ public final class MessageManager implements IMessageManager {
         sendMessage(chatId, messageText);
 
         latestMessageIds.remove(chatId);
+        modeTracker.deactivateNoIdea();
     }
 
     @Override
@@ -563,6 +584,7 @@ public final class MessageManager implements IMessageManager {
                 weRecommendFirstMovieText,
                 inlineKeyboardBuilder.buildWeRecommendInterimMovieKeyboard(movieDetailsUrl));
         latestMessageHandler.accept(firstMovieMessage);
+        modeTracker.activateWeRecommend();
     }
 
     //<editor-fold default-state="collapsed" desc="Overridden 'sendWeRecommendPreviousMovie' and 'sendWeRecommendNextMovie' Methods">
@@ -647,6 +669,7 @@ public final class MessageManager implements IMessageManager {
         sendMessage(chatId, messageText);
 
         latestMessageIds.remove(chatId);
+        modeTracker.deactivateWeRecommend();
     }
 
     @Override
@@ -658,6 +681,7 @@ public final class MessageManager implements IMessageManager {
 
         sendMessage(chatId, messageText);
         updateIsSendFeedbackPressed();
+        modeTracker.activateSendFeedback();
     }
 
     @Override
@@ -685,6 +709,8 @@ public final class MessageManager implements IMessageManager {
             handleOldInlineKeyboard(chatId, messageId);
             return;
         }
+
+        modeTracker.deactivateSendFeedback();
 
         if (inlineKeyboardBuilder.isSendFeedbackNoButton(botUpdate)) {
             handleSendFeedbackNoButton(chatId, messageId);

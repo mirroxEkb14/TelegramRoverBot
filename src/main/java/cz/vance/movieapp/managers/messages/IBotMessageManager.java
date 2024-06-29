@@ -57,6 +57,11 @@ public interface IBotMessageManager {
     List<String> getLangMessage();
     List<String> getUnknownInputs();
 
+    List<String> getOnSmartSearchDeviation();
+    List<String> getOnWeRecommendDeviation();
+    List<String> getOnNoIdeaDeviation();
+    List<String> getOnSendFeedbackDeviation();
+
     List<String> getOnBotTerminatedMessage();
 
     int getSmartSearchAtLaunchGreetingsSize();
@@ -93,6 +98,11 @@ public interface IBotMessageManager {
     int getHelpsSize();
     int getLangMessageSize();
     int getUnknownInputsSize();
+
+    int getOnSmartSearchDeviationSize();
+    int getOnWeRecommendDeviationSize();
+    int getOnNoIdeaDeviationSize();
+    int getOnSendFeedbackDeviationSize();
 
     int getOnBotTerminatedMessageSize();
 

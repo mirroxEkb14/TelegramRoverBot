@@ -21,6 +21,7 @@ public final class BotMessage {
     private WeRecommendMessage weRecommendMessage;
     private SendFeedbackMessage sendFeedbackMessage;
     private List<String> onBotTerminatedMessage;
+    private DeviationMessage deviationMessage;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public CommandMessage getCommandMessage() { return commandMessage; }
@@ -31,6 +32,7 @@ public final class BotMessage {
     public WeRecommendMessage getWeRecommendMessage() { return weRecommendMessage; }
     public SendFeedbackMessage getSendFeedbackMessage() { return sendFeedbackMessage; }
     public List<String> getOnBotTerminatedMessage() { return onBotTerminatedMessage; }
+    public DeviationMessage getDeviationMessage() { return deviationMessage; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
@@ -42,5 +44,6 @@ public final class BotMessage {
     public void setWeRecommendMessage(WeRecommendMessage weRecommendMessage) { this.weRecommendMessage = weRecommendMessage; }
     public void setSendFeedbackMessage(SendFeedbackMessage sendFeedbackMessage) { this.sendFeedbackMessage = sendFeedbackMessage; }
     public void setOnBotTerminatedMessage(List<String> onBotTerminatedMessage) { this.onBotTerminatedMessage = onBotTerminatedMessage; }
+    public void setDeviationMessage(DeviationMessage deviationMessage) { this.deviationMessage = deviationMessage; }
     //</editor-fold>
 }

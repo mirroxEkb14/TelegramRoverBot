@@ -95,5 +95,12 @@
     "sendFeedbackNoConfirmationMessage": ["Ok then, your message will remain only between us\uD83E\uDD2B", "Don't send, roger that\uD83E\uDEE2", "Well, the Admins do not need to know about it...\uD83D\uDE36"],
     "sendFeedbackYesConfirmationMessage": ["The feedback has been sent!\uD83D\uDE08", "The Admins already have your feedback on the post!\uD83D\uDCEC"]
   },
+  "deviationMessage":
+  {
+    "onSmartSearchDeviation": ["First, finish the Smart Search\uD83D\uDEA8", "First of all, go all the way\uD83E\uDEF6", "Finish the Smart Search\uD83C\uDFA5"],
+    "onWeRecommendDeviation": ["Finish reviewing the recommendations first\uD83D\uDEA8", "Finish selecting recommendations\uD83E\uDEF6", "Firstly, go to the Main Menu\uD83C\uDFA5"],
+    "onNoIdeaDeviation": ["First, finish the No Idea\uD83D\uDEA8", "First of all, go to the Main Menu\uD83E\uDEF6", "Finish No Idea\uD83C\uDFA5"],
+    "onSendFeedbackDeviation": ["First, finish the Send Feedback\uD83D\uDEA8", "First of all, go to the Main Menu\uD83E\uDEF6", "Finish the Send Feedback\uD83C\uDFA5"]
+  },
   "onBotTerminatedMessage": ["The bot suspended its work for a while\uD83D\uDEE0 But it’ll be back soon\uD83E\uDD70", "The bot is sent for editing⚙️ You’ll see it in better shape soon enough\uD83D\uDD7A"]
 }

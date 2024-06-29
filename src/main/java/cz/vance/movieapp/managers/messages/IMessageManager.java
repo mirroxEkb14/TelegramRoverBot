@@ -77,6 +77,8 @@ public interface IMessageManager {
 
     /**
      * Handles the language change when the user changes the bot messages language, i.e. <b>/lang</b> command.
+     * <br>
+     * If the command is called while some mode is active, the language is not switched.
      */
     void sendLang(Update botUpdate);
 

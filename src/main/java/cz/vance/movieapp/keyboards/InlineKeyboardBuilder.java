@@ -127,8 +127,8 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
                 botMessageManager.getDetectiveInlineButton(),
                 IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getDetectiveInlineButton())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
-                botMessageManager.getFamilyMoodInlineButton(),
-                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFamilyMoodInlineButton())));
+                botMessageManager.getFamilyInlineButton(),
+                IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getFamilyInlineButton())));
         thirdInlineRow.add(inlineButtonBuilder.apply(
                 botMessageManager.getSportInlineButton(),
                 IInlineKeyboardBuilder.getCreatedCallback(botMessageManager.getSportInlineButton())));

@@ -214,6 +214,30 @@ public final class MessageRandomizer implements IMessageRandomizer {
     public String getUnknownInputMessage() { return botMessageManager.getUnknownInputs().get(0); }
 
     @Override
+    public String getOnSmartSearchDeviationMessage() {
+        return botMessageManager.getOnSmartSearchDeviation().get(
+                getRandomIndex(botMessageManager.getOnSmartSearchDeviationSize()));
+    }
+
+    @Override
+    public String getOnWeRecommendDeviationMessage() {
+        return botMessageManager.getOnWeRecommendDeviation().get(
+                getRandomIndex(botMessageManager.getOnWeRecommendDeviationSize()));
+    }
+
+    @Override
+    public String getOnNoIdeaDeviationMessage() {
+        return botMessageManager.getOnNoIdeaDeviation().get(
+                getRandomIndex(botMessageManager.getOnNoIdeaDeviationSize()));
+    }
+
+    @Override
+    public String getOnSendFeedbackDeviationMessage() {
+        return botMessageManager.getOnSendFeedbackDeviation().get(
+                getRandomIndex(botMessageManager.getOnSendFeedbackDeviationSize()));
+    }
+
+    @Override
     public String getOnBotTerminatedMessage() {
         return botMessageManager.getOnBotTerminatedMessage().get(
                 getRandomIndex(botMessageManager.getOnBotTerminatedMessageSize()));
