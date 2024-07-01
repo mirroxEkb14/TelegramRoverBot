@@ -3,7 +3,7 @@ package cz.vance.movieapp.utils.columns;
 /**
  * Contains column names of the <b>movies table</b>.
  */
-public enum MovieColumnLabel {
+public enum MoviesColumnLabel {
     ID("id"),
     RUS_NAME("rus_name"),
     RUS_MOOD("rus_mood"),
@@ -27,7 +27,7 @@ public enum MovieColumnLabel {
 
     private final String content;
 
-    MovieColumnLabel(String content) { this.content = content; }
+    MoviesColumnLabel(String content) { this.content = content; }
 
     public String getContent() { return content; }
 }

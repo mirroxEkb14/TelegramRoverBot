@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Implements a set of methods for interacting with the <b>feedback table</b> from the DB.
  */
-public class FeedbackRecord implements IFeedbackRecord {
+public final class FeedbackRecord implements IFeedbackRecord {
 
     private final ICinemaDatabase cinemaDB;
 

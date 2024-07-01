@@ -10,9 +10,7 @@ import cz.vance.movieapp.managers.builders.IMessageBuilder;
 import cz.vance.movieapp.managers.builders.MessageBuilder;
 import cz.vance.movieapp.managers.formatters.IMessageFormatter;
 import cz.vance.movieapp.managers.formatters.MessageFormatter;
-import cz.vance.movieapp.managers.records.FeedbackRecord;
-import cz.vance.movieapp.managers.records.IFeedbackRecord;
-import cz.vance.movieapp.managers.records.IMovieRecord;
+import cz.vance.movieapp.managers.records.*;
 import cz.vance.movieapp.managers.selections.IUserSelectionManager;
 import cz.vance.movieapp.managers.selections.UserSelectionManager;
 import cz.vance.movieapp.managers.updates.IUpdateExtractor;
@@ -20,7 +18,6 @@ import cz.vance.movieapp.managers.updates.UpdateExtractor;
 import cz.vance.movieapp.models.*;
 import cz.vance.movieapp.managers.randomizers.IMessageRandomizer;
 import cz.vance.movieapp.managers.randomizers.MessageRandomizer;
-import cz.vance.movieapp.managers.records.MovieRecord;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -29,11 +26,13 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageRe
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import cz.vance.movieapp.bot.TelegramRoverBot;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Consumer;
 //</editor-fold>
@@ -63,6 +62,7 @@ public final class MessageManager implements IMessageManager {
     private final IMovieRecord movieRecord;
     private final IFeedbackRecord feedbackRecord;
     private final IMessageFormatter messageFormatter;
+    private final IUserRecord userRecord;
 
     private final IReplyKeyboardBuilder replyKeyboardBuilder;
     private final IInlineKeyboardBuilder inlineKeyboardBuilder;
@@ -148,6 +148,7 @@ public final class MessageManager implements IMessageManager {
         userSelectionManager = UserSelectionManager.getInstance();
         movieRecord = MovieRecord.getInstance();
         feedbackRecord = FeedbackRecord.getInstance();
+        userRecord = UserRecord.getInstance();
 
         messageFormatter = new MessageFormatter();
 
@@ -182,6 +183,8 @@ public final class MessageManager implements IMessageManager {
                 IUpdateExtractor.hasAudio(botUpdate) || IUpdateExtractor.hasVoice(botUpdate)) {
             sendUnknownInput(chatId);
         }
+
+        userRecord.insertUserIfNotExists(botUpdate);
     }
 
     @Override
@@ -189,6 +192,8 @@ public final class MessageManager implements IMessageManager {
         final long chatId = updateExtractor.getMessageChatId(botUpdate);
         final String messageText = getFormattedWelcomeText(botUpdate);
         final String stickerFileId = messageRandomizer.getWelcomeSticker();
+
+        userRecord.insertUserIfNotExists(botUpdate);
 
         sendSticker(chatId, stickerFileId);
         sendWelcome(chatId, messageText);
@@ -200,6 +205,7 @@ public final class MessageManager implements IMessageManager {
         final String messageText = messageRandomizer.getHelpMessage();
 
         sendHelp(chatId, messageText);
+        userRecord.insertUserIfNotExists(botUpdate);
     }
 
     @Override
@@ -220,6 +226,7 @@ public final class MessageManager implements IMessageManager {
         }
 
         botMessageManager.changeBotMessageLanguage();
+        userRecord.insertUserIfNotExists(botUpdate);
 
         final String messageText = messageRandomizer.getLangMessage();
         sendLang(chatId, messageText);
@@ -244,6 +251,8 @@ public final class MessageManager implements IMessageManager {
 
         final Message moodMessage = sendMessage(chatId, messageText, inlineKeyboardBuilder.buildSmartSearchMoodKeyboard());
         latestMessageHandler.accept(moodMessage);
+
+        userRecord.insertUserIfNotExists(botUpdate);
     }
 
     @Override
@@ -471,7 +480,9 @@ public final class MessageManager implements IMessageManager {
 
         final Message firstMovieMessage = sendMessage(chatId, noIdeaFirstMovieText, inlineKeyboardBuilder.buildNoIdeaFirstMovieKeyboard());
         latestMessageHandler.accept(firstMovieMessage);
+
         modeTracker.activateNoIdea();
+        userRecord.insertUserIfNotExists(botUpdate);
     }
 
     //<editor-fold default-state="collapsed" desc="Overridden 'sendNoIdeaPreviousMovie' and 'sendNoIdeaNextMovie' Methods">
@@ -584,7 +595,9 @@ public final class MessageManager implements IMessageManager {
                 weRecommendFirstMovieText,
                 inlineKeyboardBuilder.buildWeRecommendInterimMovieKeyboard(movieDetailsUrl));
         latestMessageHandler.accept(firstMovieMessage);
+
         modeTracker.activateWeRecommend();
+        userRecord.insertUserIfNotExists(botUpdate);
     }
 
     //<editor-fold default-state="collapsed" desc="Overridden 'sendWeRecommendPreviousMovie' and 'sendWeRecommendNextMovie' Methods">
@@ -681,7 +694,9 @@ public final class MessageManager implements IMessageManager {
 
         sendMessage(chatId, messageText);
         updateIsSendFeedbackPressed();
+
         modeTracker.activateSendFeedback();
+        userRecord.insertUserIfNotExists(botUpdate);
     }
 
     @Override

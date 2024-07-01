@@ -263,7 +263,7 @@ public interface IMessageRandomizer {
      * Extracts a random sticker from the <b>.json sticker file</b> for the <b>smart search</b> feature, when
      * the user presses the <b>smart search</b> reply button.
      *
-     * @return The file id of a random sticker.
+     * @return <b>File id</b> of a random sticker.
      */
     String getSmartSearchBeginningSticker();
 
@@ -271,7 +271,7 @@ public interface IMessageRandomizer {
      * Extracts a random sticker from the <b>.json sticker file</b> for the <b>end</b> of the <b>smart search</b> feature,
      * when the user has pressed some of the <b>genre selection</b> buttons (the last step of the <b>smart search</b>).
      *
-     * @return The file id of a random sticker.
+     * @return <b>File id</b> of a random sticker.
      */
     String getSmartSearchEndSticker();
 
@@ -279,14 +279,14 @@ public interface IMessageRandomizer {
      * Extracts a random sticker from the <b>.json sticker file</b> for the <b>no idea</b> feature, when the user
      * presses the <b>no idea</b> reply button.
      *
-     * @return The file id of a random sticker.
+     * @return <b>File id</b> of a random sticker.
      */
     String getNoIdeaBeginningSticker();
 
     /**
      * Extracts a random sticker from the <b>.json sticker file</b> for the <b>welcome</b> greeting.
      *
-     * @return The file id of a random sticker.
+     * @return <b>File id</b> of a random sticker.
      */
     String getWelcomeSticker();
 }

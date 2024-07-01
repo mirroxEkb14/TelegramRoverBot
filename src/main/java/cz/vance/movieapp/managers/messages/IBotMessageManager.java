@@ -16,7 +16,7 @@ public interface IBotMessageManager {
     void changeBotMessageLanguage();
 
     /**
-     * Returns a <b>boolean value</b>, whether the current language is English.
+     * @return  <b>Boolean value</b>, whether the current language is English.
      */
     boolean isEngLanguage();
 

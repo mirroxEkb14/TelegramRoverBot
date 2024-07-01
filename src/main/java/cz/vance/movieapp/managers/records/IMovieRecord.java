@@ -17,7 +17,7 @@ public interface IMovieRecord {
     /**
      * Returns the list of movies that were sorted by the results of the last <b>smart search</b>.
      *
-     * @return The <b>list</b> of movies.
+     * @return <b>List</b> of movies.
      */
     @Unmodifiable List<Movie> getSmartSearchMovies(@NotNull UserSelection userSelection);
 
@@ -34,17 +34,17 @@ public interface IMovieRecord {
     void moveNoIdeaToPreviousMovie();
 
     /**
-     * Returns a <b>boolean value</b>, whether the next movie to be displayed to the user is the first movie from DB or not.
+     * @return  <b>Boolean value</b>, whether the next movie to be displayed to the user is the first movie from DB or not.
      */
     boolean isNoIdeaPreviousMovieFirst();
 
     /**
-     * Returns a <b>boolean value</b>, whether the next movie to be displayed to the user is the last movie from DB or not.
+     * @return <b>Boolean value</b>, whether the next movie to be displayed to the user is the last movie from DB or not.
      */
     boolean isNoIdeaNextMovieLast();
 
     /**
-     * Returns the movie to be displayed to the user for the <b>no idea</b> feature.
+     * @return {@link Movie} to be displayed to the user for the <b>no idea</b> feature.
      */
     Movie getNoIdeaCurrentMovie();
 
@@ -63,18 +63,18 @@ public interface IMovieRecord {
     void moveWeRecommendToPreviousMovie();
 
     /**
-     * Returns the movie to be displayed to the user for the <b>we recommend</b> feature.
+     * @return {@link Movie} to be displayed to the user for the <b>we recommend</b> feature.
      */
     Movie getWeRecommendCurrentMovie();
 
     /**
-     * Returns a <b>boolean value</b>, whether the next movie to be displayed to the user is the first movie from the
+     * @return  <b>Boolean value</b>, whether the next movie to be displayed to the user is the first movie from the
      * recommended list or not.
      */
     boolean isWeRecommendPreviousMovieFirst();
 
     /**
-     * Returns a <b>boolean value</b>, whether the next movie to be displayed to the user is the last movie from the
+     * @return <b>Boolean value</b>, whether the next movie to be displayed to the user is the last movie from the
      * recommended list or not.
      */
     boolean isWeRecommendNextMovieLast();

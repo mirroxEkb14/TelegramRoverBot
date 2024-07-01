@@ -1,11 +1,14 @@
 package cz.vance.movieapp.managers.updates;
 
-//<editor-fold defaultstate="collapsed" desc="Imports">
+//<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.managers.records.IUserRecord;
+import cz.vance.movieapp.models.User;
 import cz.vance.movieapp.models.UserPhoto;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 //</editor-fold>
@@ -34,6 +37,18 @@ public final class UpdateExtractor implements IUpdateExtractor {
         return messagePresenceChecker.apply(update.getMessage()) ?
                 update.getMessage().getFrom().getId() :
                 update.getCallbackQuery().getFrom().getId();
+    }
+
+    @Override
+    public @NotNull User getDBUserFromUpdate(@NotNull Update update) {
+        final org.telegram.telegrambots.meta.api.objects.User tgUser = messagePresenceChecker.apply(update.getMessage()) ?
+                update.getMessage().getFrom() :
+                update.getCallbackQuery().getFrom();
+        final long tgId = tgUser.getId();
+        final String username = tgUser.getUserName();
+        final String joinDate = LocalDateTime.now().format(IUserRecord.USER_TABLE_DATE_FORMAT);
+
+        return new User((int)tgId, username, joinDate);
     }
 
     @Override

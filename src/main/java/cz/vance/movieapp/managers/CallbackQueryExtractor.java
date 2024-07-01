@@ -38,9 +38,9 @@ public final class CallbackQueryExtractor {
      * <br>
      * Removes the prefix from the query.
      *
-     * @param callbackQuery The callback query from an inline keyboard button.
+     * @param callbackQuery the <b>callback query</b> from an inline keyboard button.
      *
-     * @return The extracted callback data.
+     * @return Extracted callback data wrapped in {@link String}.
      */
     public static @NotNull String extractCallbackQueryPrefix(@NotNull String callbackQuery) {
         return callbackQuery.substring(0, callbackQuery.indexOf(CALLBACK_QUERY_PREFIX));

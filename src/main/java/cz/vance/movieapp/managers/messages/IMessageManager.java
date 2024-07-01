@@ -6,6 +6,7 @@ import cz.vance.movieapp.keyboards.IInlineKeyboardBuilder;
 import cz.vance.movieapp.utils.BotCommand;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import cz.vance.movieapp.managers.records.UserRecord;
 
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -84,6 +85,9 @@ public interface IMessageManager {
 
     /**
      * Sends a message with <b>user's mood selection</b>.
+     * <br>
+     * Calls the {@link UserRecord#insertUserIfNotExists(Update)} method to insert a new user into the DB, if he does
+     * not exist in the DB yet.
      *
      * @see IInlineKeyboardBuilder#buildSmartSearchMoodKeyboard()
      */
@@ -202,7 +206,7 @@ public interface IMessageManager {
     void sendFeedbackAtEndFarewell(Update botUpdate);
 
     /**
-     * Return a <b>boolean value</b> indicating if the user has pressed the <b>send feedback reply keyboard button</b>.
+     * @return <b>Boolean value</b> indicating if the user has pressed the <b>send feedback reply keyboard button</b>.
      */
     boolean isSendFeedbackPressed();
 

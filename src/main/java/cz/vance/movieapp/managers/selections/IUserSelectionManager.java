@@ -14,7 +14,7 @@ public interface IUserSelectionManager {
      * <br>
      * Is called when the user starts the <b>smart search</b> by pressing the <b>smart search reply keyboard button</b>.
      *
-     * @param chatId Whole non-negative number that uniquely identifies the chat.
+     * @param chatId whole non-negative number that uniquely identifies the chat.
      */
     void initializeUserSelection(long chatId);
 
@@ -23,8 +23,8 @@ public interface IUserSelectionManager {
      * <br>
      * Is called when the user presses one of the <b>user mood buttons</b>.
      *
-     * @param chatId Whole non-negative number that uniquely identifies the chat.
-     * @param mood The user's mood selection.
+     * @param chatId whole non-negative number that uniquely identifies the chat.
+     * @param mood the user's mood selection.
      */
     void putMood(long chatId, String mood);
 
@@ -33,8 +33,8 @@ public interface IUserSelectionManager {
      * <br>
      * Is called when the user presses one of the <b>catalogue buttons</b>.
      *
-     * @param chatId Whole non-negative number that uniquely identifies the chat.
-     * @param catalogue The catalogue selection.
+     * @param chatId whole non-negative number that uniquely identifies the chat.
+     * @param catalogue the catalogue selection.
      */
     void putCatalogue(long chatId, String catalogue);
 
@@ -43,8 +43,8 @@ public interface IUserSelectionManager {
      * <br>
      * Is called when the user presses one of the <b>genre buttons</b>.
      *
-     * @param chatId Whole non-negative number that uniquely identifies the chat.
-     * @param genre The genre selection.
+     * @param chatId whole non-negative number that uniquely identifies the chat.
+     * @param genre the genre selection.
      */
     void putGenre(long chatId, String genre);
 
@@ -53,9 +53,9 @@ public interface IUserSelectionManager {
      * <br>
      * Is called when the user presses one of the <b>genre buttons</b> (the last step of the <b>smart search</b>).
      *
-     * @param chatId Whole non-negative number that uniquely identifies the chat.
+     * @param chatId whole non-negative number that uniquely identifies the chat.
      *
-     * @return The <b>UserSelection</b> object holding user's selections during <b>smart search</b>.
+     * @return {@link UserSelection} object holding user's selections during <b>smart search</b>.
      */
     UserSelection getUserSelection(long chatId);
 
@@ -64,7 +64,7 @@ public interface IUserSelectionManager {
      * <br>
      * Is called when the user finishes the <b>smart search</b>.
      *
-     * @param chatId Whole non-negative number that uniquely identifies the chat (the <b>key</b> for the map).
+     * @param chatId whole non-negative number that uniquely identifies the chat (the <b>key</b> for the map).
      */
     void removeUserSelection(long chatId);
 }

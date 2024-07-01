@@ -21,8 +21,8 @@ public interface IMessageBuilder {
     /**
      * Builds a message with the specified <b>chat id</b> and <b>message text</b>.
      *
-     * @param chatId Whole non-negative number representing the chat identifier.
-     * @param messageText String containing the message text.
+     * @param chatId whole non-negative number representing the chat identifier.
+     * @param messageText string containing the message text.
      *
      * @return Configured <b>SendMessage</b> instance.
      */
@@ -31,9 +31,6 @@ public interface IMessageBuilder {
 
     /**
      * Builds a sticker with the specified <b>chat id</b> and <b>sticker file id</b>.
-     *
-     * @param chatId Whole non-negative number representing the chat identifier.
-     * @param stickerFileId String containing the sticker file identifier.
      *
      * @return Configured <b>SendSticker</b> instance.
      */
@@ -50,10 +47,6 @@ public interface IMessageBuilder {
     /**
      * Builds a message with the specified <b>chat id</b>, <b>message text</b> and <b>reply keyboard</b>.
      *
-     * @param chatId Whole non-negative number representing the chat identifier.
-     * @param messageText String containing the text.
-     * @param keyboardMarkup Reply keyboard instance.
-     *
      * @return Configured <b>SendMessage</b> instance with custom buttons (keyboard).
      */
     @NotNull SendMessage buildTelegramMessage(long chatId,
@@ -62,10 +55,6 @@ public interface IMessageBuilder {
 
     /**
      * Builds a message with the specified <b>chat id</b>, <b>message text</b> and <b>inline keyboard</b>.
-     *
-     * @param chatId Whole non-negative number representing the chat identifier.
-     * @param messageText String containing the text.
-     * @param keyboardMarkup Inline keyboard instance.
      *
      * @return Configured <b>SendMessage</b> instance with a keyboard.
      */
@@ -76,11 +65,6 @@ public interface IMessageBuilder {
     /**
      * Builds an edited message with the specified <b>chat id</b>, <b>message id</b>, <b>message text</b> and
      * <b>inline keyboard</b>.
-     *
-     * @param callbackChatId Whole non-negative number representing the chat id.
-     * @param callbackMessageId Whole non-negative number representing the message identifier.
-     * @param messageText String containing the text.
-     * @param keyboardMarkup Inline keyboard instance.
      *
      * @return Configured <b>EditMessageText</b> instance with custom keyboard.
      */

@@ -1,6 +1,7 @@
 package cz.vance.movieapp.managers.updates;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.models.User;
 import cz.vance.movieapp.models.UserPhoto;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -48,6 +49,15 @@ public interface IUpdateExtractor {
      * @return A whole non-negative number of the <b>long</b> primitive type.
      */
     long getUserId(@NotNull Update update);
+
+    /**
+     * Extracts the <b>db user</b> from a message.
+     *
+     * @param update The bot's <b>update</b> object.
+     *
+     * @return The user of the {@link User} type.
+     */
+    @NotNull User getDBUserFromUpdate(@NotNull Update update);
 
     /**
      * Extracts the <b>first name</b> of the user from a message.

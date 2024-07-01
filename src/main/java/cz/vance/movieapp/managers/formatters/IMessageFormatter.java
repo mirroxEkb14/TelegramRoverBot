@@ -16,28 +16,28 @@ public interface IMessageFormatter {
      *
      * @param smartSearchMovies the movies found during the <b>smart search</b>.
      *
-     * @return The full output message with a sample text and a list of input movies.
+     * @return The <b>full output message</b> with a sample text and a list of input movies.
      */
     @NotNull String getSmartSearchMovieMessage(@NotNull List<Movie> smartSearchMovies);
 
     /**
      * Forms a reply to the user when no movies are found during the <b>smart search</b> (the list is empty).
      *
-     * @return The output message with a sample text.
+     * @return The <b>output message</b> with a sample text.
      */
     @NotNull String getSmartSearchNoMoviesMessage();
 
     /**
      * Forms a reply to the user when the bot has to send a movie during the <b>no idea</b> mode.
      *
-     * @return The output message with a sample text and the input movie.
+     * @return The <b>output message</b> with a sample text and the input movie.
      */
     @NotNull String getNoIdeaMovieMessage(@NotNull Movie movie);
 
     /**
      * Forms a reply to the user when the bot has to send a movie during the <b>we recommend</b> mode.
      *
-     * @return The output message with a sample text and the input movie.
+     * @return The <b>output message</b> with a sample text and the input movie.
      */
     @NotNull String getWeRecommendMovieMessage(@NotNull Movie movie);
 }

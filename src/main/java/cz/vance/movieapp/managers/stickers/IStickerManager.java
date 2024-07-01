@@ -18,9 +18,9 @@ public interface IStickerManager {
     /**
      * Returns a list of sticker objects by the specified category.
      *
-     * @param category The {@link StickerCategory} object.
+     * @param category {@link StickerCategory} object.
      *
-     * @return A <b>list</b> of sorted stickers.
+     * @return <b>List</b> of sorted stickers.
      */
     @NotNull List<Sticker> getStickersByCategory(StickerCategory category);
 }
