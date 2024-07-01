@@ -35,10 +35,40 @@ public final class ModeTracker {
     public boolean isNoIdeaActive() { return isNoIdeaActive; }
     public boolean isSendFeedbackActive() { return isSendFeedbackActive; }
 
-    public void activateSmartSearch() { if (!isSmartSearchActive) isSmartSearchActive = true; }
-    public void activateWeRecommend() { if (!isWeRecommendActive) isWeRecommendActive = true; }
-    public void activateNoIdea() { if (!isNoIdeaActive) isNoIdeaActive = true; }
-    public void activateSendFeedback() { if (!isSendFeedbackActive) isSendFeedbackActive = true; }
+    //<editor-fold default-state="collapsed" desc="Public Activation Methods">
+    public void activateSmartSearch() {
+        if (!isSmartSearchActive) {
+            isSmartSearchActive = true;
+            deactivateWeRecommend();
+            deactivateNoIdea();
+            deactivateSendFeedback();
+        }
+    }
+    public void activateWeRecommend() {
+        if (!isWeRecommendActive) {
+            isWeRecommendActive = true;
+            deactivateSmartSearch();
+            deactivateNoIdea();
+            deactivateSendFeedback();
+        }
+    }
+    public void activateNoIdea() {
+        if (!isNoIdeaActive) {
+            isNoIdeaActive = true;
+            deactivateSmartSearch();
+            deactivateWeRecommend();
+            deactivateSendFeedback();
+        }
+    }
+    public void activateSendFeedback() {
+        if (!isSendFeedbackActive) {
+            isSendFeedbackActive = true;
+            deactivateSmartSearch();
+            deactivateWeRecommend();
+            deactivateNoIdea();
+        }
+    }
+    //</editor-fold>
 
     public void deactivateSmartSearch() { if (isSmartSearchActive) isSmartSearchActive = false; }
     public void deactivateWeRecommend() { if (isWeRecommendActive) isWeRecommendActive = false; }
