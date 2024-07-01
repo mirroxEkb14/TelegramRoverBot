@@ -6,7 +6,8 @@ package cz.vance.movieapp.utils;
 public enum BotCommand {
     START_COMMAND("/start"),
     HELP_COMMAND("/help"),
-    LANG_COMMAND("/lang");
+    LANG_COMMAND("/lang"),
+    RATING_COMMAND("/rating");
 
     private final String content;
 

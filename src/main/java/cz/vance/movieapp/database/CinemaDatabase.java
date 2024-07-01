@@ -3,8 +3,10 @@ package cz.vance.movieapp.database;
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.models.Feedback;
 import cz.vance.movieapp.models.Movie;
+import cz.vance.movieapp.models.MovieRating;
 import cz.vance.movieapp.models.User;
 import cz.vance.movieapp.utils.columns.FeedbacksColumnLabel;
+import cz.vance.movieapp.utils.columns.MovieRatesColumnLabel;
 import cz.vance.movieapp.utils.columns.MoviesColumnLabel;
 import cz.vance.movieapp.utils.columns.UsersColumnTable;
 import org.jetbrains.annotations.NotNull;
@@ -183,5 +185,56 @@ public final class CinemaDatabase implements ICinemaDatabase {
             close();
         }
         return feedbacks;
+    }
+
+    @Override
+    public void insertMovieRate(@NotNull MovieRating movieRate) {
+        connect();
+
+        final String query =
+                "INSERT INTO movieRatings (tgId, ratingDate, movieName, modeName, ratingText, smartSearchRatingText) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, movieRate.getTgId());
+            stmt.setString(2, movieRate.getRatingDate());
+            stmt.setString(3, movieRate.getMovieName());
+            stmt.setString(4, movieRate.getModeName());
+            stmt.setString(5, movieRate.getRatingText());
+            stmt.setString(6, movieRate.getSmartSearchRatingText());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+    }
+
+    @Override
+    public @NotNull List<MovieRating> getMovieRates() {
+        connect();
+
+        final List<MovieRating> movieRates = new ArrayList<>();
+        final String query = "SELECT * FROM movieRatings";
+
+        try (final PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                movieRates.add(new MovieRating(
+                        rs.getInt(MovieRatesColumnLabel.ID.getContent()),
+                        rs.getInt(MovieRatesColumnLabel.TG_ID.getContent()),
+                        rs.getString(MovieRatesColumnLabel.RATING_DATE.getContent()),
+                        rs.getString(MovieRatesColumnLabel.MOVIE_NAME.getContent()),
+                        rs.getString(MovieRatesColumnLabel.MODE_NAME.getContent()),
+                        rs.getString(MovieRatesColumnLabel.RATING_TEXT.getContent()),
+                        rs.getString(MovieRatesColumnLabel.SMART_SEARCH_RATING_TEXT.getContent())
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return movieRates;
     }
 }

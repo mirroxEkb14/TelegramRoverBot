@@ -12,6 +12,7 @@ public final class ModeTracker {
     private boolean isWeRecommendActive;
     private boolean isNoIdeaActive;
     private boolean isSendFeedbackActive;
+    private boolean isMovieRatingActive;
 
     //<editor-fold default-state="collapsed" desc="Singleton">
     private static ModeTracker instance;
@@ -34,6 +35,7 @@ public final class ModeTracker {
     public boolean isWeRecommendActive() { return isWeRecommendActive; }
     public boolean isNoIdeaActive() { return isNoIdeaActive; }
     public boolean isSendFeedbackActive() { return isSendFeedbackActive; }
+    public boolean isMovieRatingActive() { return isMovieRatingActive; }
 
     //<editor-fold default-state="collapsed" desc="Public Activation Methods">
     public void activateSmartSearch() {
@@ -42,6 +44,7 @@ public final class ModeTracker {
             deactivateWeRecommend();
             deactivateNoIdea();
             deactivateSendFeedback();
+            deactivateMovieRating();
         }
     }
     public void activateWeRecommend() {
@@ -50,6 +53,7 @@ public final class ModeTracker {
             deactivateSmartSearch();
             deactivateNoIdea();
             deactivateSendFeedback();
+            deactivateMovieRating();
         }
     }
     public void activateNoIdea() {
@@ -58,6 +62,7 @@ public final class ModeTracker {
             deactivateSmartSearch();
             deactivateWeRecommend();
             deactivateSendFeedback();
+            deactivateMovieRating();
         }
     }
     public void activateSendFeedback() {
@@ -66,6 +71,16 @@ public final class ModeTracker {
             deactivateSmartSearch();
             deactivateWeRecommend();
             deactivateNoIdea();
+            deactivateMovieRating();
+        }
+    }
+    public void activateMovieRating() {
+        if (!isMovieRatingActive) {
+            isMovieRatingActive = true;
+            deactivateSmartSearch();
+            deactivateWeRecommend();
+            deactivateNoIdea();
+            deactivateSendFeedback();
         }
     }
     //</editor-fold>
@@ -74,4 +89,5 @@ public final class ModeTracker {
     public void deactivateWeRecommend() { if (isWeRecommendActive) isWeRecommendActive = false; }
     public void deactivateNoIdea() { if (isNoIdeaActive) isNoIdeaActive = false; }
     public void deactivateSendFeedback() { if (isSendFeedbackActive) isSendFeedbackActive = false; }
+    public void deactivateMovieRating() { if (isMovieRatingActive) isMovieRatingActive = false; }
 }

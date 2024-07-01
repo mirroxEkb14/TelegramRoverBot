@@ -316,4 +316,24 @@ public final class InlineKeyboardBuilder implements IInlineKeyboardBuilder {
         keyboardMarkup.setKeyboard(inlineRows);
         return keyboardMarkup;
     }
+
+    @Override
+    public @NotNull InlineKeyboardMarkup buildMovieRatingKeyboard() {
+        final InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+
+        final List<List<InlineKeyboardButton>> inlineRows = new ArrayList<>();
+        final List<InlineKeyboardButton> firstInlineRow = new ArrayList<>();
+
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getMovieRatingYesInlineButton(),
+                IInlineKeyboardBuilder.getMovieRatingCreatedCallback(botMessageManager.getMovieRatingYesInlineButton())));
+        firstInlineRow.add(inlineButtonBuilder.apply(
+                botMessageManager.getMovieRatingNoInlineButton(),
+                IInlineKeyboardBuilder.getMovieRatingCreatedCallback(botMessageManager.getMovieRatingNoInlineButton())));
+
+        inlineRows.add(firstInlineRow);
+
+        keyboardMarkup.setKeyboard(inlineRows);
+        return keyboardMarkup;
+    }
 }

@@ -3,6 +3,7 @@ package cz.vance.movieapp.database;
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.models.Feedback;
 import cz.vance.movieapp.models.Movie;
+import cz.vance.movieapp.models.MovieRating;
 import cz.vance.movieapp.models.User;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,4 +56,18 @@ public interface ICinemaDatabase {
      * @return <b>List object</b> with all the available feedbacks.
      */
     @NotNull List<Feedback> getFeedbacks();
+
+    /**
+     * Inserts a new <b>movie rate</b> object into the DB.
+     *
+     * @param movieRate <b>movie rate instance</b> containing all the necessary DB field values.
+     */
+    void insertMovieRate(@NotNull MovieRating movieRate);
+
+    /**
+     * Retrieves a list of <b>all the movie rates</b> from the DB from a related table.
+     *
+     * @return <b>List object</b> with all the available movie rates.
+     */
+    @NotNull List<MovieRating> getMovieRates();
 }

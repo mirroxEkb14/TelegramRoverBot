@@ -44,6 +44,8 @@ public final class InlineButton {
     private String weRecommendWatchInlineButton;
     private String sendFeedbackYesInlineButton;
     private String sendFeedbackNoInlineButton;
+    private String movieRatingYesInlineButton;
+    private String movieRatingNoInlineButton;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public String getDepressionMoodInlineButton() { return depressionMoodInlineButton; }
@@ -85,6 +87,8 @@ public final class InlineButton {
     public String getWeRecommendWatchInlineButton() { return weRecommendWatchInlineButton; }
     public String getSendFeedbackYesInlineButton() { return sendFeedbackYesInlineButton; }
     public String getSendFeedbackNoInlineButton() { return sendFeedbackNoInlineButton; }
+    public String getMovieRatingYesInlineButton() { return movieRatingYesInlineButton; }
+    public String getMovieRatingNoInlineButton() { return movieRatingNoInlineButton; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
@@ -127,5 +131,7 @@ public final class InlineButton {
     public void setWeRecommendWatchInlineButton(String weRecommendWatchInlineButton) { this.weRecommendWatchInlineButton = weRecommendWatchInlineButton; }
     public void setSendFeedbackYesInlineButton(String sendFeedbackYesInlineButton) { this.sendFeedbackYesInlineButton = sendFeedbackYesInlineButton; }
     public void setSendFeedbackNoInlineButton(String sendFeedbackNoInlineButton) { this.sendFeedbackNoInlineButton = sendFeedbackNoInlineButton; }
+    public void setMovieRatingYesInlineButton(String movieRatingYesInlineButton) { this.movieRatingYesInlineButton = movieRatingYesInlineButton; }
+    public void setMovieRatingNoInlineButton(String movieRatingNoInlineButton) { this.movieRatingNoInlineButton = movieRatingNoInlineButton; }
     //</editor-fold>
 }

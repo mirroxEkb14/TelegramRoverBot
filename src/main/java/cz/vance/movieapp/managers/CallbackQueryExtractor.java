@@ -32,6 +32,10 @@ public final class CallbackQueryExtractor {
      * Unique prefix for the <b>send feedback</b> callback query.
      */
     public static final String SEND_FEEDBACK_CALLBACK_QUERY_PREFIX = "_cbSendFeedback";
+    /**
+     * Unique prefix for the <b>/rating command</b> callback query.
+     */
+    public static final String MOVIE_RATING_COMMAND_CALLBACK_QUERY_PREFIX = "_cbMovieRating";
 
     /**
      * Extracts the <b>callback data</b> from the given <b>callback query</b>.

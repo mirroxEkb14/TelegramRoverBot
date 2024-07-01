@@ -486,6 +486,91 @@ public final class BotMessageManager implements IBotMessageManager {
     }
     //</editor-fold>
 
+    //<editor-fold default-state="collapsed" desc="Movie Rating Getters">
+    @Override
+    public List<String> getMovieRatingAtLaunchGreetings() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingAtLaunchGreetings() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingAtLaunchGreetings();
+    }
+    @Override
+    public List<String> getMovieRatingConfirmation() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingConfirmation() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingConfirmation();
+    }
+    @Override
+    public String getMovieRatingSampleMessage() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingSampleMessage() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingSampleMessage();
+    }
+    @Override
+    public List<String> getMovieRatingNoConfirmationMessage() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingNoConfirmationMessage() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingNoConfirmationMessage();
+    }
+    @Override
+    public List<String> getMovieRatingYesConfirmationMessage() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingYesConfirmationMessage() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingYesConfirmationMessage();
+    }
+    @Override
+    public List<String> getMovieRatingWrongSampleFormatMessage() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingWrongSampleFormatMessage() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingWrongSampleFormatMessage();
+    }
+
+    @Override
+    public int getMovieRatingAtLaunchGreetingsSize() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingAtLaunchGreetings().size() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingAtLaunchGreetings().size();
+    }
+    @Override
+    public int getMovieRatingConfirmationSize() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingConfirmation().size() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingConfirmation().size();
+    }
+    @Override
+    public int getMovieRatingNoConfirmationMessageSize() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingNoConfirmationMessage().size() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingNoConfirmationMessage().size();
+    }
+    @Override
+    public int getMovieRatingYesConfirmationMessageSize() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingYesConfirmationMessage().size() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingYesConfirmationMessage().size();
+    }
+    @Override
+    public int getMovieRatingWrongSampleFormatMessageSize() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getMovieRatingMessage().getMovieRatingWrongSampleFormatMessage().size() :
+                botMessage.getRusMessage().getMovieRatingMessage().getMovieRatingWrongSampleFormatMessage().size();
+    }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="Bot Launch Getters">
+    @Override
+    public List<String> getOnBotLaunchMessage() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getOnBotLaunchMessage() :
+                botMessage.getRusMessage().getOnBotLaunchMessage();
+    }
+    @Override
+    public int getOnBotLaunchMessageSize() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getOnBotLaunchMessage().size() :
+                botMessage.getRusMessage().getOnBotLaunchMessage().size();
+    }
+    //</editor-fold>
+
     //<editor-fold default-state="collapsed" desc="On Bot Terminated Getters">
     @Override
     public List<String> getOnBotTerminatedMessage() {
@@ -762,6 +847,18 @@ public final class BotMessageManager implements IBotMessageManager {
             return isEngLanguage ?
                     botMessage.getEngMessage().getInlineButton().getSendFeedbackNoInlineButton() :
                     botMessage.getRusMessage().getInlineButton().getSendFeedbackNoInlineButton();
+    }
+    @Override
+    public String getMovieRatingYesInlineButton() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getInlineButton().getMovieRatingYesInlineButton() :
+                botMessage.getRusMessage().getInlineButton().getMovieRatingYesInlineButton();
+    }
+    @Override
+    public String getMovieRatingNoInlineButton() {
+        return isEngLanguage ?
+                botMessage.getEngMessage().getInlineButton().getMovieRatingNoInlineButton() :
+                botMessage.getRusMessage().getInlineButton().getMovieRatingNoInlineButton();
     }
     //</editor-fold>
 

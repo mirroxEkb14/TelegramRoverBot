@@ -62,6 +62,14 @@ public interface IBotMessageManager {
     List<String> getOnNoIdeaDeviation();
     List<String> getOnSendFeedbackDeviation();
 
+    List<String> getMovieRatingAtLaunchGreetings();
+    List<String> getMovieRatingConfirmation();
+    String getMovieRatingSampleMessage();
+    List<String> getMovieRatingNoConfirmationMessage();
+    List<String> getMovieRatingYesConfirmationMessage();
+    List<String> getMovieRatingWrongSampleFormatMessage();
+
+    List<String> getOnBotLaunchMessage();
     List<String> getOnBotTerminatedMessage();
 
     int getSmartSearchAtLaunchGreetingsSize();
@@ -104,6 +112,13 @@ public interface IBotMessageManager {
     int getOnNoIdeaDeviationSize();
     int getOnSendFeedbackDeviationSize();
 
+    int getMovieRatingAtLaunchGreetingsSize();
+    int getMovieRatingConfirmationSize();
+    int getMovieRatingNoConfirmationMessageSize();
+    int getMovieRatingYesConfirmationMessageSize();
+    int getMovieRatingWrongSampleFormatMessageSize();
+
+    int getOnBotLaunchMessageSize();
     int getOnBotTerminatedMessageSize();
 
     String getSmartSearchReplyButton();
@@ -155,4 +170,7 @@ public interface IBotMessageManager {
 
     String getSendFeedbackYesInlineButton();
     String getSendFeedbackNoInlineButton();
+
+    String getMovieRatingYesInlineButton();
+    String getMovieRatingNoInlineButton();
 }

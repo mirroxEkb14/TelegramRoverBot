@@ -254,6 +254,50 @@ public interface IMessageRandomizer {
     String getOnSendFeedbackDeviationMessage();
 
     /**
+     * Extracts a random element from the <b>movieRatingAtLaunchGreetings</b> list that contains all the possible texts
+     * when the user enters the <b>.rating</b> command.
+     */
+    String getMovieRatingAtLaunchGreetingsMessage();
+
+    /**
+     * Extracts a random element from the <b>movieRatingConfirmation</b> list that contains all the possible texts
+     * when the user during the <b>movie rating</b> presses one of the <b>confirmation</b> inline keyboard buttons.
+     *
+     * @param userMovieRating <b>String</b> object representing user's movie rating.
+     */
+    String getMovieRatingConfirmationMessage(String userMovieRating);
+
+    /**
+     * Extracts the <b>movieRatingSample</b> string that contains the sample text to display to the user during the
+     * <b>movie rating</b> mode.
+     */
+    String getMovieRatingSampleMessage();
+
+    /**
+     * Extracts a random element from the <b>movieRatingNoConfirmation</b> list that contains all the possible texts
+     * when the user during the <b>movie rating</b> presses the <b>no confirmation</b> inline keyboard button.
+     */
+    String getMovieRatingNoConfirmationMessage();
+
+    /**
+     * Extracts the <b>movieRatingYesConfirmation</b> string that contains the text when the user during the <b>movie
+     * rating</b> presses the <b>yes confirmation</b> inline keyboard button.
+     */
+    String getMovieRatingYesConfirmationMessage();
+
+    /**
+     * Extracts a random element from the <b>movieRatingWrongSampleFormat</b> list that contains all the possible texts
+     * when the user during the <b>movie rating</b> enters the wrong sample format.
+     */
+    String getMovieRatingWrongSampleFormatMessage();
+
+    /**
+     * Extracts a random element from the <b>onBotLaunchMessage</b> list that contains all the possible texts
+     * when the bot is launched again.
+     */
+    String getOnBotLaunchMessage();
+
+    /**
      * Extracts the only one element from the <b>onBotTerminatedMessage</b> list that contains the text for the user
      * when the bot is terminated.
      */

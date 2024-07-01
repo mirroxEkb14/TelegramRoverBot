@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Implements basic methods for interacting with the <b>users table</b> from the DB.
  */
-public class UserRecord implements IUserRecord {
+public final class UserRecord implements IUserRecord {
 
     private final ICinemaDatabase cinemaDB;
     /**
@@ -70,4 +70,11 @@ public class UserRecord implements IUserRecord {
 
     @Override
     public @NotNull List<User> getUsers() { return new ArrayList<>(users); }
+
+    @Override
+    public @NotNull List<Integer> getTgIds() {
+        final List<Integer> tgIds = new ArrayList<>();
+        users.forEach(user -> tgIds.add(user.getTgId()));
+        return tgIds;
+    }
 }

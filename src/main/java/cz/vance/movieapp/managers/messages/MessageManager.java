@@ -1,6 +1,7 @@
 package cz.vance.movieapp.managers.messages;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.exceptions.MovieRatingFormatException;
 import cz.vance.movieapp.keyboards.IInlineKeyboardBuilder;
 import cz.vance.movieapp.keyboards.IReplyKeyboardBuilder;
 import cz.vance.movieapp.keyboards.InlineKeyboardBuilder;
@@ -26,13 +27,12 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageRe
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import cz.vance.movieapp.bot.TelegramRoverBot;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Consumer;
 //</editor-fold>
@@ -63,6 +63,7 @@ public final class MessageManager implements IMessageManager {
     private final IFeedbackRecord feedbackRecord;
     private final IMessageFormatter messageFormatter;
     private final IUserRecord userRecord;
+    private final IMovieRatingRecord movieRatingRecord;
 
     private final IReplyKeyboardBuilder replyKeyboardBuilder;
     private final IInlineKeyboardBuilder inlineKeyboardBuilder;
@@ -95,18 +96,17 @@ public final class MessageManager implements IMessageManager {
     private final HashMap<Long, Integer> latestMessageIds = new HashMap<>();
 
     /**
-     * Stores the <b>chat ids</b> of all the users who have launched the bot.
-     * <br>
-     * Is used to determine the <b>chat id</b> to remove the reply keyboard when the bot is terminated.
-     */
-    private final Set<Long> chatIds = new HashSet<>();
-
-    /**
      * Is used to determine if the user pressed the <b>send feedback</b> reply keyboard button.
      * <br>
      * Is then used to extract the user's feedback message.
      */
     private static boolean isSendFeedbackPressed;
+    /**
+     * Is used to determine if the user enters the <b>/rating</b> command.
+     * <br>
+     * Is then used to extract the user's rating message.
+     */
+    private static boolean isMovieRatingCommand;
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Latest Message Handler">
@@ -149,6 +149,7 @@ public final class MessageManager implements IMessageManager {
         movieRecord = MovieRecord.getInstance();
         feedbackRecord = FeedbackRecord.getInstance();
         userRecord = UserRecord.getInstance();
+        movieRatingRecord = MovieRatingRecord.getInstance();
 
         messageFormatter = new MessageFormatter();
 
@@ -187,6 +188,7 @@ public final class MessageManager implements IMessageManager {
         userRecord.insertUserIfNotExists(botUpdate);
     }
 
+    //<editor-fold default-state="collapsed" desc="Overridden 'sendWelcome' Methods">
     @Override
     public void sendWelcome(Update botUpdate) {
         final long chatId = updateExtractor.getMessageChatId(botUpdate);
@@ -196,15 +198,30 @@ public final class MessageManager implements IMessageManager {
         userRecord.insertUserIfNotExists(botUpdate);
 
         sendSticker(chatId, stickerFileId);
-        sendWelcome(chatId, messageText);
+        sendMessage(chatId, messageText, replyKeyboardBuilder.buildMainMenuKeyboard());
     }
+
+    /**
+     * Formats and returns the welcome text by adding <b>user's username</b> and <b>the username of the bot</b>.
+     *
+     * @param botUpdate The incoming update to extract the <b>user's surname</b>.
+     *
+     * @return The formatted text for a welcome message.
+     */
+    private String getFormattedWelcomeText(@NotNull Update botUpdate) {
+        return String.format(
+                messageRandomizer.getWelcomeMessage(),
+                botUpdate.getMessage().getFrom().getFirstName(),
+                bot.getBotUsername());
+    }
+    //</editor-fold>
 
     @Override
     public void sendHelp(Update botUpdate) {
         final long chatId = updateExtractor.getMessageChatId(botUpdate);
         final String messageText = messageRandomizer.getHelpMessage();
 
-        sendHelp(chatId, messageText);
+        sendMessage(chatId, messageText);
         userRecord.insertUserIfNotExists(botUpdate);
     }
 
@@ -754,6 +771,7 @@ public final class MessageManager implements IMessageManager {
     /**
      * Handles the <b>Yes</b> button press for the <b>Send Feedback</b> message:
      * <ul>
+     *     <li>inserts the <b>feedback</b> into the <b>feedback record</b>;</li>
      *     <li>removes the <b>inline keyboard</b>;</li>
      *     <li>sends the <b>'send feedback' yes confirmation</b> message;</li>
      *     <li>removes the <b>latest message id</b> from the <b>latest message ids</b> map.</li>
@@ -773,15 +791,123 @@ public final class MessageManager implements IMessageManager {
     //</editor-fold>
 
     @Override
+    public void sendMovieRatingAtLaunchGreetings(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        if (modeTracker.isSmartSearchActive()) {
+            sendMessage(chatId, messageRandomizer.getOnSmartSearchDeviationMessage());
+            return;
+        } else if (modeTracker.isWeRecommendActive()) {
+            sendMessage(chatId, messageRandomizer.getOnWeRecommendDeviationMessage());
+            return;
+        } else if (modeTracker.isNoIdeaActive()) {
+            sendMessage(chatId, messageRandomizer.getOnNoIdeaDeviationMessage());
+            return;
+        } else if (modeTracker.isSendFeedbackActive()) {
+            sendMessage(chatId, messageRandomizer.getOnSendFeedbackDeviationMessage());
+            return;
+        }
+
+        final String atLaunchGreetingsText = messageRandomizer.getMovieRatingAtLaunchGreetingsMessage();
+        sendMessage(chatId, atLaunchGreetingsText);
+        ProgramSleeper.pauseMovieRatingBeforeSendingSample();
+
+        final String messageText = messageRandomizer.getMovieRatingSampleMessage();
+        sendMessage(chatId, messageText);
+
+        updateIsMovieRatingCommand();
+        modeTracker.activateMovieRating();
+        userRecord.insertUserIfNotExists(botUpdate);
+    }
+
+    @Override
+    public void sendMovieRatingConfirmation(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final String userMovieRatingText = updateExtractor.getMessageText(botUpdate);
+        final String messageText = messageRandomizer.getMovieRatingConfirmationMessage(userMovieRatingText);
+        modeProcessingHandler.accept(chatId);
+
+        final Message movieRatingConfirmationMessage = sendMessage(
+                chatId,
+                messageText,
+                inlineKeyboardBuilder.buildMovieRatingKeyboard());
+        latestMessageHandler.accept(movieRatingConfirmationMessage);
+    }
+
+    //<editor-fold default-state="collapsed" desc="Overridden 'sendMovieRatingAtEndFarewell' Method">
+    @Override
+    public void sendMovieRatingAtEndFarewell(Update botUpdate) {
+        final long chatId = updateExtractor.getMessageChatId(botUpdate);
+        final long messageId = updateExtractor.getCallbackMessageId(botUpdate);
+
+        if (isOldInlineKeyboard(chatId, messageId)) {
+            handleOldInlineKeyboard(chatId, messageId);
+            return;
+        }
+
+        modeTracker.deactivateMovieRating();
+
+        if (inlineKeyboardBuilder.isMovieRatingNoButton(botUpdate)) {
+            handleMovieRatingNoButton(chatId, messageId);
+            updateIsMovieRatingCommand();
+            return;
+        }
+        handleMovieRatingYesButton(chatId, messageId, botUpdate);
+        updateIsMovieRatingCommand();
+    }
+
+    /**
+     * Handles the <b>No</b> button press for the <b>/rating</b> message:
+     * <ul>
+     *     <li>removes the <b>inline keyboard</b>;</li>
+     *     <li>sends the <b>'/rating' no confirmation</b> message;</li>
+     *     <li>removes the <b>latest message id</b> from the <b>latest message ids</b> map.</li>
+     * </ul>
+     */
+    private void handleMovieRatingNoButton(long chatId, long messageId) {
+        removeMessageInlineKeyboard(chatId, messageId);
+        sendMessage(chatId, messageRandomizer.getMovieRatingNoConfirmationMessage());
+
+        latestMessageIds.remove(chatId);
+    }
+
+    /**
+     * Handles the <b>Yes</b> button press for the <b>/rating</b> message:
+     * <ul>
+     *     <li>inserts the <b>movie rating</b> into the <b>movie rating record</b>;</li>
+     *     <li>removes the <b>inline keyboard</b>;</li>
+     *     <li>sends the <b>'/rating' yes confirmation</b> message;</li>
+     *     <li>removes the <b>latest message id</b> from the <b>latest message ids</b> map.</li>
+     * </ul>
+     */
+    private void handleMovieRatingYesButton(long chatId,
+                                            long messageId,
+                                            Update botUpdate) {
+        try {
+            final MovieRating movieRating = updateExtractor.getMovieRatingCallbackObject(botUpdate);
+            movieRatingRecord.insertMovieRating(movieRating);
+
+            sendMessage(chatId, messageRandomizer.getSendFeedbackYesConfirmationMessage());
+        } catch (MovieRatingFormatException e) {
+            sendMessage(chatId, messageRandomizer.getMovieRatingWrongSampleFormatMessage());
+        }
+        removeMessageInlineKeyboard(chatId, messageId);
+        latestMessageIds.remove(chatId);
+    }
+    //</editor-fold>
+
+    @Override
     public boolean isSendFeedbackPressed() { return isSendFeedbackPressed; }
 
     @Override
-    public void removeReplyKeyboard() { chatIds.forEach(this::removeMenuReplyKeyboard); }
+    public boolean isMovieRatingCommand() { return isMovieRatingCommand; }
 
     @Override
-    public void addChatId(Update botUpdate) {
-        final long chatId = updateExtractor.getMessageChatId(botUpdate);
-        chatIds.add(chatId);
+    public void removeReplyKeyboard() { userRecord.getTgIds().forEach(this::removeMenuReplyKeyboard); }
+
+    @Override
+    public void sendRestartingNotification() {
+        final String restartingNotificationText = messageRandomizer.getOnBotLaunchMessage();
+        userRecord.getTgIds().forEach(tgId -> sendMessage(tgId, restartingNotificationText));
     }
 
     /* ---------------- Private Helper Methods -------------- */
@@ -809,44 +935,6 @@ public final class MessageManager implements IMessageManager {
         try {
             bot.execute(
                     messageBuilder.buildTelegramPhoto(chatId, userPhoto));
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
-    //</editor-fold>
-
-    //<editor-fold default-state="collapsed" desc="Welcome Message Sender">
-    private void sendWelcome(long chatId, String messageText) {
-        try {
-            bot.execute(messageBuilder.buildTelegramMessage(
-                    chatId,
-                    messageText,
-                    replyKeyboardBuilder.buildMainMenuKeyboard()));
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Formats and returns the welcome text by adding <b>user's username</b> and <b>the username of the bot</b>.
-     *
-     * @param botUpdate The incoming update to extract the <b>user's surname</b>.
-     *
-     * @return The formatted text for a welcome message.
-     */
-    private String getFormattedWelcomeText(@NotNull Update botUpdate) {
-        return String.format(
-                messageRandomizer.getWelcomeMessage(),
-                botUpdate.getMessage().getFrom().getFirstName(),
-                bot.getBotUsername());
-    }
-    //</editor-fold>
-
-    //<editor-fold default-state="collapsed" desc="Help Message Sender">
-    private void sendHelp(long chatId, String messageText) {
-        try {
-            bot.execute(
-                    messageBuilder.buildTelegramMessage(chatId, messageText));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
@@ -881,6 +969,20 @@ public final class MessageManager implements IMessageManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private void sendMessage(long chatId,
+                             String messageText,
+                             ReplyKeyboardMarkup replyMarkup) {
+        try {
+            bot.execute(
+                    messageBuilder.buildTelegramMessage(
+                            chatId,
+                            messageText,
+                            replyMarkup));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendMessage(long chatId,
@@ -1041,6 +1143,8 @@ public final class MessageManager implements IMessageManager {
     //</editor-fold>
 
     private void updateIsSendFeedbackPressed() { isSendFeedbackPressed = !isSendFeedbackPressed; }
+
+    private void updateIsMovieRatingCommand() { isMovieRatingCommand = !isMovieRatingCommand; }
 
     /* ------------------------------------------------------ */
 }

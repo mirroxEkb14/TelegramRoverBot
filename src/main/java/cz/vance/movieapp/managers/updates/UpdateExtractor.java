@@ -1,7 +1,10 @@
 package cz.vance.movieapp.managers.updates;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.exceptions.MovieRatingFormatException;
+import cz.vance.movieapp.managers.records.IMovieRatingRecord;
 import cz.vance.movieapp.managers.records.IUserRecord;
+import cz.vance.movieapp.models.MovieRating;
 import cz.vance.movieapp.models.User;
 import cz.vance.movieapp.models.UserPhoto;
 import org.jetbrains.annotations.NotNull;
@@ -9,6 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 //</editor-fold>
@@ -79,6 +83,22 @@ public final class UpdateExtractor implements IUpdateExtractor {
         if (firstNewlineIndex != -1)
             return originalText.substring(firstNewlineIndex + 1).trim();
         return originalText.trim();
+    }
+
+    @Override
+    public @NotNull MovieRating getMovieRatingCallbackObject(@NotNull Update update) throws MovieRatingFormatException {
+        final String originalText = update.getCallbackQuery().getMessage().getText();
+        final int tgId = (int)getUserId(update);
+        final String ratingDate = LocalDateTime.now().format(IMovieRatingRecord.MOVIE_RATINGS_TABLE_DATE_FORMAT);
+
+        final String[] splitTitleFromFormat = originalText.split(LINE_FORMAT_SEPARATOR);
+        final String[] splitText = splitTitleFromFormat[1].split(LINE_SEPARATOR);
+
+        if (splitText.length < 4)
+            throw new MovieRatingFormatException();
+
+        return new MovieRating(
+                tgId, ratingDate, splitText[0], splitText[1], splitText[2], splitText[3]);
     }
 
     @Override

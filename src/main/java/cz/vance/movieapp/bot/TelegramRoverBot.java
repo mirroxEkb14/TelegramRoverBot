@@ -75,22 +75,26 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
      */
     public void removeReplyKeyboard() { messageManager.removeReplyKeyboard(); }
 
+    public void sendRestartingNotification() { messageManager.sendRestartingNotification(); }
+
     /**
      * Delegates the processing of the incoming messages (based on their content) to the {@link MessageManager}.
      *
      * @param update The update containing the message.
      */
     private void handleMessage(Update update) {
-        messageManager.addChatId(update);
-
         if (messageManager.isSendFeedbackPressed())
             messageManager.sendFeedbackConfirmation(update);
+        else if (messageManager.isMovieRatingCommand())
+            messageManager.sendMovieRatingConfirmation(update);
         else if (messageManager.isStartCommand(update))
             messageManager.sendWelcome(update);
         else if (messageManager.isHelpCommand(update))
             messageManager.sendHelp(update);
         else if (messageManager.isLangCommand(update))
             messageManager.sendLang(update);
+        else if (messageManager.isRatingCommand(update))
+            messageManager.sendMovieRatingAtLaunchGreetings(update);
         else if (messageManager.isSmartSearchButton(update))
             messageManager.sendSmartSearchMood(update);
         else if (messageManager.isNoIdeaButton(update))
@@ -113,8 +117,6 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
      * @param update The update containing the callback query.
      */
     private void handleCallback(Update update) {
-        messageManager.addChatId(update);
-
         if (inlineKeyboardBuilder.isSmartSearchMoodButton(update))
             messageManager.sendSmartSearchCatalogue(update);
         else if (inlineKeyboardBuilder.isSmartSearchCatalogueButton(update))
@@ -141,5 +143,7 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
             messageManager.handleWeRecommendToMainMenu(update);
         else if (inlineKeyboardBuilder.isSendFeedbackConfirmationButton(update))
             messageManager.sendFeedbackAtEndFarewell(update);
+        else if (inlineKeyboardBuilder.isMovieRatingConfirmationButton(update))
+            messageManager.sendMovieRatingAtEndFarewell(update);
     }
 }

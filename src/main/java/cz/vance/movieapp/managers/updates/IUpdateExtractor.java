@@ -1,6 +1,8 @@
 package cz.vance.movieapp.managers.updates;
 
 //<editor-fold default-state="collapsed" desc="Imports">
+import cz.vance.movieapp.exceptions.MovieRatingFormatException;
+import cz.vance.movieapp.models.MovieRating;
 import cz.vance.movieapp.models.User;
 import cz.vance.movieapp.models.UserPhoto;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +20,7 @@ public interface IUpdateExtractor {
 
     Function<Message, Boolean> messagePresenceChecker = Objects::nonNull;
     String LINE_SEPARATOR = "\n";
+    String LINE_FORMAT_SEPARATOR = "\n\n";
     int DEFAULT_ID = -1;
 
     /**
@@ -105,6 +108,13 @@ public interface IUpdateExtractor {
      * @return <b>String</b> object containing the callback message text.
      */
     @NotNull String getSendFeedbackCallbackMessageText(@NotNull Update update);
+
+    /**
+     * Extracts the <b>movie rating</b> from a message.
+     *
+     * @throws MovieRatingFormatException if the user entered the rating in the wrong format.
+     */
+    @NotNull MovieRating getMovieRatingCallbackObject(@NotNull Update update) throws MovieRatingFormatException;
 
     /**
      * Extracts the <b>sticker file id</b> from a message.

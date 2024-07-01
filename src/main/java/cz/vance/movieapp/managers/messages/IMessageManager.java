@@ -3,6 +3,7 @@ package cz.vance.movieapp.managers.messages;
 //<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.keyboards.IReplyKeyboardBuilder;
 import cz.vance.movieapp.keyboards.IInlineKeyboardBuilder;
+import cz.vance.movieapp.models.messages.MovieRatingMessage;
 import cz.vance.movieapp.utils.BotCommand;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -48,6 +49,14 @@ public interface IMessageManager {
     Predicate<Update> langCommandValidator = t ->
             t.getMessage().getText() != null &&  t.getMessage().getText().equals(
                     BotCommand.LANG_COMMAND.content());
+    /**
+     * Validator checks if the text of the incoming update represents the <b>rating command</b>.
+     *
+     * @see BotCommand#RATING_COMMAND
+     */
+    Predicate<Update> ratingCommandValidator = t ->
+            t.getMessage().getText() != null &&  t.getMessage().getText().equals(
+                    BotCommand.RATING_COMMAND.content());
 
     /**
      * Validator tests if the incoming update's message text is equal to the <b>smart search/no idea/our choice/feedback
@@ -206,9 +215,32 @@ public interface IMessageManager {
     void sendFeedbackAtEndFarewell(Update botUpdate);
 
     /**
+     * Sends a message with the <b>rating</b> of the movie/series.
+     *
+     * @see IInlineKeyboardBuilder#buildMovieRatingKeyboard()
+     */
+    void sendMovieRatingAtLaunchGreetings(Update botUpdate);
+
+    /**
+     * Sends a message with the movie rating <b>confirmation inline buttons</b>.
+     */
+    void sendMovieRatingConfirmation(Update botUpdate);
+
+    /**
+     * Handles the {@link MovieRatingMessage#getMovieRatingNoConfirmationMessage()} and {@link MovieRatingMessage#getMovieRatingYesConfirmationMessage()}
+     * inline buttons.
+     */
+    void sendMovieRatingAtEndFarewell(Update botUpdate);
+
+    /**
      * @return <b>Boolean value</b> indicating if the user has pressed the <b>send feedback reply keyboard button</b>.
      */
     boolean isSendFeedbackPressed();
+
+    /**
+     * @return <b>Boolean value</b> indicating if the user enters the <b>/rating</b> command.
+     */
+    boolean isMovieRatingCommand();
 
     /**
      * Sends a new messages with the removed <b>reply keyboard</b> when the bot is terminated.
@@ -216,9 +248,9 @@ public interface IMessageManager {
     void removeReplyKeyboard();
 
     /**
-     * Adds the <b>chat id</b> to the list to keep track of the users who have interacted with the bot.
+     * Sends a message with the <b>restart notification</b> when the bot is restarted.
      */
-    void addChatId(Update botUpdate);
+    void sendRestartingNotification();
 
     //<editor-fold default-state="collapsed" desc="Boolean Methods">
     default boolean isMessage(Update botUpdate) { return messageExistenceValidator.test(botUpdate); }
@@ -238,6 +270,8 @@ public interface IMessageManager {
     default boolean isHelpCommand(Update botUpdate) { return helpCommandValidator.test(botUpdate); }
 
     default boolean isLangCommand(Update botUpdate) { return langCommandValidator.test(botUpdate); }
+
+    default boolean isRatingCommand(Update botUpdate) { return ratingCommandValidator.test(botUpdate); }
 
     default boolean isNoIdeaButton(@NotNull Update botUpdate) {
         String messageText = botUpdate.getMessage().getText();

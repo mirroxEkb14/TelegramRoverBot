@@ -32,5 +32,8 @@ public final class TelegramRoverBotChat {
         // shutdown hook (on bot termination)
         Runtime.getRuntime().addShutdownHook(
                 new Thread(bot::removeReplyKeyboard));
+
+        // notification on bot launch
+        bot.sendRestartingNotification();
     }
 }

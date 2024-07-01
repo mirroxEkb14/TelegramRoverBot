@@ -4,7 +4,7 @@
     "commandMessage":
     {
       "welcomes": ["Welcome %s!\nI'm - <b>%s</b>, created to be your own movie-guide\nLet's pick some movie", "Howdy %s!\nMy name's <b>%s</b>, an avid lover of movies\nLet me find you some good movie"],
-      "helps": ["<u>\ud83c\udfacSmart Search</u>\nis a sampling of movies and series based on your preferences: mood, genre, movie/series. This is the point of me existing. I try to make a perfect selection for you according to your current spiritual state\n<u>\ud83c\udfafWe recommend</u>\nis a sample of 10 top movies, according to the Developers. The list may change as the Admins watch new movies/series\n<u>\ud83d\udc40No idea</u>\nis a compendium of all movies/series collected in Our database. You can switch between the previous/next movie/series.\n<u>\ud83c\udfadSend feedback</u>\nis an option that allows you share your good or bad experience about a watched movie. All your comments read the Admins themselves, so you could say hello. The more feedbacks you leave, the more smarter I'm becoming\ud83d\udc68\u200d\ud83c\udf93"],
+      "helps": ["<u>\ud83c\udfacSmart Search</u>\nis a sampling of movies and series based on your preferences: mood, genre, movie/series. This is the point of me existing. I try to make a perfect selection for you according to your current spiritual state\n<u>\ud83c\udfafWe recommend</u>\nis a sample of 10 top movies, according to the Developers. The list may change as the Admins watch new movies/series\n<u>\ud83d\udc40No idea</u>\nis a compendium of all movies/series collected in Our database. You can switch between the previous/next movie/series.\n<u>\ud83c\udfadSend feedback</u>\nis an option that allows you share your good or bad experience about a watched movie. All your comments read the Admins themselves, so you could say hello. The more feedbacks you leave, the more smarter I'm becoming\ud83d\udc68\u200d\ud83c\udf93 Also, we can offer a new movie/series that you would like to see in the bot's selections. THe Admins will consider your proposals with pleasure!\uD83D\uDC83"],
       "langMessage": ["The language has been changed to English\uD83C\uddec\ud83c\udde7", "Now I can speak English!\uD83C\uddec\ud83c\udde7"],
       "unknownInputs": ["I beg your pardon, but you've sent an unknown content to me."]
     },
@@ -55,7 +55,9 @@
       "weRecommendToMainMenuInlineButton": "\u2199\ufe0f To main menu",
       "weRecommendWatchInlineButton": "\ud83d\udcfa Watch",
       "sendFeedbackYesInlineButton": "\u2714\ufe0f Yes",
-      "sendFeedbackNoInlineButton": "\u2716\ufe0f No"
+      "sendFeedbackNoInlineButton": "\u2716\ufe0f No",
+      "movieRatingYesInlineButton": "\u2714\ufe0f No",
+      "movieRatingNoInlineButton": "\u2716\ufe0f Yes"
     },
     "smartSearchMessage":
     {
@@ -104,6 +106,16 @@
       "onNoIdeaDeviation": ["First, finish the No Idea\uD83D\uDEA8", "First of all, go to the Main Menu\uD83E\uDEF6", "Finish No Idea\uD83C\uDFA5"],
       "onSendFeedbackDeviation": ["First, finish the Send Feedback\uD83D\uDEA8", "First of all, go to the Main Menu\uD83E\uDEF6", "Finish the Send Feedback\uD83C\uDFA5"]
     },
+    "movieRatingMessage":
+    {
+      "movieRatingAtLaunchGreetings": ["Your rating is essential for the Admins!\uD83C\uDF1F", "Movie ratings help to improve the recommendations quality\uD83C\uDF1A"],
+      "movieRatingConfirmation": ["Are you sure you want to send our movie rating?\n\n%s", "Are we sending your movie rating?\n\n%s", "Did I catch you right?\n\n%s"],
+      "movieRatingSampleMessage": "Send your rating following the format:\n\n<b><u>1.</u> Movie name</b>\n<b><u>2.</u> Mode name</b>: \uD83C\uDFACSmart search, \uD83C\uDFAFWe recommend, \uD83D\uDC40No Idea, \uD83C\uDFADSend feedback\n<b><u>3.</u> Rating text</b>: here you can leave your comments\uD83D\uDCDD\n<b><u>4.</u> Was it a movie from the «\uD83C\uDFACSmart search» mode?</b>: if so, describe, did the movie live up to your expectations\uD83D\uDC40",
+      "movieRatingNoConfirmationMessage": ["First, finish the No Idea\uD83D\uDEA8", "First of all, go to the Main Menu\uD83E\uDEF6", "Finish No Idea\uD83C\uDFA5"],
+      "movieRatingYesConfirmationMessage": ["First, finish the Send Feedback\uD83D\uDEA8", "First of all, go to the Main Menu\uD83E\uDEF6", "Finish the Send Feedback\uD83C\uDFA5"],
+      "movieRatingWrongSampleFormatMessage": ["The format is wrong\uD83E\uDD40", "The format is incorrect\uD83E\uDD27", "The format isn't correct\uD83D\uDE48"]
+    },
+    "onBotLaunchMessage": ["The bot has come back from repair and is already running\uD83D\uDE80", "The bot is ready for work\uD83E\uDD16", "The bot's on it\uD83D\uDE80"],
     "onBotTerminatedMessage": ["The bot suspended its work for a while\uD83D\uDEE0 But it’ll be back soon\uD83E\uDD70", "The bot is sent for editing⚙️ You’ll see it in better shape soon enough\uD83D\uDD7A"]
   },
   "rusMessage":
@@ -111,7 +123,7 @@
     "commandMessage":
     {
       "welcomes": ["Привет %s!\nЯ - <b>%s</b>, создан чтобы быть твоим собственным гидом в мире кино\nДавай уже что-нибудь тебе подберём!", "Доброго дня %s!\nМеня зовут <b>%s</b>, истинный поклонник кинематографа\nПозволь я тебе что-нибудь подберу"],
-      "helps": ["<u>\ud83c\udfacУмный подбор</u>\nвыборка из фильмов и сериалов, основанная на ваших предпочтениях: настроение, жанр, фильм/сериал. В этом и суть меня как бота. Я стараюсь сделать такую подборку, где вы сможете найти такой фильм или сериал, который бы соответствовал вашему духовному состоянию\n<u>\ud83c\udfafРекомендуем</u>\nвыборка из 10-и топовых фильмов, по мнению Разработчиков. Список может меняться по мере просмотра новых фильмов/сериалов Админами\n<u>\ud83d\udc40Не знаю что хочу</u>\nкомпедий из всех фильмов/сериалов, собраных в Нашей базе данных. Можно поочерёдно переключаться между предыдущим/следующим фильмом/сериалом.\n<u>\ud83c\udfadОбратная связь</u>\nэто опция, позволяющая вам поделиться со мной вашим опытом просмотренного фильма, будь то хорошим или плохим. Ваши комментарии читают лично Админы, так что можете передавать им привет. Чем больше фидбеков вы оставляете, тем умнее я становлюсь!\ud83d\udc68\u200d\ud83c\udf93"],
+      "helps": ["<u>\ud83c\udfacУмный подбор</u>\nвыборка из фильмов и сериалов, основанная на ваших предпочтениях: настроение, жанр, фильм/сериал. В этом и суть меня как бота. Я стараюсь сделать такую подборку, где вы сможете найти такой фильм или сериал, который бы соответствовал вашему духовному состоянию\n<u>\ud83c\udfafРекомендуем</u>\nвыборка из 10-и топовых фильмов, по мнению Разработчиков. Список может меняться по мере просмотра новых фильмов/сериалов Админами\n<u>\ud83d\udc40Незнайка</u>\nкомпедий из всех фильмов/сериалов, собраных в Нашей базе данных. Можно поочерёдно переключаться между предыдущим/следующим фильмом/сериалом.\n<u>\ud83c\udfadОбратная связь</u>\nэто опция, позволяющая вам поделиться со мной вашим опытом просмотренного фильма, будь то хорошим или плохим. Ваши комментарии читают лично Админы, так что можете передавать им привет. Чем больше фидбеков вы оставляете, тем умнее я становлюсь!\ud83d\udc68\u200d\ud83c\udf93 Также, здесь вы можете продложить какой-нибудь новый фитльм/сериал, который бы вы хотели видеть в подборках. Админы с удовольствием рассмотрят наши предложения!\uD83D\uDC83"],
       "langMessage": ["Язык был изменён на русский\uD83D\uDC3B", "Теперь я умею поговорить по-русски!\uD83D\uDC3B"],
       "unknownInputs": ["Извините, но Вы отправили неизвестное мне сообщение."]
     },
@@ -162,7 +174,9 @@
       "weRecommendToMainMenuInlineButton": "\u2199\ufe0f В главное меню",
       "weRecommendWatchInlineButton": "\ud83d\udcfa Смотреть",
       "sendFeedbackYesInlineButton": "\u2714\ufe0f Да",
-      "sendFeedbackNoInlineButton": "\u2716\ufe0f Нет"
+      "sendFeedbackNoInlineButton": "\u2716\ufe0f Нет",
+      "movieRatingYesInlineButton": "\u2714\ufe0f Да",
+      "movieRatingNoInlineButton": "\u2716\ufe0f Нет"
     },
     "smartSearchMessage":
     {
@@ -211,6 +225,16 @@
       "onNoIdeaDeviation": ["Сначала закончите Незнайку\uD83D\uDEA8", "Сначала перейдите в Главное Меню\uD83E\uDEF6", "Закончите Незнайку\uD83C\uDFA5"],
       "onSendFeedbackDeviation": ["Сначала закончите Отправление Отзыва\uD83D\uDEA8", "Сначала перейдите в Главное Меню\uD83E\uDEF6", "Закончите Отправление Отзыва\uD83C\uDFA5"]
     },
+    "movieRatingMessage":
+    {
+      "movieRatingAtLaunchGreetings": ["Ваша оценка фильма очень важна для Админов!\uD83C\uDF1F", "Оценки фильмов помогают улучшить качество рекомендаций\uD83C\uDF1A"],
+      "movieRatingSampleMessage": "Отправьте оценку фильма в следующем формате:\n\n<b><u>1.</u> Название фильма</b>\n<b><u>2.</u> Название режима</b>: \uD83C\uDFACПодборчик, \uD83C\uDFAFТопчик, \uD83D\uDC40Незнайка, \uD83C\uDFADОбратка\n<b><u>3.</u> Текст оценки</b>: здесь можете оставить свои комментарии\uD83D\uDCDD\n<b><u>4.</u> Был ли это фильм из режима «\uD83C\uDFACПодборчик»?</b>: если да, опишите, соответствовал ли фильм вашим ожиданиям\uD83D\uDC40",
+      "movieRatingConfirmation": ["Действительно хотите отправить свою оценку фильма?\n\n%s", "Отправляем вашу оценку фильма?\n\n%s", "Правильно ли я понял вашу оценку фильма?\n\n%s"],
+      "movieRatingNoConfirmationMessage": ["Тогда ваша оценка останется только между нами\uD83E\uDD2B", "Не отправлять, так не отправлять\uD83E\uDEE2", "Хорошо, Админам об этом знать не нужно...\uD83D\uDE36"],
+      "movieRatingYesConfirmationMessage": ["Оценка отправлена!\uD83D\uDE08", "Ваша оценка уже на почте Админов!\uD83D\uDCEC"],
+      "movieRatingWrongSampleFormatMessage": ["Неверный формат\uD83E\uDD40", "Формат неверный\uD83E\uDD27", "Некорректный формат\uD83D\uDE48"]
+    },
+    "onBotLaunchMessage": ["Бот вернулся с ремонта и уже запущен\uD83D\uDE80", "Бот вновь готов к работе\uD83E\uDD16", "Бот внова в деле\uD83D\uDE80"],
     "onBotTerminatedMessage": ["Бот приостановил свою работу на некоторое время\uD83D\uDEE0 Но вскоре обязательно вернётся\uD83E\uDD70", "Бот отправляется на правки⚙️ В скором времени вы его увидите в лучшей форме\uD83D\uDD7A"]
   }
 }

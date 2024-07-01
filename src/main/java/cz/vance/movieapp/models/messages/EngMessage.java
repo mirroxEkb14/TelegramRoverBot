@@ -14,8 +14,10 @@ public final class EngMessage {
     private NoIdeaMessage noIdeaMessage;
     private WeRecommendMessage weRecommendMessage;
     private SendFeedbackMessage sendFeedbackMessage;
-    private List<String> onBotTerminatedMessage;
     private DeviationMessage deviationMessage;
+    private MovieRatingMessage movieRatingMessage;
+    private List<String> onBotLaunchMessage;
+    private List<String> onBotTerminatedMessage;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public CommandMessage getCommandMessage() { return commandMessage; }
@@ -25,8 +27,10 @@ public final class EngMessage {
     public NoIdeaMessage getNoIdeaMessage() { return noIdeaMessage; }
     public WeRecommendMessage getWeRecommendMessage() { return weRecommendMessage; }
     public SendFeedbackMessage getSendFeedbackMessage() { return sendFeedbackMessage; }
-    public List<String> getOnBotTerminatedMessage() { return onBotTerminatedMessage; }
     public DeviationMessage getDeviationMessage() { return deviationMessage; }
+    public MovieRatingMessage getMovieRatingMessage() { return movieRatingMessage; }
+    public List<String> getOnBotLaunchMessage() { return onBotLaunchMessage; }
+    public List<String> getOnBotTerminatedMessage() { return onBotTerminatedMessage; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Setters">
@@ -37,7 +41,9 @@ public final class EngMessage {
     public void setNoIdeaMessage(NoIdeaMessage noIdeaMessage) { this.noIdeaMessage = noIdeaMessage; }
     public void setWeRecommendMessage(WeRecommendMessage weRecommendMessage) { this.weRecommendMessage = weRecommendMessage; }
     public void setSendFeedbackMessage(SendFeedbackMessage sendFeedbackMessage) { this.sendFeedbackMessage = sendFeedbackMessage; }
-    public void setOnBotTerminatedMessage(List<String> onBotTerminatedMessage) { this.onBotTerminatedMessage = onBotTerminatedMessage; }
     public void setDeviationMessage(DeviationMessage deviationMessage) { this.deviationMessage = deviationMessage; }
+    public void setMovieRatingMessage(MovieRatingMessage movieRatingMessage) { this.movieRatingMessage = movieRatingMessage; }
+    public void setOnBotLaunchMessage(List<String> onBotLaunchMessage) { this.onBotLaunchMessage = onBotLaunchMessage; }
+    public void setOnBotTerminatedMessage(List<String> onBotTerminatedMessage) { this.onBotTerminatedMessage = onBotTerminatedMessage; }
     //</editor-fold>
 }

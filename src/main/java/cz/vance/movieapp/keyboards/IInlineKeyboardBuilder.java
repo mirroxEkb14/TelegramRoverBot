@@ -43,6 +43,12 @@ public interface IInlineKeyboardBuilder {
     BiFunction<String, String, Boolean> sendFeedbackCallbackDataStringValidator = (buttonCallback, buttonText) ->
             buttonCallback.equals(
                     getSendFeedbackCreatedCallback(buttonText));
+    /**
+     * @see #getMovieRatingCreatedCallback(String)
+     */
+    BiFunction<String, String, Boolean> movieRatingCallbackDataStringValidator = (buttonCallback, buttonText) ->
+            buttonCallback.equals(
+                    getMovieRatingCreatedCallback(buttonText));
     //</editor-fold>
 
     /**
@@ -181,43 +187,55 @@ public interface IInlineKeyboardBuilder {
      */
     @NotNull InlineKeyboardMarkup buildSendFeedbackConfirmationKeyboard();
 
+    /**
+     * Builds and returns <b>the movie rating inline keyboard</b> containing the following buttons:
+     * <ol>
+     *      <li> ✅ Yes
+     *      <li> ❌ No
+     * </ol>
+     * This keyboard is triggered when the user enters the <b>/rating</b> command, enters his message and now the bot
+     * sends this keyboard for confirmation purposes.
+     *
+     * @return Configured instance of {@link InlineKeyboardMarkup}.
+     */
+    @NotNull InlineKeyboardMarkup buildMovieRatingKeyboard();
+
     //<editor-fold default-state="collapsed" desc="Created Callbacks Getters">
     /**
      * Creates a callback data string for the passed inline button by concatenating the button text with the
      * {@link CallbackQueryExtractor#CALLBACK_QUERY_PREFIX}.
      *
-     * @param inlineButtonText The text of the inline button.
-     *
-     * @return The created callback data string.
+     * @param inlineButtonText the text of the inline button.
      */
     static @NotNull String getCreatedCallback(String inlineButtonText) { return inlineButtonText + CALLBACK_QUERY_PREFIX; }
     /**
      * Creates a callback data string for the <b>'no idea' inline button</b> by concatenating the button text with the
      * {@link CallbackQueryExtractor#NO_IDEA_CALLBACK_QUERY_PREFIX}.
      *
-     * @param inlineButtonText The text of the inline button.
-     *
-     * @return The created callback data string.
+     * @param inlineButtonText the text of the inline button.
      */
     static @NotNull String getNoIdeaCreatedCallback(String inlineButtonText) { return inlineButtonText + NO_IDEA_CALLBACK_QUERY_PREFIX; }
     /**
      * Creates a callback data string for the <b>'we recommend' inline button</b> by concatenating the button text with
      * the {@link CallbackQueryExtractor#WE_RECOMMEND_CALLBACK_QUERY_PREFIX}.
      *
-     * @param inlineButtonText The text of the inline button.
-     *
-     * @return The created callback data string.
+     * @param inlineButtonText the text of the inline button.
      */
     static @NotNull String getWeRecommendCreatedCallback(String inlineButtonText) { return inlineButtonText + WE_RECOMMEND_CALLBACK_QUERY_PREFIX; }
     /**
      * Creates a callback data string for the <b>'send feedback' inline button</b> by concatenating the button text with
      * the {@link CallbackQueryExtractor#SEND_FEEDBACK_CALLBACK_QUERY_PREFIX}.
      *
-     * @param inlineButtonText The text of the inline button.
-     *
-     * @return The created callback data string.
+     * @param inlineButtonText the text of the inline button.
      */
     static @NotNull String getSendFeedbackCreatedCallback(String inlineButtonText) { return inlineButtonText + SEND_FEEDBACK_CALLBACK_QUERY_PREFIX; }
+    /**
+     * Creates a callback data string for the <b>'movie rating' inline button</b> by concatenating the button text with
+     * the {@link CallbackQueryExtractor#MOVIE_RATING_COMMAND_CALLBACK_QUERY_PREFIX}.
+     *
+     * @param inlineButtonText the text of the inline button.
+     */
+    static @NotNull String getMovieRatingCreatedCallback(String inlineButtonText) { return inlineButtonText + MOVIE_RATING_COMMAND_CALLBACK_QUERY_PREFIX; }
     //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="'Smart Search' Mood Boolean Methods">
@@ -499,6 +517,25 @@ public interface IInlineKeyboardBuilder {
         return sendFeedbackCallbackDataStringValidator.apply(
                 botUpdate.getCallbackQuery().getData(),
                 BotMessageManager.getInstance().getSendFeedbackYesInlineButton());
+    }
+    //</editor-fold>
+
+    //<editor-fold default-state="collapsed" desc="'Movie Rating' Boolean Methods">
+    default boolean isMovieRatingConfirmationButton(@NotNull Update botUpdate) {
+        return isMovieRatingYesButton(botUpdate) ||
+                isMovieRatingNoButton(botUpdate);
+    }
+
+    default boolean isMovieRatingYesButton(@NotNull Update botUpdate) {
+        return movieRatingCallbackDataStringValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getMovieRatingYesInlineButton());
+    }
+
+    default boolean isMovieRatingNoButton(@NotNull Update botUpdate) {
+        return movieRatingCallbackDataStringValidator.apply(
+                botUpdate.getCallbackQuery().getData(),
+                BotMessageManager.getInstance().getMovieRatingNoInlineButton());
     }
     //</editor-fold>
 }

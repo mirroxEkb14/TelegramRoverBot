@@ -238,6 +238,46 @@ public final class MessageRandomizer implements IMessageRandomizer {
     }
 
     @Override
+    public String getMovieRatingAtLaunchGreetingsMessage() {
+        return botMessageManager.getMovieRatingAtLaunchGreetings().get(
+                getRandomIndex(botMessageManager.getMovieRatingAtLaunchGreetingsSize()));
+    }
+
+    @Override
+    public String getMovieRatingConfirmationMessage(String userMovieRating) {
+        return String.format(botMessageManager.getMovieRatingConfirmation().get(
+                    getRandomIndex(botMessageManager.getMovieRatingConfirmationSize())),
+                userMovieRating);
+    }
+
+    @Override
+    public String getMovieRatingSampleMessage() { return botMessageManager.getMovieRatingSampleMessage(); }
+
+    @Override
+    public String getMovieRatingNoConfirmationMessage() {
+        return botMessageManager.getMovieRatingNoConfirmationMessage().get(
+                getRandomIndex(botMessageManager.getMovieRatingNoConfirmationMessageSize()));
+    }
+
+    @Override
+    public String getMovieRatingYesConfirmationMessage() {
+        return botMessageManager.getMovieRatingYesConfirmationMessage().get(
+                getRandomIndex(botMessageManager.getMovieRatingYesConfirmationMessageSize()));
+    }
+
+    @Override
+    public String getMovieRatingWrongSampleFormatMessage() {
+        return botMessageManager.getMovieRatingWrongSampleFormatMessage().get(
+                getRandomIndex(botMessageManager.getMovieRatingWrongSampleFormatMessageSize()));
+    }
+
+    @Override
+    public String getOnBotLaunchMessage() {
+        return botMessageManager.getOnBotLaunchMessage().get(
+                getRandomIndex(botMessageManager.getOnBotLaunchMessageSize()));
+    }
+
+    @Override
     public String getOnBotTerminatedMessage() {
         return botMessageManager.getOnBotTerminatedMessage().get(
                 getRandomIndex(botMessageManager.getOnBotTerminatedMessageSize()));

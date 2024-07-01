@@ -51,4 +51,11 @@ public interface IUserRecord {
      * @return <b>List</b> of all the users.
      */
     @NotNull List<User> getUsers();
+
+    /**
+     * Retrieves all the telegram ids from the DB.
+     *
+     * @return <b>List</b> of all the telegram ids.
+     */
+    @NotNull List<Integer> getTgIds();
 }
