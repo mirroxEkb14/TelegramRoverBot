@@ -36,7 +36,7 @@ public final class MovieRecord implements IMovieRecord {
      * Contains the indexes of the movies that <b>are recommended</b> to the user.
      */
     private static final List<Integer> weRecommendMovieIndexes = List.of(
-            109, 110, 111, 112, 113, 114, 115, 116, 117, 118);
+            117, 118, 119, 120, 121, 122, 123, 124, 125, 126);
 
     /**
      * Contains the index of the current movie displayed to the user from the {@link #movies} list.
@@ -128,7 +128,7 @@ public final class MovieRecord implements IMovieRecord {
     }
 
     @Override
-    public Movie getWeRecommendCurrentMovie() { return movies.get(weRecommendMovieIndexes.get(weRecommendCurrentMovieIndex)); }
+    public Movie getWeRecommendCurrentMovie() { return movies.get(weRecommendMovieIndexes.get(weRecommendCurrentMovieIndex) - 1); }
 
     @Override
     public boolean isWeRecommendPreviousMovieFirst() { return weRecommendCurrentMovieIndex - 1 == 0; }
