@@ -12,6 +12,9 @@ import java.util.List;
  * Implements methods for getting bot messages from the {@link BotMessage} instance.
  * <br>
  * Contains a {@link BotMessage} instance providing all the possible texts for the bot messages.
+ *
+ * @see cz.vance.movieapp.managers.randomizers.MessageRandomizer
+ * @see cz.vance.movieapp.managers.messages.MessageManager
  */
 public final class BotMessageManager implements IBotMessageManager {
 

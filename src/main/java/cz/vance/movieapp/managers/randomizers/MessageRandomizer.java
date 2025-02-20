@@ -311,7 +311,5 @@ public final class MessageRandomizer implements IMessageRandomizer {
         return welcomeStickers.get(randomIndex).fileId();
     }
 
-    //<editor-fold default-state="collapsed" desc="Private Methods">
     private int getRandomIndex(int size) { return random.nextInt(size); }
-    //</editor-fold>
 }

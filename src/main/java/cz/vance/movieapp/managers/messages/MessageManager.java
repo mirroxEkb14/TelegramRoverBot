@@ -208,7 +208,7 @@ public final class MessageManager implements IMessageManager {
      *
      * @return The formatted text for a welcome message.
      */
-    private String getFormattedWelcomeText(@NotNull Update botUpdate) {
+    private @NotNull String getFormattedWelcomeText(@NotNull Update botUpdate) {
         return String.format(
                 messageRandomizer.getWelcomeMessage(),
                 botUpdate.getMessage().getFrom().getFirstName(),
@@ -228,19 +228,8 @@ public final class MessageManager implements IMessageManager {
     @Override
     public void sendLang(Update botUpdate) {
         final long chatId = updateExtractor.getMessageChatId(botUpdate);
-        if (modeTracker.isSmartSearchActive()) {
-            sendMessage(chatId, messageRandomizer.getOnSmartSearchDeviationMessage());
+        if (isAndSendDeviationMessage(chatId))
             return;
-        } else if (modeTracker.isWeRecommendActive()) {
-            sendMessage(chatId, messageRandomizer.getOnWeRecommendDeviationMessage());
-            return;
-        } else if (modeTracker.isNoIdeaActive()) {
-            sendMessage(chatId, messageRandomizer.getOnNoIdeaDeviationMessage());
-            return;
-        } else if (modeTracker.isSendFeedbackActive()) {
-            sendMessage(chatId, messageRandomizer.getOnSendFeedbackDeviationMessage());
-            return;
-        }
 
         botMessageManager.changeBotMessageLanguage();
         userRecord.insertUserIfNotExists(botUpdate);
@@ -793,19 +782,8 @@ public final class MessageManager implements IMessageManager {
     @Override
     public void sendMovieRatingAtLaunchGreetings(Update botUpdate) {
         final long chatId = updateExtractor.getMessageChatId(botUpdate);
-        if (modeTracker.isSmartSearchActive()) {
-            sendMessage(chatId, messageRandomizer.getOnSmartSearchDeviationMessage());
+        if (isAndSendDeviationMessage(chatId))
             return;
-        } else if (modeTracker.isWeRecommendActive()) {
-            sendMessage(chatId, messageRandomizer.getOnWeRecommendDeviationMessage());
-            return;
-        } else if (modeTracker.isNoIdeaActive()) {
-            sendMessage(chatId, messageRandomizer.getOnNoIdeaDeviationMessage());
-            return;
-        } else if (modeTracker.isSendFeedbackActive()) {
-            sendMessage(chatId, messageRandomizer.getOnSendFeedbackDeviationMessage());
-            return;
-        }
 
         final String atLaunchGreetingsText = messageRandomizer.getMovieRatingAtLaunchGreetingsMessage();
         sendMessage(chatId, atLaunchGreetingsText);
@@ -941,7 +919,6 @@ public final class MessageManager implements IMessageManager {
     }
     //</editor-fold>
 
-    //<editor-fold default-state="collapsed" desc="Lang Message Sender">
     private void sendLang(long chatId, String messageText) {
         try {
             bot.execute(
@@ -953,7 +930,6 @@ public final class MessageManager implements IMessageManager {
             e.printStackTrace();
         }
     }
-    //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Message Senders">
     private @Nullable Message sendMessage(long chatId,
@@ -1013,7 +989,6 @@ public final class MessageManager implements IMessageManager {
     }
     //</editor-fold>
 
-    //<editor-fold default-state="collapsed" desc="Sticker Message Sender">
     private void sendSticker(long chatId, String stickerFileId) {
         try {
             bot.execute(
@@ -1024,9 +999,7 @@ public final class MessageManager implements IMessageManager {
             e.printStackTrace();
         }
     }
-    //</editor-fold>
 
-    //<editor-fold default-state="collapsed" desc="Unknown Input Message Sender">
     private void sendUnknownInput(long chatId) {
         try {
             bot.execute(
@@ -1037,7 +1010,6 @@ public final class MessageManager implements IMessageManager {
             e.printStackTrace();
         }
     }
-    //</editor-fold>
 
     //<editor-fold default-state="collapsed" desc="Message Editors">
     /**
@@ -1141,6 +1113,29 @@ public final class MessageManager implements IMessageManager {
         return !latestMessageIds.containsKey(chatId) || latestMessageIds.get(chatId) != (int)messageId;
     }
     //</editor-fold>
+
+    /**
+     * @return <b>true</b> if a message was sent, <b>false</b> otherwise.
+     *
+     * @see #sendLang(long, String)
+     * @see #sendMovieRatingAtLaunchGreetings(Update)
+     */
+    private boolean isAndSendDeviationMessage(long chatId) {
+        if (modeTracker.isSmartSearchActive()) {
+            sendMessage(chatId, messageRandomizer.getOnSmartSearchDeviationMessage());
+            return true;
+        } else if (modeTracker.isWeRecommendActive()) {
+            sendMessage(chatId, messageRandomizer.getOnWeRecommendDeviationMessage());
+            return true;
+        } else if (modeTracker.isNoIdeaActive()) {
+            sendMessage(chatId, messageRandomizer.getOnNoIdeaDeviationMessage());
+            return true;
+        } else if (modeTracker.isSendFeedbackActive()) {
+            sendMessage(chatId, messageRandomizer.getOnSendFeedbackDeviationMessage());
+            return true;
+        }
+        return false;
+    }
 
     private void updateIsSendFeedbackPressed() { isSendFeedbackPressed = !isSendFeedbackPressed; }
 

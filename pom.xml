@@ -32,6 +32,14 @@
             <artifactId>snakeyaml</artifactId>
             <version>${shakeyaml.version}</version>
         </dependency>
+        <!-- ««SnakeYAML»» library for accessing and creating SQLite database files in Java (as it's written in
+        README.md, without this dependency it won't be possible to connect to cinema.db)
+         Reference: https://github.com/xerial/sqlite-jdbc?tab=readme-ov-file#download -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.49.0.0</version>
+        </dependency>
         <!-- «JUnit» framework to test individual units of the application to ensure they behave as expected
         Reference: https://mvnrepository.com/artifact/junit/junit -->
         <dependency>

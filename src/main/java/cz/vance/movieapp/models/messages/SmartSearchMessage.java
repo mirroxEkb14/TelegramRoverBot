@@ -1,8 +1,6 @@
 package cz.vance.movieapp.models.messages;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import java.util.List;
-//</editor-fold>
 
 /**
  * Holds lists with <b>smart search</b> messages from the <b>.json file</b>.
@@ -11,23 +9,11 @@ import java.util.List;
  */
 public final class SmartSearchMessage {
 
-    private List<String> smartSearchAtLaunchGreetings;
-    private List<String> smartSearchMoodSelection;
-    private List<String> smartSearchCatalogueSelection;
-    private List<String> smartSearchGenreSelection;
-    private List<String> smartSearchVerifying;
-    private List<String> smartSearchVerified;
-    private List<String> smartSearchSampling;
-    private List<String> smartSearchOnFinish;
-    private List<String> smartSearchNoMovies;
-    private List<String> smartSearchOnFailure;
-    private List<String> onSmartSearchKeyboardRemoved;
-    private List<String> onSmartSearchOldKeyboardRemoved;
-    private List<String> onSmartSearchRepeatedKeyboardRemoved;
-    private List<String> onSmartSearchRebooted;
-    private List<String> onSmartSearchCatalogueBack;
-    private List<String> onSmartSearchGenreBack;
-    private List<String> onSmartSearchConfirmationBack;
+    private List<String> smartSearchAtLaunchGreetings, smartSearchMoodSelection, smartSearchCatalogueSelection,
+            smartSearchGenreSelection, smartSearchVerifying, smartSearchVerified, smartSearchSampling,
+            smartSearchOnFinish, smartSearchNoMovies, smartSearchOnFailure, onSmartSearchKeyboardRemoved,
+            onSmartSearchOldKeyboardRemoved, onSmartSearchRepeatedKeyboardRemoved, onSmartSearchRebooted,
+            onSmartSearchCatalogueBack, onSmartSearchGenreBack, onSmartSearchConfirmationBack;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public List<String> getSmartSearchAtLaunchGreetings() { return smartSearchAtLaunchGreetings; }

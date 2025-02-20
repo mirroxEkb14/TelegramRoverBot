@@ -1,8 +1,6 @@
 package cz.vance.movieapp.managers;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import java.util.Random;
-//</editor-fold>
 
 /**
  * Contains a set of public static methods that pause the execution during different bot feature executions.

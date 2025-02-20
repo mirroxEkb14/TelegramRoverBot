@@ -75,6 +75,9 @@ public final class TelegramRoverBot extends TelegramLongPollingBot {
      */
     public void removeReplyKeyboard() { messageManager.removeReplyKeyboard(); }
 
+    /**
+     * @see IMessageManager#sendRestartingNotification()
+     */
     public void sendRestartingNotification() { messageManager.sendRestartingNotification(); }
 
     /**

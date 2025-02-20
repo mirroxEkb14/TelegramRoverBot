@@ -39,6 +39,8 @@ To connect the <b>cinema.db</b> to the project, it is necessary to add the "sqli
 - Add the file to the project's dependencies (IntelliJ IDEA):
   - <b>File</b> -> <b>Project Structure</b> -> <b>Modules</b> -> <b>Dependencies</b> -> <b>"+"</b> -> <b>JARs or Directories...</b>;
 
+<b>Update (13.02.2025)<b>: now it is no longer required to add the .jar file to the project's dependencies through Intellij Idea UI. The file is from now on included in the <b>pom.xml<b> dependencies.
+
 ### Contact
 
 [![LinkedIn Badge](https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/daniyar-amirov-103467227)

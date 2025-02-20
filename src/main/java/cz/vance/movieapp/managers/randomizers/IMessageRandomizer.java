@@ -1,9 +1,7 @@
 package cz.vance.movieapp.managers.randomizers;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.models.UserSelection;
 import org.jetbrains.annotations.NotNull;
-//</editor-fold>
 
 /**
  * Declares a set of basic operations for getting messages that are sent to the user while <b>SmartSearch</b>.

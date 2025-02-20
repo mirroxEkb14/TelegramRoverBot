@@ -7,12 +7,12 @@ import java.util.List;
  */
 public final class MovieRatingMessage {
 
-    private List<String> movieRatingAtLaunchGreetings;
-    private List<String> movieRatingConfirmation;
+    private List<String> movieRatingAtLaunchGreetings,
+            movieRatingConfirmation,
+            movieRatingNoConfirmationMessage,
+            movieRatingYesConfirmationMessage,
+            movieRatingWrongSampleFormatMessage;
     private String movieRatingSampleMessage;
-    private List<String> movieRatingNoConfirmationMessage;
-    private List<String> movieRatingYesConfirmationMessage;
-    private List<String> movieRatingWrongSampleFormatMessage;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public List<String> getMovieRatingAtLaunchGreetings() { return movieRatingAtLaunchGreetings; }

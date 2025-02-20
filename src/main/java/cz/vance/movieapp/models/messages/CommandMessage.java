@@ -1,8 +1,6 @@
 package cz.vance.movieapp.models.messages;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import java.util.List;
-//</editor-fold>
 
 /**
  * Holds the texts that are sent to the user after using some bot commands.

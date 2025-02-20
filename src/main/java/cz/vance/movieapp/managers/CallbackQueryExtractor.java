@@ -1,8 +1,6 @@
 package cz.vance.movieapp.managers;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import org.jetbrains.annotations.NotNull;
-//</editor-fold>
 
 /**
  * Handles general cased related to the <b>callback query</b> extraction from inline keyboard buttons.

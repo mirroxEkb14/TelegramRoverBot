@@ -1,8 +1,6 @@
 package cz.vance.movieapp.models.messages;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import java.util.List;
-//</editor-fold>
 
 /**
  * Holds lists of deviations from the expected user behavior during different modes.

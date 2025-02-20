@@ -1,8 +1,6 @@
 package cz.vance.movieapp.models;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import org.jetbrains.annotations.Nullable;
-//</editor-fold>
 
 /**
  * Represents a photo that a user sends to the bot.

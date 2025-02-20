@@ -5,10 +5,10 @@ package cz.vance.movieapp.models.messages;
  */
 public final class ReplyButton {
 
-    public String smartSearchReplyButton;
-    public String ourChoiceReplyButton;
-    public String noIdeaReplyButton;
-    public String sendFeedbackReplyButton;
+    public String smartSearchReplyButton,
+            ourChoiceReplyButton,
+            noIdeaReplyButton,
+            sendFeedbackReplyButton;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public String getSmartSearchReplyButton() { return smartSearchReplyButton; }

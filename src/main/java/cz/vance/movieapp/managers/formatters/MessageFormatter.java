@@ -80,7 +80,7 @@ public final class MessageFormatter implements IMessageFormatter {
     }
 
     /**
-     * @return Same as the {@link #getSmartSearchRusMovieMessage(List)} method, but for the <b>English language</b>.
+     * @return Same as the {@link #getSmartSearchRusMovieMessage(List)} method, but for <b>English</b>.
      */
     private @NotNull String getSmartSearchEngMovieMessage(@NotNull List<Movie> smartSearchMovies) {
         final StringBuilder movieMessage = new StringBuilder(
@@ -111,7 +111,7 @@ public final class MessageFormatter implements IMessageFormatter {
      * @return {@link String} representation of a message containing the <b>name</b>, <b>release year</b> and <b>link</b>
      * of a movie revealed during the <b>no idea</b> feature, taking into account the <b>Russian language</b>.
      */
-    private String getNoIdeaRusMovieMessage(@NotNull Movie movie) {
+    private @NotNull String getNoIdeaRusMovieMessage(@NotNull Movie movie) {
         return String.format(NO_IDEA_MOVIE_MESSAGE_SAMPLE,
                 movie.rusName(),
                 movie.releaseYear(),
@@ -119,9 +119,9 @@ public final class MessageFormatter implements IMessageFormatter {
     }
 
     /**
-     * @return Same as the {@link #getNoIdeaRusMovieMessage(Movie)} method, but for the <b>English language</b>.
+     * @return Same as the {@link #getNoIdeaRusMovieMessage(Movie)} method, but for <b>English</b>.
      */
-    private String getNoIdeaEngMovieMessage(@NotNull Movie movie) {
+    private @NotNull String getNoIdeaEngMovieMessage(@NotNull Movie movie) {
         return String.format(NO_IDEA_MOVIE_MESSAGE_SAMPLE,
                 movie.engName(),
                 movie.releaseYear(),

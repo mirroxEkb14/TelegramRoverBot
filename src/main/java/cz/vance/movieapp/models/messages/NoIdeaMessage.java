@@ -1,17 +1,15 @@
 package cz.vance.movieapp.models.messages;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import java.util.List;
-//</editor-fold>
 
 /**
  * Holds lists with <b>no idea</b> feature messages from the <b>.json file</b>.
  */
 public final class NoIdeaMessage {
 
-    private List<String> noIdeaAtLaunchGreetings;
-    private List<String> noIdeaNoMoviesLeft;
-    private List<String> noIdeaToMainMenu;
+    private List<String> noIdeaAtLaunchGreetings,
+            noIdeaNoMoviesLeft,
+            noIdeaToMainMenu;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public List<String> getNoIdeaAtLaunchGreetings() { return noIdeaAtLaunchGreetings; }

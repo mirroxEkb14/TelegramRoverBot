@@ -49,7 +49,7 @@ public final class UpdateExtractor implements IUpdateExtractor {
                 update.getMessage().getFrom() :
                 update.getCallbackQuery().getFrom();
         final long tgId = tgUser.getId();
-        final String username = tgUser.getUserName();
+        final String username = getUserName(tgUser);
         final String joinDate = LocalDateTime.now().format(IUserRecord.USER_TABLE_DATE_FORMAT);
 
         return new User((int)tgId, username, joinDate);
@@ -137,4 +137,17 @@ public final class UpdateExtractor implements IUpdateExtractor {
 
     @Override
     public String getCallbackQuery(@NotNull Update update) { return update.getCallbackQuery().getData(); }
+
+    /**
+     * Extracts and returns the <b>username</b> of the user who sent the message.
+     * <br>
+     * If the user has no Telegram username, the {@link IUpdateExtractor#DEFAULT_USERNAME} is returned.
+     *
+     * @param tgUser The Telegram <b>user</b> object.
+     *
+     * @return The user's Telegram <b>username</b>.
+     */
+    private String getUserName(@NotNull org.telegram.telegrambots.meta.api.objects.User tgUser) {
+        return tgUser.getUserName() == null ? DEFAULT_USERNAME : tgUser.getUserName();
+    }
 }

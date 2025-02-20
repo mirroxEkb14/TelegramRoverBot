@@ -1,8 +1,6 @@
 package cz.vance.movieapp.managers.selections;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import cz.vance.movieapp.models.UserSelection;
-//</editor-fold>
 
 /**
  * Declares a set of methods for managing the user's selections (mood, catalogue, genre) during the <b>smart search</b>.

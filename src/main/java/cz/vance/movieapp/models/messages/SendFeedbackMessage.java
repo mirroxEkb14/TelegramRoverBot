@@ -1,8 +1,6 @@
 package cz.vance.movieapp.models.messages;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import java.util.List;
-//</editor-fold>
 
 /**
  * Holds lists with messages the bot sends during the <b>send feedback</b> feature.
@@ -10,9 +8,9 @@ import java.util.List;
 public final class SendFeedbackMessage {
 
     private String sendFeedbackAtLaunchGreetings;
-    private List<String> sendFeedbackConfirmation;
-    private List<String> sendFeedbackNoConfirmationMessage;
-    private List<String> sendFeedbackYesConfirmationMessage;
+    private List<String> sendFeedbackConfirmation,
+            sendFeedbackNoConfirmationMessage,
+            sendFeedbackYesConfirmationMessage;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public String getSendFeedbackAtLaunchGreetings() { return sendFeedbackAtLaunchGreetings; }

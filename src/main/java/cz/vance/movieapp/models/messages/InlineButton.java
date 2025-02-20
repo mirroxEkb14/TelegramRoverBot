@@ -5,47 +5,18 @@ package cz.vance.movieapp.models.messages;
  */
 public final class InlineButton {
 
-    private String depressionMoodInlineButton;
-    private String cheerfulMoodInlineButton;
-    private String fightingMoodInlineButton;
-    private String familyMoodInlineButton;
-    private String friendsMoodInlineButton;
-    private String loveMoodInlineButton;
-    private String movieInlineButton;
-    private String seriesInlineButton;
-    private String comedyInlineButton;
-    private String dramaInlineButton;
-    private String melodramaInlineButton;
-    private String thrillerInlineButton;
-    private String actionInlineButton;
-    private String fictionInlineButton;
-    private String detectiveInlineButton;
-    private String familyInlineButton;
-    private String sportInlineButton;
-    private String fantasyInlineButton;
-    private String animationInlineButton;
-    private String adventureInlineButton;
-    private String biographyInlineButton;
-    private String criminalInlineButton;
-    private String documentaryInlineButton;
-    private String warInlineButton;
-    private String musicInlineButton;
-    private String smartSearchYesInlineButton;
-    private String smartSearchNoInlineButton;
-    private String smartSearchBackInlineButton;
-    private String leftArrowInlineButton; // "«" left-pointing double angle quotation mark
-    private String rightArrowInlineButton; // "»" right-pointing double angle quotation mark
-    private String noIdeaNextMovieInlineButton;
-    private String noIdeaPreviousMovieInlineButton;
-    private String noIdeaToMainMenuInlineButton;
-    private String weRecommendNextMovieInlineButton;
-    private String weRecommendPreviousMovieInlineButton;
-    private String weRecommendToMainMenuInlineButton;
-    private String weRecommendWatchInlineButton;
-    private String sendFeedbackYesInlineButton;
-    private String sendFeedbackNoInlineButton;
-    private String movieRatingYesInlineButton;
-    private String movieRatingNoInlineButton;
+    // "leftArrowInlineButton": "«" is a left-pointing double angle quotation mark
+    // "rightArrowInlineButton": "»" is a right-pointing double angle quotation mark
+    private String depressionMoodInlineButton, cheerfulMoodInlineButton, fightingMoodInlineButton,
+            familyMoodInlineButton, friendsMoodInlineButton, loveMoodInlineButton, movieInlineButton,
+            seriesInlineButton, comedyInlineButton, dramaInlineButton, melodramaInlineButton, thrillerInlineButton,
+            actionInlineButton, fictionInlineButton, detectiveInlineButton, familyInlineButton, sportInlineButton,
+            fantasyInlineButton, animationInlineButton, adventureInlineButton, biographyInlineButton, criminalInlineButton,
+            documentaryInlineButton, warInlineButton, musicInlineButton, smartSearchYesInlineButton, smartSearchNoInlineButton,
+            smartSearchBackInlineButton, leftArrowInlineButton, rightArrowInlineButton, noIdeaNextMovieInlineButton,
+            noIdeaPreviousMovieInlineButton, noIdeaToMainMenuInlineButton, weRecommendNextMovieInlineButton,
+            weRecommendPreviousMovieInlineButton, weRecommendToMainMenuInlineButton, weRecommendWatchInlineButton,
+            sendFeedbackYesInlineButton, sendFeedbackNoInlineButton, movieRatingYesInlineButton, movieRatingNoInlineButton;
 
     //<editor-fold default-state="collapsed" desc="Getters">
     public String getDepressionMoodInlineButton() { return depressionMoodInlineButton; }

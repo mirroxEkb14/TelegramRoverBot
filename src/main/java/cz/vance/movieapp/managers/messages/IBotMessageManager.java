@@ -1,9 +1,7 @@
 package cz.vance.movieapp.managers.messages;
 
-//<editor-fold default-state="collapsed" desc="Imports">
 import java.util.List;
 import cz.vance.movieapp.models.BotMessage;
-//</editor-fold>
 
 /**
  * Declares methods working with message lists from the {@link BotMessage} class.

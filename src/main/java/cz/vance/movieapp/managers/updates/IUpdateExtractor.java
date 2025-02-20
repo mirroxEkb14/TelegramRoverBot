@@ -21,13 +21,14 @@ public interface IUpdateExtractor {
     Function<Message, Boolean> messagePresenceChecker = Objects::nonNull;
     String LINE_SEPARATOR = "\n";
     String LINE_FORMAT_SEPARATOR = "\n\n";
+    String DEFAULT_USERNAME = "Unknown";
     int DEFAULT_ID = -1;
 
     /**
      * Extracts the <b>chat id</b> from a message.
      * <br>
      * In case the <b>message chat id</b> is <b>null</b>, the method checks the <b>callback message chat id</b>. If it
-     * is also <b>null</b>, the method returns the <b>default id</b>.
+     * is also <b>null</b>, the method returns the {@link IUpdateExtractor#DEFAULT_ID}.
      *
      * @param update The bot's <b>update</b> object.
      *
@@ -55,6 +56,9 @@ public interface IUpdateExtractor {
 
     /**
      * Extracts the <b>db user</b> from a message.
+     * <br>
+     * In case the <b>username</b> is <b>null</b> (which Telegram allows), the method sets the <b>username</b> to
+     * the {@link IUpdateExtractor#DEFAULT_USERNAME}.
      *
      * @param update The bot's <b>update</b> object.
      *
